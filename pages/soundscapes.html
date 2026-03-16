@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundscapes — TWISTORES</title>
+    <meta name="description" content="Sesiones de paisajes sonoros grabados en el campo: fotografías y audio de salidas de campo.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .soundscape-full { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+        .soundscape-full.reverse { direction: rtl; }
+        .soundscape-full.reverse > * { direction: ltr; }
+        .soundscape-gallery { display: grid; grid-template-rows: 220px 1fr; gap: 4px; }
+        .photo-main { background: linear-gradient(135deg, #020f1a, #041824); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 2px; }
+        .photo-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+        .photo-thumb { background: linear-gradient(135deg, #020c18, #031018); height: 80px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.6rem; cursor: pointer; transition: background var(--transition); }
+        .photo-thumb:hover { background: rgba(0,255,209,0.05); }
+        .soundscape-info { padding: 32px; display: flex; flex-direction: column; justify-content: center; }
+        .soundscape-info h2 { font-size: 1.2rem; margin-bottom: 12px; }
+        .soundscape-info p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+        .field-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+        .field-meta-item { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); }
+        .field-meta-item strong { color: var(--accent2); display: block; font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+        .audio-player-full { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: rgba(0,255,209,0.02); }
+        .audio-player-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .audio-title { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+        .audio-controls { display: flex; align-items: center; gap: 12px; }
+        .audio-bar-full { flex: 1; height: 3px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
+        .audio-progress { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+        @media (max-width: 768px) { .soundscape-full { grid-template-columns: 1fr; } .soundscape-full.reverse { direction: ltr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" class="active" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header fade-in">
+            <p class="section-label" data-i18n="label_field">// grabaciones de campo · fotografía · audio</p>
+            <h1 data-i18n="title_soundscapes_page">Soundscapes</h1>
+            <p style="max-width:580px; margin-top:12px; color: var(--text-dim); font-size:0.92rem; line-height:1.7;" data-i18n="ss_page_desc">
+                Salidas de campo para escuchar, registrar y explorar los paisajes sonoros de la ciudad y del campo.
+                Cada sesión incluye fotografías del entorno y grabaciones de audio.
+            </p>
+        </div>
+
+        <!-- Sesión 1 -->
+        <div class="soundscape-full fade-in">
+            <div class="soundscape-gallery">
+                <div class="photo-main">[ foto principal · Can Masdeu ]</div>
+                <div class="photo-thumbs">
+                    <div class="photo-thumb">[ foto 2 ]</div>
+                    <div class="photo-thumb">[ foto 3 ]</div>
+                    <div class="photo-thumb">[ foto 4 ]</div>
+                </div>
+            </div>
+            <div class="soundscape-info">
+                <p class="soundscape-date">Feb 2025</p>
+                <h2 data-i18n="ss1_title">Lluvia sobre piedra</h2>
+                <p data-i18n="ss1_desc">Tarde de invierno en las ruinas de Can Masdeu. Agua, viento y silencio urbano.</p>
+                <div class="field-meta">
+                    <div class="field-meta-item"><strong data-i18n="field_place">Lugar</strong><span data-i18n="ss1_loc">Can Masdeu, BCN</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_date">Fecha</strong><span data-i18n="ss1_date">Feb 14, 2025</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_cond">Condiciones</strong><span data-i18n="ss1_cond">Lluvia, 8°C</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_duration">Duración</strong>4:32</div>
+                </div>
+                <div class="audio-player-full">
+                    <div class="audio-player-header">
+                        <span class="audio-title">lluvia_sobre_piedra.wav</span>
+                        <span class="audio-title">0:00 / 4:32</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="audio-play-btn" aria-label="Reproducir">
+                            <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                        </button>
+                        <div class="audio-bar-full"><div class="audio-progress" style="width:0%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesión 2 -->
+        <div class="soundscape-full reverse fade-in">
+            <div class="soundscape-gallery">
+                <div class="photo-main">[ foto principal · Collserola ]</div>
+                <div class="photo-thumbs">
+                    <div class="photo-thumb">[ foto 2 ]</div>
+                    <div class="photo-thumb">[ foto 3 ]</div>
+                    <div class="photo-thumb">[ foto 4 ]</div>
+                </div>
+            </div>
+            <div class="soundscape-info">
+                <p class="soundscape-date">Ene 2025</p>
+                <h2 data-i18n="ss2_title">Amanecer en el bosque</h2>
+                <p data-i18n="ss2_desc">Pájaros, brisa y el zumbido lejano de la ciudad despertando al amanecer.</p>
+                <div class="field-meta">
+                    <div class="field-meta-item"><strong data-i18n="field_place">Lugar</strong><span data-i18n="ss2_loc">Collserola, BCN</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_date">Fecha</strong><span data-i18n="ss2_date">Ene 8, 2025</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_cond">Condiciones</strong><span data-i18n="ss2_cond">Despejado, 5°C</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_duration">Duración</strong>7:14</div>
+                </div>
+                <div class="audio-player-full">
+                    <div class="audio-player-header">
+                        <span class="audio-title">amanecer_bosque.wav</span>
+                        <span class="audio-title">0:00 / 7:14</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="audio-play-btn" aria-label="Reproducir">
+                            <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                        </button>
+                        <div class="audio-bar-full"><div class="audio-progress" style="width:0%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesión 3 -->
+        <div class="soundscape-full fade-in">
+            <div class="soundscape-gallery">
+                <div class="photo-main">[ foto principal · Boqueria ]</div>
+                <div class="photo-thumbs">
+                    <div class="photo-thumb">[ foto 2 ]</div>
+                    <div class="photo-thumb">[ foto 3 ]</div>
+                    <div class="photo-thumb">[ foto 4 ]</div>
+                </div>
+            </div>
+            <div class="soundscape-info">
+                <p class="soundscape-date">Nov 2024</p>
+                <h2 data-i18n="ss3_title">Mercado y voces</h2>
+                <p data-i18n="ss3_desc">El caos organizado del mercado: idiomas, metales y el ritmo de la venta.</p>
+                <div class="field-meta">
+                    <div class="field-meta-item"><strong data-i18n="field_place">Lugar</strong><span data-i18n="ss3_loc">La Boqueria, BCN</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_date">Fecha</strong><span data-i18n="ss3_date">Nov 20, 2024</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_cond">Condiciones</strong><span data-i18n="ss3_cond">Interior, bullicioso</span></div>
+                    <div class="field-meta-item"><strong data-i18n="field_duration">Duración</strong>5:47</div>
+                </div>
+                <div class="audio-player-full">
+                    <div class="audio-player-header">
+                        <span class="audio-title">mercado_voces.wav</span>
+                        <span class="audio-title">0:00 / 5:47</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="audio-play-btn" aria-label="Reproducir">
+                            <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                        </button>
+                        <div class="audio-bar-full"><div class="audio-progress" style="width:0%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_tools">Herramientas</h4>
+                <ul>
+                    <li><a href="#">Zoom H5</a></li>
+                    <li><a href="#">Sony A7III</a></li>
+                    <li><a href="#">Audacity</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

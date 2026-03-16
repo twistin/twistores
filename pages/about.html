@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de — TWISTORES</title>
+    <meta name="description" content="Sobre TWISTORES — investigación doctoral en sociología de la música, migración e identidad.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .research-areas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+        .research-area { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: var(--surface); border-left: 3px solid var(--accent); transition: box-shadow var(--transition); }
+        .research-area:hover { box-shadow: var(--glow-sm); }
+        .research-area h4 { font-size: 0.85rem; margin-bottom: 8px; }
+        .research-area p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+        .thesis-block { border: 1px solid var(--accent); border-radius: var(--radius); padding: 28px; background: rgba(0,255,209,0.03); margin-bottom: 32px; }
+        .thesis-block .tag { margin-bottom: 14px; }
+        .thesis-block h3 { font-size: 1.1rem; line-height: 1.4; margin-bottom: 14px; color: var(--accent); }
+        .thesis-block p { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .skill-pill { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 1px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim); transition: var(--transition); }
+        .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
+        @media (max-width: 768px) { .research-areas { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" class="active" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header fade-in">
+            <p class="section-label" data-i18n="label_researcher">// investigador/a · performer · escuchante</p>
+            <h1 data-i18n="title_about_page">Acerca de</h1>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-bio">
+
+                <div class="thesis-block fade-in">
+                    <span class="tag" data-i18n="about_thesis_tag">Tesis Doctoral — Sociología</span>
+                    <h3 data-i18n="about_thesis_title">«Cantando en Tierra Ajena»<br>Música, Migración e Identidad</h3>
+                    <p data-i18n="about_thesis_desc">Investigación doctoral sobre cómo las personas que migran utilizan la música como herramienta de negociación identitaria, construcción de comunidad y resistencia cultural en contextos de desplazamiento.</p>
+                </div>
+
+                <section class="fade-in">
+                    <p class="section-label" data-i18n="label_who">// quién soy</p>
+                    <hr class="divider" style="margin:12px 0 24px">
+                    <p data-i18n="about_bio1">Investigador/a doctoral en sociología, con formación musical y una práctica artística centrada en el live coding y la grabación sonora de campo.</p>
+                    <p data-i18n="about_bio2">TWISTORES es el nombre de mi proyecto artístico y también de este espacio web: un vórtice donde confluyen la investigación, el sonido y la tecnología.</p>
+                    <p data-i18n="about_bio3">Actualmente investigando y actuando desde Barcelona. Universitat Autònoma de Barcelona (UAB).</p>
+                </section>
+
+                <section class="fade-in" style="margin-top: 40px;">
+                    <p class="section-label" data-i18n="label_research">// líneas de investigación</p>
+                    <hr class="divider" style="margin:12px 0 24px">
+                    <div class="research-areas">
+                        <div class="research-area">
+                            <h4 data-i18n="ra1_title">Música &amp; Migración</h4>
+                            <p data-i18n="ra1_desc">Función de la música en procesos de adaptación, nostalgia y construcción identitaria en diásporas.</p>
+                        </div>
+                        <div class="research-area">
+                            <h4 data-i18n="ra2_title">Música &amp; Tecnología</h4>
+                            <p data-i18n="ra2_desc">Live coding, algorave, y nuevas formas de performance musical mediadas por software.</p>
+                        </div>
+                        <div class="research-area">
+                            <h4 data-i18n="ra3_title">Música &amp; Educación</h4>
+                            <p data-i18n="ra3_desc">Pedagogías interculturales del sonido y uso de músicas del mundo en aulas diversas.</p>
+                        </div>
+                        <div class="research-area">
+                            <h4 data-i18n="ra4_title">Tecnología &amp; Educación</h4>
+                            <p data-i18n="ra4_desc">Integración del código creativo y el live coding como herramientas pedagógicas.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <aside>
+                <div class="about-sidebar-box fade-in">
+                    <p class="sidebar-heading" data-i18n="sidebar_tools">Herramientas creativas</p>
+                    <ul class="sidebar-list">
+                        <li>SuperCollider</li>
+                        <li>TidalCycles</li>
+                        <li>Zoom H5</li>
+                        <li>Audacity / Reaper</li>
+                        <li>Max/MSP</li>
+                    </ul>
+                    <div class="skills-grid">
+                        <span class="skill-pill">live coding</span>
+                        <span class="skill-pill">algorave</span>
+                        <span class="skill-pill">soundscape</span>
+                        <span class="skill-pill">field recording</span>
+                        <span class="skill-pill">etnografía</span>
+                    </div>
+                </div>
+
+                <div class="about-sidebar-box fade-in">
+                    <p class="sidebar-heading" data-i18n="sidebar_research">Investigación</p>
+                    <ul class="sidebar-list">
+                        <li data-i18n="res1">Sociología de la música</li>
+                        <li data-i18n="res2">Estudios migratorios</li>
+                        <li data-i18n="res3">Identidad cultural</li>
+                        <li data-i18n="res4">Etnomusicología</li>
+                        <li data-i18n="res5">Sociología digital</li>
+                    </ul>
+                </div>
+
+                <div class="about-sidebar-box fade-in">
+                    <p class="sidebar-heading" data-i18n="sidebar_contact">Contacto</p>
+                    <ul class="sidebar-list">
+                        <li>Email</li>
+                        <li>GitHub</li>
+                        <li>SoundCloud</li>
+                        <li>ResearchGate</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="#">Cantando en Tierra Ajena</a></li>
+                    <li><a href="#">UAB — Sociología</a></li>
+                    <li><a href="#">Algorave Barcelona</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

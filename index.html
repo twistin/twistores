@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWISTORES — Música, Migración &amp; Tecnología</title>
+    <meta name="description" content="TWISTORES — Espacio personal de investigación doctoral, live coding, soundscapes y reflexiones sobre música, migración e identidad.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ═══════ HEADER ═══════════════════════════════════════════ -->
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="index.html" class="active" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher" role="group" aria-label="Idioma">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════ HERO ════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow" data-i18n="hero_eyebrow">// Música · Migración · Tecnología</p>
+            <h1 class="hero-title cursor-blink">TWISTORES</h1>
+            <p class="hero-sub" data-i18n="hero_sub">
+                Espacio de investigación doctoral, live coding y soundscapes.<br>
+                Cantando en tierra ajena — sociología de la identidad sonora.
+            </p>
+            <a href="pages/articulos.html" class="btn" data-i18n="hero_cta1">Explorar artículos</a>
+            <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver eventos</a>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <!-- ── SCHMIDT · EVENTO DESTACADO ───────────────────────── -->
+        <div class="event-banner fade-in" id="schmidt-banner">
+            <div class="event-banner-date">
+                <div class="event-banner-day">03</div>
+                <div class="event-banner-month" data-i18n="ev_schmidt_month">ABR · 2025</div>
+                <span class="event-banner-badge" data-i18n="event_upcoming">Próximo</span>
+            </div>
+            <div class="event-banner-info">
+                <p class="event-banner-label">// live coding concert</p>
+                <h2 class="event-banner-title">SCHMIDT</h2>
+                <p class="event-banner-sub" data-i18n="ev_schmidt_desc">
+                    Ambient · House · Código en tiempo real.<br>
+                    El kairós y el I Ching como guías de la improvisación algorítmica.
+                </p>
+                <div class="event-banner-meta">
+                    <span>📍 <strong data-i18n="ev_schmidt_venue">Sala Supersonic · Vigo</strong></span>
+                    <span>🕙 <strong>22:00h</strong></span>
+                    <span>🎟 <strong data-i18n="ev_schmidt_tickets">Entradas disponibles</strong></span>
+                </div>
+            </div>
+            <div class="event-banner-cta">
+                <a class="btn-ticket"
+                   href="https://entradas.ticketrona.com/events/schmidt-live-coding-concert-en-la-sala-supersonic"
+                   target="_blank"
+                   rel="noopener"
+                   data-i18n="ev_schmidt_cta">
+                    Comprar entradas →
+                </a>
+            </div>
+        </div>
+
+        <!-- ── Artículos recientes ──────────────────────────────── -->
+        <section class="page-section fade-in">
+            <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
+            <h2 class="section-title" data-i18n="title_recent_articles">Artículos recientes</h2>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all" data-i18n="filter_all">Todos</button>
+                <button class="filter-tab" data-filter="tesis" data-i18n="filter_thesis">Tesis doctoral</button>
+                <button class="filter-tab" data-filter="musica-tech" data-i18n="filter_music_tech">Música &amp; Tech</button>
+                <button class="filter-tab" data-filter="educacion" data-i18n="filter_music_edu">Educación</button>
+                <button class="filter-tab" data-filter="otros" data-i18n="filter_others">Otros</button>
+            </div>
+
+            <div class="card-grid" id="articles-home">
+
+                <article class="card fade-in" data-category="tesis"
+                         data-share-title="Cantando en Tierra Ajena: identidad y pertenencia en la diáspora latinoamericana">
+                    <p class="card-category" data-i18n="cat_thesis">Tesis doctoral</p>
+                    <h3 data-i18n="art1_title">Cantando en Tierra Ajena: identidad y pertenencia en la diáspora latinoamericana</h3>
+                    <p data-i18n="art1_desc">Un análisis sociológico de cómo la música actúa como anclaje identitario en contextos migratorios.</p>
+                    <div class="card-meta">
+                        <span>Mar 2025</span>
+                        <span>· <span data-i18n="reading_min">Lectura</span> 8 min</span>
+                    </div>
+                    <div class="card-footer">
+                        <a class="card-link" href="pages/articulos.html" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+                </article>
+
+                <article class="card fade-in" data-category="musica-tech"
+                         data-share-title="Live coding como práctica performativa: del error al gesto sonoro">
+                    <p class="card-category" data-i18n="cat_music_tech">Música &amp; Tecnología</p>
+                    <h3 data-i18n="art4_title">Live coding como práctica performativa: del error al gesto sonoro</h3>
+                    <p data-i18n="art4_desc">Reflexiones sobre la improvisación algorítmica y la estética del código en tiempo real.</p>
+                    <div class="card-meta">
+                        <span>Feb 2025</span>
+                        <span>· <span data-i18n="reading_min">Lectura</span> 6 min</span>
+                    </div>
+                    <div class="card-footer">
+                        <a class="card-link" href="pages/articulos.html" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+                </article>
+
+                <article class="card fade-in" data-category="educacion"
+                         data-share-title="Pedagogías sonoras en contextos interculturales">
+                    <p class="card-category" data-i18n="cat_music_edu">Música &amp; Educación</p>
+                    <h3 data-i18n="art7_title">Pedagogías sonoras en contextos interculturales</h3>
+                    <p data-i18n="art7_desc">Cómo el trabajo con músicas del mundo puede transformar el aula en un espacio de encuentro.</p>
+                    <div class="card-meta">
+                        <span>Ene 2025</span>
+                        <span>· <span data-i18n="reading_min">Lectura</span> 5 min</span>
+                    </div>
+                    <div class="card-footer">
+                        <a class="card-link" href="pages/articulos.html" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Próximos eventos ─────────────────────────────────── -->
+        <section class="page-section fade-in">
+            <p class="section-label" data-i18n="label_events">// sets de live coding</p>
+            <h2 class="section-title" data-i18n="title_events">Eventos</h2>
+
+            <div class="events-list">
+
+                <div class="event-row upcoming fade-in">
+                    <div class="event-date"><span>ABR 2025</span><br><strong>12</strong></div>
+                    <div>
+                        <p class="event-name" data-i18n="ev1_name">TWISTORES Live — Algorave Barcelona</p>
+                        <p class="event-venue" data-i18n="ev1_venue">Sala Apolo · Barcelona</p>
+                    </div>
+                    <span class="event-status status-upcoming" data-i18n="event_upcoming">Próximo</span>
+                </div>
+
+                <div class="event-row upcoming fade-in">
+                    <div class="event-date"><span>MAY 2025</span><br><strong>03</strong></div>
+                    <div>
+                        <p class="event-name" data-i18n="ev2_name">Resonancias Migrantes — Set de live coding</p>
+                        <p class="event-venue" data-i18n="ev2_venue">CCCB · Barcelona</p>
+                    </div>
+                    <span class="event-status status-upcoming" data-i18n="event_upcoming">Próximo</span>
+                </div>
+
+                <div class="event-row fade-in">
+                    <div class="event-date"><span>ENE 2025</span><br><strong>21</strong></div>
+                    <div>
+                        <p class="event-name" data-i18n="ev3_name">Código Abierto — Festival SuperCollider</p>
+                        <p class="event-venue" data-i18n="ev3_venue">Espai Erre · Girona</p>
+                    </div>
+                    <span class="event-status status-past" data-i18n="event_past">Pasado</span>
+                </div>
+
+            </div>
+
+            <br>
+            <a href="pages/eventos.html" class="btn" data-i18n="all_events_btn">Ver todos los eventos →</a>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── Soundscapes recientes ────────────────────────────── -->
+        <section class="page-section fade-in">
+            <p class="section-label" data-i18n="label_soundscapes">// grabaciones de campo</p>
+            <h2 class="section-title" data-i18n="title_soundscapes">Soundscapes recientes</h2>
+
+            <div class="soundscapes-grid">
+
+                <div class="soundscape-card fade-in">
+                    <div class="soundscape-img-placeholder">[ campo · 2025.02 ]</div>
+                    <div class="soundscape-body">
+                        <p class="soundscape-date">Febrero 2025 · <span data-i18n="ss1_loc">Can Masdeu, BCN</span></p>
+                        <h3 class="soundscape-title" data-i18n="ss1_title">Lluvia sobre piedra</h3>
+                        <p class="soundscape-desc" data-i18n="ss1_desc">Tarde de invierno en las ruinas de Can Masdeu. Agua, viento y silencio urbano.</p>
+                        <div class="audio-player">
+                            <button class="audio-play-btn" aria-label="Reproducir">
+                                <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                            </button>
+                            <div class="audio-bar"></div>
+                            <span class="audio-time">4:32</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="soundscape-card fade-in">
+                    <div class="soundscape-img-placeholder">[ campo · 2025.01 ]</div>
+                    <div class="soundscape-body">
+                        <p class="soundscape-date">Enero 2025 · <span data-i18n="ss2_loc">Collserola, BCN</span></p>
+                        <h3 class="soundscape-title" data-i18n="ss2_title">Amanecer en el bosque</h3>
+                        <p class="soundscape-desc" data-i18n="ss2_desc">Pájaros, brisa y el zumbido lejano de la ciudad despertando al amanecer.</p>
+                        <div class="audio-player">
+                            <button class="audio-play-btn" aria-label="Reproducir">
+                                <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                            </button>
+                            <div class="audio-bar"></div>
+                            <span class="audio-time">7:14</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="soundscape-card fade-in">
+                    <div class="soundscape-img-placeholder">[ campo · 2024.11 ]</div>
+                    <div class="soundscape-body">
+                        <p class="soundscape-date">Nov 2024 · <span data-i18n="ss3_loc">Boqueria, BCN</span></p>
+                        <h3 class="soundscape-title" data-i18n="ss3_title">Mercado y voces</h3>
+                        <p class="soundscape-desc" data-i18n="ss3_desc">El caos organizado del mercado: idiomas, metales y el ritmo de la venta.</p>
+                        <div class="audio-player">
+                            <button class="audio-play-btn" aria-label="Reproducir">
+                                <svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg>
+                            </button>
+                            <div class="audio-bar"></div>
+                            <span class="audio-time">5:47</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br><br>
+            <a href="pages/soundscapes.html" class="btn" data-i18n="all_ss_btn">Ver todas las sesiones →</a>
+        </section>
+
+    </main>
+
+    <!-- ═══════ FOOTER ═══════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad. Live coding &amp; soundscapes.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="#">Cantando en Tierra Ajena</a></li>
+                    <li><a href="#">SuperCollider / TidalCycles</a></li>
+                    <li><a href="#">Sociología · UAB</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="assets/main.js"></script>
+    <script>
+        // Filter tabs (homepage only)
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('#articles-home .card').forEach(card => {
+                    card.style.display =
+                        (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

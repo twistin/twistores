@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículos — TWISTORES</title>
+    <meta name="description" content="Artículos de investigación sobre sociología de la música, migraciones, tecnología y educación.">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header fade-in">
+            <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
+            <h1 data-i18n="title_articles_page">Artículos</h1>
+        </div>
+
+        <div class="filter-tabs fade-in">
+            <button class="filter-tab active" data-filter="all" data-i18n="filter_all">Todos</button>
+            <button class="filter-tab" data-filter="tesis" data-i18n="filter_thesis">Tesis doctoral</button>
+            <button class="filter-tab" data-filter="musica-tech" data-i18n="filter_music_tech">Música &amp; Tech</button>
+            <button class="filter-tab" data-filter="musica-edu" data-i18n="filter_music_edu">Música &amp; Educación</button>
+            <button class="filter-tab" data-filter="tech-edu" data-i18n="filter_tech_edu">Tecnología &amp; Educación</button>
+            <button class="filter-tab" data-filter="otros" data-i18n="filter_others">Otros</button>
+        </div>
+
+        <div class="card-grid" id="all-articles">
+
+            <article class="card fade-in" data-category="tesis">
+                <p class="card-category" data-i18n="cat_thesis">Tesis doctoral</p>
+                <h3 data-i18n="art1_title">Cantando en Tierra Ajena: identidad y pertenencia en la diáspora latinoamericana</h3>
+                <p data-i18n="art1_desc">Un análisis sociológico de cómo la música actúa como anclaje identitario en contextos migratorios.</p>
+                <div class="card-meta"><span>Mar 2025</span><span>· <span data-i18n="reading_min">Lectura</span> 8 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="tesis">
+                <p class="card-category" data-i18n="cat_thesis">Tesis doctoral</p>
+                <h3 data-i18n="art2_title">Música de raíz y negociación identitaria: el caso de músicos latinos en Barcelona</h3>
+                <p data-i18n="art2_desc">Entrevistas en profundidad con músicos migrantes sobre la función de la música en sus procesos de adaptación.</p>
+                <div class="card-meta"><span>Nov 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 10 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="tesis">
+                <p class="card-category" data-i18n="cat_thesis">Tesis doctoral</p>
+                <h3 data-i18n="art3_title">El sonido del nosotros: comunidades sonoras transnacionales</h3>
+                <p data-i18n="art3_desc">Cómo las plataformas digitales permiten mantener vínculos culturales a través de la música en la distancia.</p>
+                <div class="card-meta"><span>Oct 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 7 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="musica-tech">
+                <p class="card-category" data-i18n="cat_music_tech">Música &amp; Tecnología</p>
+                <h3 data-i18n="art4_title">Live coding como práctica performativa: del error al gesto sonoro</h3>
+                <p data-i18n="art4_desc">Reflexiones sobre la improvisación algorítmica y la estética del código en tiempo real.</p>
+                <div class="card-meta"><span>Feb 2025</span><span>· <span data-i18n="reading_min">Lectura</span> 6 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="musica-tech">
+                <p class="card-category" data-i18n="cat_music_tech">Música &amp; Tecnología</p>
+                <h3 data-i18n="art5_title">SuperCollider y TidalCycles: gramáticas sonoras del presente</h3>
+                <p data-i18n="art5_desc">Comparativa entre dos lenguajes de live coding y sus comunidades de práctica a nivel global.</p>
+                <div class="card-meta"><span>Dic 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 9 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="musica-tech">
+                <p class="card-category" data-i18n="cat_music_tech">Música &amp; Tecnología</p>
+                <h3 data-i18n="art6_title">Écranoscapes: paisajes sonoros y visuales en la era digital</h3>
+                <p data-i18n="art6_desc">La convergencia entre imagen, código y sonido en las nuevas formas de performance audiovisual.</p>
+                <div class="card-meta"><span>Sep 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 5 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="musica-edu">
+                <p class="card-category" data-i18n="cat_music_edu">Música &amp; Educación</p>
+                <h3 data-i18n="art7_title">Pedagogías sonoras en contextos interculturales</h3>
+                <p data-i18n="art7_desc">Cómo el trabajo con músicas del mundo puede transformar el aula en un espacio de encuentro.</p>
+                <div class="card-meta"><span>Ene 2025</span><span>· <span data-i18n="reading_min">Lectura</span> 5 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="musica-edu">
+                <p class="card-category" data-i18n="cat_music_edu">Música &amp; Educación</p>
+                <h3 data-i18n="art8_title">Música migrante en el aula: voz, emoción y aprendizaje</h3>
+                <p data-i18n="art8_desc">Experiencias docentes que incorporan las músicas familiares de los estudiantes migrantes como recurso pedagógico.</p>
+                <div class="card-meta"><span>Nov 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 6 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="tech-edu">
+                <p class="card-category" data-i18n="cat_tech_edu">Tecnología &amp; Educación</p>
+                <h3 data-i18n="art9_title">Código como lenguaje creativo: introducción al live coding en educación secundaria</h3>
+                <p data-i18n="art9_desc">Una propuesta didáctica para integrar el live coding como herramienta de expresión artística en el aula.</p>
+                <div class="card-meta"><span>Mar 2025</span><span>· <span data-i18n="reading_min">Lectura</span> 7 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="tech-edu">
+                <p class="card-category" data-i18n="cat_tech_edu">Tecnología &amp; Educación</p>
+                <h3 data-i18n="art10_title">Plataformas digitales y nuevas formas de aprender música</h3>
+                <p data-i18n="art10_desc">YouTube, SoundCloud, Twitch: cómo las plataformas están redefiniendo la educación musical informal.</p>
+                <div class="card-meta"><span>Oct 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 8 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="otros">
+                <p class="card-category" data-i18n="cat_others">Otros</p>
+                <h3 data-i18n="art11_title">Notas de campo: Barcelona como laboratorio sonoro</h3>
+                <p data-i18n="art11_desc">Reflexiones personales sobre los paisajes sonoros de Barcelona como espacio de investigación y vida.</p>
+                <div class="card-meta"><span>Feb 2025</span><span>· <span data-i18n="reading_min">Lectura</span> 4 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+            <article class="card fade-in" data-category="otros">
+                <p class="card-category" data-i18n="cat_others">Otros</p>
+                <h3 data-i18n="art12_title">Reseña: «Música e inmigración» — Coord. Silvia Martínez</h3>
+                <p data-i18n="art12_desc">Lectura crítica de uno de los libros de referencia sobre música y migración en el contexto español.</p>
+                <div class="card-meta"><span>Ago 2024</span><span>· <span data-i18n="reading_min">Lectura</span> 5 min</span></div>
+                    <div class="card-footer">
+                        <a class="card-link" href="#" data-i18n="read_more">Leer más →</a>
+                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
+                    </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="#">Cantando en Tierra Ajena</a></li>
+                    <li><a href="#">SuperCollider / TidalCycles</a></li>
+                    <li><a href="#">Sociología · UAB</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+    <script>
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('#all-articles .card').forEach(card => {
+                    card.style.display =
+                        (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
