@@ -698,6 +698,14 @@ section.page-section {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.sidebar-list li a {
+    color: inherit;
+}
+
+.sidebar-list li a:hover {
+    color: var(--heading);
+}
+
 /* ── FILTER TABS ────────────────────────────────────────── */
 .filter-tabs {
     display: flex;
