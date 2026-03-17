@@ -7,26 +7,26 @@
     <meta name="description" content="Sesiones de paisajes sonoros grabados en el campo: fotografías y audio de salidas de campo.">
     <link rel="stylesheet" href="../style.css">
     <style>
-        .soundscape-full { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+        .soundscape-full { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 32px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
         .soundscape-full.reverse { direction: rtl; }
         .soundscape-full.reverse > * { direction: ltr; }
-        .soundscape-gallery { display: grid; grid-template-rows: 220px 1fr; gap: 4px; }
-        .photo-main { background: linear-gradient(135deg, #020f1a, #041824); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 2px; }
-        .photo-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
-        .photo-thumb { background: linear-gradient(135deg, #020c18, #031018); height: 80px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.6rem; cursor: pointer; transition: background var(--transition); }
-        .photo-thumb:hover { background: rgba(0,255,209,0.05); }
-        .soundscape-info { padding: 32px; display: flex; flex-direction: column; justify-content: center; }
-        .soundscape-info h2 { font-size: 1.2rem; margin-bottom: 12px; }
-        .soundscape-info p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
-        .field-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
-        .field-meta-item { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); }
-        .field-meta-item strong { color: var(--accent2); display: block; font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
-        .audio-player-full { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: rgba(0,255,209,0.02); }
+        .soundscape-gallery { display: grid; grid-template-rows: 240px 1fr; gap: 1px; background: var(--border); }
+        .photo-main { background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.64rem; letter-spacing: 1.6px; }
+        .photo-thumbs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+        .photo-thumb { background: rgba(255,255,255,0.025); height: 76px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.58rem; cursor: pointer; transition: background var(--transition); }
+        .photo-thumb:hover { background: rgba(255,255,255,0.05); }
+        .soundscape-info { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+        .soundscape-info h2 { font-size: 1.12rem; margin-bottom: 10px; color: var(--heading); }
+        .soundscape-info p { font-size: 0.88rem; line-height: 1.72; margin-bottom: 18px; color: var(--text-dim); }
+        .field-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 22px; }
+        .field-meta-item { font-family: var(--mono); font-size: 0.66rem; color: var(--text-dim); }
+        .field-meta-item strong { color: var(--accent2); display: block; font-size: 0.58rem; letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 3px; }
+        .audio-player-full { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; background: rgba(255,255,255,0.02); }
         .audio-player-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .audio-title { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+        .audio-title { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); }
         .audio-controls { display: flex; align-items: center; gap: 12px; }
-        .audio-bar-full { flex: 1; height: 3px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
-        .audio-progress { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+        .audio-bar-full { flex: 1; height: 2px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
+        .audio-progress { height: 100%; background: var(--accent2); border-radius: 2px; }
         @media (max-width: 768px) { .soundscape-full { grid-template-columns: 1fr; } .soundscape-full.reverse { direction: ltr; } }
     </style>
 </head>
