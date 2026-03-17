@@ -134,10 +134,10 @@ const T = {
         // ABOUT
         about_thesis_tag: "Tese Doutoral — Socioloxía",
         about_thesis_title:   "«Cantando en Terra Allea»\nMúsica, Migración e Identidade",
-        about_thesis_desc:    "Investigación doutoral sobre como as persoas que migran utilizan a música como ferramenta de negociación identitaria, construción de comunidade e resistencia cultural en contextos de desprazamento. O traballo combina etnografía, entrevistas en profundidade e análise sociolóxica para explorar as prácticas musicais de comunidades latinoamericanas en Barcelona.",
-        about_bio1:  "Investigador/a doutoral en socioloxía, con formación musical e unha práctica artística centrada no live coding e a gravación sonora de campo. O meu traballo móvese na intersección entre a academia e a performance: dende a escritura de artigos científicos até os sets de algorave onde o código se converte en música en tempo real.",
-        about_bio2:  "TWISTORES é o nome do meu proxecto artístico e tamén deste espazo web: un vórtice onde conflúen a investigación, o son e a tecnoloxía.",
-        about_bio3:  "Actualmente investigando e actuando desde Barcelona. Universitat Autònoma de Barcelona (UAB).",
+        about_thesis_desc:    "Investigación doutoral sobre a música como espazo de identidade, memoria e pertenza nas comunidades migrantes, cunha aproximación sociolóxica atenta ás prácticas musicais, aos procesos educativos e ás mediacións tecnolóxicas.",
+        about_bio1:  "Son doutorando na Facultade de Socioloxía, con formación superior en guitarra clásica e Historia e Ciencias da Música, e investigador centrado na relación entre música e identidade nas comunidades migrantes. Ademais, son profesor no CMUS Profesional de Música Reveriano Soutullo, onde imparto guitarra clásica, Historia da Música e Novas Tecnoloxías Aplicadas á Música.",
+        about_bio2:  "En paralelo, desenvolvo unha práctica artística con ordenador centrada en SuperCollider, o live coding e a gravación de paisaxes sonoras. Interésame a confluencia entre música, tecnoloxía e ciencia, así como as súas aplicacións á educación musical.",
+        about_bio3:  "Vivo en Vigo, cidade da que son natural. TWISTORES é o espazo no que conflúen esa labor investigadora, a docencia e a creación sonora.",
         ra1_title: "Música & Migración",
         ra1_desc:  "Función da música en procesos de adaptación, nostalxia e construción identitaria nas diásporas.",
         ra2_title: "Música & Tecnoloxía",
@@ -283,10 +283,10 @@ const T = {
         field_duration: "Duración",
         about_thesis_tag:   "Tesis Doctoral — Sociología",
         about_thesis_title: "«Cantando en Tierra Ajena»\nMúsica, Migración e Identidad",
-        about_thesis_desc:  "Investigación doctoral sobre cómo las personas que migran utilizan la música como herramienta de negociación identitaria, construcción de comunidad y resistencia cultural en contextos de desplazamiento. El trabajo combina etnografía, entrevistas en profundidad y análisis sociológico para explorar las prácticas musicales de comunidades latinoamericanas en Barcelona.",
-        about_bio1:  "Investigador/a doctoral en sociología, con formación musical y una práctica artística centrada en el live coding y la grabación sonora de campo. Mi trabajo se mueve en la intersección entre la academia y la performance: desde la escritura de artículos científicos hasta los sets de algorave donde el código se convierte en música en tiempo real.",
-        about_bio2:  "TWISTORES es el nombre de mi proyecto artístico y también de este espacio web: un vórtice donde confluyen la investigación, el sonido y la tecnología.",
-        about_bio3:  "Actualmente investigando y actuando desde Barcelona. Universitat Autònoma de Barcelona (UAB).",
+        about_thesis_desc:  "Investigación doctoral sobre la música como espacio de identidad, memoria y pertenencia en comunidades migrantes, con una aproximación sociológica atenta a las prácticas musicales, los procesos educativos y las mediaciones tecnológicas.",
+        about_bio1:  "Soy doctorando en la Facultad de Sociología, con formación superior en guitarra clásica e Historia y Ciencias de la Música, e investigador centrado en la relación entre música e identidad en comunidades migrantes. Además, soy profesor en el CMUS Profesional de Música Reveriano Soutullo, donde imparto guitarra clásica, Historia de la Música y Novas Tecnoloxías Aplicadas á Música.",
+        about_bio2:  "En paralelo, desarrollo una práctica artística con ordenador centrada en SuperCollider, el live coding y la grabación de paisajes sonoros. Me interesa la confluencia entre música, tecnología y ciencia, así como sus aplicaciones en la educación musical.",
+        about_bio3:  "Vivo en Vigo, ciudad de la que soy natural. TWISTORES es el espacio en el que confluyen esa labor investigadora, la docencia y la creación sonora.",
         ra1_title: "Música & Migración",
         ra1_desc:  "Función de la música en procesos de adaptación, nostalgia y construcción identitaria en diásporas.",
         ra2_title: "Música & Tecnología",
@@ -426,10 +426,10 @@ const T = {
         field_duration: "Duration",
         about_thesis_tag:   "Doctoral Thesis — Sociology",
         about_thesis_title: "«Singing in a Foreign Land»\nMusic, Migration and Identity",
-        about_thesis_desc:  "Doctoral research on how migrant people use music as a tool for identity negotiation, community building and cultural resistance in contexts of displacement. The work combines ethnography, in-depth interviews and sociological analysis to explore the musical practices of Latin American communities in Barcelona.",
-        about_bio1:  "Doctoral researcher in sociology, with a musical background and an artistic practice centred on live coding and sonic field recording. My work moves at the intersection of academia and performance: from writing scientific articles to algorave sets where code becomes music in real time.",
-        about_bio2:  "TWISTORES is the name of my artistic project and also of this web space: a vortex where research, sound and technology converge.",
-        about_bio3:  "Currently researching and performing from Barcelona. Universitat Autònoma de Barcelona (UAB).",
+        about_thesis_desc:  "Doctoral research on music as a space of identity, memory and belonging in migrant communities, approached from sociology with attention to musical practices, educational processes and technological mediation.",
+        about_bio1:  "I am a doctoral researcher in Sociology, with advanced training in classical guitar and in Music History and Musicology, focused on the relationship between music and identity in migrant communities. I also teach at the CMUS Profesional de Música Reveriano Soutullo, where I give classes in classical guitar, Music History and music technology.",
+        about_bio2:  "Alongside that, I develop a computer-based artistic practice centred on SuperCollider, live coding and soundscape recording. I am interested in the convergence of music, technology and science, as well as their applications in music education.",
+        about_bio3:  "I live in Vigo, my hometown. TWISTORES is the space where that research, teaching and sonic practice come together.",
         ra1_title: "Music & Migration",
         ra1_desc:  "The role of music in processes of adaptation, nostalgia and identity construction in diasporas.",
         ra2_title: "Music & Technology",
@@ -543,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── Social Icons SVG ──────────────────────────────────────────────────────────
 const SOCIAL_SVGS = {
+    email:     `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v.511l9 6 9-6V7H3zm18 10V9.489l-8.445 5.63a1 1 0 0 1-1.11 0L3 9.489V17h18z"/></svg>`,
     instagram: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
     twitter:   `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
     soundcloud:`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.175 12.225c-.056 0-.094.06-.101.133l-.233 2.154.233 2.105c.007.07.045.128.101.128.05 0 .09-.05.099-.12l.255-2.113-.27-2.154c-.009-.075-.05-.132-.1-.132zm.899-.218c-.069 0-.12.064-.128.145l-.207 2.372.208 2.278c.008.08.059.145.128.145.065 0 .117-.058.127-.138l.234-2.285-.234-2.372c-.01-.082-.062-.145-.128-.145zm.914-.045c-.082 0-.149.076-.157.17l-.184 2.417.185 2.32c.008.095.075.17.157.17.079 0 .147-.07.156-.164l.21-2.326-.21-2.417c-.01-.096-.077-.17-.157-.17zm.9-.167c-.096 0-.174.089-.18.197l-.161 2.584.162 2.456c.006.108.084.197.18.197.094 0 .172-.084.18-.193l.185-2.46-.185-2.584c-.008-.113-.086-.197-.18-.197zm.924-.123c-.108 0-.196.1-.202.218l-.139 2.707.14 2.556c.006.12.094.218.201.218.105 0 .194-.094.2-.212l.16-2.562-.16-2.707c-.006-.12-.095-.218-.2-.218zm.92-.14c-.12 0-.218.11-.222.24l-.117 2.847.117 2.614c.004.13.103.24.222.24.117 0 .215-.107.222-.237l.134-2.617-.134-2.847c-.007-.13-.105-.24-.222-.24zm.94-.062c-.13 0-.237.12-.24.261l-.094 2.91.094 2.667c.003.14.11.261.24.261.13 0 .237-.117.24-.258l.107-2.67-.107-2.91c-.003-.14-.11-.261-.24-.261zm.94-.087c-.144 0-.26.13-.262.28l-.073 2.997.073 2.697c.002.15.118.28.262.28.141 0 .258-.127.261-.276l.083-2.7-.083-2.997c-.003-.15-.12-.28-.262-.28zm.95-.077c-.156 0-.283.138-.284.3l-.05 3.074.05 2.742c.001.16.128.3.284.3.154 0 .28-.136.283-.293l.057-2.749-.057-3.074c-.003-.163-.129-.3-.283-.3zm.97-.1c-.17 0-.308.148-.308.322l-.024 3.174.024 2.757c0 .174.138.322.308.322.168 0 .307-.144.308-.317l.028-2.762-.028-3.174c-.001-.176-.14-.322-.308-.322zm.968-.113c-.18 0-.328.157-.328.343l-.003 3.287.003 2.777c0 .186.148.343.328.343.179 0 .327-.154.328-.338l.003-2.782-.003-3.287c-.001-.188-.149-.343-.328-.343zm5.48.452a4.07 4.07 0 00-1.584.32 5.888 5.888 0 00-5.824-5.124 5.913 5.913 0 00-2.228.433v11.4c0 .238.187.433.428.44h9.208c.24 0 .432-.193.432-.433V12.24a3.896 3.896 0 00-3.897-3.897 3.93 3.93 0 00-3.921 3.921v.003l-.003 5.61"/></svg>`,
@@ -557,6 +558,16 @@ const SOCIAL_SVGS = {
 function buildSocialLinks(className = 'social-links') {
     const profiles = [
         {
+            key: 'email',
+            href: 'mailto:sarerac@gmail.com',
+            label: 'Email'
+        },
+        {
+            key: 'github',
+            href: 'https://github.com/twistin',
+            label: 'GitHub'
+        },
+        {
             key: 'researchgate',
             href: 'https://www.researchgate.net/profile/Silvino-Diaz-Carreras?ev=hdr_xprf',
             label: 'ResearchGate'
@@ -565,6 +576,11 @@ function buildSocialLinks(className = 'social-links') {
             key: 'academia',
             href: 'https://uab.academia.edu/SilvinoD%C3%ADazCarreras',
             label: 'Academia.edu'
+        },
+        {
+            key: 'soundcloud',
+            href: 'https://soundcloud.com/twistin_25/qian',
+            label: 'SoundCloud'
         },
         {
             key: 'youtube',
