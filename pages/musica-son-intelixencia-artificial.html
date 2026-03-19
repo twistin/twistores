@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A música, o son e a Intelixencia Artificial — TWISTORES</title>
+    <meta name="description" content="Da música algorítmica de Mozart ás redes neuronais de hoxe: un percorrido polo estado da Intelixencia Artificial no campo da música, desde a composición até a industria e a educación.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .article-figure img {
+            width: 100%;
+            max-width: 820px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .article-figure img.banner-code {
+            max-width: 680px;
+            border-radius: 6px;
+        }
+        .article-figure img.historical {
+            max-width: 600px;
+            filter: grayscale(20%);
+        }
+        .article-figure figcaption {
+            margin-top: 0.6rem;
+            font-size: 0.82rem;
+            opacity: 0.6;
+            font-style: italic;
+        }
+        .video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            background: #000;
+        }
+        .video-wrap iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        .article-note {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            text-align: center;
+            margin-top: -0.8rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        /* Company cards for industry section */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .company-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 1.2rem;
+        }
+        .company-card h4 {
+            margin: 0 0 0.3rem;
+            font-size: 1rem;
+            color: var(--accent, #4af);
+        }
+        .company-card .location {
+            font-size: 0.78rem;
+            opacity: 0.5;
+            margin-bottom: 0.7rem;
+            font-style: italic;
+        }
+        .company-card p {
+            font-size: 0.88rem;
+            margin: 0 0 0.6rem;
+        }
+        .company-card .impact {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 0.6rem;
+            margin-top: 0.4rem;
+        }
+        .neuro-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: neuro;
+        }
+        .neuro-list li {
+            counter-increment: neuro;
+            padding: 0.4rem 0 0.4rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .neuro-list li::before {
+            content: counter(neuro) ".";
+            position: absolute;
+            left: 0;
+            opacity: 0.4;
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="gl">GL</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content">
+
+            <div class="page-header fade-in">
+                <p class="section-label">// musicoloxía · intelixencia artificial · investigación</p>
+                <h1>A música, o son e a Intelixencia Artificial</h1>
+                <div class="article-meta">
+                    <span>14 de marzo de 2022</span>
+                    <span>Tecnoloxía &amp; IA</span>
+                    <span>Lectura 18 min</span>
+                </div>
+            </div>
+
+            <figure class="article-figure fade-in">
+                <img src="../assets/img/sc-banner.png"
+                     class="banner-code"
+                     alt="Fragmento de código SuperCollider: síntese de son mediante LFNoise0, LFSaw e SinOsc"
+                     loading="lazy">
+                <figcaption>Síntese de son mediante SuperCollider: o código como material musical. © Twistores</figcaption>
+            </figure>
+
+            <p class="article-lead fade-in">
+                Da música algorítmica de Mozart ás redes neuronais do presente: este artigo percorre a historia e o estado actual da Intelixencia Artificial no campo da música, desde as súas orixes na computación dos anos cincuenta até as aplicacións contemporáneas na composición, na educación e nos ecosistemas da industria musical.
+            </p>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones do artigo">
+                <a href="#algorítmica">Orixe algorítmica</a>
+                <a href="#redes">Redes neuronais</a>
+                <a href="#ia-musica">IA e música hoxe</a>
+                <a href="#composicion">Composición con IA</a>
+                <a href="#educacion">Educación musical</a>
+                <a href="#industria">Industria</a>
+                <a href="#referencias">Referencias</a>
+            </nav>
+
+            <!-- ── SECCIÓN 1 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="algorítmica">
+                <h2>A orixe da música algorítmica</h2>
+
+                <p>
+                    En 1793, menos de dous anos despois da morte de Mozart, publicouse —e se reimprimi
+u en Bonn tres anos despois— o <em>Musikalisches Würfelspiel</em> en do maior, atribuído ao compositor salzoburgués. É moi probable que Mozart fixese esbozo deste xogo el mesmo, como apunta un bosquexo de voz de minueto conservado na folla do Adagio KV 516 f, aínda que esta atribución non ten o consenso unánime da comunidade investigadora. O propio <em>Grove</em> de 1936, na súa sección de "Obras espurias e dubidosas" de Mozart, cita "a gran cantidade de pezas para piano falsas" sen mencionar o <em>Würfelspiel</em>.
+                </p>
+
+                <figure class="article-figure">
+                    <img src="../assets/img/dice-mozart.png"
+                         alt="Portada do Musikalisches Würfelspiel atribuído a W. A. Mozart, publicado por N. Simrock en Bonn. Instruciones en alemán, francés, inglés e italiano para compor valses lanzando dados."
+                         loading="lazy">
+                    <figcaption>Portada do <em>Musikalisches Würfelspiel</em> atribuído a W. A. Mozart. Publicado por N. Simrock en Bonn, c. 1793.</figcaption>
+                </figure>
+
+                <p>
+                    A obra funciona como unha melodía de minueto cuxos compases están ordenados mediante letras, de xeito que o intérprete lanza dous dados para seleccionar ao azar a alternativa correspondente a cada compás. As instrucións orixinais non outorgan a mesma probabilidade a cada alternativa: o número 7 aparece con maior frecuencia que o 2 ou o 12, de modo que o proceso de selección asigna probabilidades diferentes ás once opcións posibles.
+                </p>
+                <p>
+                    A <em>Real Academia Galega da Lingua</em> define algoritmo como "un conxunto de regras que, aplicadas, permiten resolver un problema mediante un número finito de operacións". Baixo esta definición, o <em>Würfelspiel</em> convértese posiblemente na primeira peza musical baseada nun algoritmo estocástico con concepción formal de obra aberta: pioneira, deste xeito, no uso de técnicas compositivas máis propias do século XX que do clasicismo vienés do XVIII.
+                </p>
+                <p>
+                    Podemos datar a música xerada por computadora na década de 1950, poucos anos despois de 1943, cando se iniciou en Filadelfia a construción do ENIAC (<em>Electronic Numerical Integrator And Computer</em>): o primeiro computador de propósito xeral baseado en circuítos electrónicos. Era un mastodonte de 27 toneladas que ocupaba 167 m², e contaba con 17.500 válvulas, 7.200 díodos de cristal, 1.500 relés, 70.000 resistencias, 10.000 condensadores e cinco millóns de soldaduras.
+                </p>
+
+                <figure class="article-figure">
+                    <img src="../assets/img/eniac-computer.jpg"
+                         alt="O computador ENIAC, Filadelfia, 1943. Panel de cableado e módulos electrónicos nun espazo de 167 metros cadrados."
+                         loading="lazy">
+                    <figcaption>O ENIAC, Filadelfia, 1943. O primeiro computador electrónico de propósito xeral. Fotografía de arquivo, Smithsonian Institution.</figcaption>
+                </figure>
+
+                <p>
+                    <em>Illiac Suite</em> (1957), de Lejaren Hiller e Leonard Isaacson, é a primeira partitura composta con axuda dunha computadora. Constitúe un exemplo temperán de algoritmia musical: emprega modelos aleatorios para a xeración de material sonoro, así como regras de filtrado que descartan o material xerado que non cumpre certos criterios estilísticos predefinidos.
+                </p>
+
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/0F75bckGBA0"
+                            title="Illiac Suite — Hiller e Isaacson (1957)"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <p class="article-note">Illiac Suite · Hiller &amp; Isaacson, 1957 · Primeira partitura composta con computadora</p>
+            </section>
+
+            <!-- ── SECCIÓN 2 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="redes">
+                <h2>Breve historia das redes neuronais</h2>
+
+                <p>
+                    En 1943, o mesmo ano en que se iniciou a construción do ENIAC, Walter Pitts (matemático) e Warren McCulloch (neurofisiólogo) deseñaron o primeiro modelo algorítmico dunha neurona artificial: unha representación matemática simplificada dunha neurona real, capaz de combinar entradas binarias para producir unha saída.
+                </p>
+                <p>
+                    Frank Rosenblatt, investigador pioneiro neste eido, ampliou o modelo Pitts-McCulloch introducindo a capacidade de aprendizaxe: o seu algoritmo, denominado <strong>perceptrón</strong>, é esencialmente unha función que decide se un vector de entrada pertence ou non a unha clase determinada. O perceptrón foi inventado en 1958 no Laboratorio Aeronáutico de Cornell, con financiamento da Oficina de Investigación Naval dos Estados Unidos.
+                </p>
+                <p>
+                    O perceptrón concibírase inicialmente como un dispositivo hardware, non como un programa: a súa primeira implementación física, o <em>Mark I Perceptron</em>, contaba cunha matriz de 400 fotocélulas conectadas aleatoriamente como neuronas, con pesos codificados en potenciómetros e actualizacións de pesos realizadas mediante motores eléctricos. Rosenblatt declarou entón:
+                </p>
+
+                <div class="article-keyline">
+                    <p>
+                        "Estamos a punto de presenciar o nacemento dunha máquina deste tipo, unha máquina capaz de percibir, recoñecer e identificar a súa contorna sen ningún adestramento ou control humano."<br>
+                        <em>— Frank Rosenblatt, 1958</em>
+                    </p>
+                </div>
+
+                <figure class="article-figure">
+                    <img src="../assets/img/illiac-computer.png"
+                         class="historical"
+                         alt="Investigador traballando nunha computadora de primeiros tempos, anos cincuenta do século XX. Ao fondo, panel de conexións electrónicas."
+                         loading="lazy">
+                    <figcaption>Investigador con computadora de primeiros tempos, c. 1958. Fotografía de arquivo.</figcaption>
+                </figure>
+
+                <p>
+                    A pesar deste entusiasmo, a comunidade académica abandonou durante case vinte anos os estudos sobre redes neuronais ao considerar que nunca poderían alcanzar o grao de complexidade da mente humana. O resurgimento chegou nos anos oitenta, impulsado pola publicación de <em>Parallel Distributed Processing: Explorations in the Microstructure of Cognition</em> (MIT Press, 1987), obra de David Rumelhart e James McClelland. Os autores suxerían que os programas de computadora convencionais funcionan de xeito radicalmente distinto ao cerebro humano, o que explicaría por que até entón resultaran tan deficientes para tarefas que o cerebro resolve con facilidade —como o recoñecemento de obxectos en imaxes—. O seu enfoque, máis próximo á arquitectura neuronal biolóxica, quedou codificado nos seguintes elementos constitutivos dunha rede neuronal:
+                </p>
+
+                <ol class="neuro-list">
+                    <li>Un conxunto de unidades de procesamento</li>
+                    <li>Un estado de activación para cada unidade</li>
+                    <li>Unha función de saída para cada unidade</li>
+                    <li>Un patrón de conectividade entre unidades</li>
+                    <li>Unha regra de propagación para distribución de patróns de actividade pola rede</li>
+                    <li>Unha regra de activación para combinar as entradas entrantes co estado actual da unidade</li>
+                    <li>Unha regra de aprendizaxe mediante a cal os patróns de conectividade se modifican pola experiencia</li>
+                    <li>Unha contorna dentro da cal o sistema debe operar</li>
+                </ol>
+
+                <p>
+                    Hoxe, as redes neuronais acadan o seu máximo desenvolvemento grazas á confluencia de tres factores: a multiplicación de capas de procesamento profundo (<em>deep learning</em>), a capacidade computacional exponencialmente maior dos dispositivos actuais, e a dispoñibilidade masiva de datos derivada da xeralización de internet. Rosenblatt veuse, en certo sentido, vindicado.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 3 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="ia-musica">
+                <h2>Música e IA: o estado actual</h2>
+
+                <p>
+                    O que moita xente descoñece é que a música xerativa por medios informáticos xa se practicou nos anos cincuenta do século pasado, empregando técnicas como a estocástica de Markov, as gramáticas xerativas ou os sistemas baseados en regras. O que cambiou ao longo de setenta anos é, por un lado, o desenvolvemento do hardware —que permite velocidades e volumes de procesamento antes impensables— e, por outro, a sofisticación dos algoritmos. As tarefas de fondo, en esencia, seguen sendo as mesmas.
+                </p>
+                <p>
+                    Na actualidade, os asistentes de voz son un dos campos tecnolóxicos de maior crecemento, xa que posibilitan a interacción humana con dispositivos sen necesidade de contacto físico. Existe unha relación directa entre a IA aplicada á voz e a IA aplicada á música: en ambos casos, os datos de partida son ondas sonoras. A diferenza radica en que non se traballa directamente sobre a forma de onda, senón sobre unha <strong>representación gráfica do son</strong> obtida mediante a transformada de Fourier: un espectrograma que representa de xeito compacto a información de tempo e frecuencia. Estes espectrogramas aliméntanse a continuación como entradas de algoritmos de regresión ou clasificación.
+                </p>
+                <p>
+                    Existe ademais outra representación amplamente usada en música que procede do campo do procesamento de voz: os <strong>MFCC</strong> (<em>Mel Frequency Cepstral Coefficients</em>), unha representación do espectro de potencia a curto prazo dun son, calculada como a transformada de coseno dunha escala de frecuencias logarítmica non lineal (escala mel). Os MFCC forman parte do cotiá tecnolóxico: utilízanse en sistemas de recoñecemento de voz, recoñecemento automático de números marcados nun teléfono, clasificación de xéneros musicais e medidas de similitude de audio, entre outras aplicacións.
+                </p>
+                <p>
+                    De xeito moi xeral, a IA musical móvese en tres grandes eixes: <strong>composición</strong> (xeración de material musical novo), <strong>análise</strong> (clasificación, recuperación de información, descrición de contido) e <strong>interacción</strong> (interfaces intelixentes para músicos e usuarios). As dúas últimas seccións deste artigo darán conta de exemplos concretos en cada un destes ámbitos.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 4 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="composicion">
+                <h2>O uso da IA na composición musical</h2>
+
+                <h3>Huawei e a Sinfonía Inacabada de Schubert</h3>
+                <p>
+                    Huawei utilizou o teléfono Mate 20 Pro para completar a Sinfonía n.º 8 de Schubert, coñecida como "Inacabada": Schubert deixou completos só o primeiro e o segundo movementos, mentres que o terceiro e o cuarto quedaron como borradores. O proxecto naceu como demostración do chipset Kirin 980. Nunha primeira fase, analizáronse mediante redes neuronais 90 obras de Schubert en formato MIDI para extraer os patróns estruturais do compositor; a continuación, a rede adestrou tamén sobre obras dos compositores que influíron en Schubert, para un contexto estilístico máis profundo; e finalmente analizáronse o ton, o timbre e as dinámicas dos movementos xa existentes. A IA sintetizou a melodía das partes terceira e cuarta. O compositor Lucas Cantor (gañador dun Emmy) e un colaborador de DreamWorks revisaron a saída durante 30 días, corrixiron erros melódicos, engadiron expresividade e escribiron a partitura orquestral. Cantor declarou:
+                </p>
+
+                <div class="article-keyline">
+                    <p>
+                        "A máquina non podería rematar a peza sen min. Pero dificilmente tería escrito algo así sen un marco tan asombroso."<br>
+                        <em>— Lucas Cantor, compositor</em>
+                    </p>
+                </div>
+
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/hHwKhItwiIg"
+                            title="Schubert Sinfonía Inacabada completada con IA — Huawei"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <p class="article-note">Schubert: Sinfonía n.º 8 "Inacabada" completada con IA · Huawei Mate 20 Pro / Lucas Cantor, 2019</p>
+
+                <h3>Taryn Southern e Amper Music</h3>
+                <p>
+                    <em>I AM AI</em> (2018) é o terceiro álbum de estudio da artista estadounidense Taryn Southern. Consta de oito canciones cuxas letras foron escritas pola propia artista e colaboradores, mentres que melodía e produción musical foron realizadas integramente por <strong>Amper</strong>, unha plataforma de IA musical que permite a calquera usuario crear música "orixinal" e libre de licenza baixo demanda. Un dos seus creadores, Silverstein, afirma que Amper non substituirá aos compositores humanos, senón que axudará a "crear unha próxima xeración de música" libre de restriccións de dereitos de autor.
+                </p>
+
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/f-Tm1yX6-BY"
+                            title="Taryn Southern — Break Free (Amper AI)"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <p class="article-note">Taryn Southern · <em>Break Free</em> · produción íntegra con Amper Music AI, 2018</p>
+
+                <h3>Sony CSL e Flow Machines</h3>
+                <p>
+                    O Laboratorio de Investigación de Sony CSL creou dúas cancións pop compostas con IA mediante <strong>Flow Machines</strong>, un sistema que aprende estilos musicais a partir de enormes bases de datos de cancións e, explotando técnicas de transferencia de estilos e optimización, pode compor en calquera estilo elixido polo compositor humano.
+                </p>
+                <p>
+                    O proceso foi o seguinte: o compositor Benoît Carré seleccionou un estilo —"Os Beatles" para <em>Daddy's Car</em>; "American Songwriters" (Cole Porter, Gershwin, Ellington…) para <em>Mr. Shadow</em>— e colocou un <em>lead sheet</em> (melodía + harmonía) mediante FlowComposer. Logo, co sistema Recored, comparou fragmentos de audio reais coas follas xeradas, e finalmente encargouse da produción e mestura definitivas.
+                </p>
+
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/LSHZ_b05W7o"
+                            title="Daddy's Car — Sony CSL Flow Machines"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <p class="article-note">Sony CSL · <em>Daddy's Car</em> · Flow Machines + Benoît Carré, 2016</p>
+
+                <p>
+                    Estes tres exemplos son representativos dos avances da IA na composición musical, mais é honesto subliñar un elemento común: en todos os casos, a intervención humana foi imprescindible para o resultado final. Esta constatación sitúanos nunha reflexión máis ampla sobre o papel da música como expresión de humanidade —da que Epicuro, Rousseau ou Hanslick xa debateron nos seus séculos respectivos— e sobre o sentido dunha música baleira do seu contexto social, afectivo e cultural.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 5 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="educacion">
+                <h2>Educación musical na era da IA</h2>
+
+                <p>
+                    En 2019, a UNESCO celebrou en Pekín a Conferencia Internacional sobre a Intelixencia Artificial e a Educación. O documento final, con 44 puntos dirixidos a gobernos e institucións, propón unha integración sistemática da IA nos sistemas educativos cara á axenda 2030, promovendo oportunidades de aprendizaxe permanente, equitativas e de calidade. Entre os seus puntos máis ilustrativos figura un aviso explícito:
+                </p>
+
+                <div class="article-keyline">
+                    <p>
+                        "A interacción humana e a colaboración entre os docentes e os educandos deben seguir ocupando un lugar esencial na educación. Os docentes non poden ser desprazados polas máquinas, e os seus dereitos e condicións de traballo deben estar protexidos."<br>
+                        <em>— UNESCO, Conferencia IA e Educación, Pekín, 2019</em>
+                    </p>
+                </div>
+
+                <p>
+                    No eido da educación musical, xa se utilizan nas aulas universitarias, nos conservatorios e nos centros de música ferramentas baseadas en IA como:
+                </p>
+                <ul>
+                    <li><strong>Moises.ai</strong> e <strong>Melody.ml</strong>: separación automática de pistas de audio mediante aprendizaxe automática, para edición multipista, mestura e sonorización.</li>
+                    <li><strong>DeepBach</strong>: algoritmo adestrado sobre 400 corais de Johann Sebastian Bach, capaz de xerar novos corais no seu estilo, útil para a comprensión de conceptos harmónicos, rítmicos e melódicos na aula.</li>
+                    <li><strong>Flow Machines</strong>: IA que analiza bases de datos de cancións e xera composicións nun estilo musical definido polo usuario.</li>
+                    <li><strong>Music21</strong> e <strong>Librosa</strong>: bibliotecas de Python para análise musical, estudos de harmonía, separación de voces e seguimento do progreso interpretativo (afinación, dinámica, agóxica).</li>
+                </ul>
+
+                <p>
+                    No ámbito da investigación, cómpre distinguir dous tipos de actores. Por un lado, os <strong>grupos universitarios</strong> —como o Grup de Tecnologia Musical da Universitat Pompeu Fabra, liderado por Xavier Serra, referente mundial en <em>Music Information Retrieval</em> (MIR) e creadores da biblioteca <strong>Essentia</strong>, de C++ con conectores Python para análise, descrición e síntese de audio—. Por outro, as <strong>grandes corporacións</strong>, cuxa motivación combina o descubrimento de novos algoritmos coa implementación a escala produción: Spotify, Apple Music ou YouTube Music non só desenvolven algoritmos de clasificación, senón que os implementan para recomendar cancións e interactuar con centos de millóns de usuarios. <strong>Magenta</strong> (Google Brain) é un proxecto de investigación de código aberto que explora o papel da aprendizaxe automática no proceso creativo, desenvolvendo novos algoritmos de aprendizaxe profunda e por reforzo para a xeración de cancións, imaxes e outros materiais, dispoñibles en Github baixo TensorFlow.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 6 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="industria">
+                <h2>A IA nos sectores empresariais da música</h2>
+
+                <p>
+                    A implementación da IA na industria musical acelerouse de xeito notable nos últimos cinco anos. A música ambiental xerada por IA, a xeración de música libre de dereitos para creadores de contido e a masterización asistida por automatización convertéronse en sectores consolidades, e os sistemas de recomendación tiveron implicacións que van moito máis alá do streaming musical.
+                </p>
+
+                <div class="company-grid">
+
+                    <div class="company-card">
+                        <h4>AIVA</h4>
+                        <p class="location">Luxemburgo</p>
+                        <p>Motor de IA para bandas sonoras. Permite a compositores e creadores xerar orixinais ou subir o seu traballo para crear variacións. Ofrece dereitos de uso completos segundo o plan elixido.</p>
+                        <p class="impact">⟶ Aposta pola colaboración entre creatividade artificial e orgánica, non pola substitución.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Amper Music</h4>
+                        <p class="location">Nova York</p>
+                        <p>Ferramenta que interpreta, compón e produce música personalizada para contido multimedia. O usuario elixe estilo, estado de ánimo e duración sen necesitar coñecementos musicais.</p>
+                        <p class="impact">⟶ Adquirida por Shutterstock en 2020. O seu sistema Score permite crear unha pista con IA en menos de 10 clics.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Brain.fm</h4>
+                        <p class="location">Chicago</p>
+                        <p>Aplicación web e móbil de música ambiental para favorecer o descanso, a relaxación e a concentración. O motor de IA engade características acústicas para inducir estados mentais determinados en 10-15 minutos.</p>
+                        <p class="impact">⟶ Estudo piloto independente mostra taxas maiores de atención sostida con Brain.fm fronte a música convencional.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>LANDR</h4>
+                        <p class="location">Montreal</p>
+                        <p>Plataforma para crear, masterizar e vender música. O software de masterización analiza o estilo das pistas e mellora os parámetros sobre unha biblioteca de referencia de xéneros e estilos.</p>
+                        <p class="impact">⟶ Permite distribuír en plataformas de streaming sen pasar por un estudio profesional.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Muzeek</h4>
+                        <p class="location">San Francisco</p>
+                        <p>Algoritmo que analiza vídeos combinando duración e ritmo para xerar bandas sonoras relevantes e con licenza para creadores, desenvolvedores e axencias.</p>
+                        <p class="impact">⟶ Permite emparelar legalmente vídeos e música ante o endurecemento das políticas de dereitos de autor nas plataformas sociais.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Pandora</h4>
+                        <p class="location">Oakland</p>
+                        <p>Servizo de radio personalizado que aprende dos "gústame" e "non me gusta" do usuario para afinar recomendacións. Con acceso a 80.000 millóns de selecciones, utiliza ML para examinar miles de novos lanzamentos á semana.</p>
+                        <p class="impact">⟶ Os seus algoritmos axudan tamén a detectar bots e identidades falsas na plataforma.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Splash</h4>
+                        <p class="location">Brisbane</p>
+                        <p>Comezou como Popgun en 2017 con instrumentos dixitais intelixentes; pivotou a ferramentas musicais asistidas por IA en contornos de xogo como Roblox. Actualmente enfocada na intersección de composición intelixente e metaverso.</p>
+                        <p class="impact">⟶ Bitkraft Ventures e Amazon Alexa Fund colideraron unha ronda de 20 millóns de dólares en novembro de 2021.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Shazam</h4>
+                        <p class="location">Londres</p>
+                        <p>Un dos primeiros servizos de IA de consumo masivo. Toma a pegada dixital dunha canción e compáraa cunha biblioteca masiva de música pregravada para identificala en segundos.</p>
+                        <p class="impact">⟶ Parte da familia Apple. Resolveu durante décadas a pregunta "Quen canta isto?" en cafés, tendas e radios.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Spotify</h4>
+                        <p class="location">Estocolmo</p>
+                        <p>Servizo de streaming con máis de 381 millóns de usuarios en 184 mercados. A función "Discover Weekly" xera listas personalizadas con música non escoitada pola persoa usuaria, baseándose nos seus hábitos de escoita.</p>
+                        <p class="impact">⟶ Transformou a industria do CD e das descargas ilegais cara ao streaming masivo e a descuberta de artistas emerxentes.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>iZotope</h4>
+                        <p class="location">Cambridge, MA</p>
+                        <p>Pioneira na produción musical asistida por IA desde 2016, con Track Assistant. Ofrece asistentes de mestura vocal, reverberación e masterización baseados en IA. O seu Spire Studio converteu nun éxito durante a pandemia.</p>
+                        <p class="impact">⟶ Utilizado por Beyoncé, Kendrick Lamar e Foo Fighters para mesturas e masterizacións.</p>
+                    </div>
+
+                    <div class="company-card">
+                        <h4>Output / Arcade</h4>
+                        <p class="location">Los Ángeles</p>
+                        <p>O plugin Arcade permite crear e manipular bucles en pistas longas. A ferramenta Kit Generator, con IA, permite descargar un kit completo de sons a partir de mostras de audio discretas.</p>
+                        <p class="impact">⟶ Utilizado por Drake e Rihanna, e nas bandas sonoras de <em>Black Panther</em> e <em>Game of Thrones</em>.</p>
+                    </div>
+
+                </div>
+
+                <p>
+                    O que estes exemplos evidencian é que a IA xa está dentro das entrañas da vida cotiá das persoas, aínda que estamos aínda nunha fase inicial. Queda moito camiño por percorrer en aspectos tecnolóxicos, éticos, sociais, económicos e estéticos. Esperamos que este achegamento a estes temas resultara útil e suxerente.
+                </p>
+            </section>
+
+            <!-- ── REFERENCIAS ─────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="referencias">
+                <h2>Referencias e recursos</h2>
+                <ol class="article-bibliography">
+                    <li>Iyer, V. (ed.) (2022). <em>Handbook of Artificial Intelligence for Music</em>. Springer. <a href="https://www.vitalsource.com/products/handbook-of-artificial-intelligence-for-music-v9783030721169" target="_blank" rel="noopener">VitalSource</a></li>
+                    <li>Cádiz, R. F., Macaya, A., Cartagena, M. e Parra, D. (2021). Creatividad en redes musicales xerativas: evidencia a partir de dous estudos de caso. <em>Frontiers in Robotics and AI</em>, 8, 680586. <a href="https://doi.org/10.3389/frobt.2021.680586" target="_blank" rel="noopener">DOI</a></li>
+                    <li>Rumelhart, D. E. e McClelland, J. L. (1987). <em>Parallel Distributed Processing: Explorations in the Microstructure of Cognition</em>, vol. 1-2. MIT Press.</li>
+                    <li>Hiller, L. e Isaacson, L. (1959). <em>Experimental Music: Composition with an Electronic Computer</em>. McGraw-Hill.</li>
+                    <li>UNESCO (2019). <em>Documento final da Conferencia Internacional sobre a IA e a Educación</em>. Pekín. <a href="https://unesdoc.unesco.org/ark:/48223/pf0000368303" target="_blank" rel="noopener">Enlace</a></li>
+                    <li>Serra, X. et al. Essentia: biblioteca de análise de audio de código aberto. <a href="https://essentia.upf.edu" target="_blank" rel="noopener">essentia.upf.edu</a></li>
+                    <li>Google Brain. Proyecto Magenta. <a href="https://magenta.tensorflow.org" target="_blank" rel="noopener">magenta.tensorflow.org</a></li>
+                </ol>
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="musica-son-intelixencia-artificial.html">Música, son e IA</a></li>
+                    <li><a href="musicbert-musica-simbolica.html">MusicBERT</a></li>
+                    <li><a href="cacofonia-buraco-negro.html">Cacofonía dun buraco negro</a></li>
+                    <li><a href="son-do-sars-cov-2.html">O son do SARS-CoV-2</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

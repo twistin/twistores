@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music21: método computacional aplicado á musicoloxía — TWISTORES</title>
+    <meta name="description" content="Music21 é un conxunto de ferramentas de Python para a musicoloxía computacional, desenvolvido no MIT. Permite analizar, xerar e editar música de xeito programático.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .article-figure img {
+            width: 100%;
+            max-width: 820px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .article-figure figcaption {
+            margin-top: 0.6rem;
+            font-size: 0.82rem;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid rgba(79, 175, 239, 0.18);
+            border-radius: 10px;
+            margin: 1.8rem 0;
+            overflow: hidden;
+        }
+        .code-block-header {
+            background: rgba(79, 175, 239, 0.08);
+            border-bottom: 1px solid rgba(79, 175, 239, 0.15);
+            padding: 0.5rem 1.1rem;
+            font-size: 0.78rem;
+            opacity: 0.7;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .code-block-header::before {
+            content: "● ● ●";
+            letter-spacing: 3px;
+            opacity: 0.4;
+            font-size: 0.6rem;
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 1.3rem 1.4rem;
+            overflow-x: auto;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+        .code-block pre code {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+            color: #e6edf3;
+        }
+        /* Python token colors */
+        .kw { color: #ff7b72; }   /* keywords: from, import, for, in */
+        .fn { color: #d2a8ff; }   /* functions */
+        .st { color: #a5d6ff; }   /* strings */
+        .cm { color: #6e7781; font-style: italic; }  /* comments */
+        .nb { color: #79c0ff; }   /* builtins / module names */
+        .nm { color: #ffa657; }   /* method/attribute names */
+        .nu { color: #79c0ff; }   /* numbers */
+        .op { color: #ff7b72; }   /* operators */
+
+        .code-caption {
+            font-size: 0.8rem;
+            opacity: 0.55;
+            text-align: center;
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Author cards */
+        .author-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .author-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 1.2rem;
+        }
+        .author-card h4 {
+            margin: 0 0 0.2rem;
+            font-size: 1rem;
+            color: var(--accent, #4af);
+        }
+        .author-card .role {
+            font-size: 0.78rem;
+            opacity: 0.5;
+            margin-bottom: 0.7rem;
+            font-style: italic;
+        }
+        .author-card p {
+            font-size: 0.87rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="gl">GL</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content">
+
+            <div class="page-header fade-in">
+                <p class="section-label">// musicoloxía · Python · metodoloxía · investigación</p>
+                <h1>Music21: método computacional aplicado á musicoloxía</h1>
+                <div class="article-meta">
+                    <span>17 de febreiro de 2022</span>
+                    <span>Investigación &amp; Educación</span>
+                    <span>Lectura 8 min</span>
+                </div>
+            </div>
+
+            <figure class="article-figure fade-in">
+                <img src="../assets/img/music21-banner.png"
+                     alt="Notación musical e código Python fundidos: representación visual de Music21, o sistema de musicoloxía computacional do MIT"
+                     loading="lazy">
+                <figcaption>Music21: onde a notación musical e a programación se atopan. MIT, 2008–actualidade.</figcaption>
+            </figure>
+
+            <p class="article-lead fade-in">
+                Music21 é un conxunto de ferramentas de Python para a musicoloxía computacional, desenvolvido no MIT desde 2008. Permite estudar conexións de datos musicais a gran escala, xerar exemplos musicais, impartir teoría musical, editar notación e compor música —tanto algoritmicamente como de xeito directo— sen necesidade de experiencia avanzada en programación.
+            </p>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones do artigo">
+                <a href="#que-e">Que é Music21</a>
+                <a href="#autores">Autores</a>
+                <a href="#nome">O nome</a>
+                <a href="#uso">Que pode facer</a>
+                <a href="#analise">Análise do século XX</a>
+                <a href="#corpus">Corpus Bach</a>
+                <a href="#comezar">Para comezar</a>
+            </nav>
+
+            <!-- ── SECCIÓN 1 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="que-e">
+                <h2>Que é Music21?</h2>
+                <p>
+                    Music21 é un conxunto de ferramentas baseado en Python para a musicoloxía computacional. A aplicación creouse no ano 2008 e desde entón converteuse nun estándar de referencia na investigación musical asistida por computadora. Entre as súas capacidades principais figuran:
+                </p>
+                <ul>
+                    <li>Estudar e analizar grandes cantidades de datos musicais interconectados.</li>
+                    <li>Xerar exemplos musicais de xeito programático ou directo.</li>
+                    <li>Impartir e visualizar os fundamentos da teoría musical.</li>
+                    <li>Editar notación musical en formatos estándar (MusicXML, MIDI, ABC, Kern…).</li>
+                    <li>Compor música algorítmica ou asistida por computadora.</li>
+                </ul>
+            </section>
+
+            <!-- ── SECCIÓN 2 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="autores">
+                <h2>Os autores</h2>
+
+                <div class="author-grid">
+                    <div class="author-card">
+                        <h4>Michael Cuthbert</h4>
+                        <p class="role">Creador de Music21 · Profesor Asociado de Música, MIT</p>
+                        <p>
+                            Graduado <em>summa cum laude</em> en Harvard (AB, AM e Ph.D.). Gañou o Premio Roma en Estudos Medievais na Academia Estadounidense de Roma (2004–05), foi membro do Centro Villa I Tatti de Harvard para Estudos do Renacemento Italiano en Florencia (2009–10) e residente no Instituto Radcliffe (2012–13). Ademais de dirixir Music21, prepara un libro sobre música sacra en Italia durante a época da Peste Negra e o Gran Cisma Papal.
+                        </p>
+                    </div>
+                    <div class="author-card">
+                        <h4>Christopher Ariza</h4>
+                        <p class="role">Programador principal emérito · Profesor visitante MIT (2010–2013)</p>
+                        <p>
+                            Antes de unirse ao proxecto Music21, foi profesor asistente de tecnoloxía musical na Universidade de Towson (Baltimore). Publicou e presentou numerosos artigos sobre composición algorítmica e sistemas musicais xerativos. Graduado en Harvard (AB) e doutor pola Universidade de Nova York.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── SECCIÓN 3 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="nome">
+                <h2>O MIT e o centro de investigación de Music21</h2>
+                <p>
+                    O <strong>21</strong> do nome <em>music21</em> fai referencia ás súas orixes como proxecto do MIT: no Instituto, todos os cursos teñen número, e a música —xunto con outros departamentos de humanidades— está numerada <strong>21</strong>. Os departamentos de música do MIT, Harvard, Smith e Mount Holyoke contribuíron a facer medrar este conxunto de ferramentas desde as súas raíces máis sinxelas até un sistema maduro e de referencia mundial.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 4 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="uso">
+                <h2>Que pode facer Music21?</h2>
+                <p>
+                    Para comezar a utilizar Music21 non se necesita unha gran experiencia en programación, aínda que é recomendable ter uns coñecementos mínimos de Python para comprender os algoritmos implementados. Tras importar a biblioteca, pódese representar unha nota de xeito inmediato:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">Python · nota.py</div>
+                    <pre><code><span class="kw">from</span> <span class="nb">music21</span> <span class="kw">import</span> *
+
+<span class="cm"># Crear e visualizar unha nota Ré sostido cunha duración de branca</span>
+n <span class="op">=</span> <span class="nb">note</span>.<span class="fn">Note</span>(<span class="st">'D#'</span>)
+n.<span class="nm">duration</span>.<span class="nm">type</span> <span class="op">=</span> <span class="st">'half'</span>   <span class="cm"># valores: whole, half, quarter, eighth…</span>
+n.<span class="fn">show</span>()</code></pre>
+                </div>
+                <p class="code-caption">Na primeira liña importamos todos os módulos de Music21. Créase o obxecto <code>Note</code> coa nota desexada en notación anglosaxona (<code>'D#'</code> = ré sostido). A duración asígnase como cadea de texto. O método <code>.show()</code> abre a partitura no visor configurado (MuseScore, Lilypond…).</p>
+
+                <p>
+                    Para traballar cunha frase musical completa, Music21 ofrece o módulo <code>converter</code>, que carga música desde múltiples formatos (MIDI, MusicXML, ABC, Kern, texto <em>TinyNotation</em>, URL…) e os converte en obxectos Music21. O seguinte exemplo crea unha melodía breve mediante <em>TinyNotation</em>:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">Python · melodíaSimple.py</div>
+                    <pre><code><span class="kw">from</span> <span class="nb">music21</span> <span class="kw">import</span> *
+
+<span class="cm"># TinyNotation: '4/4' é o compás; cada nota vai seguida da súa duración en fracciones</span>
+littleMelody <span class="op">=</span> <span class="nb">converter</span>.<span class="fn">parse</span>(<span class="st">"tinynotation: 4/4 c4 d8 e8 f4 g4 a2"</span>)
+
+<span class="cm"># Visualizar como partitura gráfica</span>
+littleMelody.<span class="fn">show</span>()
+
+<span class="cm"># Ou reproducir como MIDI</span>
+littleMelody.<span class="fn">show</span>(<span class="st">'midi'</span>)</code></pre>
+                </div>
+                <p class="code-caption">A función <code>converter.parse()</code> acepta TinyNotation como cadea de texto: el compás seguido de as notas con indicación de duración (4=negra, 8=corchea, 2=branca…). <code>.show('midi')</code> activa a reprodución MIDI directa.</p>
+            </section>
+
+            <!-- ── SECCIÓN 5 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="analise">
+                <h2>Análise de música do século XX</h2>
+                <p>
+                    As técnicas analíticas aplicables á música do século XX teñen en Music21 unha ferramenta de primeiro orde. Por exemplo, é posible xerar a matriz de series de doce tons a partir dunha composición de Arnold Schoenberg, ou calcular a frecuencia de aparición de distintas alturas nunha obra do século XIV. O seguinte exempl
+o mostra como analizar a distribución de tons nunha obra dodecafónica:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">Python · schoenberg_matrix.py</div>
+                    <pre><code><span class="kw">from</span> <span class="nb">music21</span> <span class="kw">import</span> *
+
+<span class="cm"># Cargar o Cuarteto de cordas op. 25 de Schoenberg desde o corpus integrado</span>
+schoenberg <span class="op">=</span> <span class="nb">corpus</span>.<span class="fn">parse</span>(<span class="st">'schoenberg/opus25'</span>)
+
+<span class="cm"># Extraer a serie de tons do tema inicial</span>
+part <span class="op">=</span> schoenberg.<span class="nm">parts</span>[<span class="nu">0</span>]
+notes <span class="op">=</span> part.<span class="fn">flatten</span>().<span class="fn">notes</span>.<span class="fn">stream</span>()
+
+<span class="cm"># Mostrar a matriz de series (tone row matrix)</span>
+row <span class="op">=</span> <span class="nb">serial</span>.<span class="fn">pcToToneRow</span>([<span class="nu">2</span>, <span class="nu">3</span>, <span class="nu">9</span>, <span class="nu">1</span>, <span class="nu">11</span>, <span class="nu">5</span>, <span class="nu">8</span>, <span class="nu">7</span>, <span class="nu">6</span>, <span class="nu">10</span>, <span class="nu">4</span>, <span class="nu">0</span>])
+row.<span class="fn">matrix</span>().<span class="fn">show</span>(<span class="st">'text'</span>)</code></pre>
+                </div>
+                <p class="code-caption">Music21 inclúe módulos especializados de análise dodecafónica (<code>serial</code>), tonalidade (<code>tonal</code>), ritmo e estrutura. A matriz de series mostra todas as transformacións canónicas (orixinal, inversión, retrogradación e inversión retrogradada).</p>
+
+                <p>
+                    De xeito similar, pódese investigar a frecuencia de aparición de distintas alturas nunha composición, o que resulta especialmente útil no estudo da música do Medievo ou do Renacemento:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">Python · pitch_analysis.py</div>
+                    <pre><code><span class="kw">from</span> <span class="nb">music21</span> <span class="kw">import</span> *
+
+<span class="cm"># Cargar unha peza do século XIV do corpus de Music21</span>
+piece <span class="op">=</span> <span class="nb">corpus</span>.<span class="fn">parse</span>(<span class="st">'ciconia/quod_jactatur'</span>)
+
+<span class="cm"># Calcular a distribución de clases de ton (pitch class distribution)</span>
+pitches <span class="op">=</span> piece.<span class="fn">flatten</span>().<span class="fn">pitches</span>
+<span class="kw">from</span> <span class="nb">collections</span> <span class="kw">import</span> <span class="fn">Counter</span>
+dist <span class="op">=</span> <span class="fn">Counter</span>(p.<span class="nm">name</span> <span class="kw">for</span> p <span class="kw">in</span> pitches)
+<span class="kw">for</span> pitch, count <span class="kw">in</span> dist.<span class="fn">most_common</span>():
+    <span class="fn">print</span>(<span class="st">f"</span><span class="nb">{pitch}</span><span class="st">: </span><span class="nb">{count}</span><span class="st">"</span>)</code></pre>
+                </div>
+                <p class="code-caption">O método <code>.flatten().pitches</code> extrae todas as notas da partitura (sen importar a parte ou o compás) como obxectos <code>Pitch</code>. A distribución resultante revela o centro tonal e os modos utilizados.</p>
+            </section>
+
+            <!-- ── SECCIÓN 6 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="corpus">
+                <h2>O corpus integrado: os corais de Bach</h2>
+                <p>
+                    Algúns dos exemplos máis ilustrativos de Music21 traballan sobre o seu <strong>corpus integrado</strong>: miles de pezas de libre uso listas para analizar, entre as que destacan todos os corais de Bach, obras de Monteverdi, Josquin, Palestrina, e moitas outras. No seguinte exemplo, accédese ao coral de Bach BWV 295 e engádese o nome alemán de cada nota como anotación lírica, o que resulta especialmente útil en contextos de educación musical:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">Python · bach_bwv295.py</div>
+                    <pre><code><span class="kw">from</span> <span class="nb">music21</span> <span class="kw">import</span> *
+
+<span class="cm"># Cargar o coral BWV 295 de J.S. Bach desde o corpus</span>
+bwv295 <span class="op">=</span> <span class="nb">corpus</span>.<span class="fn">parse</span>(<span class="st">'bach/bwv295'</span>)
+
+<span class="cm"># Engadir o nome de nota en alemán como anotación sobre cada nota</span>
+<span class="kw">for</span> thisNote <span class="kw">in</span> bwv295.<span class="fn">recurse</span>().<span class="nm">notes</span>:
+    thisNote.<span class="fn">addLyric</span>(thisNote.<span class="nm">pitch</span>.<span class="nm">german</span>)
+
+<span class="cm"># Mostrar a partitura resultante co visor configurado</span>
+bwv295.<span class="fn">show</span>()</code></pre>
+                </div>
+                <p class="code-caption">O método <code>.recurse().notes</code> percorre todas as partes e compases da partitura. <code>.pitch.german</code> devolve o nome alemán da nota (ex.: <code>B</code> → <code>H</code>, <code>Bb</code> → <code>B</code>), fundamental para o estudo da teoría musical xermánica.</p>
+            </section>
+
+            <!-- ── SECCIÓN 7 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="comezar">
+                <h2>Para comezar con Music21</h2>
+                <p>
+                    Music21 pode ser unha ferramenta simple de usar, mais tamén extremadamente poderosa. Como calquera software especializado —de Photoshop a AutoCAD, de Excel a Max/MSP—, presenta unha curva de aprendizaxe que, no caso de Music21, é suave en comparación coa súa capacidade analítica. Para usalo é necesaria certa familiaridade con Python, amplamente considerado como un dos idiomas de programación máis accesibles e habitualmente o primeiro que se aprende en contextos académicos. Non é preciso ser un/ha programador/a experimentado/a: con unhas nocións básicas pódese comezar a explorar a música de xeito completamente novo.
+                </p>
+
+                <div class="article-keyline">
+                    <p>
+                        Non é necesario un gran coñecemento de programación para comezar. Só un pouco de Python, e xa se poderá explorar a música de novas maneiras con Music21.
+                    </p>
+                </div>
+
+                <p>
+                    A instalación é sinxela mediante <code>pip</code>:
+                </p>
+                <div class="code-block">
+                    <div class="code-block-header">Terminal</div>
+                    <pre><code>pip install music21</code></pre>
+                </div>
+
+                <p>
+                    Ademais, Music21 intégrase perfectamente con Jupyter Notebooks, o que o converte nunha ferramenta ideal tanto para a investigación musicolóxica como para o ensino interactivo en conservatorios e universidades.
+                </p>
+            </section>
+
+            <!-- ── FONTE ─────────────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="fonte">
+                <h2>Fonte e recursos</h2>
+                <ol class="article-bibliography">
+                    <li>
+                        Cuthbert, M. S. e Ariza, C. (2010). Music21: A Toolkit for Computer-Aided Musicology and Symbolic Music Data.
+                        <em>Proceedings of the 11th International Society for Music Information Retrieval Conference (ISMIR 2010)</em>, 637–642.
+                    </li>
+                    <li>
+                        Web oficial de Music21: <a href="https://web.mit.edu/music21/" target="_blank" rel="noopener">web.mit.edu/music21</a>
+                    </li>
+                    <li>
+                        Documentación e tutoriais: <a href="https://music21.readthedocs.io" target="_blank" rel="noopener">music21.readthedocs.io</a>
+                    </li>
+                </ol>
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="music21-musicoloxia-computacional.html">Music21</a></li>
+                    <li><a href="musica-son-intelixencia-artificial.html">Música, son e IA</a></li>
+                    <li><a href="musicbert-musica-simbolica.html">MusicBERT</a></li>
+                    <li><a href="cacofonia-buraco-negro.html">Cacofonía dun buraco negro</a></li>
+                    <li><a href="son-do-sars-cov-2.html">O son do SARS-CoV-2</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
