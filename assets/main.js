@@ -673,8 +673,9 @@ function initShareButtons() {
 
         btn.addEventListener('click', e => {
             e.stopPropagation();
-            // Native share (mobile)
-            if (navigator.share) {
+            // Native share (only on mobile to ensure desktop shows custom social links)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (isMobile && navigator.share) {
                 navigator.share({ title, url: pageUrl }).catch(() => {});
                 return;
             }
