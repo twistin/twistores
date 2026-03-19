@@ -153,9 +153,13 @@ const T = {
         ra4_desc:  "Integración do código creativo e o live coding como ferramentas pedagóxicas.",
 
         // SOUNDSCAPES PAGE
+        ss_page_desc: "Saídas de campo para escoitar, rexistrar e explorar as paisaxes sonoras da cidade e do campo.\nCada sesión inclúe fotografías da contorna e gravacións de audio.",
         ss_castro_title: "Sesión: O Castro de Vigo",
         ss_castro_loc: "O Castro de Vigo",
+        ss_masdeu_title: "Sesión: Can Masdeu, Collserola",
+        ss_masdeu_loc: "Can Masdeu, BCN",
         ss_meta_loc: "Lugar / Hora",
+
         ss_meta_date: "Data",
         ss_meta_coords: "Coordenadas",
         ss_meta_gear: "Gravación",
@@ -319,9 +323,13 @@ const T = {
         ra4_desc:  "Integración del código creativo y el live coding como herramientas.",
 
         // SOUNDSCAPES PAGE
+        ss_page_desc: "Salidas de campo para escuchar, registrar y explorar los paisajes sonoros de la ciudad y del campo.\nCada sesión incluye fotografías del entorno y grabaciones de audio.",
         ss_castro_title: "Sesión: El Castro de Vigo",
         ss_castro_loc: "Castro de Vigo",
+        ss_masdeu_title: "Sesión: Can Masdeu, BCN",
+        ss_masdeu_loc: "Can Masdeu, BCN",
         ss_meta_loc: "Lugar / Hora",
+
         ss_meta_date: "Fecha",
         ss_meta_coords: "Coordenadas",
         ss_meta_gear: "Grabación",
@@ -447,9 +455,19 @@ const T = {
         ss3_title: "Market and voices",
         ss3_desc:  "The organised chaos of the market: languages, metals and the rhythm of selling.",
         ss_page_desc:    "Field trips to listen, record, and explore the soundscapes of the city and the countryside.\nEach session includes environmental photographs and audio recordings.",
+        ss_castro_title: "Session: El Castro de Vigo",
+        ss_castro_loc: "Castro de Vigo",
+        ss_masdeu_title: "Session: Can Masdeu, BCN",
+        ss_masdeu_loc: "Can Masdeu, BCN",
+        ss_meta_loc: "Location / Time",
+
+        ss_meta_date: "Date",
+        ss_meta_coords: "Coordinates",
+        ss_meta_gear: "Gear",
         ss1_loc:   "Can Masdeu, BCN",
         ss1_date:  "Feb 14, 2025",
         ss1_cond:  "Rain, 8°C",
+
         ss2_loc:   "Collserola, BCN",
         ss2_date:  "Jan 8, 2025",
         ss2_cond:  "Clear, 5°C",

@@ -107,6 +107,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Sesión: Can Masdeu -->
+        <hr class="divider" style="margin: 60px 0;">
+
+        <div class="soundscape-full fade-in" id="masdeu-session">
+            <div class="soundscape-gallery">
+                <style>
+                    #masdeu-thumbs { grid-template-columns: repeat(4, 1fr); gap: 1px; }
+                    #masdeu-main-img { background-size: cover; background-position: center; transition: background-image 0.4s ease; }
+                </style>
+                <div class="photo-main" id="masdeu-main-img" style="background-image: url('../assets/img/masdeu/1.jpg'); color: transparent;"></div>
+                <div class="photo-thumbs" id="masdeu-thumbs">
+                    <div class="photo-thumb active" data-id="1" style="background-image: url('../assets/img/masdeu/1.jpg');"></div>
+                    <div class="photo-thumb" data-id="2" style="background-image: url('../assets/img/masdeu/2.jpg');"></div>
+                    <div class="photo-thumb" data-id="3" style="background-image: url('../assets/img/masdeu/3.jpg');"></div>
+                    <div class="photo-thumb" data-id="4" style="background-image: url('../assets/img/masdeu/4.jpg');"></div>
+                </div>
+            </div>
+            <div class="soundscape-info">
+                <p class="soundscape-date">Feb 2025</p>
+                <h2 id="masdeu-title" data-i18n="ss_masdeu_title">Sesión: Can Masdeu, BCN</h2>
+                <p id="masdeu-desc" style="min-height: 80px;">Tarde de invierno en las ruinas y huertos comunitarios de Can Masdeu. El agua fluyendo por las canalizaciones antiguas, el viento moviendo las hojas y un denso silencio marcado por pájaros que poco a poco se van yendo a dormir.</p>
+                <div class="field-meta">
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_loc">Lugar / Hora</strong><span id="masdeu-loc">Can Masdeu — 17:30 h</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_date">Fecha</strong><span>14/02/2025</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_coords">Coordenadas</strong><span id="masdeu-coords">41.4421, 2.1506</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_gear">Grabación</strong>Zoom H5, MS</div>
+                </div>
+                <div class="audio-player-full" style="padding:0; background:none; border:none; margin-top: 10px;">
+                    <audio id="masdeu-audio" controls style="width:100%; height: 40px; outline: none; filter: invert(0.9) hue-rotate(180deg);" src="../assets/audio/masdeu/1.mp3"></audio>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -133,16 +166,21 @@
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 TWISTORES</p>
-            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        <div class="footer-bottom" style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+                <p>© 2025 TWISTORES</p>
+                <p data-i18n="footer_copy" style="margin-top:4px;">// hecho con código y café ☕</p>
+            </div>
+            <div class="footer-social" style="display:flex;"></div>
         </div>
     </footer>
 
     <script src="../assets/main.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const castroData = {
+        // Translation data for dynamic JS text 
+        // CASTRO DE VIGO
+        const castroData_es = {
             1: { title: "Mirador dentro fortaleza Plaza España", time: "12:45 h", coords: "42.2309, -8.7254", desc: "Un día súper cálido, la acústica en este punto es tranquila. Se escuchan varias fuentes distintas: alguna sirena, tráfico de fondo leve, diversos cantos de pájaros, algún coche que pasa y pasos de paseantes." },
             2: { title: "Entrada fortaleza enfrente de antena", time: "12:02 h", coords: "42.2311, -8.7263", desc: "En la entrada de la fortaleza hay muchos paseantes, perros, pasos, conversaciones etc. Cantos de pájaros, rumor de la fuente del Castro de fondo y tráfico lejano." },
             3: { title: "Muro debajo mirador de la ría", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Siguiendo el paseo, justo del lado del mirador de la ría encima de unas piedras. Se escucha el rumor de la ciudad, muchas conversaciones explicando la ría, turistas, perros, pájaros." },
@@ -155,37 +193,133 @@
             10:{ title: "Plaza Martín Codax", time: "13:40 h", coords: "42.2302, -8.7266", desc: "En el mirador de Martín Codax domina sonoramente el chorro de agua que cae libre en la fuente y define toda la sala." }
         };
 
-        const thumbs = document.querySelectorAll('#castro-thumbs .photo-thumb');
-        const mainImg = document.getElementById('castro-main-img');
-        const title = document.getElementById('castro-title');
-        const desc = document.getElementById('castro-desc');
-        const loc = document.getElementById('castro-loc');
-        const coords = document.getElementById('castro-coords');
-        const audio = document.getElementById('castro-audio');
+        const castroData_gl = {
+            1: { title: "Miradoiro dentro da fortaleza Praza España", time: "12:45 h", coords: "42.2309, -8.7254", desc: "Un día súper cálido, a acústica neste punto é tranquila. Escóitanse varias fontes distintas: algunha sirena, tráfico de fondo leve, diversos cantos de paxaros, algún coche que pasa e pasos de paseantes." },
+            2: { title: "Entrada da fortaleza fronte á antena", time: "12:02 h", coords: "42.2311, -8.7263", desc: "Na entrada da fortaleza hai moitos paseantes, cans, pasos, conversas etc. Cantos de paxaros, rumor da fonte do Castro de fondo e tráfico afastado." },
+            3: { title: "Muro debaixo do miradoiro da ría", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Seguindo o paseo, xusto do lado do miradoiro da ría enriba dunhas pedras. Escóitase o rumor da cidade, moitas conversas explicando a ría, turistas, cans, paxaros." },
+            4: { title: "Miradoiro das Áncoras", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Densidade moi grande de paseantes, óese un avión pasar e a unhas persoas conversando xusto ao lado. Ruído da auga do estanque de fondo." },
+            5: { title: "Inicio do paseo dos camelios", time: "12:40 h", coords: "42.2332, -8.7270", desc: "Inicio do paseo dende a parte baixa da fonte das áncoras dos galeóns. Algunha ambulancia, varios cantos de paxaros, paseantes en movemento, murmurio e tráfico urbano." },
+            6: { title: "Paseo dos cedros vista da Guía", time: "12:52 h", coords: "42.2331, -8.7256", desc: "Rodeando o Castro polo paseo de terra en sentido cara á pista de skate. Paxaros varios, insectos sen identificar, avión, o rumor da cidade." },
+            7: { title: "Debaixo do parque infantil", time: "13:12 h", coords: "42.2298, -8.7229", desc: "Un recuncho apartado fronte ao hospital. Totalmente exposto aos refachos de vento, ruído de nenos, tráfico intensificándose." },
+            8: { title: "Promontorio enriba do parque", time: "13:20 h", coords: "42.2296, -8.7236", desc: "Dominando visual e acusticamente o parque e o aparcadoiro. Voces de nenos xogando, pais chamándoos e coches pasando repetidamente." },
+            9: { title: "Sendeiro pouco transitado", time: "13:30 h", coords: "42.2303, -8.7257", desc: "Sendeiro pouco transitado ao carón do invernadoiro. Ruídos de motores acelerando, follaxe abaneada intermitentemente, unha sirena policial de fondo." },
+            10:{ title: "Praza Martín Codax", time: "13:40 h", coords: "42.2302, -8.7266", desc: "No miradoiro de Martín Codax domina sonoramente o chorro de auga que cae libre na fonte e define toda a sala." }
+        };
 
-        thumbs.forEach(thumb => {
+        const castroData_en = {
+            1: { title: "Lookout within Plaza España fortress", time: "12:45 h", coords: "42.2309, -8.7254", desc: "A very warm day, the acoustics at this point are calm. Several distinct sources can be heard: a siren, light background traffic, various birdsongs, a passing car and the footsteps of people walking by." },
+            2: { title: "Fortress entrance opposite the antenna", time: "12:02 h", coords: "42.2311, -8.7263", desc: "At the fortress entrance there are many walkers, dogs, footsteps, conversations etc. Birdsongs, the murmur of the Castro fountain in the background and distant traffic." },
+            3: { title: "Wall below the estuary lookout", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Following the path, just beside the estuary lookout on some stones. The murmur of the city can be heard, many conversations explaining the estuary, tourists, dogs, birds." },
+            4: { title: "Anchor Lookout", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Very high density of walkers, a plane is heard passing and people conversing right beside. Noise of the pond water in the background." },
+            5: { title: "Start of the camellias path", time: "12:40 h", coords: "42.2332, -8.7270", desc: "Start of the path from the lower part of the galleon anchors fountain. An ambulance, several birdsongs, moving walkers, murmur and urban traffic." },
+            6: { title: "Cedar path view of A Guía", time: "12:52 h", coords: "42.2331, -8.7256", desc: "Going around the Castro along the dirt path towards the skate park. Various birds, unidentified insects, a plane, the murmur of the city." },
+            7: { title: "Below the children's playground", time: "13:12 h", coords: "42.2298, -8.7229", desc: "A secluded corner opposite the hospital. Totally exposed to gusts of wind, noise of children, traffic intensifying." },
+            8: { title: "Promontory above the park", time: "13:20 h", coords: "42.2296, -8.7236", desc: "Visually and acoustically dominating the park and the car park. Voices of children playing, parents calling them and cars passing repeatedly." },
+            9: { title: "Little-travelled path", time: "13:30 h", coords: "42.2303, -8.7257", desc: "Little-travelled path next to the greenhouse. Noises of engines revving, foliage swayed intermittently, a police siren in the background." },
+            10:{ title: "Martín Codax Square", time: "13:40 h", coords: "42.2302, -8.7266", desc: "At the Martín Codax lookout, the jet of water falling freely into the fountain acoustically dominates and defines the whole room." }
+        };
+
+        // CAN MASDEU
+        const masdeuData_es = {
+            1: { title: "Balsa de riego, huertos comunitarios", time: "17:30 h", coords: "41.4421, 2.1506", desc: "Agua goteando en la balsa vieja. Poco viento, cantos muy suaves de gorriones preparándose para dormir." },
+            2: { title: "Pinares tras el hospital de Sant Llàtzer", time: "16:45 h", coords: "41.4402, 2.1488", desc: "Caminando entre los pinos secos, crepita el suelo a cada paso. Rumor difuso de la ronda de Dalt allá abajo." },
+            3: { title: "Muro de la casa de recuperación", time: "18:05 h", coords: "41.4411, 2.1519", desc: "Silbido del viento chocando contra el muro descascarillado. Intervenciones esporádicas de gallinas locales." },
+            4: { title: "Camino de tierra hacia la torre", time: "18:30 h", coords: "41.4435, 2.1522", desc: "Oscureciendo. Un perrillo ladrando lejos. El viento se intensifica pero de forma rítmica, como olas lentas contra la montaña." }
+        };
+
+        const masdeuData_gl = {
+            1: { title: "Balsa de rego, hortas comunitarias", time: "17:30 h", coords: "41.4421, 2.1506", desc: "Auga pingando na balsa vella. Pouco vento, cantos moi suaves de pardais preparándose para durmir." },
+            2: { title: "Piñeirais tras o hospital de Sant Llàtzer", time: "16:45 h", coords: "41.4402, 2.1488", desc: "Camiñando entre os piñeiros secos, estrala o chan a cada paso. Rumor difuso da rolda de Dalt aló abaixo." },
+            3: { title: "Muro da casa de recuperación", time: "18:05 h", coords: "41.4411, 2.1519", desc: "Asubío do vento chocando contra o muro cascado. Intervencións esporádicas de galiñas locais." },
+            4: { title: "Camiño de terra cara á torre", time: "18:30 h", coords: "41.4435, 2.1522", desc: "Escurecendo. Un canciño ladrando lonxe. O vento intensifícase pero de forma rítmica, como ondas lentas contra a montaña." }
+        };
+
+        const masdeuData_en = {
+            1: { title: "Irrigation pond, community gardens", time: "17:30 h", coords: "41.4421, 2.1506", desc: "Water dripping into the old pond. Little wind, very soft songs of sparrows getting ready to sleep." },
+            2: { title: "Pine groves behind Sant Llàtzer hospital", time: "16:45 h", coords: "41.4402, 2.1488", desc: "Walking among the dry pines, the ground crackles with every step. Diffuse murmur of the Ronda de Dalt way down below." },
+            3: { title: "Wall of the recovery house", time: "18:05 h", coords: "41.4411, 2.1519", desc: "Whistle of the wind hitting the peeling wall. Sporadic interventions from local hens." },
+            4: { title: "Dirt path towards the tower", time: "18:30 h", coords: "41.4435, 2.1522", desc: "Getting dark. A little dog barking far away. The wind gets stronger but in a rhythmic way, like slow waves against the mountain." }
+        };
+
+        const db = { 
+            es: { castro: castroData_es, masdeu: masdeuData_es }, 
+            gl: { castro: castroData_gl, masdeu: masdeuData_gl }, 
+            en: { castro: castroData_en, masdeu: masdeuData_en } 
+        };
+
+        // UI Selectors (Castro)
+        const c_thumbs = document.querySelectorAll('#castro-thumbs .photo-thumb');
+        const c_mainImg = document.getElementById('castro-main-img');
+        const c_title = document.getElementById('castro-title');
+        const c_desc = document.getElementById('castro-desc');
+        const c_loc = document.getElementById('castro-loc');
+        const c_coords = document.getElementById('castro-coords');
+        const c_audio = document.getElementById('castro-audio');
+        let currentCastroId = '1';
+
+        // UI Selectors (Masdeu)
+        const m_thumbs = document.querySelectorAll('#masdeu-thumbs .photo-thumb');
+        const m_mainImg = document.getElementById('masdeu-main-img');
+        const m_title = document.getElementById('masdeu-title');
+        const m_desc = document.getElementById('masdeu-desc');
+        const m_loc = document.getElementById('masdeu-loc');
+        const m_coords = document.getElementById('masdeu-coords');
+        const m_audio = document.getElementById('masdeu-audio');
+        let currentMasdeuId = '1';
+
+        function updateUIforLanguage() {
+            const currentLang = document.documentElement.lang || 'es';
+            
+            // Update Castro
+            const c_data = db[currentLang].castro[currentCastroId];
+            const c_baseLocName = typeof window.T !== 'undefined' ? (window.T[currentLang]?.ss_castro_loc || 'O Castro de Vigo') : 'O Castro de Vigo';
+            c_title.textContent = c_data.title;
+            c_desc.textContent = c_data.desc;
+            c_loc.textContent = `${c_baseLocName} — ${c_data.time}`;
+            c_coords.textContent = c_data.coords;
+
+            // Update Masdeu
+            const m_data = db[currentLang].masdeu[currentMasdeuId];
+            const m_baseLocName = typeof window.T !== 'undefined' ? (window.T[currentLang]?.ss_masdeu_loc || 'Can Masdeu, BCN') : 'Can Masdeu, BCN';
+            m_title.textContent = m_data.title;
+            m_desc.textContent = m_data.desc;
+            m_loc.textContent = `${m_baseLocName} — ${m_data.time}`;
+            m_coords.textContent = m_data.coords;
+        }
+
+        c_thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
-                thumbs.forEach(t => t.classList.remove('active'));
+                c_thumbs.forEach(t => t.classList.remove('active'));
                 thumb.classList.add('active');
-                const id = thumb.getAttribute('data-id');
-                const data = castroData[id];
+                currentCastroId = thumb.getAttribute('data-id');
+                c_mainImg.style.backgroundImage = `url('../assets/img/castro/${currentCastroId}.jpg')`;
                 
-                mainImg.style.backgroundImage = `url('../assets/img/castro/${id}.jpg')`;
+                updateUIforLanguage();
                 
-                // Allow translation logic to hook in if needed, but for now we just use the raw text
-                // We'll update just the dynamic parts while leaving the static wrapper translatable
-                const currentLang = document.documentElement.lang || 'es';
-                const baseLocName = T[currentLang]?.ss_castro_loc || 'O Castro de Vigo';
-
-                title.textContent = data.title;
-                desc.textContent = data.desc;
-                loc.textContent = `${baseLocName} — ${data.time}`;
-                coords.textContent = data.coords;
-                
-                audio.src = `../assets/audio/castro/${id}.mp3`;
-                audio.play().catch(() => {});
+                c_audio.src = `../assets/audio/castro/${currentCastroId}.mp3`;
+                c_audio.play().catch(() => {});
             });
         });
+
+        m_thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                m_thumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                currentMasdeuId = thumb.getAttribute('data-id');
+                m_mainImg.style.backgroundImage = `url('../assets/img/masdeu/${currentMasdeuId}.jpg')`;
+                
+                updateUIforLanguage();
+                
+                m_audio.src = `../assets/audio/masdeu/${currentMasdeuId}.mp3`;
+                m_audio.play().catch(() => {});
+            });
+        });
+
+        // Initialize UI with current language
+        updateUIforLanguage();
+
+        // Listen for global language changes
+        document.addEventListener('languageChanged', updateUIforLanguage);
     });
     </script>
 </body>
