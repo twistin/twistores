@@ -93,13 +93,13 @@
             </div>
             <div class="soundscape-info">
                 <p class="soundscape-date">Nov 2024</p>
-                <h2 id="castro-title">Mirador dentro fortaleza Plaza España</h2>
+                <h2 id="castro-title" data-i18n="ss_castro_title">Sesión: El Castro de Vigo</h2>
                 <p id="castro-desc" style="min-height: 80px;">Un día súper cálido, la acústica en este punto es tranquila. Se escuchan varias fuentes distintas: alguna sirena, tráfico de fondo leve, diversos cantos de pájaros, algún coche que pasa y pasos de paseantes.</p>
                 <div class="field-meta">
-                    <div class="field-meta-item"><strong>Lugar / Hora</strong><span id="castro-loc">Castro de Vigo — 12:45 h</span></div>
-                    <div class="field-meta-item"><strong>Fecha</strong><span>03/11/2024</span></div>
-                    <div class="field-meta-item"><strong>Coordenadas</strong><span id="castro-coords">42.2309, -8.7254</span></div>
-                    <div class="field-meta-item"><strong>Grabación</strong>Zoom H6, X/Y</div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_loc">Lugar / Hora</strong><span id="castro-loc">Castro de Vigo — 12:45 h</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_date">Fecha</strong><span>03/11/2024</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_coords">Coordenadas</strong><span id="castro-coords">42.2309, -8.7254</span></div>
+                    <div class="field-meta-item"><strong data-i18n="ss_meta_gear">Grabación</strong>Zoom H6, X/Y</div>
                 </div>
                 <!-- Reproductor nativo HTML5 para la máxima compatibilidad y navegación -->
                 <div class="audio-player-full" style="padding:0; background:none; border:none; margin-top: 10px;">
@@ -171,9 +171,15 @@
                 const data = castroData[id];
                 
                 mainImg.style.backgroundImage = `url('../assets/img/castro/${id}.jpg')`;
+                
+                // Allow translation logic to hook in if needed, but for now we just use the raw text
+                // We'll update just the dynamic parts while leaving the static wrapper translatable
+                const currentLang = document.documentElement.lang || 'es';
+                const baseLocName = T[currentLang]?.ss_castro_loc || 'O Castro de Vigo';
+
                 title.textContent = data.title;
                 desc.textContent = data.desc;
-                loc.textContent = `Castro de Vigo — ${data.time}`;
+                loc.textContent = `${baseLocName} — ${data.time}`;
                 coords.textContent = data.coords;
                 
                 audio.src = `../assets/audio/castro/${id}.mp3`;
