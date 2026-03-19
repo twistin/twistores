@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escenas musicales locales hoy en día: ¿una herramienta válida? — TWISTORES</title>
+    <meta name="description" content="Una revisión crítica sobre el concepto de escena musical local, su productividad histórica y su reformulación necesaria en la era de las plataformas digitales.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-hero-banner {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: var(--glow-sm);
+        }
+        .abstract-box {
+            background: var(--surface);
+            border-left: 3px solid var(--accent);
+            padding: 24px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 32px 0 48px;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content">
+            <div class="page-header fade-in">
+                <p class="section-label">// sociología · geografía urbana · plataformas</p>
+                <h1>Escenas musicales locales hoy en día:<br><span style="font-size:0.6em; font-weight:400; opacity:0.7;">¿una herramienta válida?*</span></h1>
+                <div class="article-meta">
+                    <span>Mar 2026</span>
+                    <span>Investigación</span>
+                    <span>Lectura 10 min</span>
+                </div>
+            </div>
+
+            <img src="../assets/img/escenas-locales-banner.png" alt="Ilustración que fusiona un club musical con nodos gráficos de una red global digital" class="article-hero-banner fade-in">
+
+            <p class="article-lead fade-in" style="font-size: 0.85rem; font-style: italic; color: var(--text-dim);">
+                * Este artículo constituye una versión revisada, ampliada y actualizada de un trabajo anterior publicado en 2017. Aunque conserva la pregunta de fondo y parte de la orientación inicial, la presente versión reformula el argumento, depura la expresión y revisa críticamente el marco teórico y bibliográfico a la luz de transformaciones recientes en las prácticas musicales y en sus condiciones de circulación.
+            </p>
+
+            <div class="abstract-box fade-in">
+                <strong>Resumen:</strong> El concepto de <em>escena musical</em> se consolidó en los estudios de música popular durante la década de 1990 como una alternativa analítica a categorías previas como <em>subcultura</em> y <em>comunidad</em>. Su principal virtud consistía en ofrecer un marco más flexible para pensar prácticas musicales urbanas atravesadas por la movilidad, la heterogeneidad social y la articulación entre cultura, espacio e identidad. Sin embargo, las transformaciones tecnológicas, económicas y comunicativas de las últimas décadas obligan a reconsiderar críticamente su alcance. Este artículo revisa la utilidad del concepto de <em>escena musical local</em> para el estudio de las prácticas musicales contemporáneas y sostiene que, si bien dicha categoría sigue siendo especialmente productiva para comprender ciertos procesos históricos —en particular los vinculados al punk, al post-punk y a las formaciones urbanas de finales del siglo XX—, resulta insuficiente si se aplica de manera aislada al presente. En la actualidad, lo local aparece estructuralmente imbricado con lo translocal y lo virtual, de modo que cualquier aproximación a las músicas urbanas contemporáneas exige una reformulación del concepto de escena que incorpore la plataformización, la circulación digital, la memoria cultural y la articulación multiescalar de las prácticas musicales.<br><br>
+                <strong>Palabras clave:</strong> escena musical, música popular, localismo, translocalidad, virtualidad, identidad, ciudad, plataformas digitales.
+            </div>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones del artículo">
+                <a href="#introduccion">1. Introducción</a>
+                <a href="#subcultura">2. Subcultura y comunidad</a>
+                <a href="#elementos">3. Elementos constitutivos</a>
+                <a href="#productividad">4. Productividad histórica</a>
+                <a href="#crisis">5. Crisis relativa del localismo</a>
+                <a href="#vigo">6. Vigo como problema</a>
+                <a href="#reformulacion">7. Hacia una reformulación</a>
+                <a href="#conclusion">8. Conclusión</a>
+            </nav>
+
+            <section class="article-section fade-in" id="introduccion">
+                <h2>1. Introducción</h2>
+                <p>
+                    La expresión <em>escena musical</em> pertenece a la vez al vocabulario ordinario de la crítica cultural y al repertorio conceptual de los estudios académicos sobre música popular. Se emplea para aludir, de manera más o menos intuitiva, a agrupamientos de músicos, públicos, espacios, repertorios y prácticas sociales vinculados a un determinado estilo, entorno urbano o red de relaciones. No obstante, esa aparente familiaridad encubre una notable indeterminación conceptual. La escena musical designa algo reconocible, pero no siempre fácilmente delimitable.
+                </p>
+                <p>
+                    En el ámbito académico, el concepto adquirió relevancia a partir de la década de 1990 como respuesta a las limitaciones de otras categorías utilizadas para estudiar la relación entre música y sociedad. Frente a nociones como <em>subcultura</em> o <em>comunidad</em>, la escena permitía pensar configuraciones más abiertas, dinámicas y heterogéneas, capaces de dar cuenta de la movilidad de los actores, de la permeabilidad de las fronteras sociales y de la complejidad de las mediaciones culturales (Straw 1991; Bennett 2004). Desde este punto de vista, su éxito no se debió a una precisión cerrada, sino a su capacidad para nombrar procesos relacionales que otras herramientas conceptuales apenas conseguían capturar.
+                </p>
+                <p>
+                    Sin embargo, la productividad de la categoría no la exime de revisión. Las transformaciones experimentadas por la industria musical desde finales del siglo XX, la expansión de internet, la creciente centralidad de las redes sociales, la plataformización del consumo cultural y la intensificación de las circulaciones transnacionales han modificado profundamente las condiciones de existencia de las prácticas musicales. En ese nuevo contexto, la <em>escena musical local</em> ya no puede ser concebida como una unidad autosuficiente ni como una realidad separable con nitidez de lo translocal y lo virtual.<sup>1</sup>
+                </p>
+                <p>
+                    Este artículo parte de una doble hipótesis. En primer lugar, sostiene que la noción de escena musical local fue especialmente fecunda para el análisis de ciertas formaciones musicales urbanas de la segunda mitad del siglo XX, particularmente en contextos marcados por la emergencia del punk, del post-punk y de otras culturas musicales articuladas en torno a la ciudad, los circuitos de proximidad y la ética del <em>do it yourself</em> (Shank 1994; Cohen 1991). En segundo lugar, defiende que, en el presente, el concepto requiere una reformulación crítica. No se trata de abandonarlo, sino de desplazarlo desde una comprensión territorial cerrada hacia una concepción más compleja, atenta a la interacción entre espacialidad, mediación digital, memoria e infraestructura.
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="subcultura">
+                <h2>2. De la subcultura y la comunidad a la escena</h2>
+                <p>
+                    La consolidación del concepto de escena solo se entiende en relación con las insuficiencias de los modelos previos. La noción de <em>subcultura</em>, desarrollada de forma influyente por la Escuela de Birmingham, permitió estudiar las culturas juveniles británicas de posguerra atendiendo a sus estilos, consumos y formas de resistencia simbólica. Sin embargo, con el tiempo se hizo evidente que dicha categoría tendía a acentuar en exceso la coherencia interna de los grupos y a simplificar la heterogeneidad de sus composiciones sociales (Bennett 1999; Thornton 1995). La diversidad de clase, género, etnia y trayectoria biográfica quedaba con frecuencia subordinada a una imagen demasiado compacta de la pertenencia.
+                </p>
+                <p>
+                    Algo similar ocurrió con la idea de <em>comunidad</em>. Aunque sigue siendo útil en determinados contextos, su uso en los estudios de música popular ha estado a menudo asociado a una concepción excesivamente cohesionada, orgánica e incluso idealizada del vínculo social. En muchos casos, la música no expresa una comunidad previamente constituida, sino que contribuye a producirla de forma contingente, conflictiva y provisional. Como observó Simon Frith, la música no solo refleja identidades colectivas, sino que también las fabrica como experiencia social (Frith 1981).<sup>2</sup>
+                </p>
+                <p>
+                    En este marco, la escena se reveló como una categoría más flexible. Su principal virtud consistía en no presuponer homogeneidad social ni cohesión normativa. Una escena no es un grupo cerrado ni una totalidad armónica, sino una red de relaciones entre músicos, públicos, mediadores, instituciones, espacios y dispositivos culturales. Su unidad no deriva de la pureza de sus fronteras, sino de la intensidad de sus articulaciones. Por ello, la escena permitió pensar con mayor precisión los modos en que determinadas prácticas musicales se vinculan a contextos urbanos concretos, sin por ello quedar reducidas a ellos (Straw 1991; Peterson y Bennett 2004).
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="elementos">
+                <h2>3. Elementos constitutivos de la escena musical</h2>
+                <p>
+                    Para que el concepto de escena conserve capacidad analítica, conviene evitar que se convierta en una categoría indiscriminada. No toda agregación de prácticas musicales constituye una escena. A mi juicio, al menos cuatro dimensiones resultan fundamentales.
+                </p>
+                <ul>
+                    <li><strong>La Espacialidad.</strong> Toda escena implica una geografía, aunque esta no sea exclusivamente física. Salas de conciertos, bares, locales de ensayo, tiendas de discos, estudios de grabación, calles, barrios y circuitos urbanos funcionan como nodos en los que se condensan prácticas, expectativas, afectos y relaciones de reconocimiento. La escena no se limita al espacio, pero no puede pensarse sin él (Cohen 1991; Driver y Bennett 2015).</li>
+                    <li><strong>La Identidad.</strong> Las escenas no se reducen a repertorios sonoros: son también ámbitos de exploración, negociación y puesta en forma de identidades individuales y colectivas. En ellas se elaboran modos de vestir, lenguajes, códigos, afinidades y oposiciones. La música opera, en ese sentido, como práctica de identificación y diferenciación (Shank 1994; Bennett 1999).</li>
+                    <li><strong>La Mediación.</strong> Ninguna escena existe al margen de los dispositivos que la hacen visible, narrable y circulable. La prensa musical, la radio, los carteles, los fanzines, los videoclips, las redes sociales o las plataformas digitales no son simples añadidos externos: forman parte de la propia constitución de la escena. Lo que una escena es depende también de cómo se representa, se documenta y se distribuye (Thornton 1995; Bennett y Rogers 2016).</li>
+                    <li><strong>La Historicidad.</strong> Toda escena trabaja con materiales heredados: sonidos, símbolos, relatos, mitologías, memorias y objetos. Las escenas no emergen de la nada; reordenan legados y producen genealogías. En ese sentido, la memoria no es un suplemento retrospectivo, sino una dimensión constitutiva de la práctica musical misma (Bennett y Rogers 2016).</li>
+                </ul>
+                <p>
+                    Estas cuatro dimensiones permiten entender la escena musical como una formación relacional históricamente situada, en la que espacio, identidad, mediación y memoria se articulan de manera variable. Su utilidad reside precisamente en hacer visible esa articulación, no en ofrecer una taxonomía cerrada.
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="productividad">
+                <h2>4. La productividad histórica de la escena local</h2>
+                <p>
+                    La noción de escena local fue especialmente útil para el estudio de determinados momentos históricos en los que el territorio urbano y la sociabilidad presencial actuaban como ejes estructuradores de la práctica musical. Casos como Liverpool, Manchester, Austin, Madrid o Vigo muestran con claridad hasta qué punto ciertos estilos se desarrollaron no solo en un lugar, sino a través de él: mediante redes de proximidad, economías precarias, imaginarios urbanos, tensiones culturales y espacios concretos de encuentro (Cohen 1991; Shank 1994).
+                </p>
+                <div class="article-keyline">
+                    <p>
+                        La fuerza del concepto radicaba en captar cómo determinadas músicas eran apropiadas, transformadas y resignificadas localmente. La ciudad no aparecía simplemente como contenedor, sino como medio activo de producción cultural. Los locales emblemáticos, por ejemplo, no eran meros escenarios funcionales, sino espacios de condensación simbólica, lugares donde se estabilizaban repertorios, se generaban jerarquías y se producía memoria.<sup>3</sup>
+                    </p>
+                </div>
+                <p>
+                    En este sentido, la escena local resultó particularmente esclarecedora para comprender el impacto del punk y del post-punk. La ética <em>DIY</em>, la desprofesionalización relativa de la práctica musical, la activación de circuitos alternativos y la crítica a los lenguajes dominantes de la industria favorecieron la proliferación de escenas urbanas intensamente localizadas. Lo decisivo no era únicamente la novedad sonora, sino la reestructuración del espacio social de la música: nuevos actores, nuevos lugares, nuevas legitimidades y nuevas formas de identificación (Hebdige 1979; Shank 1994).
+                </p>
+                <p>
+                    Por ello puede sostenerse que el concepto de escena local resulta especialmente productivo para estudiar formaciones musicales urbanas situadas entre finales de los años setenta y mediados de los noventa, es decir, en un periodo en el que el anclaje territorial y la sociabilidad presencial seguían siendo condiciones centrales de producción y circulación cultural.
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="crisis">
+                <h2>5. Crisis relativa del localismo como categoría autosuficiente</h2>
+                <p>
+                    El problema aparece cuando ese modelo se aplica sin mediaciones al presente. A partir de los años noventa, y con mayor intensidad en el siglo XXI, las condiciones de producción, distribución y recepción musical cambiaron de manera radical. La socialización musical dejó de depender exclusivamente de la copresencia física. Los vínculos entre músicos, públicos y mediadores comenzaron a articularse también a través de redes digitales, plataformas de vídeo, servicios de mensajería, circuitos de autoproducción y sistemas algorítmicos de recomendación (Kibby 2000; Bennett y Peterson 2004).
+                </p>
+                <p>
+                    En consecuencia, lo local no desapareció, pero dejó de constituir una escala autosuficiente. Las prácticas musicales contemporáneas siguen produciéndose en ciudades, barrios, locales y estudios, pero esos espacios están ya atravesados por flujos translocales y virtuales que afectan de forma decisiva a su visibilidad, circulación y autocomprensión. Una escena puede tener un fuerte anclaje urbano y, al mismo tiempo, operar desde su origen como red distribuida.
+                </p>
+                <p>
+                    Esta transformación obliga a revisar críticamente el concepto de escena local. Si se lo concibe de manera fuerte, como una unidad territorial relativamente autónoma, corre el riesgo de volverse anacrónico. Si, por el contrario, se lo reformula en términos relacionales y multiescalares, puede seguir siendo útil. El reto consiste, por tanto, en no confundir persistencia del lugar con suficiencia analítica de lo local.
+                </p>
+                <p>
+                    Además, la plataformización de la cultura ha alterado de forma profunda la relación entre <em>underground</em> y <em>mainstream</em>. Durante buena parte del siglo XX, las escenas locales funcionaron como laboratorios de experimentación estética y social que la industria musical incorporaba posteriormente. Hoy, en cambio, la visibilidad, la legitimidad y la circulación dependen también de infraestructuras digitales que premian otros regímenes de atención y otras formas de optimización. La independencia ya no puede pensarse como simple exterioridad al mercado, sino como una posición inestable dentro de ecologías culturales gobernadas por plataformas.<sup>4</sup>
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="vigo">
+                <h2>6. Vigo como problema analítico: de la escena localizada a la escena expandida</h2>
+                <p>
+                    El caso de Vigo permite observar con especial claridad el desplazamiento histórico que aquí se propone. Pensar la Vigo musical de los años ochenta sigue siendo, en gran medida, pensar una escena local en el sentido fuerte del término: una red relativamente densa y reconocible de músicos, locales, mediadores, públicos y circuitos urbanos, articulada por la copresencia, la proximidad territorial y la intervención directa sobre el espacio de la ciudad. En ese contexto, la escena podía estudiarse todavía como un ecosistema local dotado de una cierta coherencia interna, aunque atravesado, por supuesto, por tensiones estéticas, comerciales e ideológicas.
+                </p>
+                <p>
+                    La escena viguesa de aquel momento respondía de forma bastante precisa al modelo clásico de escena local: centralidad de los espacios físicos, importancia decisiva de los locales de ensayo, bares y salas, sociabilidad cara a cara, formación de públicos relativamente estables, y una mediación todavía muy dependiente de la prensa musical, la radio, el directo y los canales convencionales de la industria. Incluso cuando aquellas bandas dialogaban con referencias foráneas, el procesamiento simbólico de esas influencias se hacía desde una experiencia urbana intensamente localizada. La ciudad no era un simple telón de fondo, sino una condición material y afectiva de posibilidad.
+                </p>
+                <p>
+                    Las escenas actuales vinculadas a Vigo presentan, en cambio, otro tipo de configuración. Continúan existiendo anclajes locales, pero estos ya no bastan para describir el fenómeno. Hoy el lugar de origen opera más bien como punto de partida, como marca de procedencia o como reserva simbólica, no como límite efectivo de la escena. Los proyectos se constituyen desde el comienzo en una ecología híbrida donde conviven ciudad, redes sociales, plataformas, circuitos estatales, festivales, colaboraciones translocales y comunidades digitales de recepción. Por eso, en el presente, Vigo resulta menos legible como "escena cerrada" y más como nodo dentro de una constelación de escalas superpuestas.
+                </p>
+                <p>
+                    En este punto resultan particularmente útiles dos ejemplos recientes, no porque agoten la diversidad viguesa actual, sino porque permiten visualizar dos formas distintas de relación entre lo local y lo extralocal.
+                </p>
+                <p>
+                    Por un lado, <strong>As Fillas de Cassandra</strong>, dúo formado por María SOA y Sara Faro, ambas nacidas en Vigo, representan una modalidad de proyección contemporánea en la que la dimensión identitaria no desaparece al ganar visibilidad, sino que se intensifica. Su propuesta articula tradición oral gallega, mitología, feminismo, teatralidad y sonoridades contemporáneas, y lo hace desde una reivindicación explícita de lo gallego como espacio lingüístico, cultural y político. Ellas mismas han vinculado su nombre a una lectura feminista del mito de Casandra y a la necesidad de formular una voz propia frente a formas persistentes de opresión patriarcal. Diversos perfiles y entrevistas subrayan además su procedencia viguesa y el carácter central de esa matriz cultural en su trayectoria.
+                </p>
+                <p>
+                    Ahora bien, precisamente porque su caso es contemporáneo, su fuerte dimensión identitaria no puede confundirse con localismo en sentido estricto. As Fillas de Cassandra son viguesas, trabajan con materiales culturales gallegos y activan un imaginario claramente situado, pero su circulación efectiva excede desde muy pronto el marco local. Su presencia en festivales, medios estatales y colaboraciones con artistas de alta visibilidad dentro de la música gallega reciente muestra que la identidad local ya no funciona como límite geográfico de la escena, sino como recurso de singularización dentro de circuitos mucho más amplios. El paso de lo local a lo expandido no diluye aquí la marca de origen: la resemantiza.
+                </p>
+                <p>
+                    Por otro lado, <strong>dani dicostas</strong> permite observar un tipo distinto de trayectoria. Vinculada a Vigo en sus comienzos y todavía identificada en diversas entrevistas y perfiles como artista procedente de la ciudad, su carrera muestra con claridad una inscripción más inmediata en circuitos pop estatales y en dinámicas de movilidad entre Vigo y Madrid. Mondo Sonoro señaló ya en 2023 que se había mudado de Vigo a Madrid y que ese desplazamiento atravesaba su nuevo trabajo; en una entrevista anterior, la propia artista hablaba de una "escena super chula en Vigo" ya fusionada con la de Madrid, mencionando además la conexión creciente entre ambas. Más recientemente, su presencia en ciclos como <em>Momentos Alhambra</em> confirma una circulación que rebasa completamente el marco local.
+                </p>
+                <p>
+                    Lo interesante de este segundo caso es que el vínculo con Vigo no desaparece, pero deja de organizar el sentido principal del proyecto. Si en As Fillas de Cassandra lo local-identitario funciona como motor poético y político de la propuesta, en dani dicostas el origen vigués aparece más bien como punto de partida biográfico dentro de una lógica pop más cosmopolita, móvil e interurbana. No se trata de una oposición simple entre "lo auténtico" y "lo comercial", ni entre "lo local" y "lo global", sino de dos maneras distintas de habitar la contemporaneidad musical desde una ciudad periférica. En un caso, la singularidad se construye mediante la intensificación de una lengua, una memoria y unos símbolos situados; en el otro, mediante la inserción fluida en redes de circulación más amplias y estilísticamente menos territorializadas.
+                </p>
+                <p>
+                    Esta diferencia permite subrayar una mutación decisiva respecto de los años ochenta. Entonces, la escena local tendía a funcionar como condición de posibilidad de las trayectorias: primero era necesario consolidar una red urbana, unos espacios, una comunidad de recepción y un circuito reconocible, y solo después podía producirse una proyección exterior más amplia. En el presente, en cambio, muchos proyectos nacen ya orientados hacia una circulación simultáneamente local, estatal y digital. La exterioridad no llega después; está incorporada desde el inicio. La escena no desaparece, pero pierde parte de su antigua clausura territorial.
+                </p>
+                <p>
+                    De ahí que el contraste entre la Vigo de los ochenta y la Vigo actual no deba formularse como oposición entre una escena "verdadera" y otra "disuelta", sino como diferencia entre dos regímenes de articulación. La primera respondía todavía a una lógica de concentración espacial, mediación presencial y sedimentación urbana relativamente estable. La segunda se caracteriza por una articulación más móvil, fragmentaria y expandida, en la que lo local sigue importando, aunque ya no como única escala organizadora. Hoy Vigo sigue produciendo escenas, pero estas solo pueden comprenderse si se estudian a la vez como experiencias urbanas, redes translocales y configuraciones mediadas digitalmente.
+                </p>
+                <p>
+                    En ese sentido, los casos de As Fillas de Cassandra y dani dicostas no son anomalías, sino síntomas de una transformación más profunda: la imposibilidad de seguir pensando lo local como una esfera analíticamente autosuficiente. La escena contemporánea no deja atrás la ciudad, pero tampoco cabe ya enteramente en ella.
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="reformulacion">
+                <h2>7. Hacia una reformulación del concepto de escena</h2>
+                <p>
+                    La conclusión que se desprende de lo anterior no exige abandonar el concepto de escena, sino someterlo a una revisión más exigente. A mi juicio, esta reformulación debería atender al menos a cuatro cuestiones.
+                </p>
+                <ol>
+                    <li>En primer lugar, habría que evitar una comprensión esencialista del territorio. La escena no es una emanación natural de la ciudad ni una propiedad intrínseca de un lugar, sino una articulación históricamente situada de actores, espacios, mediaciones e infraestructuras.</li>
+                    <li>En segundo lugar, es imprescindible incorporar las <strong>plataformas digitales</strong> como elemento constitutivo del análisis. Hoy no es posible estudiar las prácticas musicales contemporáneas sin atender a los regímenes de visibilidad, clasificación y circulación que imponen redes y servicios digitales.</li>
+                    <li>En tercer lugar, conviene adoptar una perspectiva <strong>multiescalar</strong>. Lo local, lo translocal y lo virtual no deberían entenderse como compartimentos separados, sino como dimensiones entrelazadas de una misma formación cultural.</li>
+                    <li>Por último, es necesario recuperar la dimensión <strong>afectiva, corporal y memorial</strong> de las escenas. Estas no son simples redes abstractas ni agregados de contenidos circulantes: están hechas de presencias, emociones, cansancios, rutinas, precariedades, archivos y relatos retrospectivos. La escena es también una forma de experiencia (Driver y Bennett 2015; Bennett y Rogers 2016).</li>
+                </ol>
+            </section>
+
+            <section class="article-section fade-in" id="conclusion">
+                <h2>8. Conclusión</h2>
+                <p>
+                    La escena musical local fue una herramienta especialmente valiosa para estudiar determinadas prácticas musicales urbanas de la segunda mitad del siglo XX. Su capacidad para articular espacio, identidad, mediación y memoria la convirtió en una categoría central dentro de los estudios de música popular. Sin embargo, las transformaciones tecnológicas, económicas y comunicativas de las últimas décadas han modificado las condiciones de inteligibilidad de ese concepto.
+                </p>
+                <p>
+                    Hoy lo local no ha desaparecido, pero ya no puede pensarse como una esfera cerrada. Las escenas contemporáneas se configuran en la intersección de espacios urbanos, circuitos translocales, infraestructuras digitales y memorias en circulación. En consecuencia, el concepto de escena local solo puede seguir siendo útil si se libera de una lectura territorialista y se reformula desde una perspectiva relacional, crítica y multiescalar.
+                </p>
+                <p>
+                    La cuestión no es, por tanto, si la escena local sigue siendo o no una herramienta válida en términos absolutos. La cuestión es bajo qué condiciones teóricas y metodológicas puede seguir siéndolo. A mi entender, solo podrá conservar su productividad si asume la complejidad del presente y renuncia a pensar la música desde categorías espaciales puras heredadas de una ecología cultural anterior a la digitalización y a la plataformización.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <section class="article-section fade-in">
+                <h3>Notas</h3>
+                <ol class="article-bibliography" style="font-size: 0.85rem;">
+                    <li>En este trabajo empleo <em>virtual</em> no como sinónimo de irreal o desmaterializado, sino para referirme a formas de interacción, circulación y socialidad mediadas digitalmente. En ese sentido, lo virtual no sustituye a lo local, sino que se articula con él y reconfigura sus condiciones de visibilidad.</li>
+                    <li>La crítica a <em>subcultura</em> y <em>comunidad</em> no implica su inutilidad absoluta. Ambas categorías siguen siendo válidas en determinados contextos históricos o metodológicos. El problema aparece cuando se utilizan como marcos universales para explicar prácticas musicales profundamente heterogéneas y cambiantes.</li>
+                    <li>El valor analítico de los espacios emblemáticos no reside solo en su función logística. Tales lugares operan también como dispositivos de legitimación, condensación memorial y producción simbólica. En muchas escenas, el local es tanto una infraestructura como un signo.</li>
+                    <li>Esta mutación no supone que las distinciones entre independencia y mercado hayan desaparecido, sino que ya no pueden formularse en los mismos términos que en la ecología musical de finales del siglo XX. La autonomía relativa de una escena depende hoy también de su relación con infraestructuras digitales privadas que condicionan acceso, circulación y visibilidad.</li>
+                </ol>
+
+                <h3 style="margin-top: 32px;">Bibliografía</h3>
+                <ul class="article-bibliography" style="list-style: none; padding-left: 0; font-size: 0.85rem;">
+                    <li><strong>Ahmed, Sara.</strong> 2004. "Collective Feelings: Or, the Impressions Left by Others." <em>Theory, Culture & Society</em> 21 (2): 25–42.</li>
+                    <li><strong>Bennett, Andy.</strong> 1999. "Subcultures or Neo-Tribes? Rethinking the Relationship between Youth, Style and Musical Taste." <em>Sociology</em> 33 (3): 599–617.</li>
+                    <li><strong>Bennett, Andy.</strong> 2004. "Consolidating the Music Scenes Perspective." <em>Poetics</em> 32 (3–4): 223–34.</li>
+                    <li><strong>Bennett, Andy, and Richard A. Peterson, eds.</strong> 2004. <em>Music Scenes: Local, Translocal and Virtual</em>. Nashville: Vanderbilt University Press.</li>
+                    <li><strong>Bennett, Andy, and Ian Rogers.</strong> 2016. <em>Popular Music Scenes and Cultural Memory</em>. London: Palgrave Macmillan.</li>
+                    <li><strong>Cohen, Sara.</strong> 1991. <em>Rock Culture in Liverpool: Popular Music in the Making</em>. Oxford: Clarendon Press.</li>
+                    <li><strong>Driver, Christopher, and Andy Bennett.</strong> 2015. "Music Scenes, Space and the Body." <em>Cultural Sociology</em> 9 (1): 99–115.</li>
+                    <li><strong>Frith, Simon.</strong> 1981. <em>Sound Effects: Youth, Leisure, and the Politics of Rock 'n' Roll</em>. New York: Pantheon.</li>
+                    <li><strong>Hebdige, Dick.</strong> 1979. <em>Subculture: The Meaning of Style</em>. London: Methuen.</li>
+                    <li><strong>Hesmondhalgh, David.</strong> 2005. "Subcultures, Scenes or Tribes? None of the Above." <em>Journal of Youth Studies</em> 8 (1): 21–40.</li>
+                    <li><strong>Kibby, Marjorie.</strong> 2000. "Home on the Page: A Virtual Place of Music Community." <em>Popular Music</em> 19 (1): 91–100.</li>
+                    <li><strong>Peterson, Richard A., y Andy Bennett.</strong> 2004. "Introducing Music Scenes." En <em>Music Scenes: Local, Translocal and Virtual</em>, editado por Andy Bennett y Richard A. Peterson, 1–15. Nashville: Vanderbilt University Press.</li>
+                    <li><strong>Shank, Barry.</strong> 1994. <em>Dissonant Identities: The Rock 'n' Roll Scene in Austin, Texas</em>. Hanover, NH: Wesleyan University Press.</li>
+                    <li><strong>Straw, Will.</strong> 1991. "Systems of Articulation, Logics of Change: Communities and Scenes in Popular Music." <em>Cultural Studies</em> 5 (3): 368–88.</li>
+                    <li><strong>Thornton, Sarah.</strong> 1995. <em>Club Cultures: Music, Media and Subcultural Capital</em>. Cambridge: Polity Press.</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación en sociología de la música, sonido e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="escenas-locales.html">Escenas musicales locales</a></li>
+                    <li><a href="music21-musicoloxia-computacional.html">Music21 &amp; Musicoloxía</a></li>
+                    <li><a href="articulos.html">Arquivo de artigos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
