@@ -531,6 +531,18 @@ function applyTheme(theme) {
 // ── Init & Wiring ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     // Inject dynamic elements before i18n
+    
+    // Add Favicon
+    let prefix = window.location.pathname.includes('/pages/') ? '../' : '';
+    if (window.location.pathname.endsWith('html5/') || window.location.pathname.endsWith('html5')) prefix = ''; // fallback
+    if (!document.querySelector("link[rel*='icon']")) {
+        const link = document.createElement('link');
+        link.type = 'image/png';
+        link.rel = 'icon';
+        link.href = prefix + 'assets/img/favicon.png';
+        document.head.appendChild(link);
+    }
+
     injectSocialLinks();
     injectArticleShare();
 
