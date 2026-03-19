@@ -170,6 +170,10 @@ const T = {
         read_more: "Ler máis →",
         reading_min: "Lectura",
 
+        // SHARE ARTICLE
+        share_article_prompt: "¿Interesouche o artigo?",
+        share_article_btn: "⇡ compartir artigo",
+
         // MISC
         all_events_btn: "Ver todos os eventos →",
         all_ss_btn:     "Ver todas as sesións →",
@@ -318,6 +322,10 @@ const T = {
         footer_copy:    "// hecho con código y café ☕",
         read_more:  "Leer más →",
         reading_min:"Lectura",
+
+        share_article_prompt: "¿Te pareció interesante?",
+        share_article_btn: "⇡ compartir artículo",
+
         all_events_btn: "Ver todos los eventos →",
         all_ss_btn:     "Ver todas las sesiones →",
         all_art_btn:    "Ver todos los artículos →",
@@ -465,6 +473,10 @@ const T = {
         footer_copy:    "// made with code and coffee ☕",
         read_more:  "Read more →",
         reading_min:"Read",
+
+        share_article_prompt: "Did you find it interesting?",
+        share_article_btn: "⇡ share article",
+
         all_events_btn: "See all events →",
         all_ss_btn:     "See all sessions →",
         all_art_btn:    "See all articles →",
@@ -518,6 +530,10 @@ function applyTheme(theme) {
 
 // ── Init & Wiring ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    // Inject dynamic elements before i18n
+    injectSocialLinks();
+    injectArticleShare();
+
     // Apply saved preferences
     applyTheme(currentTheme);
     applyLang(currentLang);
@@ -548,8 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.08 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Social icons + Share menus
-    injectSocialLinks();
+    // Social icons + Share menus (links & article share already injected above)
     initShareButtons();
 });
 
@@ -623,6 +638,23 @@ function injectSocialLinks() {
     }
 }
 
+// ── Article Share Injection ───────────────────────────────────────────────────
+function injectArticleShare() {
+    document.querySelectorAll('.article-content').forEach(article => {
+        if (!article.querySelector('.article-share-footer')) {
+            const title = document.title.split('—')[0].trim();
+            article.insertAdjacentHTML('beforeend', `
+                <div class="article-share-footer fade-in" style="margin-top: 48px; padding-top: 24px; border-top: 1px dashed var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <span style="font-size: 0.95rem; color: var(--text-dim);" data-i18n="share_article_prompt"></span>
+                    <div class="share-wrap" data-share-title="${title}">
+                        <button class="share-btn" data-i18n="share_article_btn"></button>
+                    </div>
+                </div>
+            `);
+        }
+    });
+}
+
 // ── Share Button Logic ────────────────────────────────────────────────────────
 function initShareButtons() {
     document.querySelectorAll('.share-btn').forEach(btn => {
@@ -631,7 +663,13 @@ function initShareButtons() {
 
         const card  = btn.closest('[data-share-title]') || btn.closest('.card');
         const title = card?.dataset?.shareTitle || document.title;
-        const pageUrl = window.location.href;
+        let pageUrl = window.location.href;
+        
+        // If sharing from a card that has a link, grab the article URL instead of current page
+        if (card) {
+            const link = card.querySelector('.card-link');
+            if (link) pageUrl = link.href;
+        }
 
         btn.addEventListener('click', e => {
             e.stopPropagation();
