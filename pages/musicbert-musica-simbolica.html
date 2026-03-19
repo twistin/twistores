@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicBERT: PLN e comprensión da música simbólica — TWISTORES</title>
+    <meta name="description" content="MusicBERT é un modelo preentrenado a gran escala para a comprensión da música simbólica, desenvolvido por Microsoft Asia. Inspirado nos avances do procesamento da linguaxe natural, alcanza resultados de vangarda en catro tarefas musicais fundamentais.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .article-figure img {
+            width: 100%;
+            max-width: 820px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            padding: 1rem;
+        }
+        .article-figure img.table-img {
+            max-width: 480px;
+            padding: 1.2rem 2rem;
+        }
+        .article-figure figcaption {
+            margin-top: 0.6rem;
+            font-size: 0.82rem;
+            opacity: 0.6;
+            font-style: italic;
+        }
+        .tasks-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.8rem;
+        }
+        .tasks-list li {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
+            padding: 0.7rem 1rem;
+            font-size: 0.92rem;
+        }
+        .tasks-list li::before {
+            content: "→ ";
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="gl">GL</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content">
+
+            <div class="page-header fade-in">
+                <p class="section-label">// intelixencia artificial · aprendizaxe profunda · música simbólica</p>
+                <h1>MusicBERT: PLN e comprensión da música simbólica</h1>
+                <div class="article-meta">
+                    <span>6 de abril de 2022</span>
+                    <span>Tecnoloxía &amp; IA</span>
+                    <span>Lectura 8 min</span>
+                </div>
+            </div>
+
+            <p class="article-lead fade-in">
+                Inspirado polo éxito dos modelos de preentrenamento en procesamento da linguaxe natural (PLN), un equipo de Microsoft Research Asia desenvolveu MusicBERT: un modelo preentrenado a gran escala para a comprensión da música simbólica. O proxecto aborda por primeira vez, de forma sistemática, os desafíos específicos que presenta a música fronte á linguaxe textual.
+            </p>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones do artigo">
+                <a href="#que-e">Que é MusicBERT</a>
+                <a href="#pln">De BERT a MusicBERT</a>
+                <a href="#corpus">O corpus MMD</a>
+                <a href="#resultados">Resultados e tarefas</a>
+                <a href="#conclusión">Conclusión</a>
+                <a href="#fonte">Fonte</a>
+            </nav>
+
+            <!-- ── SECCIÓN 1 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="que-e">
+                <h2>Que é MusicBERT?</h2>
+                <p>
+                    MusicBERT é un modelo preentrenado a gran escala para a comprensión da música simbólica, encadrado no ámbito da aprendizaxe profunda (<em>deep learning</em>). Trátase dunha rede neuronal deseñada para aplicacións musicais como a clasificación de xéneros e estilos, a detección de emocións, a recomendación de cancións ou a predición de preferencias, entre outras.
+                </p>
+                <p>
+                    A clave diferenciadora de MusicBERT é que traballa sobre <strong>música simbólica</strong> —aquela representada mediante datos estruturados como o formato MIDI— e non sobre audio en bruto. Esta distinción é fundamental: a comprensión da música simbólica implica interpretar relacións de altura, duración, compás, instrumento e ton a partir dunha codificación discreta, o que presenta desafíos moi distintos aos do procesamento do sinal de audio.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 2 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="pln">
+                <h2>De BERT a MusicBERT: a tradición do PLN aplicada á música</h2>
+                <p>
+                    O modelo parte da arquitectura BERT (<em>Bidirectional Encoder Representations from Transformers</em>), desenvolvida orixinalmente por Google para o procesamento da linguaxe natural. BERT aprendeuse mediante preentrenamento non supervisado sobre grandes cantidades de texto, e demostrou que as representacións aprendidas deste xeito resultan transferibles a un amplo espectro de tarefas concretas mediante o <em>fine-tuning</em>.
+                </p>
+                <p>
+                    O diagrama seguinte ilustra o proceso xeral de preentrenamento e axuste fino (fine-tuning) da arquitectura BERT, sobre o que MusicBERT constrúe a súa lóxica de funcionamento aplicada ao dominio musical:
+                </p>
+
+                <figure class="article-figure">
+                    <img src="../assets/img/musicbert-bert-diagram.png"
+                         alt="Diagrama da arquitectura BERT: preentrenamento con NSP e Mask LM (esquerda) e fine-tuning para distintas tarefas MNLI, NER, SQuAD (dereita)"
+                         loading="lazy">
+                    <figcaption>Arquitectura BERT: preentrenamento (esquerda) e axuste fino para tarefas específicas (dereita). Fonte: Devlin et al., 2019 / MusicBERT paper.</figcaption>
+                </figure>
+
+                <p>
+                    Non obstante, a música simbólica presenta complexidades estruturais que non aparecen no texto. A información musical combina dous tipos de datos de natureza moi diferente: por un lado, datos <strong>estruturados</strong> como o compás ou a posición métrica; por outro, datos de natureza máis <strong>heteroxénea</strong> como o tempo, o instrumento ou o ton. Esta dualidade esixiu adaptacións coidadosas no deseño de MusicBERT, entre as que destacan:
+                </p>
+                <ul>
+                    <li>Unha <strong>codificación OctupleMIDI</strong> eficiente e universal, que representa simultaneamente oito atributos de cada nota musical nun único token.</li>
+                    <li>Unha <strong>estratexia de enmascaramento a nivel de compás</strong> (<em>bar-level masking</em>), adaptada á estrutura rítmica da música, en lugar do enmascaramento a nivel de palabra propio do PLN.</li>
+                    <li>Un <strong>corpus de preentrenamento a gran escala</strong> construído especificamente para o proxecto: o <em>Million MIDI Dataset</em> (MMD).</li>
+                </ul>
+            </section>
+
+            <!-- ── SECCIÓN 3 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="corpus">
+                <h2>O corpus MMD: un millón e medio de cancións simbólicas</h2>
+                <p>
+                    Un dos obstáculos históricos para o preentrenamento de modelos musicais era a falta de datos simbólicos a gran escala. Os conxuntos de datos existentes resultaban insuficientes para o propósito: MAESTRO (Hawthorne et al., 2019) conta con algo máis de mil interpretacións de piano; GiantMIDI-Piano (Kong et al., 2020) chega a dez mil; e o maior conxunto de libre acceso ata ese momento, Lakh MIDI Dataset (LMD), contén ao redor de 100.000 cancións.
+                </p>
+                <p>
+                    Para superar esta limitación, o equipo construíu o <strong>Million MIDI Dataset (MMD)</strong>: un corpus de música simbólica rastrexado e depurado da web, que abarca máis dun millón e medio de cancións de xéneros diversos —rock, clásica, rap, electrónica, jazz e outros—. O proceso de construción implicou tres etapas: primeiro, a recolección masiva de ficheiros MIDI de múltiples fontes; a seguir, a limpeza de ficheiros malformados ou baleiros; e, finalmente, a conversión á codificación OctupleMIDI e a deduplicación dos arquivos.
+                </p>
+                <p>
+                    A deduplicación resultou especialmente relevante, dado que moitos ficheiros MIDI conteñen o mesmo contido musical aínda que presenten valores <em>hash</em> diferentes. Para detectar estes casos, o equipo desenvolveu un método que omite todos os atributos agás o instrumento e o ton, obtén o hash da secuencia resultante e úsao como pegada dixital do ficheiro. Tras este proceso, o MMD quedou composto por <strong>1.524.557 cancións</strong> e máis de <strong>2.075 millóns de notas</strong> en formato OctupleMIDI.
+                </p>
+
+                <figure class="article-figure">
+                    <img src="../assets/img/musicbert-mmd-table.png"
+                         class="table-img"
+                         alt="Táboa comparativa de conxuntos de datos musicais: MAESTRO (1.184 cancións, 6M notas), GiantMIDI-Piano (10.854, 39M), LMD (148.403, 535M) e MMD (1.524.557 cancións, 2.075M notas)"
+                         loading="lazy">
+                    <figcaption>Táboa 2: Comparativa de tamaños entre os principais conxuntos de datos de música simbólica. O MMD supera en dous ordes de magnitude ao LMD. Fonte: MusicBERT (2021).</figcaption>
+                </figure>
+
+                <div class="article-keyline">
+                    <p>
+                        Tras aplicar o mesmo proceso de limpeza e deduplicación ao LMD, o seu tamaño real quedou en 148.403 cancións —moi por debaixo das cifras habitualmente citadas—, o que reforza a necesidade do MMD como corpus de referencia.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ── SECCIÓN 4 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="resultados">
+                <h2>Catro tarefas de comprensión musical</h2>
+                <p>
+                    Os experimentos demostraron que MusicBERT proporciona melloras significativas fronte a liñas de base anteriores en catro tarefas fundamentais da comprensión musical simbólica:
+                </p>
+
+                <ul class="tasks-list">
+                    <li>Finalización dunha melodía</li>
+                    <li>Suxerencia de acompañamento</li>
+                    <li>Clasificación de xénero</li>
+                    <li>Clasificación de estilo</li>
+                </ul>
+
+                <p>
+                    Estes resultados confirman que as técnicas de preentrenamento desenvolvidas no campo do PLN son transferibles ao dominio da música simbólica, sempre que se adopten as adaptacións estruturais necesarias. Non basta con aplicar directamente un modelo de linguaxe a datos MIDI: a estrutura métrica, a polifonía e a natureza discreta dos eventos musicais esixen estratexias específicas que MusicBERT aborda de forma explícita.
+                </p>
+            </section>
+
+            <!-- ── SECCIÓN 5 ───────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="conclusión">
+                <h2>Conclusión e perspectivas</h2>
+                <p>
+                    MusicBERT representa un paso significativo na aplicación dos modelos de preentrenamento ao dominio musical. A combinación da codificación OctupleMIDI, o enmascaramento a nivel de compás e o corpus MMD proporciona unha base sólida para o desenvolvemento de sistemas de comprensión musical a gran escala.
+                </p>
+                <p>
+                    Os propios autores apuntan como liñas de traballo futuro a extensión de MusicBERT a outras tarefas de comprensión musical de maior complexidade analítica: o recoñecemento de acordes, a análise da estrutura formal e a harmonización automática. O modelo abre tamén a posibilidade de explorar a transferencia entre xéneros e a xeración musicalmente coherente a partir de representacións simbólicas aprendidas.
+                </p>
+            </section>
+
+            <!-- ── FONTE ─────────────────────────────────────────────────── -->
+            <section class="article-section fade-in" id="fonte">
+                <h2>Fonte</h2>
+                <ol class="article-bibliography">
+                    <li>
+                        Zeng, M., Tan, X., Wang, R., Ju, Z., Qin, T. e Liu, T.-Y. (2021).
+                        <em>MusicBERT: Symbolic Music Understanding with Large-Scale Pre-Training.</em>
+                        Microsoft Research Asia.
+                        <a href="https://arxiv.org/pdf/2106.05630.pdf" target="_blank" rel="noopener">arxiv.org/pdf/2106.05630.pdf</a>
+                    </li>
+                    <li>Hawthorne, C. et al. (2019). Enabling Factorized Piano Music Modeling and Generation with the MAESTRO Dataset. <em>ICLR 2019</em>.</li>
+                    <li>Kong, Q. et al. (2020). GiantMIDI-Piano: Learning Generic Classical Piano Transcription. <em>arXiv:2010.07061</em>.</li>
+                    <li>Raffel, C. (2016). Learning-Based Methods for Comparing Sequences, with Applications to Audio-to-MIDI Alignment and Matching. Tese doutoral. Columbia University. [Lakh MIDI Dataset]</li>
+                    <li>Devlin, J. et al. (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. <em>NAACL 2019</em>.</li>
+                </ol>
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Investigación doctoral en sociología de la música, migraciones e identidad.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="musicbert-musica-simbolica.html">MusicBERT</a></li>
+                    <li><a href="cacofonia-buraco-negro.html">Cacofonía dun buraco negro</a></li>
+                    <li><a href="son-do-sars-cov-2.html">O son do SARS-CoV-2</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
