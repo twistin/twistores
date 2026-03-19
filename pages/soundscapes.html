@@ -70,8 +70,8 @@
         <div class="soundscape-full fade-in" id="castro-session">
             <div class="soundscape-gallery">
                 <style>
-                    /* Custom grid for 10 thumbs */
-                    #castro-thumbs { grid-template-columns: repeat(5, 1fr); gap: 1px; }
+                    /* Custom grid for 4 thumbs */
+                    #castro-thumbs { grid-template-columns: repeat(4, 1fr); gap: 1px; }
                     .photo-thumb { background-size: cover; background-position: center; transition: opacity 0.3s; opacity: 0.5; }
                     .photo-thumb:hover { opacity: 0.8; }
                     .photo-thumb.active { opacity: 1; border: 2px solid var(--accent2); }
@@ -83,12 +83,6 @@
                     <div class="photo-thumb" data-id="2" style="background-image: url('../assets/img/castro/2.jpg');"></div>
                     <div class="photo-thumb" data-id="3" style="background-image: url('../assets/img/castro/3.jpg');"></div>
                     <div class="photo-thumb" data-id="4" style="background-image: url('../assets/img/castro/4.jpg');"></div>
-                    <div class="photo-thumb" data-id="5" style="background-image: url('../assets/img/castro/5.jpg');"></div>
-                    <div class="photo-thumb" data-id="6" style="background-image: url('../assets/img/castro/6.jpg');"></div>
-                    <div class="photo-thumb" data-id="7" style="background-image: url('../assets/img/castro/7.jpg');"></div>
-                    <div class="photo-thumb" data-id="8" style="background-image: url('../assets/img/castro/8.jpg');"></div>
-                    <div class="photo-thumb" data-id="9" style="background-image: url('../assets/img/castro/9.jpg');"></div>
-                    <div class="photo-thumb" data-id="10" style="background-image: url('../assets/img/castro/10.jpg');"></div>
                 </div>
             </div>
             <div class="soundscape-info">
@@ -103,7 +97,7 @@
                 </div>
                 <!-- Reproductor nativo HTML5 para la máxima compatibilidad y navegación -->
                 <div class="audio-player-full" style="padding:0; background:none; border:none; margin-top: 10px;">
-                    <audio id="castro-audio" controls style="width:100%; height: 40px; outline: none; filter: invert(0.9) hue-rotate(180deg);" src="../assets/audio/castro/1.mp3"></audio>
+                    <audio id="castro-audio" controls style="width:100%; height: 40px; outline: none; filter: invert(0.9) hue-rotate(180deg);" src="../assets/audio/castro/1.WAV"></audio>
                 </div>
             </div>
         </div>
@@ -184,39 +178,21 @@
             1: { title: "Mirador dentro fortaleza Plaza España", time: "12:45 h", coords: "42.2309, -8.7254", desc: "Un día súper cálido, la acústica en este punto es tranquila. Se escuchan varias fuentes distintas: alguna sirena, tráfico de fondo leve, diversos cantos de pájaros, algún coche que pasa y pasos de paseantes." },
             2: { title: "Entrada fortaleza enfrente de antena", time: "12:02 h", coords: "42.2311, -8.7263", desc: "En la entrada de la fortaleza hay muchos paseantes, perros, pasos, conversaciones etc. Cantos de pájaros, rumor de la fuente del Castro de fondo y tráfico lejano." },
             3: { title: "Muro debajo mirador de la ría", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Siguiendo el paseo, justo del lado del mirador de la ría encima de unas piedras. Se escucha el rumor de la ciudad, muchas conversaciones explicando la ría, turistas, perros, pájaros." },
-            4: { title: "Mirador de las Anclas", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Densidad muy grande de paseantes, se oye un avión pasar y a unas personas conversando justo al lado. Ruido del agua del estanque de fondo." },
-            5: { title: "Inicio paseo de los camelios", time: "12:40 h", coords: "42.2332, -8.7270", desc: "Inicio del paseo desde la parte baja de la fuente de las anclas de los galeones. Alguna ambulancia, varios cantos de pájaros, paseantes en movimiento, murmullo y tráfico urbano." },
-            6: { title: "Paseo dos cedros vista da A Guía", time: "12:52 h", coords: "42.2331, -8.7256", desc: "Rodeando el Castro por el paseo de tierra en sentido hacia la pista de skate. Pájaros varios, insectos sin identificar, avión, el rumor de la ciudad." },
-            7: { title: "Debajo de parque infantil", time: "13:12 h", coords: "42.2298, -8.7229", desc: "Un rincón apartado enfrente del hospital. Totalmente expuesto a las ráfagas de viento, ruido de niños, tráfico intensificándose." },
-            8: { title: "Promontorio encima del parque", time: "13:20 h", coords: "42.2296, -8.7236", desc: "Dominando visual y acústicamente el parque y el aparcamiento. Voces de niños jugando, padres llamándolos y coches pasando repetidamente." },
-            9: { title: "Sendero poco transitado", time: "13:30 h", coords: "42.2303, -8.7257", desc: "Sendero poco transitado al lado del invernadero. Ruidos de motores acelerando, follaje mecido intermitentemente, una sirena policial de fondo." },
-            10:{ title: "Plaza Martín Codax", time: "13:40 h", coords: "42.2302, -8.7266", desc: "En el mirador de Martín Codax domina sonoramente el chorro de agua que cae libre en la fuente y define toda la sala." }
+            4: { title: "Mirador de las Anclas", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Densidad muy grande de paseantes, se oye un avión pasar y a unas personas conversando justo al lado. Ruido del agua del estanque de fondo." }
         };
 
         const castroData_gl = {
             1: { title: "Miradoiro dentro da fortaleza Praza España", time: "12:45 h", coords: "42.2309, -8.7254", desc: "Un día súper cálido, a acústica neste punto é tranquila. Escóitanse varias fontes distintas: algunha sirena, tráfico de fondo leve, diversos cantos de paxaros, algún coche que pasa e pasos de paseantes." },
             2: { title: "Entrada da fortaleza fronte á antena", time: "12:02 h", coords: "42.2311, -8.7263", desc: "Na entrada da fortaleza hai moitos paseantes, cans, pasos, conversas etc. Cantos de paxaros, rumor da fonte do Castro de fondo e tráfico afastado." },
             3: { title: "Muro debaixo do miradoiro da ría", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Seguindo o paseo, xusto do lado do miradoiro da ría enriba dunhas pedras. Escóitase o rumor da cidade, moitas conversas explicando a ría, turistas, cans, paxaros." },
-            4: { title: "Miradoiro das Áncoras", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Densidade moi grande de paseantes, óese un avión pasar e a unhas persoas conversando xusto ao lado. Ruído da auga do estanque de fondo." },
-            5: { title: "Inicio do paseo dos camelios", time: "12:40 h", coords: "42.2332, -8.7270", desc: "Inicio do paseo dende a parte baixa da fonte das áncoras dos galeóns. Algunha ambulancia, varios cantos de paxaros, paseantes en movemento, murmurio e tráfico urbano." },
-            6: { title: "Paseo dos cedros vista da Guía", time: "12:52 h", coords: "42.2331, -8.7256", desc: "Rodeando o Castro polo paseo de terra en sentido cara á pista de skate. Paxaros varios, insectos sen identificar, avión, o rumor da cidade." },
-            7: { title: "Debaixo do parque infantil", time: "13:12 h", coords: "42.2298, -8.7229", desc: "Un recuncho apartado fronte ao hospital. Totalmente exposto aos refachos de vento, ruído de nenos, tráfico intensificándose." },
-            8: { title: "Promontorio enriba do parque", time: "13:20 h", coords: "42.2296, -8.7236", desc: "Dominando visual e acusticamente o parque e o aparcadoiro. Voces de nenos xogando, pais chamándoos e coches pasando repetidamente." },
-            9: { title: "Sendeiro pouco transitado", time: "13:30 h", coords: "42.2303, -8.7257", desc: "Sendeiro pouco transitado ao carón do invernadoiro. Ruídos de motores acelerando, follaxe abaneada intermitentemente, unha sirena policial de fondo." },
-            10:{ title: "Praza Martín Codax", time: "13:40 h", coords: "42.2302, -8.7266", desc: "No miradoiro de Martín Codax domina sonoramente o chorro de auga que cae libre na fonte e define toda a sala." }
+            4: { title: "Miradoiro das Áncoras", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Densidade moi grande de paseantes, óese un avión pasar e a unhas persoas conversando xusto ao lado. Ruído da auga do estanque de fondo." }
         };
 
         const castroData_en = {
             1: { title: "Lookout within Plaza España fortress", time: "12:45 h", coords: "42.2309, -8.7254", desc: "A very warm day, the acoustics at this point are calm. Several distinct sources can be heard: a siren, light background traffic, various birdsongs, a passing car and the footsteps of people walking by." },
             2: { title: "Fortress entrance opposite the antenna", time: "12:02 h", coords: "42.2311, -8.7263", desc: "At the fortress entrance there are many walkers, dogs, footsteps, conversations etc. Birdsongs, the murmur of the Castro fountain in the background and distant traffic." },
             3: { title: "Wall below the estuary lookout", time: "12:14 h", coords: "42.2320, -8.7267", desc: "Following the path, just beside the estuary lookout on some stones. The murmur of the city can be heard, many conversations explaining the estuary, tourists, dogs, birds." },
-            4: { title: "Anchor Lookout", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Very high density of walkers, a plane is heard passing and people conversing right beside. Noise of the pond water in the background." },
-            5: { title: "Start of the camellias path", time: "12:40 h", coords: "42.2332, -8.7270", desc: "Start of the path from the lower part of the galleon anchors fountain. An ambulance, several birdsongs, moving walkers, murmur and urban traffic." },
-            6: { title: "Cedar path view of A Guía", time: "12:52 h", coords: "42.2331, -8.7256", desc: "Going around the Castro along the dirt path towards the skate park. Various birds, unidentified insects, a plane, the murmur of the city." },
-            7: { title: "Below the children's playground", time: "13:12 h", coords: "42.2298, -8.7229", desc: "A secluded corner opposite the hospital. Totally exposed to gusts of wind, noise of children, traffic intensifying." },
-            8: { title: "Promontory above the park", time: "13:20 h", coords: "42.2296, -8.7236", desc: "Visually and acoustically dominating the park and the car park. Voices of children playing, parents calling them and cars passing repeatedly." },
-            9: { title: "Little-travelled path", time: "13:30 h", coords: "42.2303, -8.7257", desc: "Little-travelled path next to the greenhouse. Noises of engines revving, foliage swayed intermittently, a police siren in the background." },
-            10:{ title: "Martín Codax Square", time: "13:40 h", coords: "42.2302, -8.7266", desc: "At the Martín Codax lookout, the jet of water falling freely into the fountain acoustically dominates and defines the whole room." }
+            4: { title: "Anchor Lookout", time: "12:30 h", coords: "42.2332, -8.7265", desc: "Very high density of walkers, a plane is heard passing and people conversing right beside. Noise of the pond water in the background." }
         };
 
         // CAN MASDEU
@@ -296,7 +272,7 @@
                 
                 updateUIforLanguage();
                 
-                c_audio.src = `../assets/audio/castro/${currentCastroId}.mp3`;
+                c_audio.src = `../assets/audio/castro/${currentCastroId}.WAV`;
                 c_audio.play().catch(() => {});
             });
         });
@@ -310,7 +286,7 @@
                 
                 updateUIforLanguage();
                 
-                m_audio.src = `../assets/audio/masdeu/${currentMasdeuId}.mp3`;
+                m_audio.src = `../assets/audio/masdeu/${currentMasdeuId}.WAV`;
                 m_audio.play().catch(() => {});
             });
         });
