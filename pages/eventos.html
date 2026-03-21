@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Coding — TWISTORES</title>
-    <meta name="description" content="Sets de live coding de TWISTORES: eventos pasados y próximas actuaciones.">
+    <meta name="description" content="Estado de directos de TWISTORES y archivo de actuaciones en revisión.">
     <link rel="stylesheet" href="../style.css">
     <style>
         .events-header-info {
@@ -18,47 +18,6 @@
             line-height: 1.75;
         }
         .events-header-info strong { color: var(--heading); font-family: var(--mono); font-weight: 400; }
-        .year-group { margin-bottom: 48px; }
-        .year-label {
-            font-family: var(--mono);
-            font-size: 0.64rem;
-            letter-spacing: 2.4px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .year-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-        .event-row-extended {
-            display: grid;
-            grid-template-columns: 86px 1fr 170px 90px;
-            align-items: center;
-            gap: 20px;
-            padding: 18px 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 8px;
-            transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
-        }
-        .event-row-extended:hover { border-color: var(--border-strong); background: var(--surface-strong); box-shadow: var(--glow-sm); }
-        .event-row-extended.upcoming { border-color: var(--border-strong); }
-        .event-day { font-family: var(--mono); font-size: 1.45rem; font-weight: 700; color: var(--heading); line-height: 1; }
-        .event-month-year { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
-        .event-main h3 { font-size: 0.95rem; color: var(--heading); margin-bottom: 4px; font-family: var(--sans); }
-        .event-details { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); display: flex; gap: 12px; flex-wrap: wrap; }
-        .event-tags { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
-        .event-tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim); background: rgba(255,255,255,0.02); }
-        .event-tag.tag-supercollider { border-color: rgba(79,183,168,0.22); color: var(--accent2); }
-        .event-tag.tag-tidal { border-color: rgba(146,172,233,0.22); color: #9db6ef; }
-        .event-tag.tag-av { border-color: rgba(210,177,120,0.22); color: #d2b178; }
-        @media (max-width: 768px) {
-            .event-row-extended { grid-template-columns: 70px 1fr; grid-template-rows: auto auto; }
-            .event-tags { grid-column: 1 / -1; }
-            .event-status { grid-column: 1 / -1; }
-        }
     </style>
 </head>
 <body>
@@ -93,125 +52,24 @@
             <h1 data-i18n="title_events_page">Sets de Live Coding</h1>
         </div>
 
-        <!-- ── SCHMIDT · EVENTO DESTACADO ───────────────────────── -->
-        <div class="event-banner fade-in">
-            <div class="event-banner-date">
-                <div class="event-banner-day">03</div>
-                <div class="event-banner-month" data-i18n="ev_schmidt_month">ABR · 2025</div>
-                <span class="event-banner-badge" data-i18n="event_upcoming">Próximo</span>
-            </div>
-            <div class="event-banner-info">
-                <p class="event-banner-label">// live coding concert</p>
-                <h2 class="event-banner-title">SCHMIDT</h2>
-                <p class="event-banner-sub" data-i18n="ev_schmidt_desc">
-                    Ambient · House · Código en tiempo real.<br>
-                    El kairós y el I Ching como guías de la improvisación algorítmica.
-                </p>
-                <div class="event-banner-meta">
-                    <span>📍 <strong data-i18n="ev_schmidt_venue">Sala Supersonic · Vigo</strong></span>
-                    <span>🕙 <strong>22:00h</strong></span>
-                    <span>🎟 <strong data-i18n="ev_schmidt_tickets">Entradas disponibles</strong></span>
-                </div>
-            </div>
-            <div class="event-banner-cta">
-                <a class="btn-ticket"
-                   href="https://entradas.ticketrona.com/events/schmidt-live-coding-concert-en-la-sala-supersonic"
-                   target="_blank"
-                   rel="noopener"
-                   data-i18n="ev_schmidt_cta">
-                    Comprar entradas →
-                </a>
-            </div>
-        </div>
-
         <div class="events-header-info fade-in" data-i18n="events_intro">
             Sets realizados con <strong>SuperCollider</strong> y <strong>TidalCycles</strong>.
             La música emerge del código en tiempo real: cada actuación es irrepetible.
             El programa y el músico improvisan juntos, el error es parte de la obra.
         </div>
 
-
-        <section class="year-group fade-in">
-            <p class="year-label" data-i18n="events_upcoming">Próximos</p>
-
-            <div class="event-row-extended upcoming">
-                <div><div class="event-day">12</div><div class="event-month-year">Abr 2025</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev1_name">TWISTORES Live — Algorave Barcelona</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev1_venue">Sala Apolo · Barcelona</span></span><span>⏱ 22:00h</span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-supercollider">SuperCollider</span><span class="event-tag tag-av">A/V</span></div>
-                <span class="event-status status-upcoming" data-i18n="event_upcoming">Próximo</span>
+        <section class="status-panel fade-in" aria-labelledby="events-status-title">
+            <div>
+                <span class="tag" data-i18n="events_status_badge">En actualización</span>
+                <h2 class="status-panel-title" id="events-status-title" data-i18n="events_status_title">Sin fechas públicas en este momento</h2>
+                <p class="status-panel-text" data-i18n="events_status_desc">La agenda de directos se actualizará aquí cuando haya una actuación confirmada y publicada.</p>
             </div>
-
-            <div class="event-row-extended upcoming">
-                <div><div class="event-day">03</div><div class="event-month-year">May 2025</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev2_name">Resonancias Migrantes — CCCB</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev2_venue">CCCB · Barcelona</span></span><span>⏱ 19:30h</span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-tidal">TidalCycles</span></div>
-                <span class="event-status status-upcoming" data-i18n="event_upcoming">Próximo</span>
+            <div class="status-panel-actions">
+                <a class="btn" href="mailto:sarerac@gmail.com" data-i18n="events_contact_cta">Escribir por correo →</a>
             </div>
         </section>
 
-        <section class="year-group fade-in">
-            <p class="year-label">2025</p>
-
-            <div class="event-row-extended">
-                <div><div class="event-day">21</div><div class="event-month-year">Ene 2025</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev3_name">Código Abierto — Festival SuperCollider</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev3_venue">Espai Erre · Girona</span></span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-supercollider">SuperCollider</span></div>
-                <span class="event-status status-past" data-i18n="event_past">Pasado</span>
-            </div>
-
-            <div class="event-row-extended">
-                <div><div class="event-day">08</div><div class="event-month-year">Feb 2025</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev4_name">Noches Electrónicas — set improvisado</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev4_venue">Hangar · Barcelona</span></span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-tidal">TidalCycles</span><span class="event-tag tag-av">A/V</span></div>
-                <span class="event-status status-past" data-i18n="event_past">Pasado</span>
-            </div>
-        </section>
-
-        <section class="year-group fade-in">
-            <p class="year-label">2024</p>
-
-            <div class="event-row-extended">
-                <div><div class="event-day">15</div><div class="event-month-year">Nov 2024</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev5_name">Tierra Sonora — Jornadas de Etnomusicología</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev5_venue">UAB · Bellaterra</span></span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-supercollider">SuperCollider</span></div>
-                <span class="event-status status-past" data-i18n="event_past">Pasado</span>
-            </div>
-
-            <div class="event-row-extended">
-                <div><div class="event-day">29</div><div class="event-month-year">Sep 2024</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev6_name">Algorave — Sónar+D Late Night</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev6_venue">Sónar · Barcelona</span></span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-tidal">TidalCycles</span><span class="event-tag tag-av">A/V</span></div>
-                <span class="event-status status-past" data-i18n="event_past">Pasado</span>
-            </div>
-
-            <div class="event-row-extended">
-                <div><div class="event-day">12</div><div class="event-month-year">Jun 2024</div></div>
-                <div class="event-main">
-                    <h3 data-i18n="ev7_name">Música Viva — 1er aniversario de TWISTORES</h3>
-                    <div class="event-details"><span>📍 <span data-i18n="ev7_venue">Sala Beckett · Barcelona</span></span></div>
-                </div>
-                <div class="event-tags"><span class="event-tag tag-supercollider">SuperCollider</span></div>
-                <span class="event-status status-past" data-i18n="event_past">Pasado</span>
-            </div>
-        </section>
+        <p class="section-note fade-in" data-i18n="events_archive_note">El archivo de actuaciones volverá cuando esté revisado con fechas y documentación verificadas.</p>
     </main>
 
     <footer>
@@ -232,14 +90,14 @@
             <div class="footer-col">
                 <h4 data-i18n="footer_tools">Herramientas</h4>
                 <ul>
-                    <li><a href="#">SuperCollider</a></li>
-                    <li><a href="#">TidalCycles</a></li>
-                    <li><a href="#">Algorave</a></li>
+                    <li><span>SuperCollider</span></li>
+                    <li><span>TidalCycles</span></li>
+                    <li><span>Algorave</span></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 TWISTORES</p>
+            <p>© 2026 TWISTORES</p>
             <p data-i18n="footer_copy">// hecho con código y café ☕</p>
         </div>
     </footer>

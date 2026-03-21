@@ -41,6 +41,7 @@ const T = {
 
         // FILTER TABS
         filter_all:       "Todos",
+        filter_research:  "Investigación",
         filter_thesis:    "Tese doutoral",
         filter_music_tech:"Música & Tech",
         filter_music_edu: "Música & Educación",
@@ -48,13 +49,17 @@ const T = {
         filter_others:    "Outros",
 
         // ARTICLE CATEGORIES
+        cat_research:   "Investigación",
         cat_thesis:     "Tese doutoral",
         cat_music_tech: "Música & Tecnoloxía",
         cat_music_edu:  "Música & Educación",
         cat_tech_edu:   "Tecnoloxía & Educación",
         cat_others:     "Outros",
+        badge_featured: "★ Destacado",
 
         // ARTICLE TITLES & DESCRIPTIONS
+        art_locales_title: "Escenas musicais locais hoxe en día: unha ferramenta válida?",
+        art_locales_desc:  "Unha revisión crítica da utilidade do concepto de \"escena musical local\", desde a súa emerxencia co punk ata a súa expansión na era das plataformas dixitais, analizando o caso de Vigo.",
         art1_title: "Cantando en Terra Allea: identidade e pertenza na diáspora latinoamericana",
         art1_desc:  "Unha análise sociolóxica de como a música actúa como ancla identitaria en contextos migratorios.",
         art2_title: "Música de raíz e negociación identitaria: o caso de músicos latinos en Barcelona",
@@ -85,7 +90,14 @@ const T = {
         art14_desc: "Unha revisión crítica sobre como a condena do sexismo nestes xéneros se entrelaza coa distinción social, a identidade e a deslexitimación cultural.",
 
         // EVENTS PAGE
-        events_intro:    "Sets realizados con SuperCollider e TidalCycles. A música xorde do código en tempo real: cada actuación é irrepetible. O programa e o músico improvisaban xuntos, o erro é parte da obra.",
+        events_intro:    "Sets realizados con <strong>SuperCollider</strong> e <strong>TidalCycles</strong>. A música xorde do código en tempo real: cada actuación é irrepetible. O programa e o músico improvisaban xuntos, o erro é parte da obra.",
+        events_status_label: "Axenda",
+        events_status_current: "Agora",
+        events_status_title: "Sen datas públicas neste momento",
+        events_status_desc: "A axenda de directos actualizarase aquí cando haxa unha actuación confirmada e publicada.",
+        events_status_badge: "En actualización",
+        events_contact_cta: "Escribir por correo →",
+        events_archive_note: "O arquivo de actuacións volverá cando estea revisado con datas e documentación verificadas.",
         event_upcoming:  "Próximo",
         event_past:      "Pasado",
         events_upcoming: "Próximos",
@@ -158,6 +170,9 @@ const T = {
         ss_castro_loc: "O Castro de Vigo",
         ss_masdeu_title: "Sesión: Can Masdeu, Collserola",
         ss_masdeu_loc: "Can Masdeu, BCN",
+        ss_home_castro_title: "O Castro de Vigo",
+        ss_home_castro_desc: "Nove puntos de escoita, fotografías e gravacións de campo rexistradas en novembro de 2024.",
+        ss_archive_note: "Arquivo en crecemento: polo de agora só está publicada a sesión do Castro de Vigo.",
         ss_meta_loc: "Lugar / Hora",
 
         ss_meta_date: "Data",
@@ -188,7 +203,7 @@ const T = {
         share_article_btn: "⇡ compartir artigo",
 
         // MISC
-        all_events_btn: "Ver todos os eventos →",
+        all_events_btn: "Ver estado dos directos →",
         all_ss_btn:     "Ver todas as sesións →",
         all_art_btn:    "Ver todos os artigos →",
 
@@ -227,16 +242,21 @@ const T = {
         title_about_page:      "Acerca de",
         title_research_areas:  "Áreas de investigación",
         filter_all:       "Todos",
+        filter_research:  "Investigación",
         filter_thesis:    "Tesis doctoral",
         filter_music_tech:"Música & Tech",
         filter_music_edu: "Música & Educación",
         filter_tech_edu:  "Tecnología & Educación",
         filter_others:    "Otros",
+        cat_research:   "Investigación",
         cat_thesis:     "Tesis doctoral",
         cat_music_tech: "Música & Tecnología",
         cat_music_edu:  "Música & Educación",
         cat_tech_edu:   "Tecnología & Educación",
         cat_others:     "Otros",
+        badge_featured: "★ Destacado",
+        art_locales_title: "Escenas musicales locales hoy en día: ¿una herramienta válida?",
+        art_locales_desc:  "Una revisión crítica de la utilidad del concepto de \"escena musical local\", desde su emergencia con el punk hasta su expansión en la era de las plataformas digitales, analizando el caso de Vigo.",
         art1_title: "Cantando en Tierra Ajena: identidad y pertenencia en la diáspora latinoamericana",
         art1_desc:  "Un análisis sociológico de cómo la música actúa como anclaje identitario en contextos migratorios.",
         art2_title: "Música de raíz y negociación identitaria: el caso de músicos latinos en Barcelona",
@@ -265,7 +285,14 @@ const T = {
         art13_desc: "Un recorrido por los pioneros del arte computacional, la demoscene, el net.art y la IA generativa, con foco en sus escenas, artistas y modelos pedagógicos.",
         art14_title:"Clasismo y machismo en la recepción del trap y el reguetón: revisión crítica de la legitimidad cultural, la identidad y el sexismo",
         art14_desc: "Una revisión crítica sobre cómo la condena del sexismo en estos géneros se entrelaza con la distinción social, la identidad y la deslegitimación cultural.",
-        events_intro:    "Sets realizados con SuperCollider y TidalCycles. La música emerge del código en tiempo real: cada actuación es irrepetible. El programa y el músico improvisan juntos, el error es parte de la obra.",
+        events_intro:    "Sets realizados con <strong>SuperCollider</strong> y <strong>TidalCycles</strong>. La música emerge del código en tiempo real: cada actuación es irrepetible. El programa y el músico improvisan juntos, el error es parte de la obra.",
+        events_status_label: "Agenda",
+        events_status_current: "Ahora",
+        events_status_title: "Sin fechas públicas en este momento",
+        events_status_desc: "La agenda de directos se actualizará aquí cuando haya una actuación confirmada y publicada.",
+        events_status_badge: "En actualización",
+        events_contact_cta: "Escribir por correo →",
+        events_archive_note: "El archivo de actuaciones volverá cuando esté revisado con fechas y documentación verificadas.",
         event_upcoming:  "Próximo",
         event_past:      "Pasado",
         events_upcoming: "Próximos",
@@ -328,6 +355,9 @@ const T = {
         ss_castro_loc: "Castro de Vigo",
         ss_masdeu_title: "Sesión: Can Masdeu, BCN",
         ss_masdeu_loc: "Can Masdeu, BCN",
+        ss_home_castro_title: "O Castro de Vigo",
+        ss_home_castro_desc: "Nueve puntos de escucha, fotografías y grabaciones de campo registradas en noviembre de 2024.",
+        ss_archive_note: "Archivo en crecimiento: por ahora solo está publicada la sesión de O Castro de Vigo.",
         ss_meta_loc: "Lugar / Hora",
 
         ss_meta_date: "Fecha",
@@ -352,7 +382,7 @@ const T = {
         share_article_prompt: "¿Te pareció interesante?",
         share_article_btn: "⇡ compartir artículo",
 
-        all_events_btn: "Ver todos los eventos →",
+        all_events_btn: "Ver estado de directos →",
         all_ss_btn:     "Ver todas las sesiones →",
         all_art_btn:    "Ver todos los artículos →",
 
@@ -391,16 +421,21 @@ const T = {
         title_about_page:      "About",
         title_research_areas:  "Research areas",
         filter_all:       "All",
+        filter_research:  "Research",
         filter_thesis:    "Doctoral thesis",
         filter_music_tech:"Music & Tech",
         filter_music_edu: "Music & Education",
         filter_tech_edu:  "Technology & Education",
         filter_others:    "Others",
+        cat_research:   "Research",
         cat_thesis:     "Doctoral thesis",
         cat_music_tech: "Music & Technology",
         cat_music_edu:  "Music & Education",
         cat_tech_edu:   "Technology & Education",
         cat_others:     "Others",
+        badge_featured: "★ Featured",
+        art_locales_title: "Local music scenes today: are they still a valid tool?",
+        art_locales_desc:  "A critical review of the usefulness of the \"local music scene\" concept, from its emergence with punk to its expansion in the platform era, with Vigo as a case study.",
         art1_title: "Singing in a Foreign Land: identity and belonging in the Latin American diaspora",
         art1_desc:  "A sociological analysis of how music acts as an identity anchor in migratory contexts.",
         art2_title: "Roots music and identity negotiation: the case of Latin musicians in Barcelona",
@@ -429,7 +464,14 @@ const T = {
         art13_desc: "A journey through computer art pioneers, the demoscene, net.art and generative AI, focusing on scenes, artists and pedagogical models.",
         art14_title:"Classism and sexism in the reception of trap and reggaeton: a critical review of cultural legitimacy, identity and sexism",
         art14_desc: "A critical review of how the condemnation of sexism in these genres intersects with social distinction, identity and cultural delegitimation.",
-        events_intro:    "Sets performed with SuperCollider and TidalCycles. Music emerges from code in real time: every performance is unique. The program and the musician improvise together; the error is part of the work.",
+        events_intro:    "Sets performed with <strong>SuperCollider</strong> and <strong>TidalCycles</strong>. Music emerges from code in real time: every performance is unique. The program and the musician improvise together; the error is part of the work.",
+        events_status_label: "Schedule",
+        events_status_current: "Now",
+        events_status_title: "No public dates right now",
+        events_status_desc: "The live schedule will be updated here once a performance is confirmed and publicly announced.",
+        events_status_badge: "Updating",
+        events_contact_cta: "Write by email →",
+        events_archive_note: "The performance archive will return once dates and supporting documentation have been reviewed.",
         event_upcoming:  "Upcoming",
         event_past:      "Past",
         events_upcoming: "Upcoming",
@@ -459,6 +501,9 @@ const T = {
         ss_castro_loc: "Castro de Vigo",
         ss_masdeu_title: "Session: Can Masdeu, BCN",
         ss_masdeu_loc: "Can Masdeu, BCN",
+        ss_home_castro_title: "O Castro de Vigo",
+        ss_home_castro_desc: "Nine listening points, photographs and field recordings documented in November 2024.",
+        ss_archive_note: "Growing archive: for now, only the O Castro de Vigo session is published.",
         ss_meta_loc: "Location / Time",
 
         ss_meta_date: "Date",
@@ -510,7 +555,7 @@ const T = {
         share_article_prompt: "Did you find it interesting?",
         share_article_btn: "⇡ share article",
 
-        all_events_btn: "See all events →",
+        all_events_btn: "See live status →",
         all_ss_btn:     "See all sessions →",
         all_art_btn:    "See all articles →",
 
@@ -522,6 +567,8 @@ const T = {
         ev_schmidt_cta:     "Get tickets →",
     }
 };
+
+window.T = T;
 
 // ── i18n Engine ───────────────────────────────────────────────────────────────
 let currentLang = localStorage.getItem('twistores-lang') || 'es';
@@ -548,6 +595,8 @@ function applyLang(lang) {
     // Update html lang attribute
     document.documentElement.lang =
         lang === 'gl' ? 'gl' : lang === 'en' ? 'en' : 'es';
+
+    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
 }
 
 // ── Theme Engine ──────────────────────────────────────────────────────────────
