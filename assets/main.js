@@ -38,6 +38,10 @@ const T = {
         title_soundscapes_page:"Soundscapes",
         title_about_page:      "Sobre min",
         title_research_areas:  "Áreas de investigación",
+        home_articles_intro:   "Unha selección breve de investigación publicada e textos sobre tecnoloxía musical, sen mesturar borradores nin pezas en desenvolvemento.",
+        home_events_intro:     "A axenda pública amosa só actuacións confirmadas. Se non hai datas pechadas, esta sección indícao sen promesas baleiras.",
+        home_soundscapes_intro:"Rexistro de escoita en contorna urbana, publicado con fotografía e audio de campo reais.",
+        articles_page_intro:   "Arquivo de textos publicados sobre socioloxía da música, escenas locais e tecnoloxía sonora.",
 
         // FILTER TABS
         filter_all:       "Todos",
@@ -173,6 +177,7 @@ const T = {
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nove puntos de escoita, fotografías e gravacións de campo rexistradas en novembro de 2024.",
         ss_archive_note: "Arquivo en crecemento: polo de agora só está publicada a sesión do Castro de Vigo.",
+        ss_castro_helper: "Selecciona un dos nove puntos para actualizar a fotografía, a nota de campo e o audio.",
         ss_meta_loc: "Lugar / Hora",
 
         ss_meta_date: "Data",
@@ -241,6 +246,10 @@ const T = {
         title_soundscapes_page:"Soundscapes",
         title_about_page:      "Acerca de",
         title_research_areas:  "Áreas de investigación",
+        home_articles_intro:   "Una selección breve de investigación publicada y textos sobre tecnología musical, sin mezclar borradores ni piezas en desarrollo.",
+        home_events_intro:     "La agenda pública enseña solo actuaciones confirmadas. Si no hay fechas cerradas, esta sección lo muestra sin promesas vacías.",
+        home_soundscapes_intro:"Registro de escucha en entorno urbano, publicado con fotografía y audio de campo reales.",
+        articles_page_intro:   "Archivo de textos publicados sobre sociología de la música, escenas locales y tecnología sonora.",
         filter_all:       "Todos",
         filter_research:  "Investigación",
         filter_thesis:    "Tesis doctoral",
@@ -358,6 +367,7 @@ const T = {
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nueve puntos de escucha, fotografías y grabaciones de campo registradas en noviembre de 2024.",
         ss_archive_note: "Archivo en crecimiento: por ahora solo está publicada la sesión de O Castro de Vigo.",
+        ss_castro_helper: "Selecciona uno de los nueve puntos para actualizar la fotografía, la nota de campo y el audio.",
         ss_meta_loc: "Lugar / Hora",
 
         ss_meta_date: "Fecha",
@@ -420,6 +430,10 @@ const T = {
         title_soundscapes_page:"Soundscapes",
         title_about_page:      "About",
         title_research_areas:  "Research areas",
+        home_articles_intro:   "A concise selection of published research and writing on music technology, without drafts or placeholder pieces mixed in.",
+        home_events_intro:     "The public schedule shows only confirmed performances. If there are no fixed dates, this section says so plainly.",
+        home_soundscapes_intro:"Listening work in urban space, published with real field photography and audio.",
+        articles_page_intro:   "Archive of published texts on the sociology of music, local scenes and sonic technology.",
         filter_all:       "All",
         filter_research:  "Research",
         filter_thesis:    "Doctoral thesis",
@@ -504,6 +518,7 @@ const T = {
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nine listening points, photographs and field recordings documented in November 2024.",
         ss_archive_note: "Growing archive: for now, only the O Castro de Vigo session is published.",
+        ss_castro_helper: "Select one of the nine points to update the photograph, field note and audio.",
         ss_meta_loc: "Location / Time",
 
         ss_meta_date: "Date",
@@ -645,11 +660,56 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => applyLang(btn.dataset.lang));
     });
 
+    document.querySelectorAll('.lang-switcher').forEach(group => {
+        if (!group.hasAttribute('role')) {
+            group.setAttribute('role', 'group');
+        }
+    });
+
     // Mobile nav toggle
     const navToggleBtn = document.getElementById('nav-toggle');
     const navList = document.getElementById('nav-list');
     if (navToggleBtn && navList) {
-        navToggleBtn.addEventListener('click', () => navList.classList.toggle('open'));
+        navToggleBtn.setAttribute('aria-controls', navList.id || 'nav-list');
+        navToggleBtn.setAttribute('aria-expanded', 'false');
+
+        const closeNav = () => {
+            navList.classList.remove('open');
+            navToggleBtn.setAttribute('aria-expanded', 'false');
+        };
+
+        const toggleNav = (forceOpen) => {
+            const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !navList.classList.contains('open');
+            navList.classList.toggle('open', shouldOpen);
+            navToggleBtn.setAttribute('aria-expanded', String(shouldOpen));
+        };
+
+        navToggleBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            toggleNav();
+        });
+
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => closeNav());
+        });
+
+        document.addEventListener('click', event => {
+            if (!navList.contains(event.target) && !navToggleBtn.contains(event.target)) {
+                closeNav();
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                closeNav();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeNav();
+            }
+        });
     }
 
     // Scroll fade-in
@@ -738,10 +798,10 @@ function injectArticleShare() {
         if (!article.querySelector('.article-share-footer')) {
             const title = document.title.split('—')[0].trim();
             article.insertAdjacentHTML('beforeend', `
-                <div class="article-share-footer fade-in" style="margin-top: 48px; padding-top: 24px; border-top: 1px dashed var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-                    <span style="font-size: 0.95rem; color: var(--text-dim);" data-i18n="share_article_prompt"></span>
+                <div class="article-share-footer fade-in">
+                    <span class="page-intro" data-i18n="share_article_prompt"></span>
                     <div class="share-wrap" data-share-title="${title}">
-                        <button class="share-btn" data-i18n="share_article_btn"></button>
+                        <button class="share-btn" type="button" data-i18n="share_article_btn" aria-haspopup="menu" aria-expanded="false"></button>
                     </div>
                 </div>
             `);
@@ -751,6 +811,14 @@ function injectArticleShare() {
 
 // ── Share Button Logic ────────────────────────────────────────────────────────
 function initShareButtons() {
+    const closeShareMenus = (exceptMenu = null) => {
+        document.querySelectorAll('.share-menu.open').forEach(menu => {
+            if (menu === exceptMenu) return;
+            menu.classList.remove('open');
+            menu.parentElement.querySelector('.share-btn')?.setAttribute('aria-expanded', 'false');
+        });
+    };
+
     document.querySelectorAll('.share-btn').forEach(btn => {
         if (btn.dataset.shareInited) return;
         btn.dataset.shareInited = '1';
@@ -808,19 +876,30 @@ function initShareButtons() {
                         const b = ev.currentTarget;
                         const orig = b.innerHTML;
                         b.innerHTML = '✓ Copiado';
-                        setTimeout(() => { b.innerHTML = orig; menu.classList.remove('open'); }, 1400);
+                        setTimeout(() => {
+                            b.innerHTML = orig;
+                            menu.classList.remove('open');
+                            btn.setAttribute('aria-expanded', 'false');
+                        }, 1400);
                     });
                 });
             }
-            document.querySelectorAll('.share-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
+            closeShareMenus(menu);
             menu.classList.toggle('open');
+            btn.setAttribute('aria-expanded', String(menu.classList.contains('open')));
         });
     });
 
     // Close on outside click
     document.addEventListener('click', e => {
         if (!e.target.closest('.share-wrap')) {
-            document.querySelectorAll('.share-menu.open').forEach(m => m.classList.remove('open'));
+            closeShareMenus();
         }
     }, { capture: true });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            closeShareMenus();
+        }
+    });
 }

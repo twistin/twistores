@@ -37,6 +37,7 @@
         <div class="page-header fade-in">
             <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
             <h1 data-i18n="title_articles_page">Artículos</h1>
+            <p class="page-intro" data-i18n="articles_page_intro">Archivo de textos publicados sobre sociología de la música, escenas locales y tecnología sonora.</p>
         </div>
 
         <div class="filter-tabs fade-in">
@@ -57,7 +58,6 @@
                 <div class="card-meta"><span>Mar 2026</span><span>· <span data-i18n="reading_min">Lectura</span> 10 min</span></div>
                 <div class="card-footer">
                     <a class="card-link" href="escenas-locales.html" data-i18n="read_more">Leer más →</a>
-                    <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                 </div>
             </article>
 
@@ -69,7 +69,6 @@
                 <div class="card-meta"><span>17 Feb 2022</span><span>· <span data-i18n="reading_min">Lectura</span> 8 min</span></div>
                 <div class="card-footer">
                     <a class="card-link" href="music21-musicoloxia-computacional.html" data-i18n="read_more">Leer más →</a>
-                    <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                 </div>
             </article>
 
@@ -81,7 +80,6 @@
                 <div class="card-meta"><span>14 Mar 2022</span><span>· <span data-i18n="reading_min">Lectura</span> 18 min</span></div>
                 <div class="card-footer">
                     <a class="card-link" href="musica-son-intelixencia-artificial.html" data-i18n="read_more">Leer más →</a>
-                    <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                 </div>
             </article>
 
@@ -93,7 +91,6 @@
                 <div class="card-meta"><span>6 Abr 2022</span><span>· <span data-i18n="reading_min">Lectura</span> 8 min</span></div>
                 <div class="card-footer">
                     <a class="card-link" href="musicbert-musica-simbolica.html" data-i18n="read_more">Leer más →</a>
-                    <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                 </div>
             </article>
 
@@ -105,7 +102,6 @@
                 <div class="card-meta"><span>4 Mar 2022</span><span>· <span data-i18n="reading_min">Lectura</span> 10 min</span></div>
                     <div class="card-footer">
                         <a class="card-link" href="cacofonia-buraco-negro.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
             </article>
 
@@ -117,7 +113,6 @@
                 <div class="card-meta"><span>2022</span><span>· <span data-i18n="reading_min">Lectura</span> 8 min</span></div>
                     <div class="card-footer">
                         <a class="card-link" href="son-do-sars-cov-2.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
             </article>
 
@@ -130,7 +125,6 @@
                 <div class="card-meta"><span>2017 (rev.)</span><span>· <span data-i18n="reading_min">Lectura</span> 12 min</span></div>
                 <div class="card-footer">
                     <a class="card-link" href="clasismo-y-machismo.html" data-i18n="read_more">Leer más →</a>
-                    <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                 </div>
             </article>
 
@@ -178,8 +172,7 @@
                 btn.classList.add('active');
                 const filter = btn.dataset.filter;
                 document.querySelectorAll('#all-articles .card').forEach(card => {
-                    card.style.display =
-                        (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+                    card.hidden = !(filter === 'all' || card.dataset.category === filter);
                 });
             });
         });

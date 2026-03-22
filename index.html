@@ -54,8 +54,13 @@
 
         <!-- ── Artículos recientes ──────────────────────────────── -->
         <section class="page-section fade-in">
-            <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
-            <h2 class="section-title" data-i18n="title_recent_articles">Artículos recientes</h2>
+            <div class="section-head">
+                <div>
+                    <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
+                    <h2 class="section-title" data-i18n="title_recent_articles">Artículos recientes</h2>
+                </div>
+                <p class="section-intro" data-i18n="home_articles_intro">Una selección breve de investigación publicada y textos sobre tecnología musical, sin mezclar borradores ni piezas en desarrollo.</p>
+            </div>
 
             <div class="filter-tabs">
                 <button class="filter-tab active" data-filter="all" data-i18n="filter_all">Todos</button>
@@ -77,7 +82,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/escenas-locales.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -92,7 +96,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/music21-musicoloxia-computacional.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -107,7 +110,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/musica-son-intelixencia-artificial.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -122,7 +124,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/musicbert-musica-simbolica.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -137,7 +138,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/cacofonia-buraco-negro.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -152,7 +152,6 @@
                     </div>
                     <div class="card-footer">
                         <a class="card-link" href="pages/son-do-sars-cov-2.html" data-i18n="read_more">Leer más →</a>
-                        <div class="share-wrap"><button class="share-btn">⇡ share</button></div>
                     </div>
                 </article>
 
@@ -164,8 +163,13 @@
 
         <!-- ── Estado de directos ───────────────────────────────── -->
         <section class="page-section fade-in">
-            <p class="section-label" data-i18n="label_events">// sets de live coding</p>
-            <h2 class="section-title" data-i18n="title_events">Eventos</h2>
+            <div class="section-head">
+                <div>
+                    <p class="section-label" data-i18n="label_events">// sets de live coding</p>
+                    <h2 class="section-title" data-i18n="title_events">Eventos</h2>
+                </div>
+                <p class="section-intro" data-i18n="home_events_intro">La agenda pública enseña solo actuaciones confirmadas. Si no hay fechas cerradas, esta sección lo muestra sin promesas vacías.</p>
+            </div>
 
             <div class="events-list">
                 <div class="event-row fade-in">
@@ -189,8 +193,13 @@
 
         <!-- ── Soundscapes recientes ────────────────────────────── -->
         <section class="page-section fade-in">
-            <p class="section-label" data-i18n="label_soundscapes">// grabaciones de campo</p>
-            <h2 class="section-title" data-i18n="title_soundscapes">Soundscapes recientes</h2>
+            <div class="section-head">
+                <div>
+                    <p class="section-label" data-i18n="label_soundscapes">// grabaciones de campo</p>
+                    <h2 class="section-title" data-i18n="title_soundscapes">Soundscapes recientes</h2>
+                </div>
+                <p class="section-intro" data-i18n="home_soundscapes_intro">Registro de escucha en entorno urbano, publicado con fotografía y audio de campo reales.</p>
+            </div>
 
             <div class="soundscapes-grid soundscapes-grid-single">
                 <article class="soundscape-card soundscape-card-featured fade-in">
@@ -253,8 +262,7 @@
                 btn.classList.add('active');
                 const filter = btn.dataset.filter;
                 document.querySelectorAll('#articles-home .card').forEach(card => {
-                    card.style.display =
-                        (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+                    card.hidden = !(filter === 'all' || card.dataset.category === filter);
                 });
             });
         });

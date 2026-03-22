@@ -11,17 +11,22 @@
         .soundscape-gallery { display: grid; grid-template-rows: 240px 1fr; gap: 1px; background: var(--border); }
         .photo-main { background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.64rem; letter-spacing: 1.6px; transition: background-image 0.4s ease; }
         .photo-thumbs { display: grid; grid-template-columns: repeat(9, 1fr); gap: 1px; background: var(--border); }
-        .photo-thumb { background: rgba(255,255,255,0.025); background-size: cover; background-position: center; height: 76px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.58rem; cursor: pointer; transition: opacity 0.3s; opacity: 0.5; }
+        .photo-thumb { appearance: none; border: 0; padding: 0; width: 100%; background: rgba(255,255,255,0.025); background-size: cover; background-position: center; height: 76px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.58rem; cursor: pointer; transition: opacity 0.3s, transform 0.3s; opacity: 0.5; position: relative; }
+        .photo-thumb::after { content: attr(data-id); position: absolute; left: 8px; bottom: 8px; font-family: var(--mono); font-size: 0.55rem; line-height: 1; color: var(--heading); background: rgba(7,17,24,0.72); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 4px 6px; }
         .photo-thumb:hover { opacity: 0.8; }
-        .photo-thumb.active { opacity: 1; border: 2px solid var(--accent2); }
+        .photo-thumb:focus-visible { opacity: 1; outline-offset: -3px; }
+        .photo-thumb.active { opacity: 1; box-shadow: inset 0 0 0 2px var(--accent2); transform: translateY(-1px); }
         .soundscape-info { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
         .soundscape-info h2 { font-size: 1.12rem; margin-bottom: 10px; color: var(--heading); }
         .soundscape-info p { font-size: 0.88rem; line-height: 1.72; margin-bottom: 18px; color: var(--text-dim); }
+        .soundscape-helper { margin-bottom: 18px; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--accent2); }
         .field-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 22px; }
         .field-meta-item { font-family: var(--mono); font-size: 0.66rem; color: var(--text-dim); }
         .field-meta-item strong { color: var(--accent2); display: block; font-size: 0.58rem; letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 3px; }
         .audio-player-full { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; background: rgba(255,255,255,0.02); }
-        @media (max-width: 768px) { .soundscape-full { grid-template-columns: 1fr; } .photo-thumbs { grid-template-columns: repeat(3, 1fr); } }
+        .soundscape-player-shell { padding: 0; background: none; border: none; margin-top: 10px; }
+        .soundscape-audio-embed { width: 100%; height: 40px; filter: invert(0.9) hue-rotate(180deg); }
+        @media (max-width: 768px) { .soundscape-full { grid-template-columns: 1fr; } .photo-thumbs { grid-template-columns: repeat(3, 1fr); } .soundscape-info { padding: 22px; } }
     </style>
 </head>
 <body>
@@ -54,7 +59,7 @@
         <div class="page-header fade-in">
             <p class="section-label" data-i18n="label_field">// grabaciones de campo · fotografía · audio</p>
             <h1 data-i18n="title_soundscapes_page">Soundscapes</h1>
-            <p style="max-width:580px; margin-top:12px; color: var(--text-dim); font-size:0.92rem; line-height:1.7;" data-i18n="ss_page_desc">
+            <p class="page-intro" data-i18n="ss_page_desc">
                 Salidas de campo para escuchar, registrar y explorar los paisajes sonoros de la ciudad y del campo.
                 Cada sesión incluye fotografías del entorno y grabaciones de audio.
             </p>
@@ -64,22 +69,23 @@
         <!-- Sesión: El Castro de Vigo -->
         <div class="soundscape-full fade-in" id="castro-session">
             <div class="soundscape-gallery">
-                <div class="photo-main" id="castro-main-img" style="background-image: url('../assets/img/castro/1.jpg'); color: transparent;"></div>
+                <div class="photo-main" id="castro-main-img" role="img" aria-label="Fotografía 1 de la sesión en O Castro de Vigo" style="background-image: url('../assets/img/castro/1.jpg'); color: transparent;"></div>
                 <div class="photo-thumbs" id="castro-thumbs">
-                    <div class="photo-thumb active" data-id="1" style="background-image: url('../assets/img/castro/1.jpg');"></div>
-                    <div class="photo-thumb" data-id="2" style="background-image: url('../assets/img/castro/2.jpg');"></div>
-                    <div class="photo-thumb" data-id="3" style="background-image: url('../assets/img/castro/3.jpg');"></div>
-                    <div class="photo-thumb" data-id="4" style="background-image: url('../assets/img/castro/4.jpg');"></div>
-                    <div class="photo-thumb" data-id="5" style="background-image: url('../assets/img/castro/5.jpg');"></div>
-                    <div class="photo-thumb" data-id="6" style="background-image: url('../assets/img/castro/6.jpg');"></div>
-                    <div class="photo-thumb" data-id="7" style="background-image: url('../assets/img/castro/7.jpg');"></div>
-                    <div class="photo-thumb" data-id="8" style="background-image: url('../assets/img/castro/8.jpg');"></div>
-                    <div class="photo-thumb" data-id="9" style="background-image: url('../assets/img/castro/9.jpg');"></div>
+                    <button class="photo-thumb active" type="button" data-id="1" aria-pressed="true" style="background-image: url('../assets/img/castro/1.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="2" aria-pressed="false" style="background-image: url('../assets/img/castro/2.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="3" aria-pressed="false" style="background-image: url('../assets/img/castro/3.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="4" aria-pressed="false" style="background-image: url('../assets/img/castro/4.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="5" aria-pressed="false" style="background-image: url('../assets/img/castro/5.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="6" aria-pressed="false" style="background-image: url('../assets/img/castro/6.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="7" aria-pressed="false" style="background-image: url('../assets/img/castro/7.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="8" aria-pressed="false" style="background-image: url('../assets/img/castro/8.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-id="9" aria-pressed="false" style="background-image: url('../assets/img/castro/9.jpg');"></button>
                 </div>
             </div>
             <div class="soundscape-info">
                 <p class="soundscape-date">Nov 2024</p>
                 <h2 id="castro-title" data-i18n="ss_castro_title">Sesión: El Castro de Vigo</h2>
+                <p class="soundscape-helper" data-i18n="ss_castro_helper">Selecciona uno de los nueve puntos para actualizar la fotografía, la nota de campo y el audio.</p>
                 <p id="castro-desc" style="min-height: 80px;">Un día súper cálido, la acústica en este punto es tranquila. Se escuchan varias fuentes distintas: alguna sirena, tráfico de fondo leve, diversos cantos de pájaros, algún coche que pasa y pasos de paseantes.</p>
                 <div class="field-meta">
                     <div class="field-meta-item"><strong data-i18n="ss_meta_loc">Lugar / Hora</strong><span id="castro-loc">Castro de Vigo — 12:45 h</span></div>
@@ -87,8 +93,8 @@
                     <div class="field-meta-item"><strong data-i18n="ss_meta_coords">Coordenadas</strong><span id="castro-coords">42.2309, -8.7254</span></div>
                     <div class="field-meta-item"><strong data-i18n="ss_meta_gear">Grabación</strong>Zoom H6, X/Y</div>
                 </div>
-                <div class="audio-player-full" style="padding:0; background:none; border:none; margin-top: 10px;">
-                    <audio id="castro-audio" controls preload="none" style="width:100%; height: 40px; outline: none; filter: invert(0.9) hue-rotate(180deg);" src="../assets/audio/castro/1.mp3"></audio>
+                <div class="audio-player-full soundscape-player-shell">
+                    <audio id="castro-audio" class="soundscape-audio-embed" controls preload="none" src="../assets/audio/castro/1.mp3"></audio>
                 </div>
             </div>
         </div>
@@ -189,12 +195,21 @@
             c_desc.textContent = c_data.desc;
             c_loc.textContent = `${locationNames[currentLang] || locationNames.es} — ${c_data.time}`;
             c_coords.textContent = c_data.coords;
+            c_mainImg.setAttribute('aria-label', `${c_data.title}. ${locationNames[currentLang] || locationNames.es}. ${c_data.time}.`);
+            c_thumbs.forEach(thumb => {
+                const thumbData = langData[thumb.getAttribute('data-id')];
+                thumb.setAttribute('aria-label', thumbData.title);
+            });
         }
 
         c_thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
-                c_thumbs.forEach(t => t.classList.remove('active'));
+                c_thumbs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-pressed', 'false');
+                });
                 thumb.classList.add('active');
+                thumb.setAttribute('aria-pressed', 'true');
                 currentCastroId = thumb.getAttribute('data-id');
                 c_mainImg.style.backgroundImage = `url('../assets/img/castro/${currentCastroId}.jpg')`;
                 
