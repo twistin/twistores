@@ -63,7 +63,7 @@
                 Salidas de campo para escuchar, registrar y explorar los paisajes sonoros de la ciudad y del campo.
                 Cada sesión incluye fotografías del entorno y grabaciones de audio.
             </p>
-            <p class="section-note" data-i18n="ss_archive_note">Archivo en crecimiento: por ahora solo está publicada la sesión de O Castro de Vigo.</p>
+            <p class="section-note" data-i18n="ss_archive_note">Archivo en crecimiento · Sesiones publicadas: O Castro de Vigo (Nov 2024) · Chan de Brito (Mar 2026).</p>
         </div>
 
         <!-- Sesión: El Castro de Vigo -->
@@ -95,6 +95,41 @@
                 </div>
                 <div class="audio-player-full soundscape-player-shell">
                     <audio id="castro-audio" class="soundscape-audio-embed" controls preload="none" src="../assets/audio/castro/1.mp3"></audio>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesión: Chan de Brito -->
+        <div class="soundscape-full fade-in" id="chan-session">
+            <div class="soundscape-gallery">
+                <div class="photo-main" id="chan-main-img" role="img" aria-label="Fotografía de la sesión en Chan de Brito" style="background-image: url('../assets/img/chandebrito/1-1.jpg'); color: transparent;"></div>
+                <div class="photo-thumbs" id="chan-thumbs">
+                    <button class="photo-thumb active" type="button" data-loc="1" data-img="1-1" aria-pressed="true" style="background-image: url('../assets/img/chandebrito/1-1.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-loc="1" data-img="1-2" aria-pressed="false" style="background-image: url('../assets/img/chandebrito/1-2.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-loc="2" data-img="2-1" aria-pressed="false" style="background-image: url('../assets/img/chandebrito/2-1.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-loc="2" data-img="2-2" aria-pressed="false" style="background-image: url('../assets/img/chandebrito/2-2.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-loc="3" data-img="3-1" aria-pressed="false" style="background-image: url('../assets/img/chandebrito/3-1.jpg');"></button>
+                    <button class="photo-thumb" type="button" data-loc="3" data-img="3-2" aria-pressed="false" style="background-image: url('../assets/img/chandebrito/3-2.jpg');"></button>
+                </div>
+            </div>
+            <div class="soundscape-info">
+                <p class="soundscape-date">Mar 2026</p>
+                <h2 id="chan-title">Sesión: Chan de Brito</h2>
+                <p class="soundscape-helper">Selecciona una fotografía para cambiar la localización y el audio.</p>
+                <p id="chan-desc" style="min-height: 80px;">Camino estrecho con pendiente que sube desde el camino principal. Rodeado de pinos, helechos, silvas y roca. Pájaros (¿chochines?), motosierra a lo lejos, una moto, moscas y ladridos lejanos.</p>
+                <div class="field-meta">
+                    <div class="field-meta-item"><strong>Lugar / Hora</strong><span id="chan-loc">Chan de Brito — 12:00 h</span></div>
+                    <div class="field-meta-item"><strong>Fecha</strong><span>22/03/2026</span></div>
+                    <div class="field-meta-item"><strong>Coordenadas</strong><span id="chan-coords">42.1665, -8.7738</span></div>
+                    <div class="field-meta-item"><strong>Grabación</strong>Zoom H6, X/Y</div>
+                </div>
+                <!-- Selector de audio para loc-2 (2 tomas) -->
+                <div id="chan-audio-tabs" style="display:none; margin-bottom:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <button id="chan-tab-a" class="photo-thumb active" type="button" style="width:auto; height:auto; padding:5px 12px; opacity:1; font-family:var(--mono); font-size:0.7rem; letter-spacing:1px; border-radius:999px; border:1px solid var(--accent2); background:none; color:var(--accent2); cursor:pointer;">Toma A</button>
+                    <button id="chan-tab-b" class="photo-thumb" type="button" style="width:auto; height:auto; padding:5px 12px; opacity:0.45; font-family:var(--mono); font-size:0.7rem; letter-spacing:1px; border-radius:999px; border:1px solid var(--border); background:none; color:var(--text-dim); cursor:pointer;">Toma B</button>
+                </div>
+                <div class="audio-player-full soundscape-player-shell">
+                    <audio id="chan-audio" class="soundscape-audio-embed" controls preload="none" src="../assets/audio/chandebrito/1.mp3"></audio>
                 </div>
             </div>
         </div>
@@ -134,6 +169,105 @@
     </footer>
 
     <script src="../assets/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chanData = {
+            1: {
+                title: "Camino estrecho entre pinos",
+                time:  "~12:00 h",
+                coords: "42.1665, -8.7738",
+                desc: "Camino estrecho con pendiente que sube desde el camino principal. Rodeado de pinos, helechos, silvas y roca. Pájaros (¿chochines?), motosierra a lo lejos, una moto, moscas y ladridos lejanos.",
+                audio: "../assets/audio/chandebrito/1.mp3",
+                hasTakes: false
+            },
+            2: {
+                title: "Caseta dos Cazadores — Alto de Chandebrito",
+                time:  "~12:20 h",
+                coords: "42.1659, -8.7740",
+                desc: "Alto de Chandebrito. Vistas sobrecogedoras. Cielo limpio, ligera bruma baja entre montañas. Matorral bajo, arbustos con roca de granito y flores amarillas silvestres.",
+                audioA: "../assets/audio/chandebrito/2a.mp3",
+                audioB: "../assets/audio/chandebrito/2b.mp3",
+                hasTakes: true
+            },
+            3: {
+                title: "Sendero de monte — Chan de Brito",
+                time:  "12:49 h",
+                coords: "42.1659, -8.7740",
+                desc: "Sendero de tierra que atraviesa el monte. Monte bajo, flores amarillas y árboles dispersos. Paisaje agreste. Temperatura 16°C. Sonidos de pájaros y un abejorro fugaz.",
+                audio: "../assets/audio/chandebrito/3.mp3",
+                hasTakes: false
+            }
+        };
+
+        const chanThumbs = document.querySelectorAll('#chan-thumbs .photo-thumb');
+        const chanMainImg = document.getElementById('chan-main-img');
+        const chanTitle   = document.getElementById('chan-title');
+        const chanDesc    = document.getElementById('chan-desc');
+        const chanLoc     = document.getElementById('chan-loc');
+        const chanCoords  = document.getElementById('chan-coords');
+        const chanAudio   = document.getElementById('chan-audio');
+        const chanTabs    = document.getElementById('chan-audio-tabs');
+        const chanTabA    = document.getElementById('chan-tab-a');
+        const chanTabB    = document.getElementById('chan-tab-b');
+        let currentChan   = 1;
+        let currentTake   = 'a';
+
+        function updateChanUI(locId) {
+            const d = chanData[locId];
+            chanTitle.textContent  = d.title;
+            chanDesc.textContent   = d.desc;
+            chanLoc.textContent    = `Chan de Brito — ${d.time}`;
+            chanCoords.textContent = d.coords;
+            if (d.hasTakes) {
+                chanTabs.style.display = 'flex';
+                currentTake = 'a';
+                chanTabA.style.opacity  = '1';
+                chanTabA.style.borderColor = 'var(--accent2)';
+                chanTabA.style.color    = 'var(--accent2)';
+                chanTabB.style.opacity  = '0.45';
+                chanTabB.style.borderColor = 'var(--border)';
+                chanTabB.style.color    = 'var(--text-dim)';
+                chanAudio.src = d.audioA;
+            } else {
+                chanTabs.style.display = 'none';
+                chanAudio.src = d.audio;
+            }
+        }
+
+        chanThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                chanThumbs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed','false'); });
+                thumb.classList.add('active');
+                thumb.setAttribute('aria-pressed','true');
+                const img  = thumb.getAttribute('data-img');
+                const locId = parseInt(thumb.getAttribute('data-loc'));
+                chanMainImg.style.backgroundImage = `url('../assets/img/chandebrito/${img}.jpg')`;
+                if (locId !== currentChan) {
+                    currentChan = locId;
+                    updateChanUI(locId);
+                    chanAudio.play().catch(() => {});
+                }
+            });
+        });
+
+        chanTabA.addEventListener('click', () => {
+            currentTake = 'a';
+            chanAudio.src = chanData[currentChan].audioA;
+            chanTabA.style.opacity = '1'; chanTabA.style.borderColor = 'var(--accent2)'; chanTabA.style.color = 'var(--accent2)';
+            chanTabB.style.opacity = '0.45'; chanTabB.style.borderColor = 'var(--border)'; chanTabB.style.color = 'var(--text-dim)';
+            chanAudio.play().catch(() => {});
+        });
+        chanTabB.addEventListener('click', () => {
+            currentTake = 'b';
+            chanAudio.src = chanData[currentChan].audioB;
+            chanTabB.style.opacity = '1'; chanTabB.style.borderColor = 'var(--accent2)'; chanTabB.style.color = 'var(--accent2)';
+            chanTabA.style.opacity = '0.45'; chanTabA.style.borderColor = 'var(--border)'; chanTabA.style.color = 'var(--text-dim)';
+            chanAudio.play().catch(() => {});
+        });
+
+        updateChanUI(1);
+    });
+    </script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const castroData = {
