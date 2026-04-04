@@ -270,6 +270,119 @@
         }
 
         .status-panel-actions { flex-shrink: 0; }
+
+        /* ── Media section ── */
+        .session-media {
+            border-top: 1px solid var(--border);
+            padding: 28px 32px 32px;
+        }
+
+        .media-section-title {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent2);
+            margin-bottom: 20px;
+            opacity: 0.75;
+        }
+
+        /* Video players */
+        .video-players {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .video-player-wrap {
+            background: #000;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .video-player-wrap video {
+            width: 100%;
+            display: block;
+            max-height: 340px;
+            background: #000;
+        }
+
+        .video-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            padding: 8px 12px;
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* Photo gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .photo-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: zoom-in;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .photo-item:hover {
+            border-color: var(--border-strong);
+            transform: scale(1.01);
+            box-shadow: var(--glow);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.open { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            font-family: var(--mono);
+            font-size: 1.4rem;
+            color: var(--text-dim);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10000;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover { color: var(--heading); }
     </style>
 </head>
 <body>
@@ -335,82 +448,148 @@
                     </div>
                 </div>
 
-                <div class="session-body">
+                <!-- ── YouTube Short destacado ── -->
+                <div style="display:grid;grid-template-columns:auto 1fr;gap:0;">
 
-                    <!-- Vídeo -->
-                    <div class="session-video-col">
-                        <div class="video-wrap" id="video-schmidt">
+                    <!-- Vídeo vertical (Shorts 9:16) -->
+                    <div style="padding:24px 0 24px 32px;display:flex;flex-direction:column;align-items:center;">
+                        <p class="sidebar-block-title" style="align-self:flex-start;margin-bottom:12px;">// vídeo · supersonic · sala schmidt</p>
+                        <div style="
+                            position:relative;
+                            width:270px;
+                            padding-bottom:calc(270px * 16/9);
+                            background:#000;
+                            border-radius:var(--radius);
+                            overflow:hidden;
+                            border:1px solid var(--border);
+                            box-shadow:0 8px 40px rgba(0,0,0,0.5);
+                            flex-shrink:0;
+                        " id="youtube-short-schmidt">
                             <iframe
-                                src="https://www.youtube.com/embed/videoseries?list=PLplaceholder"
+                                src="https://www.youtube.com/embed/GqJ2Ox-4YyU"
                                 title="Live coding — SuperSonic · Sala Schmidt, Vigo. Twistores y Tribar"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen
-                                loading="lazy"
+                                style="position:absolute;inset:0;width:100%;height:100%;border:none;"
                             ></iframe>
                         </div>
-                        <p class="video-credit">📱 Vídeo: Marcos López · iPhone · SuperSonic, Sala Schmidt, Vigo</p>
+                        <p style="margin-top:8px;font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);">📱 Marcos López · iPhone</p>
                     </div>
 
-                    <!-- Sidebar con info y piezas -->
-                    <div class="session-sidebar">
+                    <!-- Info + piezas + fotos -->
+                    <div style="display:flex;flex-direction:column;gap:0;">
 
-                        <div>
-                            <p class="sidebar-block-title">// datos de la sesión</p>
-                            <div class="session-info-row">
-                                <div class="session-info-item">
-                                    <span class="session-info-label">Fecha</span>
-                                    <span class="session-info-value">3 abr 2026</span>
-                                </div>
-                                <div class="session-info-item">
-                                    <span class="session-info-label">Hora</span>
-                                    <span class="session-info-value">10:30 h</span>
-                                </div>
-                                <div class="session-info-item">
-                                    <span class="session-info-label">Lugar</span>
-                                    <span class="session-info-value">Sala Schmidt, Vigo</span>
-                                </div>
-                                <div class="session-info-item">
-                                    <span class="session-info-label">Ciclo</span>
-                                    <span class="session-info-value">SuperSonic</span>
-                                </div>
-                                <div class="session-info-item">
-                                    <span class="session-info-label">Vídeo</span>
-                                    <span class="session-info-value">Marcos López</span>
-                                </div>
+                <div class="session-body" style="grid-template-columns:1fr 220px;">
+
+                    <!-- Info y piezas -->
+                    <div class="session-video-col" style="padding:24px 20px 28px 28px;">
+
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+                            <p class="sidebar-block-title" style="margin:0;">// datos de la sesión</p>
+                        </div>
+
+                        <div class="session-info-row" style="margin-bottom:24px;">
+                            <div class="session-info-item">
+                                <span class="session-info-label">Fecha</span>
+                                <span class="session-info-value">3 abr 2026</span>
+                            </div>
+                            <div class="session-info-item">
+                                <span class="session-info-label">Hora</span>
+                                <span class="session-info-value">10:30 h</span>
+                            </div>
+                            <div class="session-info-item">
+                                <span class="session-info-label">Lugar</span>
+                                <span class="session-info-value">Sala Schmidt, Vigo</span>
+                            </div>
+                            <div class="session-info-item">
+                                <span class="session-info-label">Ciclo</span>
+                                <span class="session-info-value">SuperSonic</span>
+                            </div>
+                            <div class="session-info-item">
+                                <span class="session-info-label">Cámara</span>
+                                <span class="session-info-value">Marcos López · iPhone</span>
                             </div>
                         </div>
 
-                        <div>
-                            <p class="sidebar-block-title">// piezas interpretadas</p>
-                            <div class="piece-list">
+                        <p class="sidebar-block-title">// piezas interpretadas</p>
+                        <div class="piece-list">
 
-                                <div class="piece-item" id="pieza-twistores">
-                                    <p class="piece-name">I — Twistores</p>
-                                    <p class="piece-desc">
-                                        Parte de la idea de giro, torsión y cruce de planos.
-                                        Con una referencia de fondo al concepto de <em>twistor</em>:
-                                        una manera de imaginar el espacio desde relaciones,
-                                        pliegues y cambios de perspectiva.
-                                    </p>
-                                </div>
-
-                                <div class="piece-item" id="pieza-tribar">
-                                    <p class="piece-name">II — Tribar</p>
-                                    <p class="piece-desc">
-                                        Como el triángulo imposible de Penrose: geometría que
-                                        parece coherente, pero no puede sostenerse del todo en
-                                        el espacio. Repetición, desplazamiento, pequeñas
-                                        variaciones e inestabilidad, siempre desde la improvisación.
-                                    </p>
-                                </div>
-
+                            <div class="piece-item" id="pieza-twistores">
+                                <p class="piece-name">I — Twistores</p>
+                                <p class="piece-desc">
+                                    Parte de la idea de giro, torsión y cruce de planos.
+                                    Con una referencia de fondo al concepto de <em>twistor</em>:
+                                    una manera de imaginar el espacio desde relaciones,
+                                    pliegues y cambios de perspectiva.
+                                </p>
                             </div>
+
+                            <div class="piece-item" id="pieza-tribar">
+                                <p class="piece-name">II — Tribar</p>
+                                <p class="piece-desc">
+                                    Como el triángulo imposible de Penrose: geometría que
+                                    parece coherente, pero no puede sostenerse del todo en
+                                    el espacio. Repetición, desplazamiento, pequeñas
+                                    variaciones e inestabilidad, siempre desde la improvisación.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Fotos -->
+                    <div class="session-sidebar">
+                        <p class="sidebar-block-title">// fotografías</p>
+                        <div class="photo-gallery">
+                            <div class="photo-item" onclick="openLightbox('../assets/img/schmidt/s1.jpeg','Sesión SuperSonic · Sala Schmidt, Vigo')" title="Ver imagen completa">
+                                <img src="../assets/img/schmidt/s1.jpeg" alt="Sesión live coding SuperSonic — Sala Schmidt, Vigo, 3 abr 2026" loading="lazy">
+                            </div>
+                            <div class="photo-item" onclick="openLightbox('../assets/img/schmidt/s3.jpeg','Sesión SuperSonic · Sala Schmidt, Vigo')" title="Ver imagen completa">
+                                <img src="../assets/img/schmidt/s3.jpeg" alt="Sesión live coding SuperSonic — Sala Schmidt, Vigo, 3 abr 2026" loading="lazy">
+                            </div>
+                        </div>
+                        <p style="font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);margin-top:10px;">📷 Marcos López</p>
+                    </div>
+
+                </div>
+
+                <!-- ── Vídeos de la sesión ───────────────────── -->
+                <div class="session-media">
+                    <p class="media-section-title">// vídeos de la sesión · grabación Marcos López</p>
+                    <div class="video-players">
+
+                        <div class="video-player-wrap" id="video-s2">
+                            <video controls preload="none" poster="../assets/img/schmidt/s1.jpeg">
+                                <source src="../assets/video/schmidt/s2.mp4" type="video/mp4">
+                                Tu navegador no soporta la reproducción de vídeo.
+                            </video>
+                            <div class="video-label">Pieza I — Twistores · s2</div>
+                        </div>
+
+                        <div class="video-player-wrap" id="video-s5">
+                            <video controls preload="none" poster="../assets/img/schmidt/s3.jpeg">
+                                <source src="../assets/video/schmidt/s5.mp4" type="video/mp4">
+                                Tu navegador no soporta la reproducción de vídeo.
+                            </video>
+                            <div class="video-label">Pieza II — Tribar · s5</div>
                         </div>
 
                     </div>
                 </div>
+
+            </div>
+
+                    </div><!-- /info+piezas+fotos -->
+                </div><!-- /youtube+right -->
+
             </div>
         </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+            <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+            <img id="lightbox-img" src="" alt="">
+        </div>
 
         <!-- ── Sin próximas fechas ─────────────────────────────────── -->
         <div class="status-panel fade-in" aria-label="Estado de agenda">
@@ -466,5 +645,22 @@
     </footer>
 
     <script src="../assets/main.js"></script>
+    <script>
+        function openLightbox(src, alt) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            img.alt = alt || '';
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 </body>
 </html>
