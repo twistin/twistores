@@ -4,20 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Coding — TWISTORES</title>
-    <meta name="description" content="Estado de directos de TWISTORES y archivo de actuaciones en revisión.">
+    <meta name="description" content="Sets de live coding con SuperCollider: archivo de actuaciones documentadas. Sesión SuperSonic, Sala Schmidt, Vigo — Twistores y Tribar.">
     <link rel="stylesheet" href="../style.css">
     <style>
+        /* ── Page-specific overrides ── */
         .events-header-info {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 22px 24px;
-            margin-bottom: 48px;
+            margin-bottom: 52px;
             font-size: 0.88rem;
             color: var(--text-dim);
             line-height: 1.75;
         }
-        .events-header-info strong { color: var(--heading); font-family: var(--mono); font-weight: 400; }
+        .events-header-info strong {
+            color: var(--heading);
+            font-family: var(--mono);
+            font-weight: 400;
+        }
+
+        /* ── Video Session Card ── */
+        .session-card {
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--surface);
+            backdrop-filter: blur(4px);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            position: relative;
+        }
+
+        .session-card:hover {
+            border-color: var(--accent2);
+            box-shadow: var(--glow);
+        }
+
+        .session-card-featured-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent2), var(--accent), transparent);
+        }
+
+        .session-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--accent);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .session-badge-past {
+            background: transparent;
+            color: var(--accent2);
+            border: 1px solid var(--border-strong);
+        }
+
+        .session-header {
+            padding: 28px 32px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .session-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .session-title {
+            font-family: var(--mono);
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: var(--heading);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .session-subtitle {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--accent2);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .session-body {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 0;
+        }
+
+        @media (max-width: 780px) {
+            .session-body { grid-template-columns: 1fr; }
+        }
+
+        /* ── Video Wrapper ── */
+        .session-video-col {
+            padding: 24px 32px 32px;
+        }
+
+        .video-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: calc(var(--radius) - 1px);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        .video-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-credit {
+            margin-top: 10px;
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Session Sidebar ── */
+        .session-sidebar {
+            border-left: 1px solid var(--border);
+            padding: 24px 28px 32px;
+            background: rgba(0,0,0,0.14);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        @media (max-width: 780px) {
+            .session-sidebar {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+        }
+
+        .sidebar-block-title {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent2);
+            margin-bottom: 10px;
+            opacity: 0.75;
+        }
+
+        .session-info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .session-info-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.84rem;
+        }
+
+        .session-info-label {
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            color: var(--text-dim);
+            min-width: 64px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .session-info-value {
+            color: var(--text);
+        }
+
+        /* ── Pieces List ── */
+        .piece-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .piece-item {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.02);
+            transition: border-color var(--transition);
+        }
+
+        .piece-item:hover {
+            border-color: var(--border-strong);
+        }
+
+        .piece-name {
+            font-family: var(--mono);
+            font-size: 0.92rem;
+            color: var(--heading);
+            margin-bottom: 6px;
+        }
+
+        .piece-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.55;
+        }
+
+        /* ── Archive section ── */
+        .archive-note-box {
+            margin-top: 52px;
+            padding: 22px 26px;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .archive-note-box p {
+            font-size: 0.86rem;
+            color: var(--text-dim);
+            line-height: 1.75;
+        }
+
+        /* ── Status panel (no upcoming) ── */
+        .status-panel {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            background: var(--surface);
+            flex-wrap: wrap;
+            margin-top: 48px;
+        }
+
+        .status-panel-title {
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .status-panel-text {
+            font-size: 0.87rem;
+            color: var(--text-dim);
+        }
+
+        .status-panel-actions { flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -47,29 +299,140 @@
     </header>
 
     <main class="container">
+
         <div class="page-header fade-in">
-            <p class="section-label" data-i18n="label_events">// sets de live coding</p>
-            <h1 data-i18n="title_events_page">Sets de Live Coding</h1>
+            <p class="section-label">// sets de live coding</p>
+            <h1>Sets de Live Coding</h1>
         </div>
 
-        <div class="events-header-info fade-in" data-i18n="events_intro">
+        <div class="events-header-info fade-in">
             Sets realizados con <strong>SuperCollider</strong> y <strong>TidalCycles</strong>.
             La música emerge del código en tiempo real: cada actuación es irrepetible.
             El programa y el músico improvisan juntos, el error es parte de la obra.
         </div>
 
-        <section class="status-panel fade-in" aria-labelledby="events-status-title">
-            <div>
-                <span class="tag" data-i18n="events_status_badge">En actualización</span>
-                <h2 class="status-panel-title" id="events-status-title" data-i18n="events_status_title">Sin fechas públicas en este momento</h2>
-                <p class="status-panel-text" data-i18n="events_status_desc">La agenda de directos se actualizará aquí cuando haya una actuación confirmada y publicada.</p>
+        <!-- ── Sesión Schmidt — Destacada ─────────────────────────── -->
+        <section aria-labelledby="session-schmidt-title" class="fade-in">
+
+            <div class="section-head" style="margin-bottom:24px;">
+                <div>
+                    <p class="section-label">// última sesión documentada</p>
+                    <h2 class="section-title" style="margin-bottom:0;">Archivo de sesiones</h2>
+                </div>
             </div>
-            <div class="status-panel-actions">
-                <a class="btn" href="mailto:sarerac@gmail.com" data-i18n="events_contact_cta">Escribir por correo →</a>
+
+            <div class="session-card" id="session-schmidt">
+                <div class="session-card-featured-strip"></div>
+
+                <div class="session-header">
+                    <div>
+                        <div class="session-meta-row">
+                            <span class="session-badge">★ Destacado</span>
+                            <span class="session-badge session-badge-past">Realizado</span>
+                        </div>
+                        <h2 class="session-title" id="session-schmidt-title">SuperSonic · Sala Schmidt</h2>
+                        <p class="session-subtitle">Vigo — 3 de abril de 2026 · 10:30 h</p>
+                    </div>
+                </div>
+
+                <div class="session-body">
+
+                    <!-- Vídeo -->
+                    <div class="session-video-col">
+                        <div class="video-wrap" id="video-schmidt">
+                            <iframe
+                                src="https://www.youtube.com/embed/videoseries?list=PLplaceholder"
+                                title="Live coding — SuperSonic · Sala Schmidt, Vigo. Twistores y Tribar"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen
+                                loading="lazy"
+                            ></iframe>
+                        </div>
+                        <p class="video-credit">📱 Vídeo: Marcos López · iPhone · SuperSonic, Sala Schmidt, Vigo</p>
+                    </div>
+
+                    <!-- Sidebar con info y piezas -->
+                    <div class="session-sidebar">
+
+                        <div>
+                            <p class="sidebar-block-title">// datos de la sesión</p>
+                            <div class="session-info-row">
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Fecha</span>
+                                    <span class="session-info-value">3 abr 2026</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Hora</span>
+                                    <span class="session-info-value">10:30 h</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Lugar</span>
+                                    <span class="session-info-value">Sala Schmidt, Vigo</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Ciclo</span>
+                                    <span class="session-info-value">SuperSonic</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Vídeo</span>
+                                    <span class="session-info-value">Marcos López</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="sidebar-block-title">// piezas interpretadas</p>
+                            <div class="piece-list">
+
+                                <div class="piece-item" id="pieza-twistores">
+                                    <p class="piece-name">I — Twistores</p>
+                                    <p class="piece-desc">
+                                        Parte de la idea de giro, torsión y cruce de planos.
+                                        Con una referencia de fondo al concepto de <em>twistor</em>:
+                                        una manera de imaginar el espacio desde relaciones,
+                                        pliegues y cambios de perspectiva.
+                                    </p>
+                                </div>
+
+                                <div class="piece-item" id="pieza-tribar">
+                                    <p class="piece-name">II — Tribar</p>
+                                    <p class="piece-desc">
+                                        Como el triángulo imposible de Penrose: geometría que
+                                        parece coherente, pero no puede sostenerse del todo en
+                                        el espacio. Repetición, desplazamiento, pequeñas
+                                        variaciones e inestabilidad, siempre desde la improvisación.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
 
-        <p class="section-note fade-in" data-i18n="events_archive_note">El archivo de actuaciones volverá cuando esté revisado con fechas y documentación verificadas.</p>
+        <!-- ── Sin próximas fechas ─────────────────────────────────── -->
+        <div class="status-panel fade-in" aria-label="Estado de agenda">
+            <div>
+                <span class="tag">En actualización</span>
+                <h2 class="status-panel-title">Sin fechas públicas en este momento</h2>
+                <p class="status-panel-text">La agenda de directos se actualizará aquí cuando haya una actuación confirmada y publicada.</p>
+            </div>
+            <div class="status-panel-actions">
+                <a class="btn" href="mailto:sarerac@gmail.com">Escribir por correo →</a>
+            </div>
+        </div>
+
+        <!-- ── Nota de archivo ─────────────────────────────────────── -->
+        <div class="archive-note-box fade-in">
+            <p>
+                <strong style="font-family:var(--mono);color:var(--heading);font-weight:400;">// archivo</strong> ·
+                Sesiones documentadas: SuperSonic · Sala Schmidt (Vigo, 3 abr 2026).
+                El archivo crece a medida que las actuaciones se documentan con fechas y vídeo verificados.
+            </p>
+        </div>
+
     </main>
 
     <footer>
@@ -92,7 +455,7 @@
                 <ul>
                     <li><span>SuperCollider</span></li>
                     <li><span>TidalCycles</span></li>
-                    <li><span>Algorave</span></li>
+                    <li><span>Algowave</span></li>
                 </ul>
             </div>
         </div>
