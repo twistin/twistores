@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://twistin.github.io/twistores/sitemap.xml

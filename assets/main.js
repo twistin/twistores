@@ -15,9 +15,20 @@ const T = {
 
         // HERO
         hero_eyebrow:    "// Música · Migración · Tecnoloxía",
-        hero_sub:        "Espazo de investigación doutoral, live coding e soundscapes.\nCantando en terra allea — socioloxía da identidade sonora.",
+        hero_title:      "Investigación doutoral, live coding e soundscapes desde Vigo",
+        hero_sub:        "Silvino Díaz Carreras. Investigador, docente e performer centrado na música, migración, tecnoloxía e escoita de campo.",
+        hero_support:    "Aquí conviven escritura longa, arquivo de sesións en vivo e paisaxes sonoras publicadas con contexto, imaxe e audio.",
         hero_cta1:       "Explorar artigos",
-        hero_cta2:       "Ver eventos",
+        hero_cta2:       "Ver arquivo en vivo",
+        hero_route_articles_label: "// investigación",
+        hero_route_articles_title: "Ler artigos e ensaios",
+        hero_route_articles_desc: "Textos publicados sobre socioloxía da música, migración e tecnoloxía.",
+        hero_route_live_label: "// arquivo en vivo",
+        hero_route_live_title: "Ver sesións documentadas",
+        hero_route_live_desc: "Directos con vídeo, fotografías, contexto e pezas interpretadas.",
+        hero_route_sound_label: "// escoita de campo",
+        hero_route_sound_title: "Escoitar soundscapes",
+        hero_route_sound_desc: "Gravacións de campo con notas de escoita, coordenadas e imaxes.",
 
         // SECTION LABELS
         label_articles:     "// escritura académica & reflexión",
@@ -41,6 +52,10 @@ const T = {
         home_articles_intro:   "Unha selección breve de investigación publicada e textos sobre tecnoloxía musical, sen mesturar borradores nin pezas en desenvolvemento.",
         home_events_intro:     "A axenda pública amosa só actuacións confirmadas. Se non hai datas pechadas, esta sección indícao sen promesas baleiras.",
         home_soundscapes_intro:"Rexistro de escoita en contorna urbana, publicado con fotografía e audio de campo reais.",
+        home_live_intro:       "Arquivo de directos documentados con contexto, materiais e pezas interpretadas. A home destaca só a sesión máis recente.",
+        home_live_feature_text:"Última sesión documentada con vídeo, fotografías e desglose das pezas interpretadas en directo.",
+        home_live_feature_piece1:"<strong>I — Twistores.</strong> Xiro, torsión e pregues desde a improvisación.",
+        home_live_feature_piece2:"<strong>II — Tribar.</strong> Xeometría imposible, repetición e inestabilidade.",
         articles_page_intro:   "Arquivo de textos publicados sobre socioloxía da música, escenas locais e tecnoloxía sonora.",
 
         // FILTER TABS
@@ -176,7 +191,7 @@ const T = {
         ss_masdeu_loc: "Can Masdeu, BCN",
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nove puntos de escoita, fotografías e gravacións de campo rexistradas en novembro de 2024.",
-        ss_archive_note: "Arquivo en crecemento: polo de agora só está publicada a sesión do Castro de Vigo.",
+        ss_archive_note: "Arquivo en crecemento · Sesións publicadas: O Castro de Vigo (nov. 2024) · Chan de Brito (mar. 2026).",
         ss_castro_helper: "Selecciona un dos nove puntos para actualizar a fotografía, a nota de campo e o audio.",
         ss_meta_loc: "Lugar / Hora",
 
@@ -206,6 +221,19 @@ const T = {
         // SHARE ARTICLE
         share_article_prompt: "¿Interesouche o artigo?",
         share_article_btn: "⇡ compartir artigo",
+        share_copy_link: "Copiar ligazón",
+        share_copied: "✓ Copiado",
+        meta_author: "Autor",
+        meta_original_lang: "Idioma orixinal",
+        meta_published: "Publicado",
+        meta_category: "Área",
+        meta_topics: "Temas",
+        related_articles_heading: "Lecturas relacionadas",
+        lang_original_version: "Versión orixinal do artigo",
+        lang_translation_soon: "Tradución aínda non dispoñible",
+        lang_gl_name: "Galego",
+        lang_es_name: "Castelán",
+        lang_en_name: "Inglés",
 
         // MISC
         all_events_btn: "Ver estado dos directos →",
@@ -227,9 +255,20 @@ const T = {
         nav_soundscapes: "Soundscapes",
         nav_about:       "Acerca de",
         hero_eyebrow:    "// Música · Migración · Tecnología",
-        hero_sub:        "Espacio de investigación doctoral, live coding y soundscapes.\nCantando en tierra ajena — sociología de la identidad sonora.",
+        hero_title:      "Investigación doctoral, live coding y soundscapes desde Vigo",
+        hero_sub:        "Silvino Díaz Carreras. Investigador, docente y performer centrado en música, migración, tecnología y escucha de campo.",
+        hero_support:    "Aquí conviven escritura larga, archivo de sesiones en vivo y paisajes sonoros publicados con contexto, imagen y audio.",
         hero_cta1:       "Explorar artículos",
-        hero_cta2:       "Ver eventos",
+        hero_cta2:       "Ver archivo en vivo",
+        hero_route_articles_label: "// investigación",
+        hero_route_articles_title: "Leer artículos y ensayos",
+        hero_route_articles_desc: "Textos publicados sobre sociología de la música, migración y tecnología.",
+        hero_route_live_label: "// archivo en vivo",
+        hero_route_live_title: "Ver sesiones documentadas",
+        hero_route_live_desc: "Directos con vídeo, fotografías, contexto y piezas interpretadas.",
+        hero_route_sound_label: "// escucha de campo",
+        hero_route_sound_title: "Escuchar soundscapes",
+        hero_route_sound_desc: "Grabaciones de campo con notas de escucha, coordenadas e imágenes.",
         label_articles:     "// escritura académica & reflexión",
         label_events:       "// sets de live coding",
         label_soundscapes:  "// grabaciones de campo",
@@ -249,6 +288,10 @@ const T = {
         home_articles_intro:   "Una selección breve de investigación publicada y textos sobre tecnología musical, sin mezclar borradores ni piezas en desarrollo.",
         home_events_intro:     "La agenda pública enseña solo actuaciones confirmadas. Si no hay fechas cerradas, esta sección lo muestra sin promesas vacías.",
         home_soundscapes_intro:"Registro de escucha en entorno urbano, publicado con fotografía y audio de campo reales.",
+        home_live_intro:       "Archivo de directos documentados con contexto, materiales y piezas interpretadas. La home solo destaca la sesión más reciente.",
+        home_live_feature_text:"Última sesión documentada con vídeo, fotografías y desglose de las piezas interpretadas en directo.",
+        home_live_feature_piece1:"<strong>I — Twistores.</strong> Giro, torsión y pliegues desde la improvisación.",
+        home_live_feature_piece2:"<strong>II — Tribar.</strong> Geometría imposible, repetición e inestabilidad.",
         articles_page_intro:   "Archivo de textos publicados sobre sociología de la música, escenas locales y tecnología sonora.",
         filter_all:       "Todos",
         filter_research:  "Investigación",
@@ -366,7 +409,7 @@ const T = {
         ss_masdeu_loc: "Can Masdeu, BCN",
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nueve puntos de escucha, fotografías y grabaciones de campo registradas en noviembre de 2024.",
-        ss_archive_note: "Archivo en crecimiento: por ahora solo está publicada la sesión de O Castro de Vigo.",
+        ss_archive_note: "Archivo en crecimiento · Sesiones publicadas: O Castro de Vigo (nov. 2024) · Chan de Brito (mar. 2026).",
         ss_castro_helper: "Selecciona uno de los nueve puntos para actualizar la fotografía, la nota de campo y el audio.",
         ss_meta_loc: "Lugar / Hora",
 
@@ -391,6 +434,19 @@ const T = {
 
         share_article_prompt: "¿Te pareció interesante?",
         share_article_btn: "⇡ compartir artículo",
+        share_copy_link: "Copiar enlace",
+        share_copied: "✓ Copiado",
+        meta_author: "Autor",
+        meta_original_lang: "Idioma original",
+        meta_published: "Publicado",
+        meta_category: "Área",
+        meta_topics: "Temas",
+        related_articles_heading: "Lecturas relacionadas",
+        lang_original_version: "Versión original del artículo",
+        lang_translation_soon: "Traducción todavía no disponible",
+        lang_gl_name: "Gallego",
+        lang_es_name: "Español",
+        lang_en_name: "Inglés",
 
         all_events_btn: "Ver estado de directos →",
         all_ss_btn:     "Ver todas las sesiones →",
@@ -411,9 +467,20 @@ const T = {
         nav_soundscapes: "Soundscapes",
         nav_about:       "About",
         hero_eyebrow:    "// Music · Migration · Technology",
-        hero_sub:        "Doctoral research space, live coding and soundscapes.\nSinging in a foreign land — sociology of sonic identity.",
+        hero_title:      "Doctoral research, live coding and soundscapes from Vigo",
+        hero_sub:        "Silvino Díaz Carreras. Researcher, teacher and performer working across music, migration, technology and field listening.",
+        hero_support:    "Long-form writing, documented live sets and published soundscapes live together here with context, image and audio.",
         hero_cta1:       "Explore articles",
-        hero_cta2:       "See events",
+        hero_cta2:       "Browse live archive",
+        hero_route_articles_label: "// research",
+        hero_route_articles_title: "Read articles and essays",
+        hero_route_articles_desc: "Published writing on the sociology of music, migration and technology.",
+        hero_route_live_label: "// live archive",
+        hero_route_live_title: "Browse documented sessions",
+        hero_route_live_desc: "Live sets with video, photography, context and performed pieces.",
+        hero_route_sound_label: "// field listening",
+        hero_route_sound_title: "Listen to soundscapes",
+        hero_route_sound_desc: "Field recordings with listening notes, coordinates and images.",
         label_articles:     "// academic writing & reflection",
         label_events:       "// live coding sets",
         label_soundscapes:  "// field recordings",
@@ -433,6 +500,10 @@ const T = {
         home_articles_intro:   "A concise selection of published research and writing on music technology, without drafts or placeholder pieces mixed in.",
         home_events_intro:     "The public schedule shows only confirmed performances. If there are no fixed dates, this section says so plainly.",
         home_soundscapes_intro:"Listening work in urban space, published with real field photography and audio.",
+        home_live_intro:       "Archive of documented live sets with context, materials and performed pieces. The homepage highlights only the most recent session.",
+        home_live_feature_text:"Most recent documented session with video, photographs and a breakdown of the performed pieces.",
+        home_live_feature_piece1:"<strong>I — Twistores.</strong> Rotation, torsion and folds developed through improvisation.",
+        home_live_feature_piece2:"<strong>II — Tribar.</strong> Impossible geometry, repetition and instability.",
         articles_page_intro:   "Archive of published texts on the sociology of music, local scenes and sonic technology.",
         filter_all:       "All",
         filter_research:  "Research",
@@ -517,7 +588,7 @@ const T = {
         ss_masdeu_loc: "Can Masdeu, BCN",
         ss_home_castro_title: "O Castro de Vigo",
         ss_home_castro_desc: "Nine listening points, photographs and field recordings documented in November 2024.",
-        ss_archive_note: "Growing archive: for now, only the O Castro de Vigo session is published.",
+        ss_archive_note: "Growing archive · Published sessions: O Castro de Vigo (Nov 2024) · Chan de Brito (Mar 2026).",
         ss_castro_helper: "Select one of the nine points to update the photograph, field note and audio.",
         ss_meta_loc: "Location / Time",
 
@@ -569,6 +640,19 @@ const T = {
 
         share_article_prompt: "Did you find it interesting?",
         share_article_btn: "⇡ share article",
+        share_copy_link: "Copy link",
+        share_copied: "✓ Copied",
+        meta_author: "Author",
+        meta_original_lang: "Original language",
+        meta_published: "Published",
+        meta_category: "Area",
+        meta_topics: "Topics",
+        related_articles_heading: "Related reading",
+        lang_original_version: "Original article version",
+        lang_translation_soon: "Translation not available yet",
+        lang_gl_name: "Galician",
+        lang_es_name: "Spanish",
+        lang_en_name: "English",
 
         all_events_btn: "See live status →",
         all_ss_btn:     "See all sessions →",
@@ -585,12 +669,474 @@ const T = {
 
 window.T = T;
 
+const SITE_CONFIG = {
+    origin: 'https://twistin.github.io/twistores',
+    name: 'TWISTORES',
+    author: 'Silvino Díaz Carreras',
+    email: 'sarerac@gmail.com',
+    description: 'Investigación doctoral, live coding y soundscapes desde Vigo.',
+    defaultImage: '/assets/img/sc-banner.png',
+    profileImage: '/assets/img/schmidt/s1.jpeg',
+    sameAs: [
+        'https://github.com/twistin',
+        'https://www.researchgate.net/profile/Silvino-Diaz-Carreras?ev=hdr_xprf',
+        'https://uab.academia.edu/SilvinoD%C3%ADazCarreras',
+        'https://soundcloud.com/twistin_25/qian',
+        'https://www.youtube.com/@twistin-p9'
+    ]
+};
+
+const PAGE_META = {
+    'index.html': {
+        kind: 'website',
+        sourceLang: 'es',
+        title: 'TWISTORES | Investigación doctoral, live coding y soundscapes desde Vigo',
+        description: 'Investigación doctoral, live coding y soundscapes desde Vigo. TWISTORES reúne artículos sobre música, migración y tecnología, sesiones documentadas y grabaciones de campo publicadas.',
+        image: '/assets/img/sc-banner.png'
+    },
+    'pages/articulos.html': {
+        kind: 'collection',
+        sourceLang: 'es',
+        title: 'Artículos sobre sociología de la música y tecnología | TWISTORES',
+        description: 'Archivo de artículos sobre sociología de la música, migraciones, escenas locales y tecnología sonora.',
+        image: '/assets/img/escenas-locales-banner.png'
+    },
+    'pages/about.html': {
+        kind: 'profile',
+        sourceLang: 'es',
+        title: 'Silvino Díaz Carreras | Investigación, docencia y práctica sonora',
+        description: 'Perfil de Silvino Díaz Carreras: investigación doctoral, docencia musical, live coding y grabación de paisajes sonoros desde Vigo.',
+        image: '/assets/img/schmidt/s1.jpeg'
+    },
+    'pages/eventos.html': {
+        kind: 'collection',
+        sourceLang: 'es',
+        title: 'Archivo de live coding con SuperCollider | TWISTORES',
+        description: 'Archivo de sesiones de live coding de TWISTORES con vídeo, contexto y piezas interpretadas con SuperCollider y TidalCycles.',
+        image: '/assets/img/schmidt/s1.jpeg'
+    },
+    'pages/soundscapes.html': {
+        kind: 'collection',
+        sourceLang: 'es',
+        title: 'Soundscapes y grabaciones de campo | TWISTORES',
+        description: 'Archivo publicado de soundscapes y grabaciones de campo de TWISTORES, con fotografías, audio y notas de escucha desde Vigo y su entorno.',
+        image: '/assets/img/castro/1.jpg'
+    }
+};
+
+const ARTICLE_META = {
+    'pages/escenas-locales.html': {
+        kind: 'article',
+        sourceLang: 'es',
+        title: 'Escenas musicales locales hoy en día: ¿una herramienta válida?',
+        description: 'Una revisión crítica sobre el concepto de escena musical local, su productividad histórica y su reformulación necesaria en la era de las plataformas digitales.',
+        image: '/assets/img/escenas-locales-banner.png',
+        section: 'Investigación',
+        publishedLabel: 'Marzo 2026',
+        readTime: '10 min',
+        topics: ['escena musical', 'música popular', 'plataformas digitales', 'Vigo'],
+        related: [
+            'pages/estado-del-arte-digital.html',
+            'pages/clasismo-y-machismo.html',
+            'pages/music21-musicoloxia-computacional.html'
+        ]
+    },
+    'pages/estado-del-arte-digital.html': {
+        kind: 'article',
+        sourceLang: 'es',
+        title: 'El Estado del Arte Digital',
+        description: 'Historia, escenas, pedagogía y futuros de la inteligencia artificial en el arte digital.',
+        image: '/assets/img/eniac-computer.jpg',
+        section: 'Música & Tecnología',
+        publishedLabel: 'Marzo 2026',
+        readTime: '24 min',
+        topics: ['arte digital', 'inteligencia artificial', 'pedagogía', 'creative coding'],
+        related: [
+            'pages/musica-son-intelixencia-artificial.html',
+            'pages/musicbert-musica-simbolica.html',
+            'pages/music21-musicoloxia-computacional.html'
+        ]
+    },
+    'pages/clasismo-y-machismo.html': {
+        kind: 'article',
+        sourceLang: 'es',
+        title: 'Clasismo y machismo en la recepción del trap y el reguetón',
+        description: 'Una revisión crítica de la legitimidad cultural, la identidad y el sexismo en la recepción social del trap y el reguetón.',
+        image: '/assets/img/sc-banner.png',
+        section: 'Otros',
+        publishedLabel: 'Texto revisado',
+        readTime: '12 min',
+        topics: ['trap', 'reguetón', 'clasismo', 'sexismo', 'legitimidad cultural'],
+        related: [
+            'pages/escenas-locales.html',
+            'pages/estado-del-arte-digital.html',
+            'pages/son-do-sars-cov-2.html'
+        ]
+    },
+    'pages/music21-musicoloxia-computacional.html': {
+        kind: 'article',
+        sourceLang: 'gl',
+        title: 'Music21: método computacional aplicado á musicoloxía',
+        description: 'Music21 é un conxunto de ferramentas de Python para a musicoloxía computacional, desenvolvido no MIT. Permite analizar, xerar e editar música de xeito programático.',
+        image: '/assets/img/music21-banner.png',
+        section: 'Investigación',
+        publishedLabel: '17 febreiro 2022',
+        publishedISO: '2022-02-17',
+        readTime: '8 min',
+        topics: ['musicoloxía computacional', 'Python', 'Music21', 'análise musical'],
+        related: [
+            'pages/musicbert-musica-simbolica.html',
+            'pages/musica-son-intelixencia-artificial.html',
+            'pages/estado-del-arte-digital.html'
+        ]
+    },
+    'pages/musica-son-intelixencia-artificial.html': {
+        kind: 'article',
+        sourceLang: 'gl',
+        title: 'A música, o son e a Intelixencia Artificial',
+        description: 'Da música algorítmica de Mozart ás redes neuronais de hoxe: un percorrido polo estado da Intelixencia Artificial no campo da música, desde a composición até a industria e a educación.',
+        image: '/assets/img/dice-mozart.png',
+        section: 'Música & Tecnoloxía',
+        publishedLabel: '14 marzo 2022',
+        publishedISO: '2022-03-14',
+        readTime: '18 min',
+        topics: ['intelixencia artificial', 'música', 'educación musical', 'tecnoloxía sonora'],
+        related: [
+            'pages/musicbert-musica-simbolica.html',
+            'pages/son-do-sars-cov-2.html',
+            'pages/cacofonia-buraco-negro.html'
+        ]
+    },
+    'pages/musicbert-musica-simbolica.html': {
+        kind: 'article',
+        sourceLang: 'gl',
+        title: 'MusicBERT: PLN e comprensión da música simbólica',
+        description: 'MusicBERT é un modelo preentrenado a gran escala para a comprensión da música simbólica, desenvolvido por Microsoft Asia. Inspirado nos avances do procesamento da linguaxe natural, alcanza resultados de vangarda en catro tarefas musicais fundamentais.',
+        image: '/assets/img/musicbert-bert-diagram.png',
+        section: 'Música & Tecnoloxía',
+        publishedLabel: '6 abril 2022',
+        publishedISO: '2022-04-06',
+        readTime: '8 min',
+        topics: ['MusicBERT', 'PLN', 'música simbólica', 'IA musical'],
+        related: [
+            'pages/music21-musicoloxia-computacional.html',
+            'pages/musica-son-intelixencia-artificial.html',
+            'pages/estado-del-arte-digital.html'
+        ]
+    },
+    'pages/cacofonia-buraco-negro.html': {
+        kind: 'article',
+        sourceLang: 'gl',
+        title: 'Cacofonía dun buraco negro supermasivo',
+        description: 'Un xigantesco estampido sónico e unha profunda cacofonía periódica emanaron do buraco negro supermasivo Powehi, no centro da galaxia M87. Que é o son máis grave da natureza?',
+        image: '/assets/img/m87-black-hole.jpeg',
+        section: 'Música & Tecnoloxía',
+        publishedLabel: '4 marzo 2022',
+        publishedISO: '2022-03-04',
+        readTime: '10 min',
+        topics: ['NASA', 'M87', 'astroacústica', 'sonificación'],
+        related: [
+            'pages/son-do-sars-cov-2.html',
+            'pages/musica-son-intelixencia-artificial.html',
+            'pages/estado-del-arte-digital.html'
+        ]
+    },
+    'pages/son-do-sars-cov-2.html': {
+        kind: 'article',
+        sourceLang: 'gl',
+        title: 'O son do SARS-CoV-2',
+        description: 'O rumor da pandemia: a sonificación das proteínas do coronavirus polo MIT e a relación entre ciencia, tecnoloxía e creación artística.',
+        image: '/assets/img/sons/sons.jpg',
+        section: 'Música & Tecnoloxía',
+        publishedLabel: '2022',
+        readTime: '8 min',
+        topics: ['SARS-CoV-2', 'sonificación', 'MIT', 'arte sonoro'],
+        related: [
+            'pages/cacofonia-buraco-negro.html',
+            'pages/musica-son-intelixencia-artificial.html',
+            'pages/musicbert-musica-simbolica.html'
+        ]
+    }
+};
+
+const WEBSITE_ID = `${SITE_CONFIG.origin}/#website`;
+const PERSON_ID = `${SITE_CONFIG.origin}/pages/about.html#person`;
+
+function normalizeSitePath(pathname) {
+    const cleanPath = pathname.split('?')[0].split('#')[0];
+    const localMarker = '/html5/';
+
+    if (cleanPath.includes(localMarker)) {
+        const localPath = cleanPath.split(localMarker)[1];
+        return localPath || 'index.html';
+    }
+
+    const trimmed = cleanPath.replace(/^\/+/, '');
+    if (!trimmed || trimmed === 'twistores' || trimmed === 'twistores/') return 'index.html';
+    if (trimmed === 'index.html') return 'index.html';
+    if (trimmed.startsWith('pages/')) return trimmed;
+    if (trimmed.startsWith('twistores/')) return trimmed.replace(/^twistores\//, '') || 'index.html';
+    return trimmed;
+}
+
+function buildAbsoluteUrl(path) {
+    if (!path) return SITE_CONFIG.origin;
+    if (/^https?:\/\//.test(path)) return path;
+    return `${SITE_CONFIG.origin}/${path.replace(/^\/+/, '')}`;
+}
+
+function getCurrentPageKey() {
+    const normalized = normalizeSitePath(window.location.pathname);
+    if (normalized.endsWith('/')) return `${normalized}index.html`;
+    return normalized || 'index.html';
+}
+
+function getCurrentPageMeta() {
+    const pageKey = getCurrentPageKey();
+    return ARTICLE_META[pageKey] || PAGE_META[pageKey] || null;
+}
+
+function t(key, lang = currentLang) {
+    return T[lang]?.[key] || T.es?.[key] || key;
+}
+
+function getLanguageLabel(lang) {
+    return t(`lang_${lang}_name`);
+}
+
+function getCanonicalUrl() {
+    return document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+}
+
+function getBaseTitle(rawTitle = document.title) {
+    return rawTitle.split(/\s+[|—]\s+/)[0].trim();
+}
+
+function toAbsolutePageUrl(href) {
+    try {
+        return new URL(href, getCanonicalUrl()).href;
+    } catch {
+        return href;
+    }
+}
+
+function getPersonSchema() {
+    return {
+        '@type': 'Person',
+        '@id': PERSON_ID,
+        name: SITE_CONFIG.author,
+        url: buildAbsoluteUrl('/pages/about.html'),
+        image: buildAbsoluteUrl(SITE_CONFIG.profileImage),
+        email: `mailto:${SITE_CONFIG.email}`,
+        sameAs: SITE_CONFIG.sameAs,
+        knowsAbout: [
+            'Sociología de la música',
+            'Migration studies',
+            'Live coding',
+            'Soundscape recording',
+            'Creative coding'
+        ]
+    };
+}
+
+function buildStructuredData(pageMeta) {
+    if (!pageMeta) return null;
+
+    const pageUrl = getCanonicalUrl();
+    const imageUrl = buildAbsoluteUrl(pageMeta.image || SITE_CONFIG.defaultImage);
+    const graph = [
+        getPersonSchema(),
+        {
+            '@type': 'WebSite',
+            '@id': WEBSITE_ID,
+            url: `${SITE_CONFIG.origin}/`,
+            name: SITE_CONFIG.name,
+            description: SITE_CONFIG.description,
+            inLanguage: 'es',
+            publisher: { '@id': PERSON_ID }
+        }
+    ];
+
+    if (pageMeta.kind === 'website') {
+        graph[1].description = pageMeta.description;
+    } else if (pageMeta.kind === 'profile') {
+        graph.push({
+            '@type': 'ProfilePage',
+            '@id': `${pageUrl}#webpage`,
+            url: pageUrl,
+            name: pageMeta.title,
+            description: pageMeta.description,
+            inLanguage: pageMeta.sourceLang,
+            mainEntity: { '@id': PERSON_ID },
+            isPartOf: { '@id': WEBSITE_ID }
+        });
+    } else if (pageMeta.kind === 'collection') {
+        graph.push({
+            '@type': 'CollectionPage',
+            '@id': `${pageUrl}#webpage`,
+            url: pageUrl,
+            name: pageMeta.title,
+            description: pageMeta.description,
+            inLanguage: pageMeta.sourceLang,
+            image: imageUrl,
+            isPartOf: { '@id': WEBSITE_ID },
+            author: { '@id': PERSON_ID }
+        });
+    } else if (pageMeta.kind === 'article') {
+        const articleSchema = {
+            '@type': 'Article',
+            '@id': `${pageUrl}#article`,
+            headline: pageMeta.title,
+            description: pageMeta.description,
+            image: imageUrl,
+            inLanguage: pageMeta.sourceLang,
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            mainEntityOfPage: pageUrl,
+            isPartOf: { '@id': WEBSITE_ID }
+        };
+
+        if (pageMeta.section) {
+            articleSchema.articleSection = pageMeta.section;
+        }
+
+        if (pageMeta.topics?.length) {
+            articleSchema.keywords = pageMeta.topics.join(', ');
+        }
+
+        if (pageMeta.publishedISO) {
+            articleSchema.datePublished = pageMeta.publishedISO;
+        }
+
+        graph.push(articleSchema);
+    }
+
+    return {
+        '@context': 'https://schema.org',
+        '@graph': graph
+    };
+}
+
+function injectStructuredData(pageMeta) {
+    const schema = buildStructuredData(pageMeta);
+    if (!schema) return;
+
+    let script = document.getElementById('twistores-structured-data');
+    if (!script) {
+        script = document.createElement('script');
+        script.id = 'twistores-structured-data';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+    }
+
+    script.textContent = JSON.stringify(schema);
+}
+
+function configureLanguageSwitcher(pageMeta) {
+    const isArticle = pageMeta?.kind === 'article';
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        const lang = btn.dataset.lang;
+        const isSourceLang = pageMeta?.sourceLang === lang;
+
+        if (isArticle) {
+            btn.disabled = !isSourceLang;
+            btn.setAttribute('aria-disabled', String(!isSourceLang));
+            btn.title = isSourceLang ? t('lang_original_version') : t('lang_translation_soon');
+            btn.setAttribute(
+                'aria-label',
+                isSourceLang
+                    ? `${getLanguageLabel(lang)} · ${t('lang_original_version')}`
+                    : `${getLanguageLabel(lang)} · ${t('lang_translation_soon')}`
+            );
+        } else {
+            btn.disabled = false;
+            btn.removeAttribute('aria-disabled');
+            btn.removeAttribute('title');
+            btn.setAttribute('aria-label', getLanguageLabel(lang));
+        }
+    });
+}
+
+function injectArticleEditorialMeta(pageMeta) {
+    if (pageMeta?.kind !== 'article') return;
+
+    const article = document.querySelector('.article-content');
+    const anchor = article?.querySelector('.article-jumpnav');
+    if (!article || !anchor || article.querySelector('.article-editorial-meta[data-generated="1"]')) return;
+
+    const topicsText = pageMeta.topics?.join(' · ');
+    const pieces = [
+        `<p><strong>${t('meta_author')}:</strong> ${SITE_CONFIG.author}</p>`,
+        `<p><strong>${t('meta_original_lang')}:</strong> ${getLanguageLabel(pageMeta.sourceLang)}</p>`
+    ];
+
+    if (pageMeta.publishedLabel) {
+        pieces.push(`<p><strong>${t('meta_published')}:</strong> ${pageMeta.publishedLabel}</p>`);
+    }
+
+    if (pageMeta.section) {
+        pieces.push(`<p><strong>${t('meta_category')}:</strong> ${pageMeta.section}</p>`);
+    }
+
+    if (topicsText) {
+        pieces.push(`<p><strong>${t('meta_topics')}:</strong> ${topicsText}</p>`);
+    }
+
+    anchor.insertAdjacentHTML(
+        'afterend',
+        `<div class="article-editorial-meta fade-in" data-generated="1">${pieces.join('')}</div>`
+    );
+}
+
+function injectRelatedArticles(pageMeta) {
+    if (pageMeta?.kind !== 'article' || !pageMeta.related?.length) return;
+
+    const article = document.querySelector('.article-content');
+    if (!article || article.querySelector('.article-related[data-generated="1"]')) return;
+
+    const items = pageMeta.related
+        .map(path => {
+            const meta = ARTICLE_META[path];
+            if (!meta) return '';
+
+            return `
+                <a class="article-related-link" href="${path.replace(/^pages\//, '')}">
+                    <span class="article-related-title">${meta.title}</span>
+                    <span class="article-related-desc">${meta.description}</span>
+                </a>
+            `;
+        })
+        .filter(Boolean)
+        .join('');
+
+    if (!items) return;
+
+    const shareFooter = article.querySelector('.article-share-footer');
+    const section = document.createElement('section');
+    section.className = 'article-related fade-in';
+    section.dataset.generated = '1';
+    section.innerHTML = `
+        <h2 class="article-related-heading">${t('related_articles_heading')}</h2>
+        <div class="article-related-list">${items}</div>
+    `;
+
+    if (shareFooter) {
+        article.insertBefore(section, shareFooter);
+    } else {
+        article.appendChild(section);
+    }
+}
+
 // ── i18n Engine ───────────────────────────────────────────────────────────────
 let currentLang = localStorage.getItem('twistores-lang') || 'es';
 
-function applyLang(lang) {
+function applyLang(lang, options = {}) {
+    const { persist = true } = options;
     currentLang = lang;
-    localStorage.setItem('twistores-lang', lang);
+    if (persist) {
+        localStorage.setItem('twistores-lang', lang);
+    }
 
     const dict = T[lang];
     if (!dict) return;
@@ -627,25 +1173,18 @@ function applyTheme(theme) {
 
 // ── Init & Wiring ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject dynamic elements before i18n
-    
-    // Add Favicon
-    let prefix = window.location.pathname.includes('/pages/') ? '../' : '';
-    if (window.location.pathname.endsWith('html5/') || window.location.pathname.endsWith('html5')) prefix = ''; // fallback
-    if (!document.querySelector("link[rel*='icon']")) {
-        const link = document.createElement('link');
-        link.type = 'image/png';
-        link.rel = 'icon';
-        link.href = prefix + 'assets/img/favicon.png';
-        document.head.appendChild(link);
-    }
+    const pageMeta = getCurrentPageMeta();
 
     injectSocialLinks();
-    injectArticleShare();
 
     // Apply saved preferences
     applyTheme(currentTheme);
-    applyLang(currentLang);
+    applyLang(pageMeta?.sourceLang || currentLang, { persist: pageMeta?.kind !== 'article' });
+    configureLanguageSwitcher(pageMeta);
+    injectStructuredData(pageMeta);
+    injectArticleEditorialMeta(pageMeta);
+    injectArticleShare();
+    injectRelatedArticles(pageMeta);
 
     // Theme toggle
     const themeBtn = document.getElementById('theme-toggle');
@@ -796,12 +1335,12 @@ function injectSocialLinks() {
 function injectArticleShare() {
     document.querySelectorAll('.article-content').forEach(article => {
         if (!article.querySelector('.article-share-footer')) {
-            const title = document.title.split('—')[0].trim();
+            const title = getBaseTitle();
             article.insertAdjacentHTML('beforeend', `
                 <div class="article-share-footer fade-in">
-                    <span class="page-intro" data-i18n="share_article_prompt"></span>
+                    <span class="page-intro">${t('share_article_prompt')}</span>
                     <div class="share-wrap" data-share-title="${title}">
-                        <button class="share-btn" type="button" data-i18n="share_article_btn" aria-haspopup="menu" aria-expanded="false"></button>
+                        <button class="share-btn" type="button" aria-haspopup="menu" aria-expanded="false">${t('share_article_btn')}</button>
                     </div>
                 </div>
             `);
@@ -825,12 +1364,12 @@ function initShareButtons() {
 
         const card  = btn.closest('[data-share-title]') || btn.closest('.card');
         const title = card?.dataset?.shareTitle || document.title;
-        let pageUrl = window.location.href;
+        let pageUrl = getCanonicalUrl();
         
         // If sharing from a card that has a link, grab the article URL instead of current page
         if (card) {
             const link = card.querySelector('.card-link');
-            if (link) pageUrl = link.href;
+            if (link) pageUrl = toAbsolutePageUrl(link.getAttribute('href'));
         }
 
         btn.addEventListener('click', e => {
@@ -865,7 +1404,7 @@ function initShareButtons() {
                     </a>
                     <button class="share-option js-copy-link" data-copy="${pageUrl}">
                         <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                        Copiar enlace
+                        ${t('share_copy_link')}
                     </button>
                 </div>`);
                 menu = btn.parentElement.querySelector('.share-menu');
@@ -875,7 +1414,7 @@ function initShareButtons() {
                     navigator.clipboard?.writeText(pageUrl).then(() => {
                         const b = ev.currentTarget;
                         const orig = b.innerHTML;
-                        b.innerHTML = '✓ Copiado';
+                        b.innerHTML = t('share_copied');
                         setTimeout(() => {
                             b.innerHTML = orig;
                             menu.classList.remove('open');

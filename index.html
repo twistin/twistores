@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWISTORES — Música, Migración &amp; Tecnología</title>
-    <meta name="description" content="TWISTORES — Espacio personal de investigación doctoral, live coding, soundscapes y reflexiones sobre música, migración e identidad.">
+    <title>TWISTORES | Investigación doctoral, live coding y soundscapes desde Vigo</title>
+    <meta name="description" content="Investigación doctoral, live coding y soundscapes desde Vigo. TWISTORES reúne artículos sobre música, migración y tecnología, sesiones documentadas y grabaciones de campo publicadas.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistin.github.io/twistores/">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TWISTORES | Investigación doctoral, live coding y soundscapes desde Vigo">
+    <meta property="og:description" content="Investigación doctoral, live coding y soundscapes desde Vigo. TWISTORES reúne artículos sobre música, migración y tecnología, sesiones documentadas y grabaciones de campo publicadas.">
+    <meta property="og:url" content="https://twistin.github.io/twistores/">
+    <meta property="og:image" content="https://twistin.github.io/twistores/assets/img/sc-banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TWISTORES | Investigación doctoral, live coding y soundscapes desde Vigo">
+    <meta name="twitter:description" content="Investigación doctoral, live coding y soundscapes desde Vigo. TWISTORES reúne artículos sobre música, migración y tecnología, sesiones documentadas y grabaciones de campo publicadas.">
+    <meta name="twitter:image" content="https://twistin.github.io/twistores/assets/img/sc-banner.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,13 +55,35 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <p class="hero-eyebrow" data-i18n="hero_eyebrow">// Música · Migración · Tecnología</p>
-            <h1 class="hero-title cursor-blink">TWISTORES</h1>
+            <p class="hero-brand cursor-blink">TWISTORES</p>
+            <h1 class="hero-title" data-i18n="hero_title">Investigación doctoral, live coding y soundscapes desde Vigo</h1>
             <p class="hero-sub" data-i18n="hero_sub">
-                Espacio de investigación doctoral, live coding y soundscapes.<br>
-                Cantando en tierra ajena — sociología de la identidad sonora.
+                Silvino Díaz Carreras. Investigador, docente y performer centrado en música, migración, tecnología y escucha de campo.
             </p>
+            <p class="hero-support" data-i18n="hero_support">
+                Aquí conviven escritura larga, archivo de sesiones en vivo y paisajes sonoros publicados con contexto, imagen y audio.
+            </p>
+            <div class="hero-cta-row">
             <a href="pages/articulos.html" class="btn" data-i18n="hero_cta1">Explorar artículos</a>
-            <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver eventos</a>
+            <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver archivo en vivo</a>
+            </div>
+            <div class="hero-routes" aria-label="Rutas principales">
+                <a class="hero-route" href="pages/articulos.html">
+                    <span class="hero-route-label" data-i18n="hero_route_articles_label">// investigación</span>
+                    <strong data-i18n="hero_route_articles_title">Leer artículos y ensayos</strong>
+                    <span data-i18n="hero_route_articles_desc">Textos publicados sobre sociología de la música, migración y tecnología.</span>
+                </a>
+                <a class="hero-route" href="pages/eventos.html">
+                    <span class="hero-route-label" data-i18n="hero_route_live_label">// archivo en vivo</span>
+                    <strong data-i18n="hero_route_live_title">Ver sesiones documentadas</strong>
+                    <span data-i18n="hero_route_live_desc">Directos con vídeo, fotografías, contexto y piezas interpretadas.</span>
+                </a>
+                <a class="hero-route" href="pages/soundscapes.html">
+                    <span class="hero-route-label" data-i18n="hero_route_sound_label">// escucha de campo</span>
+                    <strong data-i18n="hero_route_sound_title">Escuchar soundscapes</strong>
+                    <span data-i18n="hero_route_sound_desc">Grabaciones de campo con notas de escucha, coordenadas e imágenes.</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -157,6 +194,9 @@
 
 
             </div>
+            <div class="section-actions">
+                <a href="pages/articulos.html" class="btn btn-ghost" data-i18n="all_art_btn">Ver todos los artículos →</a>
+            </div>
         </section>
 
         <hr class="divider">
@@ -168,113 +208,27 @@
                     <p class="section-label">// sets de live coding</p>
                     <h2 class="section-title" id="home-livecoding-title">Live Coding</h2>
                 </div>
-                <p class="section-intro">Música generada e interpretada en tiempo real con SuperCollider. Cada set es irrepetible; el código y el error son parte de la obra.</p>
+                <p class="section-intro" data-i18n="home_live_intro">Archivo de directos documentados con contexto, materiales y piezas interpretadas. La home solo destaca la sesión más reciente.</p>
             </div>
-
-            <!-- Tarjeta sesión Schmidt -->
-            <div style="
-                border: 1px solid var(--border-strong);
-                border-radius: var(--radius);
-                overflow: hidden;
-                background: var(--surface);
-                backdrop-filter: blur(4px);
-                position: relative;
-                transition: border-color 180ms ease, box-shadow 180ms ease;
-            " class="fade-in" id="home-session-schmidt"
-               onmouseover="this.style.borderColor='var(--accent2)';this.style.boxShadow='var(--glow)'"
-               onmouseout="this.style.borderColor='var(--border-strong)';this.style.boxShadow='none'">
-
-                <!-- tira superior decorativa -->
-                <div style="height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent),transparent);"></div>
-
-                <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;" class="home-session-grid">
-
-                    <!-- Vídeo -->
-                    <div style="padding:24px 28px 28px;">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
-                            <span style="
-                                display:inline-block;font-family:var(--mono);font-size:0.6rem;
-                                letter-spacing:1.5px;text-transform:uppercase;
-                                color:var(--bg);background:var(--accent);
-                                padding:3px 10px;border-radius:999px;font-weight:700;
-                            ">★ Nuevo</span>
-                            <span style="
-                                display:inline-block;font-family:var(--mono);font-size:0.6rem;
-                                letter-spacing:1.5px;text-transform:uppercase;
-                                color:var(--accent2);border:1px solid var(--border-strong);
-                                padding:3px 10px;border-radius:999px;
-                            ">Realizado · 3 abr 2026</span>
-                        </div>
-                        <h3 style="font-size:1.25rem;color:var(--heading);margin-bottom:4px;">Schmidt · Sala SuperSonic</h3>
-                        <p style="font-family:var(--mono);font-size:0.68rem;color:var(--accent2);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:20px;">Vigo — 10:30 h</p>
-
-                        <!-- Twistores — YouTube 16:9 -->
-                        <div style="
-                            position:relative;
-                            width:100%;
-                            padding-bottom:56.25%;
-                            background:#000;
-                            border-radius:var(--radius);
-                            overflow:hidden;
-                            box-shadow:0 8px 40px rgba(0,0,0,0.5);
-                            border:1px solid var(--border);
-                        ">
-                            <iframe
-                                src="https://www.youtube.com/embed/bf1D6ORdgaM"
-                                title="Twistores — Live coding · Schmidt, Sala SuperSonic, Vigo"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen
-                                style="position:absolute;inset:0;width:100%;height:100%;border:none;"
-                            ></iframe>
-                        </div>
-                        <p style="margin-top:8px;font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);text-align:center;">📱 Marcos López · Schmidt, Sala SuperSonic</p>
+            <article class="feature-panel fade-in">
+                <img class="feature-panel-media" src="assets/img/schmidt/s1.jpeg" alt="Sesión de live coding Schmidt en Sala SuperSonic, Vigo, el 3 de abril de 2026" loading="lazy">
+                <div class="feature-panel-body">
+                    <div class="feature-panel-kicker">
+                        <span class="tag" data-i18n="badge_featured">★ Destacado</span>
+                        <span class="feature-panel-meta">3 abr 2026 · Vigo</span>
                     </div>
-
-                    <!-- Piezas sidebar -->
-                    <div style="
-                        border-left:1px solid var(--border);
-                        padding:24px 24px 28px;
-                        background:rgba(0,0,0,0.14);
-                        display:flex;flex-direction:column;gap:20px;
-                    ">
-                        <p style="font-family:var(--mono);font-size:0.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);opacity:0.75;">// piezas interpretadas</p>
-
-                        <div style="
-                            padding:14px;border:1px solid var(--border);
-                            border-radius:var(--radius);background:rgba(255,255,255,0.02);
-                        ">
-                            <p style="font-family:var(--mono);font-size:0.87rem;color:var(--heading);margin-bottom:6px;">I — Twistores</p>
-                            <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Giro, torsión y cruce de planos. Una referencia al concepto de <em>twistor</em>: imaginar el espacio desde relaciones y pliegues.</p>
-                        </div>
-
-                        <div style="
-                            padding:14px;border:1px solid var(--border);
-                            border-radius:var(--radius);background:rgba(255,255,255,0.02);
-                        ">
-                            <p style="font-family:var(--mono);font-size:0.87rem;color:var(--heading);margin-bottom:6px;">II — Tribar</p>
-                            <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Como el triángulo imposible de Penrose. Repetición, desplazamiento y pequeñas variaciones: inestabilidad desde la improvisación.</p>
-                        </div>
-
-                        <a href="pages/eventos.html#session-schmidt" class="btn" style="margin-top:auto;text-align:center;">Ver sesión completa →</a>
+                    <h3 class="feature-panel-title">Schmidt · Sala SuperSonic</h3>
+                    <p class="feature-panel-text" data-i18n="home_live_feature_text">Última sesión documentada con vídeo, fotografías y desglose de las piezas interpretadas en directo.</p>
+                    <ul class="feature-panel-list">
+                        <li data-i18n="home_live_feature_piece1"><strong>I — Twistores.</strong> Giro, torsión y pliegues desde la improvisación.</li>
+                        <li data-i18n="home_live_feature_piece2"><strong>II — Tribar.</strong> Geometría imposible, repetición e inestabilidad.</li>
+                    </ul>
+                    <div class="feature-panel-actions">
+                        <a href="pages/eventos.html#session-schmidt" class="btn">Ver sesión completa →</a>
+                        <a href="pages/eventos.html" class="btn btn-ghost">Ver archivo de directos →</a>
                     </div>
-
                 </div>
-            </div>
-
-            <style>
-                @media (max-width: 780px) {
-                    #home-session-schmidt .home-session-grid {
-                        grid-template-columns: 1fr !important;
-                    }
-                    #home-session-schmidt .home-session-grid > div:last-child {
-                        border-left: none !important;
-                        border-top: 1px solid var(--border);
-                    }
-                }
-            </style>
-
-            <br><br>
-            <a href="pages/eventos.html" class="btn btn-ghost">Ver todas las sesiones →</a>
+            </article>
         </section>
 
         <hr class="divider">
@@ -311,9 +265,9 @@
                 </article>
             </div>
             <p class="section-note" data-i18n="ss_archive_note">Archivo en crecimiento · Sesiones publicadas: O Castro de Vigo (Nov 2024) · Chan de Brito (Mar 2026).</p>
-
-            <br><br>
-            <a href="pages/soundscapes.html" class="btn" data-i18n="all_ss_btn">Ver todas las sesiones →</a>
+            <div class="section-actions">
+                <a href="pages/soundscapes.html" class="btn" data-i18n="all_ss_btn">Ver todas las sesiones →</a>
+            </div>
         </section>
 
     </main>
