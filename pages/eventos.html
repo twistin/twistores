@@ -340,6 +340,10 @@
             gap: 14px;
         }
 
+        .photo-gallery-sidebar {
+            grid-template-columns: 1fr;
+        }
+
         .photo-item {
             border-radius: var(--radius);
             overflow: hidden;
@@ -359,6 +363,13 @@
             height: 200px;
             object-fit: cover;
             display: block;
+        }
+
+        .photo-gallery-sidebar .photo-item img {
+            height: auto;
+            max-height: none;
+            object-fit: contain;
+            background: #020910;
         }
 
         /* Lightbox */
@@ -494,7 +505,7 @@
                     <!-- Info + piezas + fotos -->
                     <div style="display:flex;flex-direction:column;gap:0;">
 
-                <div class="session-body" style="grid-template-columns:1fr 220px;">
+                <div class="session-body" style="grid-template-columns:1fr 280px;">
 
                     <!-- Info y piezas -->
                     <div class="session-video-col" style="padding:24px 20px 28px 28px;">
@@ -555,7 +566,7 @@
                     <!-- Fotos -->
                     <div class="session-sidebar">
                         <p class="sidebar-block-title">// fotografías</p>
-                        <div class="photo-gallery">
+                        <div class="photo-gallery photo-gallery-sidebar">
                             <div class="photo-item" onclick="openLightbox('../assets/img/schmidt/s1.jpeg','Schmidt · Sala SuperSonic, Vigo')" title="Ver imagen completa">
                                 <img src="../assets/img/schmidt/s1.jpeg" alt="Sesión live coding Schmidt — Sala SuperSonic, Vigo, 3 abr 2026" loading="lazy">
                             </div>
@@ -609,8 +620,6 @@
 
                     </div>
                 </div>
-
-            </div>
 
                     </div><!-- /info+piezas+fotos -->
                 </div><!-- /youtube+right -->
