@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://twistin.github.io/twistores/sitemap.xml
+Sitemap: https://twistores.vercel.app/sitemap.xml
