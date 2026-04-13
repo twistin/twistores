@@ -671,6 +671,8 @@ window.T = T;
 
 const SITE_CONFIG = {
     origin: 'https://twistores.vercel.app',
+    // Set this to the public origin of Soundscape Recorder, without trailing slash.
+    soundscapesFeedOrigin: '',
     name: 'TWISTORES',
     author: 'Silvino Díaz Carreras',
     email: 'sarerac@gmail.com',
@@ -685,6 +687,8 @@ const SITE_CONFIG = {
         'https://www.youtube.com/@twistin-p9'
     ]
 };
+
+window.SITE_CONFIG = SITE_CONFIG;
 
 const PAGE_META = {
     'index.html': {
