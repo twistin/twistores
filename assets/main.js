@@ -672,7 +672,7 @@ window.T = T;
 const SITE_CONFIG = {
     origin: 'https://twistores.vercel.app',
     // Set this to the public origin of Soundscape Recorder, without trailing slash.
-    soundscapesFeedOrigin: '',
+    soundscapesFeedOrigin: 'https://field-recorder-beta.vercel.app',
     name: 'TWISTORES',
     author: 'Silvino Díaz Carreras',
     email: 'sarerac@gmail.com',
