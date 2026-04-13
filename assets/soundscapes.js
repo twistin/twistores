@@ -17,6 +17,7 @@
       viewSession: 'Ver salida completa →',
       viewSelection: 'Abrir selección publicada →',
       remoteLabel: 'feed remoto',
+      curatedLabel: 'archivo curado',
       loadingFeed: 'Cargando publicaciones remotas...',
       remoteFallback: 'No se pudo cargar el feed remoto. Se muestra el archivo curado local.',
       noCoordinates: 'Sin coordenadas',
@@ -38,6 +39,7 @@
       viewSession: 'Ver saída completa →',
       viewSelection: 'Abrir selección publicada →',
       remoteLabel: 'feed remoto',
+      curatedLabel: 'arquivo curado',
       loadingFeed: 'Cargando publicacións remotas...',
       remoteFallback: 'Non se puido cargar o feed remoto. Amosamos o arquivo curado local.',
       noCoordinates: 'Sen coordenadas',
@@ -59,6 +61,7 @@
       viewSession: 'View full outing →',
       viewSelection: 'Open published selection →',
       remoteLabel: 'remote feed',
+      curatedLabel: 'curated archive',
       loadingFeed: 'Loading remote publications...',
       remoteFallback: 'The remote feed could not be loaded. Showing the local curated archive instead.',
       noCoordinates: 'No coordinates',
@@ -192,178 +195,8 @@
     return `${t('archivePrefix')} ${items.map((item) => `${item.point} (${formatDate(item.pointCapturedAt || item.publishedAt)})`).join(' · ')}`;
   }
 
-  function renderHomeFromRemote(items) {
-    const container = document.getElementById('home-soundscapes-list');
-    if (!container) {
-      return;
-    }
-
-    const note = document.getElementById('home-soundscapes-note');
-    const visibleItems = [...items]
-      .sort((left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime())
-      .slice(0, 2);
-
-    if (note) {
-      note.textContent = visibleItems.length > 0 ? buildArchiveNoteForRemote(visibleItems) : t('emptyHome');
-    }
-
-    if (visibleItems.length === 0) {
-      container.innerHTML = `<p class="section-note">${escapeHtml(t('emptyHome'))}</p>`;
-      return;
-    }
-
-    container.innerHTML = visibleItems
-      .map((item) => `
-        <article class="soundscape-card fade-in visible" style="position:relative;">
-          <div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">${escapeHtml(t('remoteLabel'))}</div>
-          <img class="soundscape-img" src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.point)}" loading="lazy">
-          <div class="soundscape-body">
-            <p class="soundscape-date">${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))} · ${escapeHtml(item.project || item.session || '')}</p>
-            <h3 class="soundscape-title">${escapeHtml(item.point)}</h3>
-            <p class="soundscape-desc">${escapeHtml(item.caption || item.notes || t('noNotes'))}</p>
-            ${item.audioUrl ? `<audio class="soundscape-audio" controls preload="none" src="${escapeHtml(item.audioUrl)}"></audio>` : ''}
-            <div class="card-footer">
-              <a class="card-link" href="${escapeHtml(getSelectionHref(item.id))}">${escapeHtml(t('viewSelection'))}</a>
-            </div>
-          </div>
-        </article>
-      `)
-      .join('');
-  }
-
-  function renderArchiveFromRemote(items) {
-    const container = document.getElementById('soundscapes-archive');
-    if (!container) {
-      return;
-    }
-
-    const note = document.getElementById('soundscapes-archive-note');
-    const visibleItems = [...items].sort((left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime());
-
-    if (note) {
-      note.textContent = visibleItems.length > 0 ? buildArchiveNoteForRemote(visibleItems) : t('emptyArchive');
-    }
-
-    if (visibleItems.length === 0) {
-      container.innerHTML = `<div class="soundscape-empty">${escapeHtml(t('emptyArchive'))}</div>`;
-      return;
-    }
-
-    container.innerHTML = visibleItems
-      .map((item) => {
-        const tags = normalizeTags(item.tags);
-        const helperText = item.placeContext || item.characteristics || item.caption || '';
-
-        return `
-          <article class="soundscape-full fade-in visible" id="selection-${escapeHtml(item.id)}">
-            <div class="soundscape-gallery">
-              <div
-                class="photo-main"
-                role="img"
-                aria-label="${escapeHtml(item.point)}"
-                style="background-image:url('${escapeHtml(item.imageUrl)}'); color: transparent;"
-              ></div>
-              <div class="photo-thumbs">
-                <button
-                  class="photo-thumb active"
-                  type="button"
-                  aria-pressed="true"
-                  data-id="${escapeHtml((item.zoomTakeReference || item.point || '').slice(0, 18))}"
-                  style="background-image:url('${escapeHtml(item.imageUrl)}');"
-                ></button>
-              </div>
-            </div>
-            <div class="soundscape-info">
-              <p class="soundscape-date">${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))} · ${escapeHtml(item.project || item.session || '')}</p>
-              <h2>${escapeHtml(item.point)}</h2>
-              <p class="soundscape-helper">${escapeHtml(helperText)}</p>
-              <p style="min-height:80px;">${escapeHtml(item.caption || item.notes || t('noNotes'))}</p>
-              <div class="field-meta">
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldLocation'))}</strong><span>${escapeHtml(item.point)} — ${escapeHtml(item.session || item.project || '')}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldDate'))}</strong><span>${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldCoords'))}</strong><span>${escapeHtml(formatCoordinates(item))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldGear'))}</strong><span>${escapeHtml(formatGear(item))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldWeather'))}</strong><span>${escapeHtml(item.weather || t('noWeather'))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldTags'))}</strong><span>${escapeHtml(tags.length ? tags.join(' · ') : t('noTags'))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldNotes'))}</strong><span>${escapeHtml(item.notes || t('noNotes'))}</span></div>
-              </div>
-              <div class="audio-player-full soundscape-player-shell">
-                ${item.audioUrl ? `<audio class="soundscape-audio-embed" controls preload="none" src="${escapeHtml(item.audioUrl)}"></audio>` : ''}
-              </div>
-            </div>
-          </article>
-        `;
-      })
-      .join('');
-
-    scrollToHashIfNeeded();
-  }
-
-  function ensureSessionState(session) {
-    const firstPoint = session.points[0] || null;
-    const currentState = sessionState.get(session.slug);
-
-    if (!currentState || !firstPoint) {
-      const nextState = {
-        pointId: firstPoint ? firstPoint.id : null,
-        imageIndex: 0,
-        audioIndex: 0,
-      };
-      sessionState.set(session.slug, nextState);
-      return nextState;
-    }
-
-    const activePoint = session.points.find((point) => point.id === currentState.pointId) || firstPoint;
-    const imageIndex = Math.min(currentState.imageIndex, Math.max(0, activePoint.images.length - 1));
-    const audioIndex = Math.min(currentState.audioIndex, Math.max(0, activePoint.audio.length - 1));
-    const normalizedState = {
-      pointId: activePoint.id,
-      imageIndex,
-      audioIndex,
-    };
-    sessionState.set(session.slug, normalizedState);
-    return normalizedState;
-  }
-
-  function getActiveSessionMedia(session) {
-    const state = ensureSessionState(session);
-    const point = session.points.find((entry) => entry.id === state.pointId) || session.points[0];
-
-    if (!point) {
-      return null;
-    }
-
-    return {
-      state,
-      point,
-      imagePath: point.images[state.imageIndex] || point.images[0] || session.coverImage,
-      audioEntry: point.audio[state.audioIndex] || point.audio[0] || null,
-    };
-  }
-
-  function buildArchiveNote(sessions) {
-    return `${t('archivePrefix')} ${sessions.map((session) => `${text(session.locationLabel)} (${text(session.dateLabel)})`).join(' · ')}`;
-  }
-
-  function renderHomeStatic() {
-    const container = document.getElementById('home-soundscapes-list');
-    if (!container) {
-      return;
-    }
-
-    const note = document.getElementById('home-soundscapes-note');
-    const sessions = sortSessions(staticData.sessions).slice(0, 2);
-
-    if (note) {
-      note.textContent = sessions.length > 0 ? buildArchiveNote(sessions) : t('emptyHome');
-    }
-
-    if (sessions.length === 0) {
-      container.innerHTML = `<p class="section-note">${escapeHtml(t('emptyHome'))}</p>`;
-      return;
-    }
-
-    container.innerHTML = sessions
+  function buildStaticHomeCards(sessions) {
+    return sessions
       .map((session) => {
         const featuredPoint = session.points[0];
         const featuredAudio = featuredPoint?.audio?.[0] || null;
@@ -371,7 +204,7 @@
 
         return `
           <article class="soundscape-card fade-in visible"${badge ? ' style="position:relative;"' : ''}>
-            ${badge ? `<div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">${escapeHtml(badge)}</div>` : ''}
+            ${badge ? `<div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">${escapeHtml(badge)}</div>` : `<div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">${escapeHtml(t('curatedLabel'))}</div>`}
             <img class="soundscape-img" src="${escapeHtml(assetUrl(session.coverImage))}" alt="${escapeHtml(text(session.homeTitle))}" loading="lazy">
             <div class="soundscape-body">
               <p class="soundscape-date">${escapeHtml(text(session.dateLabel))} · ${escapeHtml(text(session.locationLabel))}</p>
@@ -388,25 +221,8 @@
       .join('');
   }
 
-  function renderArchiveStatic() {
-    const container = document.getElementById('soundscapes-archive');
-    if (!container) {
-      return;
-    }
-
-    const note = document.getElementById('soundscapes-archive-note');
-    const sessions = sortSessions(staticData.sessions);
-
-    if (note) {
-      note.textContent = sessions.length > 0 ? buildArchiveNote(sessions) : t('emptyArchive');
-    }
-
-    if (sessions.length === 0) {
-      container.innerHTML = `<div class="soundscape-empty">${escapeHtml(t('emptyArchive'))}</div>`;
-      return;
-    }
-
-    container.innerHTML = sessions
+  function buildStaticArchiveEntries(sessions) {
+    return sessions
       .map((session) => {
         const media = getActiveSessionMedia(session);
         if (!media) {
@@ -484,6 +300,214 @@
         `;
       })
       .join('');
+  }
+
+  function renderHomeFromRemote(items) {
+    const container = document.getElementById('home-soundscapes-list');
+    if (!container) {
+      return;
+    }
+
+    const note = document.getElementById('home-soundscapes-note');
+    const visibleItems = [...items]
+      .sort((left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime())
+      .slice(0, 2);
+    const staticSessions = hasStaticSessions ? sortSessions(staticData.sessions).slice(0, Math.max(0, 4 - visibleItems.length)) : [];
+
+    if (note) {
+      note.textContent = visibleItems.length > 0 ? buildArchiveNoteForRemote(visibleItems) : t('emptyHome');
+    }
+
+    if (visibleItems.length === 0 && staticSessions.length === 0) {
+      container.innerHTML = `<p class="section-note">${escapeHtml(t('emptyHome'))}</p>`;
+      return;
+    }
+
+    const remoteHtml = visibleItems
+      .map((item) => `
+        <article class="soundscape-card fade-in visible" style="position:relative;">
+          <div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">${escapeHtml(t('remoteLabel'))}</div>
+          <img class="soundscape-img" src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.point)}" loading="lazy">
+          <div class="soundscape-body">
+            <p class="soundscape-date">${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))} · ${escapeHtml(item.project || item.session || '')}</p>
+            <h3 class="soundscape-title">${escapeHtml(item.point)}</h3>
+            <p class="soundscape-desc">${escapeHtml(item.caption || item.notes || t('noNotes'))}</p>
+            ${item.audioUrl ? `<audio class="soundscape-audio" controls preload="none" src="${escapeHtml(item.audioUrl)}"></audio>` : ''}
+            <div class="card-footer">
+              <a class="card-link" href="${escapeHtml(getSelectionHref(item.id))}">${escapeHtml(t('viewSelection'))}</a>
+            </div>
+          </div>
+        </article>
+      `)
+      .join('');
+
+    const staticHtml = staticSessions.length > 0 ? buildStaticHomeCards(staticSessions) : '';
+    container.innerHTML = `${remoteHtml}${staticHtml}`;
+  }
+
+  function renderArchiveFromRemote(items) {
+    const container = document.getElementById('soundscapes-archive');
+    if (!container) {
+      return;
+    }
+
+    const note = document.getElementById('soundscapes-archive-note');
+    const visibleItems = [...items].sort((left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime());
+
+    if (note) {
+      note.textContent = visibleItems.length > 0 ? buildArchiveNoteForRemote(visibleItems) : t('emptyArchive');
+    }
+
+    if (visibleItems.length === 0 && !hasStaticSessions) {
+      container.innerHTML = `<div class="soundscape-empty">${escapeHtml(t('emptyArchive'))}</div>`;
+      return;
+    }
+
+    const remoteHtml = visibleItems
+      .map((item) => {
+        const tags = normalizeTags(item.tags);
+        const helperText = item.placeContext || item.characteristics || item.caption || '';
+
+        return `
+          <article class="soundscape-full fade-in visible" id="selection-${escapeHtml(item.id)}">
+            <div class="soundscape-gallery">
+              <div
+                class="photo-main"
+                role="img"
+                aria-label="${escapeHtml(item.point)}"
+                style="background-image:url('${escapeHtml(item.imageUrl)}'); color: transparent;"
+              ></div>
+              <div class="photo-thumbs">
+                <button
+                  class="photo-thumb active"
+                  type="button"
+                  aria-pressed="true"
+                  data-id="${escapeHtml((item.zoomTakeReference || item.point || '').slice(0, 18))}"
+                  style="background-image:url('${escapeHtml(item.imageUrl)}');"
+                ></button>
+              </div>
+            </div>
+            <div class="soundscape-info">
+              <p class="soundscape-date">${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))} · ${escapeHtml(item.project || item.session || '')}</p>
+              <h2>${escapeHtml(item.point)}</h2>
+              <p class="soundscape-helper">${escapeHtml(helperText)}</p>
+              <p style="min-height:80px;">${escapeHtml(item.caption || item.notes || t('noNotes'))}</p>
+              <div class="field-meta">
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldLocation'))}</strong><span>${escapeHtml(item.point)} — ${escapeHtml(item.session || item.project || '')}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldDate'))}</strong><span>${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldCoords'))}</strong><span>${escapeHtml(formatCoordinates(item))}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldGear'))}</strong><span>${escapeHtml(formatGear(item))}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldWeather'))}</strong><span>${escapeHtml(item.weather || t('noWeather'))}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldTags'))}</strong><span>${escapeHtml(tags.length ? tags.join(' · ') : t('noTags'))}</span></div>
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldNotes'))}</strong><span>${escapeHtml(item.notes || t('noNotes'))}</span></div>
+              </div>
+              <div class="audio-player-full soundscape-player-shell">
+                ${item.audioUrl ? `<audio class="soundscape-audio-embed" controls preload="none" src="${escapeHtml(item.audioUrl)}"></audio>` : ''}
+              </div>
+            </div>
+          </article>
+        `;
+      })
+      .join('');
+
+    const staticHtml = hasStaticSessions
+      ? `
+        <div class="section-note" style="margin:18px 0 22px;">${escapeHtml(t('curatedLabel'))}</div>
+        ${buildStaticArchiveEntries(sortSessions(staticData.sessions))}
+      `
+      : '';
+
+    container.innerHTML = `${remoteHtml}${staticHtml}`;
+    attachArchiveEvents();
+    scrollToHashIfNeeded();
+  }
+
+  function ensureSessionState(session) {
+    const firstPoint = session.points[0] || null;
+    const currentState = sessionState.get(session.slug);
+
+    if (!currentState || !firstPoint) {
+      const nextState = {
+        pointId: firstPoint ? firstPoint.id : null,
+        imageIndex: 0,
+        audioIndex: 0,
+      };
+      sessionState.set(session.slug, nextState);
+      return nextState;
+    }
+
+    const activePoint = session.points.find((point) => point.id === currentState.pointId) || firstPoint;
+    const imageIndex = Math.min(currentState.imageIndex, Math.max(0, activePoint.images.length - 1));
+    const audioIndex = Math.min(currentState.audioIndex, Math.max(0, activePoint.audio.length - 1));
+    const normalizedState = {
+      pointId: activePoint.id,
+      imageIndex,
+      audioIndex,
+    };
+    sessionState.set(session.slug, normalizedState);
+    return normalizedState;
+  }
+
+  function getActiveSessionMedia(session) {
+    const state = ensureSessionState(session);
+    const point = session.points.find((entry) => entry.id === state.pointId) || session.points[0];
+
+    if (!point) {
+      return null;
+    }
+
+    return {
+      state,
+      point,
+      imagePath: point.images[state.imageIndex] || point.images[0] || session.coverImage,
+      audioEntry: point.audio[state.audioIndex] || point.audio[0] || null,
+    };
+  }
+
+  function buildArchiveNote(sessions) {
+    return `${t('archivePrefix')} ${sessions.map((session) => `${text(session.locationLabel)} (${text(session.dateLabel)})`).join(' · ')}`;
+  }
+
+  function renderHomeStatic() {
+    const container = document.getElementById('home-soundscapes-list');
+    if (!container) {
+      return;
+    }
+
+    const note = document.getElementById('home-soundscapes-note');
+    const sessions = sortSessions(staticData.sessions).slice(0, 2);
+
+    if (note) {
+      note.textContent = sessions.length > 0 ? buildArchiveNote(sessions) : t('emptyHome');
+    }
+
+    if (sessions.length === 0) {
+      container.innerHTML = `<p class="section-note">${escapeHtml(t('emptyHome'))}</p>`;
+      return;
+    }
+
+    container.innerHTML = buildStaticHomeCards(sessions);
+  }
+
+  function renderArchiveStatic() {
+    const container = document.getElementById('soundscapes-archive');
+    if (!container) {
+      return;
+    }
+
+    const note = document.getElementById('soundscapes-archive-note');
+    const sessions = sortSessions(staticData.sessions);
+
+    if (note) {
+      note.textContent = sessions.length > 0 ? buildArchiveNote(sessions) : t('emptyArchive');
+    }
+
+    if (sessions.length === 0) {
+      container.innerHTML = `<div class="soundscape-empty">${escapeHtml(t('emptyArchive'))}</div>`;
+      return;
+    }
+
+    container.innerHTML = buildStaticArchiveEntries(sessions);
 
     attachArchiveEvents();
     scrollToHashIfNeeded();
