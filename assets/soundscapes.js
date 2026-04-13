@@ -188,7 +188,24 @@
   }
 
   function normalizeTags(tags) {
-    return Array.isArray(tags) ? tags.filter((entry) => typeof entry === 'string' && entry.trim()) : [];
+    if (!Array.isArray(tags)) {
+      return [];
+    }
+
+    return Array.from(
+      new Set(
+        tags
+          .filter((entry) => typeof entry === 'string')
+          .map((entry) => entry.trim())
+          .filter(Boolean),
+      ),
+    );
+  }
+
+  function hasDistinctNotes(item) {
+    const caption = (item.caption || '').trim();
+    const notes = (item.notes || '').trim();
+    return Boolean(notes) && notes !== caption;
   }
 
   function buildArchiveNoteForRemote(items) {
@@ -366,41 +383,37 @@
     const remoteHtml = visibleItems
       .map((item) => {
         const tags = normalizeTags(item.tags);
-        const helperText = item.placeContext || item.characteristics || item.caption || '';
+        const helperText = item.placeContext || item.characteristics || '';
+        const summaryText = item.caption || item.notes || t('noNotes');
+        const locationText = item.session || item.project || item.point;
 
         return `
-          <article class="soundscape-full fade-in visible" id="selection-${escapeHtml(item.id)}">
-            <div class="soundscape-gallery">
+          <article class="soundscape-full soundscape-full--remote fade-in visible" id="selection-${escapeHtml(item.id)}">
+            <div class="soundscape-gallery soundscape-gallery--remote">
               <div
                 class="photo-main"
                 role="img"
                 aria-label="${escapeHtml(item.point)}"
                 style="background-image:url('${escapeHtml(item.imageUrl)}'); color: transparent;"
               ></div>
-              <div class="photo-thumbs">
-                <button
-                  class="photo-thumb active"
-                  type="button"
-                  aria-pressed="true"
-                  data-id="${escapeHtml((item.zoomTakeReference || item.point || '').slice(0, 18))}"
-                  style="background-image:url('${escapeHtml(item.imageUrl)}');"
-                ></button>
-              </div>
             </div>
             <div class="soundscape-info">
+              <div class="soundscape-remote-badge">${escapeHtml(t('remoteLabel'))}</div>
               <p class="soundscape-date">${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))} · ${escapeHtml(item.project || item.session || '')}</p>
               <h2>${escapeHtml(item.point)}</h2>
-              <p class="soundscape-helper">${escapeHtml(helperText)}</p>
-              <p style="min-height:80px;">${escapeHtml(item.caption || item.notes || t('noNotes'))}</p>
-              <div class="field-meta">
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldLocation'))}</strong><span>${escapeHtml(item.point)} — ${escapeHtml(item.session || item.project || '')}</span></div>
+              ${helperText ? `<p class="soundscape-helper">${escapeHtml(helperText)}</p>` : ''}
+              <div class="soundscape-remote-summary">
+                <p>${escapeHtml(summaryText)}</p>
+              </div>
+              <div class="field-meta field-meta--remote">
+                <div class="field-meta-item"><strong>${escapeHtml(t('fieldLocation'))}</strong><span>${escapeHtml(locationText)}</span></div>
                 <div class="field-meta-item"><strong>${escapeHtml(t('fieldDate'))}</strong><span>${escapeHtml(formatDate(item.pointCapturedAt || item.publishedAt))}</span></div>
                 <div class="field-meta-item"><strong>${escapeHtml(t('fieldCoords'))}</strong><span>${escapeHtml(formatCoordinates(item))}</span></div>
                 <div class="field-meta-item"><strong>${escapeHtml(t('fieldGear'))}</strong><span>${escapeHtml(formatGear(item))}</span></div>
                 <div class="field-meta-item"><strong>${escapeHtml(t('fieldWeather'))}</strong><span>${escapeHtml(item.weather || t('noWeather'))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldTags'))}</strong><span>${escapeHtml(tags.length ? tags.join(' · ') : t('noTags'))}</span></div>
-                <div class="field-meta-item"><strong>${escapeHtml(t('fieldNotes'))}</strong><span>${escapeHtml(item.notes || t('noNotes'))}</span></div>
               </div>
+              ${tags.length ? `<div class="soundscape-remote-tags">${tags.map((tag) => `<span class="soundscape-remote-tag">${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
+              ${hasDistinctNotes(item) ? `<div class="soundscape-remote-notes"><strong>${escapeHtml(t('fieldNotes'))}</strong><p>${escapeHtml(item.notes)}</p></div>` : ''}
               <div class="audio-player-full soundscape-player-shell">
                 ${item.audioUrl ? `<audio class="soundscape-audio-embed" controls preload="none" src="${escapeHtml(item.audioUrl)}"></audio>` : ''}
               </div>
