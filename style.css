@@ -276,13 +276,13 @@ header {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 26px;
+    gap: 18px;
 }
 
 nav a {
     font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 1.2px;
+    font-size: 0.74rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-dim);
     transition: var(--transition);

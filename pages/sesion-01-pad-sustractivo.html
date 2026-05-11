@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 01 · Pad sustractivo y sus expansiones — TWISTORES</title>
+    <meta name="description" content="Primera sesión del Laboratorio de Síntesis con SC: desarrollo de un pad sustractivo en ProxySpace y sus expansiones hacia resonadores y armonía móvil.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/sesion-01-pad-sustractivo.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Sesión 01 · Pad sustractivo y sus expansiones — TWISTORES">
+    <meta property="og:description" content="Desarrollo de un ~pad con BPF, control armónico en tiempo real y primeras expansiones hacia Klank y Ringz.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/sesion-01-pad-sustractivo.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sesión 01 · Pad sustractivo y sus expansiones — TWISTORES">
+    <meta name="twitter:description" content="Desarrollo de un ~pad con BPF, control armónico en tiempo real y primeras expansiones hacia Klank y Ringz.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-hero-banner {
+            width: 100%;
+            height: auto;
+            max-height: 460px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            border: 1px solid var(--border);
+            box-shadow: var(--glow-sm);
+        }
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 28px 0 10px;
+        }
+        .concept-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+        }
+        .concept-card h3 {
+            margin: 0 0 8px;
+            font-size: 0.86rem;
+            color: var(--heading);
+        }
+        .concept-card p {
+            margin: 0;
+            font-size: 0.84rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+        }
+        .code-block {
+            margin: 24px 0;
+            padding: 18px 20px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(2, 12, 18, 0.75);
+            overflow-x: auto;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+        }
+        .code-block code {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            line-height: 1.7;
+            color: #d9ece6;
+            white-space: pre;
+        }
+        .session-note {
+            margin-top: 14px;
+            font-size: 0.84rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content">
+            <div class="page-header fade-in">
+                <p class="section-label">// supercollider · síntesis sustractiva · cuaderno abierto</p>
+                <h1>Sesión 01 · Pad sustractivo y sus expansiones</h1>
+                <div class="article-meta">
+                    <span>Mayo 2026</span>
+                    <span>Laboratorio de Síntesis con SC</span>
+                    <span>Cuaderno en desarrollo</span>
+                </div>
+            </div>
+
+            <img src="../assets/img/sc-banner.png" alt="Código de SuperCollider empleado como imagen de apertura de la sesión" class="article-hero-banner fade-in">
+
+            <div class="action-row fade-in">
+                <a href="laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn">Abrir patch .scd</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Esta primera sesión arranca con un objetivo simple: construir un <code>~pad</code> en ProxySpace a partir de ruido filtrado. En el proceso aparecen cuestiones más ricas de lo previsto: cómo controlar arrays dentro de NodeProxy, cómo obtener paneo realmente independiente por voz, qué cambia al decorrelacionar las fuentes de ruido y cómo una síntesis inicialmente sustractiva empuja casi sola hacia la resonancia y la organización armónica en tiempo real.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Material de partida:</strong> notas del documento de estudio y patch en <code>.scd</code>.</p>
+                <p><strong>Idea central:</strong> usar un pad como objeto de aprendizaje, no como preset cerrado.</p>
+                <p><strong>Estado:</strong> sesión abierta a futuras ampliaciones dentro del mismo hilo de estudio.</p>
+            </div>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones de la sesión">
+                <a href="#punto-partida">Punto de partida</a>
+                <a href="#hallazgos">Hallazgos</a>
+                <a href="#patch">Patch</a>
+                <a href="#expansiones">Expansiones</a>
+                <a href="#siguiente">Siguiente paso</a>
+            </nav>
+
+            <section class="article-section fade-in" id="punto-partida">
+                <h2>Punto de partida</h2>
+                <p>
+                    La sesión comienza con un banco de filtros <code>BPF</code> excitados por <code>BrownNoise</code>. A nivel de escucha, el interés está en producir un pad inestable, respirado y ligeramente granular. A nivel técnico, el patch se convierte pronto en una excusa excelente para revisar varias cosas fundamentales de SuperCollider: qué ocurre cuando un array vive en <code>sclang</code> y no en <code>scsynth</code>, cómo se distribuyen las voces en estéreo y cómo pequeñas modulaciones lentas cambian por completo la sensación de profundidad.
+                </p>
+                <p>
+                    Lo más valioso del proceso no es solo el sonido final, sino la cadena de decisiones: por qué <code>var</code> funciona donde <code>arg</code> falla en NodeProxy, por qué <code>Pan2</code> más <code>.flop</code> es más preciso que <code>Splay</code> para este caso, y por qué una misma estructura armónica puede abrirse luego hacia <code>Klank</code>, <code>Ringz</code> y <code>Tdef</code> sin rehacer la lógica del patch desde cero.
+                </p>
+            </section>
+
+            <section class="article-section fade-in" id="hallazgos">
+                <h2>Seis hallazgos que ordenan la sesión</h2>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>1. Arrays en ProxySpace</h3>
+                        <p><code>var</code> sirve para arrays fijos. <code>\notes.kr([...])</code> sirve para arrays modificables en tiempo real. Ese giro organiza el resto del patch.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>2. Paneo por voz</h3>
+                        <p><code>Splay</code> no resuelve bien el movimiento independiente. <code>Pan2</code> y <code>Mix(sig.flop[n])</code> sí lo hacen con claridad.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>3. Ruido decorrelacionado</h3>
+                        <p>Varias fuentes de ruido independientes limpian la mezcla y dejan emerger mejor los centros tonales de cada filtro.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>4. Modulación lenta</h3>
+                        <p>Las frecuencias de LFO basadas en Fibonacci dan una irregularidad organizada, menos mecánica y menos sincronizada.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>5. Resonancia</h3>
+                        <p>El mismo material armónico puede pasar de <code>BPF</code> a <code>Klank</code> y <code>Ringz</code>, cambiando más la física del sonido que la idea musical.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>6. Armonía móvil</h3>
+                        <p>Con <code>Tdef</code> el patch deja de ser una foto y se vuelve proceso: la armonía entra como capa temporal sin recompilar el NodeProxy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="patch">
+                <h2>El patch base que queda de la sesión</h2>
+                <p>
+                    Esta es la versión que mejor resume la fase sustractiva del estudio. Mantiene el pad sobre ruido filtrado, incorpora control armónico en tiempo real y ya deja abiertas las variaciones futuras sin rehacer la arquitectura del parche.
+                </p>
+                <pre class="code-block"><code>~pad = {
+    var sig, pans, amp, fib, src, notes;
+    notes = \notes.kr([60, 67, 72, 76, 79, 83]);
+    fib = [1, 2, 3, 5, 8, 13] * (0.08 / 13);
+    pans = LFNoise1.kr(Array.fill(6, { rrand(0.05, 0.3) })).range(-1, 1);
+    amp = LFNoise1.kr(fib).range(0, 1);
+
+    src = BrownNoise.ar({ 0.1 } ! 6) + BrownNoise.ar(0.05);
+    src = src + SinOsc.ar(notes.midicps, 0, 0.02);
+
+    sig = BPF.ar(src, notes.midicps, 0.005, 1);
+    sig = sig * amp * 3;
+    sig = Pan2.ar(sig, pans);
+    sig = [Mix(sig.flop[0]), Mix(sig.flop[1])];
+};</code></pre>
+                <p class="session-note">El uso de <code>\notes.kr</code> es la pieza clave para poder mover la armonía desde fuera del NodeProxy.</p>
+
+                <p>
+                    A partir de ahí, <code>Tdef</code> permite ciclar acordes sin recompilar. Ese paso es importante porque convierte un patch tímbrico en un objeto estructural: ya no solo diseña color, también organiza recorrido armónico.
+                </p>
+                <pre class="code-block"><code>~chords = [
+    [60, 67, 72, 76, 79, 83],
+    [57, 64, 69, 72, 76, 81],
+    [53, 60, 65, 69, 72, 77],
+    [55, 62, 67, 71, 74, 79]
+];
+
+Tdef(\armonia, {
+    var i = 0;
+    loop {
+        ~pad.set(\notes, ~chords[i % ~chords.size]);
+        i = i + 1;
+        8.wait;
+    }
+}).play;</code></pre>
+            </section>
+
+            <section class="article-section fade-in" id="expansiones">
+                <h2>Expansiones dentro de la misma sesión</h2>
+                <p>
+                    Aunque la sesión nace como síntesis sustractiva, el propio material empuja hacia otra pregunta: qué pasa si en lugar de filtrar una fuente continua dejamos que el sonido resuene como cuerpo? Ahí entran <code>Klank</code> y <code>Ringz</code>. No aparecen como capítulo independiente, sino como prolongación natural del mismo problema.
+                </p>
+                <p>
+                    Con <code>Klank</code>, la energía se acumula y decae. Con <code>Ringz</code> más <code>Dust</code>, el comportamiento ya no se parece a un pad clásico, sino a una nube de golpes microscópicos y resonancias espaciadas. El interés de dejar estas versiones dentro de la misma sesión es precisamente mostrar continuidad: misma lógica de alturas, otra física del sonido.
+                </p>
+                <pre class="code-block"><code>~padRes = {
+    var notes, pans, amp, fib, src, rings, sig;
+    notes = [40, 45, 60, 67, 72, 76, 79, 83];
+    fib = [1, 2, 3, 5, 8, 13, 21, 34] * (0.08 / 34);
+    pans = LFNoise1.kr(Array.fill(8, { rrand(0.05, 0.3) })).range(-1, 1);
+    amp = LFNoise1.kr(fib).range(0, 1);
+    rings = LFNoise1.kr(Array.fill(8, { rrand(0.1, 0.4) })).range(0.5, 6.0);
+
+    src = Dust.ar({ rrand(1.0, 8.0) } ! 8, 0.3);
+    sig = Ringz.ar(src, notes.midicps, rings);
+    sig = sig * amp * 0.4;
+    sig = Pan2.ar(sig, pans);
+    sig = [Mix(sig.flop[0]), Mix(sig.flop[1])];
+};</code></pre>
+                <div class="article-keyline">
+                    <p>
+                        La sesión deja una idea de método: estudiar un patch no es fijarlo, sino someterlo a variaciones que revelen su estructura.
+                    </p>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="siguiente">
+                <h2>Por dónde seguir</h2>
+                <p>
+                    La siguiente ampliación natural de esta sesión podría ir por tres caminos: trabajar mejor el comportamiento del filtro y sus envolventes, separar una sesión específica de resonadores, o convertir este mismo <code>~pad</code> en material para composición lenta y transiciones de larga duración.
+                </p>
+                <ul>
+                    <li>hacer una versión centrada solo en <code>rq</code>, barridos y envolventes de filtro;</li>
+                    <li>abrir una sesión propia para <code>Klank</code> y <code>Ringz</code> como síntesis por resonancia;</li>
+                    <li>llevar este patch hacia una pieza más estable con cambios armónicos, capas y automatización.</li>
+                </ul>
+            </section>
+
+            <section class="article-related fade-in" aria-label="Continuar navegando">
+                <h3 class="article-related-heading">Seguir en el laboratorio</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="laboratorio-sintesis-sc.html">
+                        <span class="article-related-title">Laboratorio de Síntesis con SC</span>
+                        <span class="article-related-desc">Volver al archivo principal de sesiones y al planteamiento general de la sección.</span>
+                    </a>
+                    <a class="article-related-link" href="../assets/code/sc/sesion-01-pad-sustractivo.scd">
+                        <span class="article-related-title">Abrir patch de la sesión</span>
+                        <span class="article-related-desc">Versión de trabajo del código base publicada junto a esta primera sesión.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
+                    <li><a href="../assets/code/sc/sesion-01-pad-sustractivo.scd">Patch .scd</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Archivo del laboratorio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

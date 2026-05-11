@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio de Síntesis con SC — TWISTORES</title>
+    <meta name="description" content="Archivo en crecimiento de sesiones de aprendizaje, estudio de patches y exploración sonora con SuperCollider.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/laboratorio-sintesis-sc.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Laboratorio de Síntesis con SC — TWISTORES">
+    <meta property="og:description" content="Sesiones de aprendizaje y desarrollo de patches con SuperCollider publicadas como cuaderno técnico en crecimiento.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/laboratorio-sintesis-sc.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Laboratorio de Síntesis con SC — TWISTORES">
+    <meta name="twitter:description" content="Sesiones de aprendizaje y desarrollo de patches con SuperCollider publicadas como cuaderno técnico en crecimiento.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .lab-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .lab-box {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 24px;
+        }
+        .lab-box h3 {
+            margin-bottom: 12px;
+            font-size: 0.98rem;
+            color: var(--heading);
+        }
+        .lab-box p,
+        .lab-box li {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--text-dim);
+        }
+        .lab-box ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .topic-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .topic-pill {
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.02);
+        }
+        .session-card-note {
+            margin-top: 10px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--accent2);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        @media (max-width: 860px) {
+            .lab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header fade-in">
+            <p class="section-label">// supercollider · síntesis · cuaderno abierto</p>
+            <h1>Laboratorio de Síntesis con SC</h1>
+            <p class="page-intro">Una sección para ir publicando sesiones de estudio con SuperCollider como laboratorio técnico: patches, hallazgos, errores útiles, variaciones y ampliaciones sucesivas.</p>
+        </div>
+
+        <section class="page-section fade-in" aria-labelledby="lab-featured-title">
+            <article class="feature-panel">
+                <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Fragmento de codigo SuperCollider sobre una interfaz oscura" loading="lazy">
+                <div class="feature-panel-body">
+                    <div class="feature-panel-kicker">
+                        <span class="tag">Sesión 01</span>
+                        <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+                    </div>
+                    <h2 class="feature-panel-title" id="lab-featured-title">Pad sustractivo y sus expansiones</h2>
+                    <p class="feature-panel-text">La primera sesión parte de un <code>~pad</code> en ProxySpace y avanza por control armónico, paneo por voz, ruido decorrelacionado, modulación lenta, resonadores y armonía móvil con <code>Tdef</code>.</p>
+                    <ul class="feature-panel-list">
+                        <li><strong>Base:</strong> ruido marrón filtrado con <code>BPF</code> en varias voces.</li>
+                        <li><strong>Control:</strong> diferencia entre <code>var</code>, <code>arg</code> y <code>\notes.kr</code> dentro de NodeProxy.</li>
+                        <li><strong>Ampliación:</strong> paso de síntesis sustractiva a ideas de resonancia con <code>Klank</code> y <code>Ringz</code>.</li>
+                    </ul>
+                    <div class="feature-panel-actions">
+                        <a href="sesion-01-pad-sustractivo.html" class="btn">Abrir sesión 01 →</a>
+                        <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost">Abrir patch .scd</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <hr class="divider">
+
+        <section class="page-section fade-in">
+            <div class="section-head">
+                <div>
+                    <p class="section-label">// método de trabajo</p>
+                    <h2 class="section-title">Cómo está pensada la sección</h2>
+                </div>
+                <p class="section-intro">No es un curso cerrado ni una serie de tutoriales rápidos. Esta sección funciona como archivo de estudio: cada sesión deja una versión legible del patch y un mapa de conceptos para retomarlos después.</p>
+            </div>
+
+            <div class="lab-grid">
+                <div class="card-grid">
+                    <article class="card fade-in">
+                        <p class="card-category">Formato</p>
+                        <h3>Sesiones acumulativas</h3>
+                        <p>Cada entrada parte de un problema concreto y deja abierta la siguiente ampliación. La idea es que el laboratorio crezca sin borrar el rastro del aprendizaje.</p>
+                    </article>
+                    <article class="card fade-in">
+                        <p class="card-category">Código</p>
+                        <h3>Patches comentados</h3>
+                        <p>Las sesiones combinan explicación técnica y código funcional para que el archivo sea útil tanto como bitácora personal como material consultable.</p>
+                    </article>
+                    <article class="card fade-in">
+                        <p class="card-category">Enfoque</p>
+                        <h3>Escucha y estructura</h3>
+                        <p>No solo importa que el patch funcione. Importa que cada cambio deje claro qué hace en el timbre, en el espacio estéreo y en la organización temporal.</p>
+                    </article>
+                    <article class="card fade-in">
+                        <p class="card-category">Próximas líneas</p>
+                        <h3>Lo que viene</h3>
+                        <p>Filtros, envolventes, síntesis FM, granularidad, feedback, espacialización y formas de composición en tiempo real con SC.</p>
+                    </article>
+                </div>
+
+                <aside class="lab-box fade-in">
+                    <h3>Índice actual</h3>
+                    <ul>
+                        <li><strong>Sesión 01.</strong> Pad sustractivo y sus expansiones.</li>
+                    </ul>
+                    <p class="session-card-note">archivo en crecimiento</p>
+                    <div class="topic-cloud" aria-label="Temas del laboratorio">
+                        <span class="topic-pill">ProxySpace</span>
+                        <span class="topic-pill">BPF</span>
+                        <span class="topic-pill">NamedControl</span>
+                        <span class="topic-pill">Klank</span>
+                        <span class="topic-pill">Ringz</span>
+                        <span class="topic-pill">Tdef</span>
+                        <span class="topic-pill">Pad</span>
+                        <span class="topic-pill">Armonía móvil</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
+                    <li><a href="../assets/code/sc/sesion-01-pad-sustractivo.scd">Patch .scd</a></li>
+                    <li><span>SuperCollider</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
