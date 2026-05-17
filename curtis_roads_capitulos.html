@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curtis Roads — Audio Digital</title>
+<meta name="description" content="Lectura integrada en el Laboratorio de Síntesis con SC: traducción y comentario de los capítulos iniciales de Curtis Roads sobre audio digital.">
+<meta name="author" content="Silvino Díaz Carreras">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#071118">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="canonical" href="https://twistores.vercel.app/curtis_roads_capitulos.html">
+<meta property="og:site_name" content="TWISTORES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Curtis Roads — Audio Digital">
+<meta property="og:description" content="Traducción y comentario de los capítulos 1 y 2 de The Computer Music Tutorial para el Laboratorio de Síntesis con SC.">
+<meta property="og:url" content="https://twistores.vercel.app/curtis_roads_capitulos.html">
+<meta property="og:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Curtis Roads — Audio Digital">
+<meta name="twitter:description" content="Lectura integrada en el Laboratorio de Síntesis con SC: fundamentos del audio digital para músicos.">
+<meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  .roads-subnav-wrap,
+  .roads-main {
+    --ink: #0f0e0b;
+    --paper: #f5f0e8;
+    --accent: #c0392b;
+    --accent2: #2c3e50;
+    --gold: #b8860b;
+    --muted: #7a7065;
+    --rule: #d4cfc5;
+    --code-bg: #1a1a1a;
+    --code-fg: #e8dcc8;
+    --highlight: #f0e6d3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body.roads-page {
+    background: #f5f0e8;
+    color: #0f0e0b;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body.roads-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  .roads-subnav-wrap {
+    background: rgba(245, 240, 232, 0.92);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .roads-subnav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.95rem 24px 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .roads-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .roads-brand:hover { color: var(--accent); }
+
+  .roads-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .roads-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .roads-links a:hover { color: var(--accent); }
+
+  .roads-links a.is-external {
+    color: var(--accent2);
+  }
+
+  .roads-main {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 8vw 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-top: 2rem;
+    max-width: 480px;
+    font-weight: 300;
+    font-style: italic;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-meta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 3rem;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .hero-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-meta-value {
+    font-size: 1rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ── DECORATIVE ELEMENTS ── */
+  .hero-deco {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45vw;
+    height: 70vh;
+    opacity: 0.06;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .waveform-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-rule {
+    height: 1px;
+    background: linear-gradient(to right, var(--rule), transparent);
+    margin: 0 8vw;
+  }
+
+  /* ── CHAPTER TABS ── */
+  .chapter-nav {
+    display: flex;
+    gap: 0;
+    padding: 0 8vw;
+    margin-top: 6rem;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 68px;
+    background: rgba(245, 240, 232, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+
+  .chapter-tab {
+    padding: 1.2rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .chapter-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .chapter-tab:hover { color: var(--ink); }
+
+  /* ── MAIN LAYOUT ── */
+  .chapter {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 8vw;
+  }
+
+  .chapter.active { display: block; }
+
+  /* ── CHAPTER HEADER ── */
+  .chapter-header {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .chapter-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .chapter-intro {
+    font-size: 1.25rem;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    padding: 2rem 2.5rem;
+    margin: 3rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .toc-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .toc-list a {
+    color: var(--accent2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc-list a:hover { color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-title::before {
+    content: '§ ';
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--accent2);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .chapter p {
+    margin-bottom: 1.25rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* ── PULL QUOTES ── */
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 3rem 0;
+    background: var(--highlight);
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .callout.note {
+    background: #e8f4f8;
+    border-left: 3px solid #2980b9;
+  }
+
+  .callout.key {
+    background: #fef9e7;
+    border-left: 3px solid var(--gold);
+  }
+
+  .callout.sc {
+    background: var(--code-bg);
+    border-left: 3px solid #27ae60;
+    color: var(--code-fg);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .callout.sc .callout-label { color: #27ae60; }
+  .callout.key .callout-label { color: var(--gold); }
+  .callout.note .callout-label { color: #2980b9; }
+
+  /* ── DATA TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+  }
+
+  .data-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    background: var(--accent2);
+    color: white;
+    text-align: left;
+  }
+
+  .data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .data-table tr:nth-child(even) td { background: var(--highlight); }
+
+  .data-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2rem 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+
+  .timeline-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-text {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .concept-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .concept-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .concept-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .concept-card:nth-child(2)::before { background: var(--gold); }
+  .concept-card:nth-child(3)::before { background: var(--accent2); }
+  .concept-card:nth-child(4)::before { background: #27ae60; }
+
+  .concept-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .concept-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .concept-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── SPECTRUM VIZ ── */
+  .spectrum-viz {
+    background: var(--code-bg);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+  }
+
+  .spectrum-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+  }
+
+  .spectrum-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 120px;
+  }
+
+  .spectrum-bar {
+    flex: 1;
+    background: linear-gradient(to top, #c0392b, #e74c3c);
+    border-radius: 1px 1px 0 0;
+    transition: height 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .spectrum-bar:hover { background: linear-gradient(to top, #e74c3c, #ff6b6b); }
+
+  .spectrum-bar .bar-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: #7f8c8d;
+    white-space: nowrap;
+  }
+
+  .spectrum-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #7f8c8d;
+  }
+
+  /* ── SC EXAMPLES ── */
+  .sc-block {
+    background: var(--code-bg);
+    border-left: 3px solid #27ae60;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--code-fg);
+    overflow-x: auto;
+  }
+
+  .sc-comment { color: #7f8c8d; }
+  .sc-keyword { color: #e74c3c; }
+  .sc-string { color: #f39c12; }
+  .sc-number { color: #3498db; }
+  .sc-ugen { color: #2ecc71; }
+
+  /* ── DIVIDERS ── */
+  .ornament {
+    text-align: center;
+    color: var(--rule);
+    font-size: 1.5rem;
+    margin: 4rem 0;
+    letter-spacing: 1rem;
+  }
+
+  /* ── CODA EDITORIAL ── */
+  .roads-coda {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 8vw;
+    margin-top: 6rem;
+  }
+
+  .roads-coda-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .roads-coda-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .roads-coda-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #7f8c8d;
+  }
+
+  .roads-coda-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+    color: #7f8c8d;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .concept-grid { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 1rem; }
+    .chapter-nav { padding: 0 1rem; }
+    .chapter { padding: 4rem 1.5rem; }
+    .roads-subnav { padding-left: 16px; padding-right: 16px; }
+    .roads-links { display: none; }
+    .roads-coda-content { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="roads-page">
+
+<header>
+  <div class="header-inner">
+    <a class="site-logo" href="index.html">TWISTORES</a>
+    <nav id="main-nav">
+      <ul id="nav-list">
+        <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+        <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+        <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+        <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+        <li><a href="pages/laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+        <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+      </ul>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="gl">GL</button>
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="roads-subnav-wrap">
+  <nav class="roads-subnav" aria-label="Navegación de la lectura">
+    <a class="roads-brand" href="pages/laboratorio-sintesis-sc.html">Lectura integrada · Curtis Roads</a>
+    <ul class="roads-links">
+      <li><a href="pages/laboratorio-sintesis-sc.html" class="is-external">Laboratorio</a></li>
+      <li><a href="pages/sesion-01-pad-sustractivo.html" class="is-external">Sesión 01</a></li>
+      <li><a href="#" onclick="showChapter(0)">Cap. 1</a></li>
+      <li><a href="#" onclick="showChapter(1)">Cap. 2</a></li>
+    </ul>
+  </nav>
+</div>
+
+<main class="roads-main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">The Computer Music Tutorial · Segunda Edición · MIT Press 2023</div>
+    <h1 class="hero-title">Audio<br><em>Digital</em></h1>
+    <p class="hero-subtitle">Fundamentos históricos y técnicos del sonido digital — traducido y comentado para músicos.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Autor</span>
+        <span class="hero-meta-value">Curtis Roads</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Capítulos</span>
+        <span class="hero-meta-value">1 — 2</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Disciplina</span>
+        <span class="hero-meta-value">Música por Computadora</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Archivo</span>
+        <span class="hero-meta-value">Laboratorio TWISTORES</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative waveform -->
+  <div class="hero-deco">
+    <svg class="waveform-svg" viewBox="0 0 400 300" preserveAspectRatio="none">
+      <path d="M0,150 C20,50 40,250 60,150 C80,50 100,250 120,150 C140,50 160,250 180,150 C200,50 220,250 240,150 C260,50 280,250 300,150 C320,50 340,250 360,150 C380,50 400,250 400,150" fill="none" stroke="#0f0e0b" stroke-width="2"/>
+      <path d="M0,150 C15,80 35,220 55,150 C75,80 95,220 115,150 C135,80 155,220 175,150 C195,80 215,220 235,150 C255,80 275,220 295,150 C315,80 335,220 355,150 C375,80 395,220 400,150" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CHAPTER TABS -->
+<div class="chapter-nav">
+  <button class="chapter-tab active" onclick="showChapter(0)">Capítulo 1 — Historia del Audio Digital</button>
+  <button class="chapter-tab" onclick="showChapter(1)">Capítulo 2 — Fundamentos de las Señales Sonoras</button>
+</div>
+
+<!-- ════════════════════════════════ CHAPTER 1 ════════════════════════════════ -->
+<article class="chapter active" id="chapter-0">
+
+  <div class="chapter-header">
+    <div class="chapter-number">Capítulo 1 · Parte I: Audio Digital</div>
+    <h2 class="chapter-title">Historia del<br>Audio Digital</h2>
+    <p class="chapter-intro">Desde los cilindros de cera de Edison hasta las DAW modernas: la evolución tecnológica que hizo posible la música por computadora.</p>
+  </div>
+
+  <div class="toc fade-in">
+    <div class="toc-title">Contenidos</div>
+    <ul class="toc-list">
+      <li><a href="#c1-analog">1.1 · Historia del Registro Analógico</a></li>
+      <li><a href="#c1-experimental">1.2 · El Registro Experimental Digital</a></li>
+      <li><a href="#c1-publico">1.3 · Sonido Digital para el Público</a></li>
+      <li><a href="#c1-formatos">1.4 · Formatos de Audio Descargables</a></li>
+      <li><a href="#c1-musicos">1.5 · Sonido Digital para Músicos</a></li>
+      <li><a href="#c1-multitrack">1.6 · Orígenes del Multipista Digital</a></li>
+      <li><a href="#c1-arte">1.7 · El Arte de Grabar</a></li>
+    </ul>
+  </div>
+
+  <!-- 1.1 -->
+  <section class="section fade-in" id="c1-analog">
+    <h3 class="section-title">Historia del Registro Analógico</h3>
+
+    <p>El registro de sonido tiene una historia rica que comienza con el <strong>fonoautógrafo</strong> de Léon Scott en 1857, que podía registrar una forma de onda sonora pero no reproducirla. Los experimentos de Thomas Edison en los años 1870 combinaron el registro con la reproducción sobre cilindros de cera. El gramófono de Emile Berliner (1887) grababa sobre discos giratorios, precursor de los discos de vinilo de larga duración que todavía se fabrican.</p>
+
+    <p>El registro de audio temprano era un proceso mecánico: las vibraciones del aire hacían vibrar una membrana, y esas vibraciones quedaban grabadas en un medio blando por un estilete unido a la membrana.</p>
+
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-year">1857</div>
+        <div class="timeline-text">Fonoautógrafo de Léon Scott — primer registro de sonido, sin reproducción.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1877</div>
+        <div class="timeline-text">Edison combina registro y reproducción en cilindros de cera.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1887</div>
+        <div class="timeline-text">Gramófono de Berliner — discos giratorios, precursor del vinilo.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1906</div>
+        <div class="timeline-text">Invención del tubo de vacío triodo → inicio de la era electrónica.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1922</div>
+        <div class="timeline-text">Registro óptico de sonido en película, primera demostración.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1935</div>
+        <div class="timeline-text">Magnetófonos alemanes — registro en cinta magnética, gran avance sobre el hilo metálico.</div>
+      </div>
+    </div>
+
+    <div class="callout note fade-in">
+      <div class="callout-label">Nota técnica</div>
+      Los magnetófonos y sus descendientes eran grabadores <strong>analógicos</strong>: la forma de onda codificada en cinta es una analogía cercana a la forma de onda original captada por el micrófono. El registro analógico enfrenta límites físicos fundamentales — al copiar de un medio analógico a otro, el ruido adicional es inevitable.
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.2 -->
+  <section class="section fade-in" id="c1-experimental">
+    <h3 class="section-title">El Registro Experimental de Audio Digital</h3>
+
+    <p>El concepto central del registro de audio digital es el <strong>muestreo</strong>: convertir señales analógicas continuas en señales discretas tomadas en el tiempo. Cada muestra es simplemente un número — una instantánea de la forma de onda sonora.</p>
+
+    <div class="pull-quote fade-in">
+      "El fundamento teórico es el teorema de muestreo de Nyquist: para reproducir correctamente una señal, la frecuencia de muestreo debe ser al menos el doble de la frecuencia más alta presente en el sonido."
+    </div>
+
+    <p>En los años 50, <strong>Max Mathews</strong> y su grupo en Bell Telephone Laboratories generaron los primeros sonidos basados en muestras desde un computador digital. Usando muestras para representar formas de onda se podía generar cualquier forma de onda posible. Las muestras eran escritas por el computador en costosas bobinas de cinta. La producción de sonido a partir de los números era un proceso separado — un convertidor digital-analógico de 12 bits de tubos de vacío.</p>
+
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-year">1937</div>
+        <div class="timeline-text">A. Reeves desarrolla el primer sistema PCM (Pulse Code Modulation) patentado.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1957–59</div>
+        <div class="timeline-text">Max Mathews en Bell Labs — primeros sonidos musicales generados por computador.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1973</div>
+        <div class="timeline-text">Nippon Columbia (Denon) — primera grabadora de audio digital, basada en videocinta de 1 pulgada.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1977</div>
+        <div class="timeline-text">Sony PCM-1 — primer sistema de grabación digital comercial (13 bits).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1978</div>
+        <div class="timeline-text">3M introduce la primera grabadora multipista digital de 32 pistas.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1980s</div>
+        <div class="timeline-text">AES/EBU establece frecuencias estándar de muestreo: 44.1 y 48 kHz.</div>
+      </div>
+    </div>
+
+    <div class="callout key fade-in">
+      <div class="callout-label">Concepto clave</div>
+      <strong>PCM — Modulación por Impulsos Codificados.</strong> El principio fundamental: muestrear la señal analógica a intervalos regulares y cuantizar cada muestra en un número binario. Este es exactamente el principio que utilizan los sistemas de audio digital modernos, incluyendo el CD y las interfaces de audio que usamos en SuperCollider.
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.3 -->
+  <section class="section fade-in" id="c1-publico">
+    <h3 class="section-title">Sonido Digital para el Público</h3>
+
+    <p>El primer sistema de audio digital ampliamente disponible fue el <strong>disco compacto (CD)</strong>, desarrollado conjuntamente por Sony y Philips e introducido al mercado en 1982. El CD usa una frecuencia de muestreo de 44.100 Hz y una profundidad de bit de 16 bits, lo que da una relación señal-ruido teórica de 96 dB.</p>
+
+    <p>El éxito del CD fue inmediato: vendió más de 1,35 millones de reproductores y decenas de millones de discos en dos años. Para mediados de los años 80, el CD dominaba el mercado de música grabada.</p>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">💿</div>
+        <div class="concept-title">Compact Disc (1982)</div>
+        <p class="concept-desc">44.1 kHz, 16 bits. Rango dinámico de 96 dB teórico. Primera distribución masiva de audio digital.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">📼</div>
+        <div class="concept-title">DAT (1987)</div>
+        <p class="concept-desc">48 kHz, 16 bits. Adoptado en estudios profesionales. Nunca tuvo éxito doméstico masivo.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎯</div>
+        <div class="concept-title">DVD-A / SACD (2000)</div>
+        <p class="concept-desc">Hasta 192 kHz y 24 bits. El SACD usa DSD (1 bit a 2.8 MHz). Mercado nicho de audiófilo.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">💿</div>
+        <div class="concept-title">Blu-ray Audio (2013)</div>
+        <p class="concept-desc">Hasta 96 kHz, 24 bits, 8 canales. Anunciado como formato de audio puro, sin éxito comercial.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.4 -->
+  <section class="section fade-in" id="c1-formatos">
+    <h3 class="section-title">Formatos de Audio Descargables</h3>
+
+    <p>La llegada de Internet transformó la distribución de música. El formato <strong>MP3</strong> (MPEG Audio Layer III), desarrollado en el Instituto Fraunhofer en Alemania, usa compresión perceptual con pérdida para reducir el tamaño de los archivos de audio manteniendo una calidad aceptable al oído.</p>
+
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>Formato</th>
+          <th>Tipo</th>
+          <th>Calidad</th>
+          <th>Uso típico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>WAV / AIFF</td>
+          <td>Sin compresión</td>
+          <td>Total — calidad original</td>
+          <td>Producción profesional, SC</td>
+        </tr>
+        <tr>
+          <td>FLAC</td>
+          <td>Sin pérdida</td>
+          <td>Total — reconstrucción exacta</td>
+          <td>Archivo, distribución de calidad</td>
+        </tr>
+        <tr>
+          <td>MP3</td>
+          <td>Con pérdida</td>
+          <td>Variable — degradación perceptual</td>
+          <td>Distribución masiva, streaming</td>
+        </tr>
+        <tr>
+          <td>AAC</td>
+          <td>Con pérdida</td>
+          <td>Superior al MP3 a igual tasa</td>
+          <td>Apple Music, YouTube</td>
+        </tr>
+        <tr>
+          <td>OGG Vorbis</td>
+          <td>Con pérdida</td>
+          <td>Similar a AAC</td>
+          <td>Software libre, Spotify</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note fade-in">
+      <div class="callout-label">Nota técnica</div>
+      La compresión sin pérdida (FLAC) reduce el tamaño del archivo alrededor de un 50% permitiendo reconstruir el original exactamente. La compresión con pérdida (MP3) descarta información perceptualmente menos significativa — armónicos enmascarados, sonidos simultáneos más suaves, componentes de alta frecuencia. Esta información descartada <strong>no puede recuperarse</strong>.
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.5 -->
+  <section class="section fade-in" id="c1-musicos">
+    <h3 class="section-title">Sonido Digital para Músicos</h3>
+
+    <p>Los primeros sistemas de audio digital accesibles para músicos fueron los <strong>samplers</strong>. El Fairlight CMI (1979) y el New England Digital Synclavier fueron los primeros instrumentos basados en audio digital, con precios prohibitivos. El E-mu Emulator (1981) fue el primer sampler relativamente asequible.</p>
+
+    <p>Los DAC de alta calidad conectados a ordenadores personales llegaron alrededor de 1988. Junto con ellos aparecieron los formatos estándar de archivos de audio: SDII, AIFF, y WAVE. En poco tiempo, la síntesis de sonido, el registro y el procesamiento por ordenador personal se generalizaron.</p>
+
+    <div class="callout sc fade-in">
+      <div class="callout-label">// Conexión con SuperCollider</div>
+      <span class="sc-comment">// El servidor scsynth opera internamente a 44.1 kHz por defecto</span><br>
+      <span class="sc-comment">// Cada SinOsc genera muestras — números — a esa tasa</span><br>
+      <span class="sc-ugen">Server</span>.default.sampleRate; <span class="sc-comment">// → 44100</span><br>
+      <span class="sc-ugen">Server</span>.default.options.sampleRate = <span class="sc-number">48000</span>; <span class="sc-comment">// cambiar si necesitas</span>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.6 -->
+  <section class="section fade-in" id="c1-multitrack">
+    <h3 class="section-title">Orígenes del Multipista Digital</h3>
+
+    <p>Los grabadores multipista tienen varios canales discretos que pueden grabarse en diferentes momentos. La BBC desarrolló una grabadora de cinta digital experimental de 10 canales en 1976. Dos años después, la compañía 3M introdujo la primera grabadora digital comercial de 32 pistas.</p>
+
+    <p>El registro multipista digital temprano era muy caro. La grabadora Studer digital se vendía por 270.000 dólares en 1991. En poco tiempo, las DAWs de software reemplazaron a las grabadoras de cinta en la mayoría de los estudios. Se hizo posible grabar, editar y mezclar en ordenadores portátiles.</p>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">🎚️</div>
+        <div class="concept-title">3M 32-track (1978)</div>
+        <p class="concept-desc">Primera grabadora multipista digital comercial. El comienzo del registro digital profesional.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">💻</div>
+        <div class="concept-title">Pro Tools (1991)</div>
+        <p class="concept-desc">Primera DAW profesional accesible para estudios de tamaño mediano. Democratización del audio digital.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎛️</div>
+        <div class="concept-title">DAW modernas</div>
+        <p class="concept-desc">Logic, Ableton, Reaper — herramientas con capacidad de decenas de pistas en cualquier portátil.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 1.7 -->
+  <section class="section fade-in" id="c1-arte">
+    <h3 class="section-title">El Arte de Grabar</h3>
+
+    <p>El arte de grabar requiere más que el equipo adecuado. La llegada del audio digital no solo cambió la tecnología sino también las prácticas artísticas. La <strong>edición no destructiva</strong> permitió a los productores experimentar sin riesgo. La <strong>automatización</strong> de mezclas permitió controlar parámetros con una precisión imposible en el dominio analógico.</p>
+
+    <div class="pull-quote fade-in">
+      "Los límites entre lo posible y lo imposible se desplazaron radicalmente. La capacidad de manipular audio a nivel de muestra abrió nuevas posibilidades compositivas que habrían sido impensables con tecnología analógica."
+    </div>
+
+    <p>Curtis Roads concluye el capítulo señalando que la historia del audio digital es también la historia de la democratización de la producción musical: herramientas que costaban cientos de miles de dólares en los años 70 y 80 están hoy disponibles como software gratuito en cualquier ordenador personal.</p>
+  </section>
+
+</article>
+
+<!-- ════════════════════════════════ CHAPTER 2 ════════════════════════════════ -->
+<article class="chapter" id="chapter-1">
+
+  <div class="chapter-header">
+    <div class="chapter-number">Capítulo 2 · Parte I: Audio Digital</div>
+    <h2 class="chapter-title">Fundamentos de las<br><em>Señales Sonoras</em></h2>
+    <p class="chapter-intro">Frecuencia, amplitud y fase — los tres parámetros que definen cualquier señal sonora, y la base matemática de todo lo que hacemos en síntesis.</p>
+  </div>
+
+  <div class="toc fade-in">
+    <div class="toc-title">Contenidos</div>
+    <ul class="toc-list">
+      <li><a href="#c2-frec">2.1 · Frecuencia y Amplitud</a></li>
+      <li><a href="#c2-tiempo">2.2 · Representación en el Dominio del Tiempo</a></li>
+      <li><a href="#c2-freq-domain">2.3 · Representación en el Dominio de la Frecuencia</a></li>
+      <li><a href="#c2-phase">2.4 · Fase e Importancia de la Fase</a></li>
+      <li><a href="#c2-mag">2.5 · Magnitud del Sonido</a></li>
+      <li><a href="#c2-dynamic">2.6 · Rango Dinámico</a></li>
+    </ul>
+  </div>
+
+  <!-- 2.1 -->
+  <section class="section fade-in" id="c2-frec">
+    <h3 class="section-title">Frecuencia y Amplitud</h3>
+
+    <p>El sonido llega a los oídos del oyente después de ser transmitido a través del aire desde una fuente. Oímos el sonido porque la presión del aire cambia ligeramente en nuestros oídos, haciendo vibrar el tímpano. Si la presión varía según un patrón que se repite, decimos que el sonido tiene una <strong>forma de onda periódica</strong>. Si no hay ningún patrón discernible, se llama <strong>ruido</strong>. Entre estos dos extremos existe un vasto dominio de sonidos cuasiperiódicos.</p>
+
+    <p>Una repetición de una forma de onda periódica se llama <strong>ciclo</strong>, y la <strong>frecuencia fundamental</strong> es el número de ciclos que ocurren por segundo, medida en <strong>Hz</strong> (herzios, en honor al acústico alemán Heinrich Hertz).</p>
+
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>Frecuencia</th>
+          <th>Período</th>
+          <th>Ejemplo musical</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>20 Hz</td>
+          <td>50 ms</td>
+          <td>Límite inferior audible — sub-bass</td>
+        </tr>
+        <tr>
+          <td>55 Hz</td>
+          <td>18.2 ms</td>
+          <td>La1 — cuerda grave de guitarra</td>
+        </tr>
+        <tr>
+          <td>110 Hz</td>
+          <td>9.09 ms</td>
+          <td>La2 — fundamental del bajo</td>
+        </tr>
+        <tr>
+          <td>440 Hz</td>
+          <td>2.27 ms</td>
+          <td>La4 — afinación estándar (La de concierto)</td>
+        </tr>
+        <tr>
+          <td>1000 Hz</td>
+          <td>1 ms</td>
+          <td>Rango de máxima sensibilidad del oído</td>
+        </tr>
+        <tr>
+          <td>20000 Hz</td>
+          <td>50 µs</td>
+          <td>Límite superior audible — presencia/aire</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>La <strong>longitud de onda</strong> es la distancia física entre períodos. Como el sonido viaja a aproximadamente 343 m/s a 20°C, una onda a 1 Hz se despliega a lo largo de 343 metros, mientras que una onda a 20 kHz se despliega a lo largo de 1,7 cm.</p>
+
+    <div class="callout sc fade-in">
+      <div class="callout-label">// SuperCollider — frecuencia y amplitud</div>
+      <span class="sc-comment">// SinOsc.ar(freq, phase, mul, add)</span><br>
+      <span class="sc-ugen">SinOsc</span>.ar(<span class="sc-number">440</span>);           <span class="sc-comment">// La4 — 440 Hz</span><br>
+      <span class="sc-ugen">SinOsc</span>.ar(<span class="sc-number">440</span>, mul: <span class="sc-number">0.5</span>);  <span class="sc-comment">// amplitud 0.5 — la mitad de potencia</span><br>
+      <span class="sc-number">440</span>.midicps;                <span class="sc-comment">// Hz → MIDI: 69</span><br>
+      <span class="sc-number">69</span>.midicps;                 <span class="sc-comment">// MIDI 69 → 440 Hz</span>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 2.2 -->
+  <section class="section fade-in" id="c2-tiempo">
+    <h3 class="section-title">Representación en el Dominio del Tiempo</h3>
+
+    <p>Un método simple para representar formas de onda sonoras es dibujarlas como un gráfico de presión del aire en función del tiempo. Esta gráfica se llama <strong>representación en el dominio del tiempo</strong>.</p>
+
+    <p>La <strong>amplitud</strong> de la forma de onda es la cantidad de cambio de presión del aire: se mide como la distancia vertical desde el punto de presión cero hasta los puntos más altos (o más bajos) de un segmento de forma de onda. Un instrumento acústico crea sonido emitiendo vibraciones que cambian la presión del aire. Un altavoz crea sonido moviéndose hacia adelante y hacia atrás.</p>
+
+    <p>Para crear un sonido audible, las vibraciones deben ocurrir a una frecuencia en el rango de aproximadamente <strong>20 a 20.000 Hz</strong>.</p>
+
+    <div class="callout note fade-in">
+      <div class="callout-label">El Stethoscope de SuperCollider</div>
+      La ventana <strong>Stethoscope</strong> en SuperCollider muestra exactamente esto: la presión del aire (amplitud) en el eje vertical, el tiempo en el eje horizontal. Es la representación en el dominio del tiempo de lo que está generando tu código en tiempo real.
+      <br><br>
+      <code style="font-family:'DM Mono',monospace; font-size:0.85rem;">Stethoscope.new(s); // abre el osciloscopio</code>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 2.3 -->
+  <section class="section fade-in" id="c2-freq-domain">
+    <h3 class="section-title">Representación en el Dominio de la Frecuencia</h3>
+
+    <p>Además de la frecuencia fundamental, puede haber muchas frecuencias presentes en una forma de onda. Una <strong>representación en el dominio de la frecuencia</strong> muestra el contenido frecuencial de un sonido. Los componentes frecuenciales individuales del espectro pueden denominarse <strong>armónicos</strong> o <strong>parciales</strong>.</p>
+
+    <p>Las frecuencias <strong>armónicas</strong> son múltiplos enteros simples de la frecuencia fundamental. Con fundamental de 110 Hz: el segundo armónico es 220 Hz, el tercero 330 Hz, y así sucesivamente. Cualquier componente frecuencial puede llamarse <strong>parcial</strong>, independientemente de si es o no un múltiplo entero.</p>
+
+    <!-- Interactive spectrum -->
+    <div class="spectrum-viz fade-in">
+      <div class="spectrum-title">Espectro Armónico — 110 Hz · Serie 1/n · haz clic en las barras</div>
+      <div class="spectrum-bars" id="specBars">
+        <div class="spectrum-bar" style="height:100%" onclick="toggleBar(this,0)" title="110 Hz — fundamental">
+          <span class="bar-label">110</span>
+        </div>
+        <div class="spectrum-bar" style="height:50%" onclick="toggleBar(this,1)" title="220 Hz — 2º armónico">
+          <span class="bar-label">220</span>
+        </div>
+        <div class="spectrum-bar" style="height:33%" onclick="toggleBar(this,2)" title="330 Hz — 3º armónico">
+          <span class="bar-label">330</span>
+        </div>
+        <div class="spectrum-bar" style="height:25%" onclick="toggleBar(this,3)" title="440 Hz — 4º armónico">
+          <span class="bar-label">440</span>
+        </div>
+        <div class="spectrum-bar" style="height:20%" onclick="toggleBar(this,4)" title="550 Hz — 5º armónico">
+          <span class="bar-label">550</span>
+        </div>
+        <div class="spectrum-bar" style="height:17%" onclick="toggleBar(this,5)" title="660 Hz — 6º armónico">
+          <span class="bar-label">660</span>
+        </div>
+        <div class="spectrum-bar" style="height:14%" onclick="toggleBar(this,6)" title="770 Hz — 7º armónico">
+          <span class="bar-label">770</span>
+        </div>
+        <div class="spectrum-bar" style="height:12%" onclick="toggleBar(this,7)" title="880 Hz — 8º armónico">
+          <span class="bar-label">880</span>
+        </div>
+      </div>
+      <div class="spectrum-axis">
+        <span>Hz →</span>
+        <span style="color:#e74c3c">amplitud = 1/n · onda Saw</span>
+        <span>Nyquist</span>
+      </div>
+    </div>
+
+    <div class="callout sc fade-in">
+      <div class="callout-label">// Reconstrucción de la onda Saw por síntesis aditiva</div>
+      <span class="sc-comment">// Cada barra del gráfico = un SinOsc</span><br>
+      ~saw = {<br>
+      &nbsp;&nbsp;var n = <span class="sc-number">8</span>;<br>
+      &nbsp;&nbsp;<span class="sc-ugen">Mix</span>.ar(<span class="sc-ugen">SinOsc</span>.ar(\freq.kr(<span class="sc-number">110</span>) * (<span class="sc-number">1</span>..n)) * (<span class="sc-number">1</span>..n).reciprocal) * <span class="sc-number">0.2</span> ! <span class="sc-number">2</span><br>
+      };<br>
+      ~saw.play;
+    </div>
+
+    <h4 class="subsection-title">Tipos de espectro</h4>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">〰️</div>
+        <div class="concept-title">Sinusoidal pura</div>
+        <p class="concept-desc">Un solo parcial. Sin armónicos. Timbre desnudo, "electrónico". El material básico de la síntesis aditiva.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">⚡</div>
+        <div class="concept-title">Armónico (Saw/Square)</div>
+        <p class="concept-desc">Múltiplos enteros de la fundamental. Pitch claro y definido. Todos los instrumentos melódicos. Amplitud 1/n en la Saw.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🔔</div>
+        <div class="concept-title">Inarmónico</div>
+        <p class="concept-desc">Parciales no enteros. Sin pitch definido. Sonido de campana, platillo, metal. Ratios como 2.756, 5.404...</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🌊</div>
+        <div class="concept-title">Ruido</div>
+        <p class="concept-desc">Contenido frecuencial constantemente cambiante. Energía en todas las frecuencias (blanco) o decreciente (rosa).</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 2.4 -->
+  <section class="section fade-in" id="c2-phase">
+    <h3 class="section-title">Fase e Importancia de la Fase</h3>
+
+    <p>El punto de partida de una forma de onda periódica en el eje de amplitud es su <strong>fase inicial</strong>. Una onda sinusoidal típica comienza en 0 y completa su ciclo en 0. Si desplazamos el punto de partida π/2 radianes (90°) en el eje horizontal, la onda empieza en 1 — esto se llama onda coseno. En efecto, una coseno es equivalente a una sinusoide desfasada 90°.</p>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">🔄</div>
+        <div class="concept-title">En fase</div>
+        <p class="concept-desc">Dos señales que empiezan en el mismo punto. Se suman constructivamente — la amplitud aumenta.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">↔️</div>
+        <div class="concept-title">Desfasadas</div>
+        <p class="concept-desc">Señales ligeramente retrasadas entre sí. Suma parcialmente constructiva o destructiva según el grado de desfase.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">❌</div>
+        <div class="concept-title">Polaridad invertida (180°)</div>
+        <p class="concept-desc">Para cada valor positivo en A hay un negativo en B. Si se suman, se cancelan mutuamente → silencio.</p>
+      </div>
+    </div>
+
+    <h4 class="subsection-title">Por qué importa la fase</h4>
+
+    <p><strong>Los filtros usan desplazamientos de fase para modificar señales.</strong> Un filtro desplaza la fase de una señal retrasando su entrada por un tiempo corto y luego combina la versión desfasada con la original. Esto crea cancelación de fase dependiente de la frecuencia para atenuar ciertas frecuencias, y refuerzo de fase para realzar otras. Cuando el desfase varía en el tiempo, las bandas afectadas también varían — creando el efecto de barrido sonoro llamado <em>phasing</em> o <em>flanging</em>.</p>
+
+    <p><strong>La fase es crítica en resíntesis.</strong> Los sistemas que resintetizan sonido a partir del análisis necesitan conocer la fase inicial de cada componente frecuencial para ensamblar los distintos componentes en el orden correcto. Especialmente crítico para sonidos transitorios percusivos.</p>
+
+    <div class="callout note fade-in">
+      <div class="callout-label">Fase en SuperCollider</div>
+      SuperCollider ignora la fase por defecto en síntesis aditiva (<code>phase: 0</code>). Esto es correcto para la mayoría de contextos musicales — el oído es poco sensible a la fase inicial de los parciales. Sin embargo, en sistemas de análisis/resíntesis (FFT, phase vocoder) la fase se vuelve crítica y debe preservarse cuidadosamente.
+    </div>
+
+    <div class="callout sc fade-in">
+      <div class="callout-label">// Cancelación de fase — ejemplo</div>
+      <span class="sc-comment">// Dos señales idénticas en polaridad opuesta → silencio</span><br>
+      {<br>
+      &nbsp;&nbsp;var a = <span class="sc-ugen">SinOsc</span>.ar(<span class="sc-number">440</span>);<br>
+      &nbsp;&nbsp;var b = <span class="sc-ugen">SinOsc</span>.ar(<span class="sc-number">440</span>, phase: <span class="sc-ugen">pi</span>); <span class="sc-comment">// invertida 180°</span><br>
+      &nbsp;&nbsp;(a + b) * <span class="sc-number">0.3</span> ! <span class="sc-number">2</span>  <span class="sc-comment">// → silencio</span><br>
+      }.play;
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 2.5 -->
+  <section class="section fade-in" id="c2-mag">
+    <h3 class="section-title">Magnitud del Sonido</h3>
+
+    <p>El <strong>decibelio</strong> es una unidad de medida para relaciones de magnitud, especialmente en sistemas de audio. En mediciones acústicas, la escala de decibelios indica la razón de un nivel respecto a un nivel de referencia:</p>
+
+    <div class="formula fade-in">
+      dB = 10 × log<sub>10</sub> (nivel / nivel de referencia)
+    </div>
+
+    <p>La base logarítmica de los decibelios refleja cómo funciona la percepción auditiva humana. Si dos notas suenan juntas y cada una está a 60 dB, el aumento de nivel es de solo 3 dB. Un aumento de un millón de veces en intensidad resulta en solo 60 dB de incremento.</p>
+
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>Fuente sonora</th>
+          <th>Nivel aproximado</th>
+          <th>Referencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0 dB</td>
+          <td>Umbral de audición</td>
+          <td>10⁻¹² W/m²</td>
+        </tr>
+        <tr>
+          <td>20 dB</td>
+          <td>Susurro</td>
+          <td>Habitación muy silenciosa</td>
+        </tr>
+        <tr>
+          <td>60 dB</td>
+          <td>Conversación normal</td>
+          <td>A 1 metro de distancia</td>
+        </tr>
+        <tr>
+          <td>90–100 dB</td>
+          <td>Orquesta sinfónica forte</td>
+          <td>Primera fila</td>
+        </tr>
+        <tr>
+          <td>110 dB</td>
+          <td>Tuttis orquestales extremos</td>
+          <td>Rango dinámico máximo en vivo</td>
+        </tr>
+        <tr>
+          <td>120–130 dB</td>
+          <td>Umbral de dolor</td>
+          <td>Evitar exposición prolongada</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout sc fade-in">
+      <div class="callout-label">// Decibelios en SuperCollider</div>
+      <span class="sc-number">0</span>.dbamp;     <span class="sc-comment">// 0 dB → amplitud 1.0</span><br>
+      <span class="sc-number">-6</span>.dbamp;    <span class="sc-comment">// -6 dB → amplitud ~0.5</span><br>
+      <span class="sc-number">-20</span>.dbamp;   <span class="sc-comment">// -20 dB → amplitud 0.1</span><br>
+      <span class="sc-number">0.5</span>.ampdb;   <span class="sc-comment">// amplitud 0.5 → ~-6 dB</span><br>
+      <span class="sc-ugen">Limiter</span>.ar(sig, <span class="sc-number">0.9</span>); <span class="sc-comment">// evita clipping sobre 0 dBFS</span>
+    </div>
+  </section>
+
+  <div class="ornament fade-in">· · ·</div>
+
+  <!-- 2.6 -->
+  <section class="section fade-in" id="c2-dynamic">
+    <h3 class="section-title">Rango Dinámico</h3>
+
+    <p>El <strong>rango dinámico</strong> es la razón entre el sonido más fuerte y el más suave que puede manejar un sistema sin distorsión. El rango de la audición humana se extiende desde 0 dB hasta alrededor de 125 dB.</p>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">📼</div>
+        <div class="concept-title">Cinta analógica</div>
+        <p class="concept-desc">~80 dB para un tono de 1 kHz en grabadoras profesionales sin reducción de ruido. Límite físico del proceso magnético.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">💿</div>
+        <div class="concept-title">CD (16 bits)</div>
+        <p class="concept-desc">~96 dB teóricos. 40 dB más que la cinta analógica. El estándar que hizo viable el audio digital para el gran público.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎙️</div>
+        <div class="concept-title">24 bits</div>
+        <p class="concept-desc">~144 dB teóricos. Estándar de producción profesional actual. Permite margen de headroom sin sacrificar calidad.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🖥️</div>
+        <div class="concept-title">Float 32 bits (SC)</div>
+        <p class="concept-desc">SuperCollider opera internamente en coma flotante de 32 bits — rango dinámico prácticamente ilimitado en el procesamiento.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote fade-in">
+      "Una diferencia de algo menos de 1 dB entre los niveles de amplitud de dos sonidos corresponde a la diferencia de amplitud más pequeña que puede escucharse."
+    </div>
+
+    <div class="callout key fade-in">
+      <div class="callout-label">Conexión directa con síntesis aditiva</div>
+      Los tres parámetros de este capítulo — frecuencia, amplitud, fase — son exactamente los tres parámetros de cada parcial en síntesis aditiva:<br><br>
+      • <strong>Frecuencia</strong> → <code>fund * n</code> dentro de cada SinOsc<br>
+      • <strong>Amplitud</strong> → el <code>1/n</code> o array de <code>relativeAmps</code><br>
+      • <strong>Fase</strong> → ignorada en síntesis básica (<code>phase: 0</code>), crítica en resíntesis FFT<br><br>
+      El rango dinámico explica por qué normalizas con <code>* 0.15 ! 2</code> al final — sumas 8 parciales y cada uno contribuye al nivel total.
+    </div>
+  </section>
+
+</article>
+
+<section class="roads-coda">
+  <div class="roads-coda-content">
+    <div>
+      <div class="roads-coda-title">The Computer Music Tutorial</div>
+      <div class="roads-coda-meta">Curtis Roads · Segunda Edición · MIT Press, 2023 · ISBN 978-0-262-04491-2</div>
+      <div class="roads-coda-meta" style="margin-top:0.5rem">Traducción y comentarios para estudio de SuperCollider · Capítulos 1 y 2</div>
+    </div>
+    <div class="roads-coda-badge">SC · Live Coding</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="site-logo" href="index.html">TWISTORES</a>
+      <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_sections">Secciones</h4>
+      <ul>
+        <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+        <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+        <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+        <li><a href="pages/laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+        <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_project">Proyecto</h4>
+      <ul>
+        <li><a href="pages/sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
+        <li><a href="assets/code/sc/sesion-01-pad-sustractivo.scd">Patch .scd</a></li>
+        <li><a href="curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
+        <li><span>SuperCollider</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 TWISTORES</p>
+    <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+
+<script>
+  // ── CHAPTER SWITCHING ──
+  function showChapter(idx) {
+    document.querySelectorAll('.chapter').forEach((c, i) => {
+      c.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.chapter-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── SPECTRUM BAR TOGGLE ──
+  const barAmps = [1, 0.5, 0.333, 0.25, 0.2, 0.167, 0.143, 0.125];
+  const barActive = [true,true,true,true,true,true,true,true];
+
+  function toggleBar(el, idx) {
+    barActive[idx] = !barActive[idx];
+    el.style.height = barActive[idx] ? (barAmps[idx] * 100) + '%' : '4%';
+    el.style.opacity = barActive[idx] ? '1' : '0.2';
+  }
+
+  // ── SCROLL FADE IN ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── NAV LINKS ──
+  document.querySelectorAll('.roads-subnav a[href="#"]').forEach(a => {
+    a.addEventListener('click', e => e.preventDefault());
+  });
+</script>
+
+</body>
+</html>
