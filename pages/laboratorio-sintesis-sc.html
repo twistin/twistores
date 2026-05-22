@@ -201,26 +201,53 @@
         </div>
 
         <section class="page-section fade-in" aria-labelledby="lab-featured-title">
-            <article class="feature-panel">
-                <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Fragmento de codigo SuperCollider sobre una interfaz oscura" loading="lazy">
-                <div class="feature-panel-body">
-                    <div class="feature-panel-kicker">
-                        <span class="tag">Sesión 01</span>
-                        <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+            <div class="session-stack" style="display: flex; flex-direction: column; gap: 40px;">
+                
+                <!-- SESIÓN 01 -->
+                <article class="feature-panel">
+                    <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Fragmento de codigo SuperCollider sobre una interfaz oscura" loading="lazy">
+                    <div class="feature-panel-body">
+                        <div class="feature-panel-kicker">
+                            <span class="tag">Sesión 01</span>
+                            <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+                        </div>
+                        <h2 class="feature-panel-title" id="lab-featured-title">Pad sustractivo y sus expansiones</h2>
+                        <p class="feature-panel-text">La primera sesión parte de un <code>~pad</code> en ProxySpace y avanza por control armónico, paneo por voz, ruido decorrelacionado, modulación lenta, resonadores y armonía móvil con <code>Tdef</code>.</p>
+                        <ul class="feature-panel-list">
+                            <li><strong>Base:</strong> ruido marrón filtrado con <code>BPF</code> en varias voces.</li>
+                            <li><strong>Control:</strong> diferencia entre <code>var</code>, <code>arg</code> y <code>\notes.kr</code> dentro de NodeProxy.</li>
+                            <li><strong>Ampliación:</strong> paso de síntesis sustractiva a ideas de resonancia con <code>Klank</code> y <code>Ringz</code>.</li>
+                        </ul>
+                        <div class="feature-panel-actions">
+                            <a href="sesion-01-pad-sustractivo.html" class="btn">Abrir sesión 01 →</a>
+                            <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost">Abrir patch .scd</a>
+                        </div>
                     </div>
-                    <h2 class="feature-panel-title" id="lab-featured-title">Pad sustractivo y sus expansiones</h2>
-                    <p class="feature-panel-text">La primera sesión parte de un <code>~pad</code> en ProxySpace y avanza por control armónico, paneo por voz, ruido decorrelacionado, modulación lenta, resonadores y armonía móvil con <code>Tdef</code>.</p>
-                    <ul class="feature-panel-list">
-                        <li><strong>Base:</strong> ruido marrón filtrado con <code>BPF</code> en varias voces.</li>
-                        <li><strong>Control:</strong> diferencia entre <code>var</code>, <code>arg</code> y <code>\notes.kr</code> dentro de NodeProxy.</li>
-                        <li><strong>Ampliación:</strong> paso de síntesis sustractiva a ideas de resonancia con <code>Klank</code> y <code>Ringz</code>.</li>
-                    </ul>
-                    <div class="feature-panel-actions">
-                        <a href="sesion-01-pad-sustractivo.html" class="btn">Abrir sesión 01 →</a>
-                        <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost">Abrir patch .scd</a>
+                </article>
+
+                <!-- SESIÓN 02 -->
+                <article class="feature-panel">
+                    <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Código de live coding en SuperCollider con diagramas rítmicos" loading="lazy">
+                    <div class="feature-panel-body">
+                        <div class="feature-panel-kicker">
+                            <span class="tag">Sesión 02</span>
+                            <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+                        </div>
+                        <h2 class="feature-panel-title">Sistema de live coding rítmico</h2>
+                        <p class="feature-panel-text">La segunda sesión aborda la construcción de un motor rítmico completo y robusto directamente en el servidor. Cubre reloj maestro con impulsos de kr, rejilla de secuenciación binaria con Select, limitación y envíos dinámicos de efectos paralelos sincronizados con el tempo.</p>
+                        <ul class="feature-panel-list">
+                            <li><strong>Reloj kr:</strong> estabilidad absoluta de tiempo mediante <code>Impulse</code> y <code>PulseCount</code>.</li>
+                            <li><strong>Síntesis rítmica:</strong> bombo, caja, hi-hat y un aplauso analógico con envolvente multi-burst.</li>
+                            <li><strong>Efectos paralelos:</strong> ruteo dinámico hacia buses de reverb y delay con interpolación tiempo-sincronizada.</li>
+                        </ul>
+                        <div class="feature-panel-actions">
+                            <a href="sesion-02-live-coding-ritmico.html" class="btn">Abrir sesión 02 →</a>
+                            <a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" class="btn btn-ghost" download>Abrir patch .scd</a>
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
+
+            </div>
         </section>
 
         <hr class="divider">
@@ -262,6 +289,7 @@
                     <h3>Índice actual</h3>
                     <ul>
                         <li><strong>Sesión 01.</strong> Pad sustractivo y sus expansiones.</li>
+                        <li><strong>Sesión 02.</strong> Sistema de live coding rítmico.</li>
                     </ul>
                     <p class="session-card-note">archivo en crecimiento</p>
                     <div class="topic-cloud" aria-label="Temas del laboratorio">
@@ -273,6 +301,11 @@
                         <span class="topic-pill">Tdef</span>
                         <span class="topic-pill">Pad</span>
                         <span class="topic-pill">Armonía móvil</span>
+                        <span class="topic-pill">Impulse.kr</span>
+                        <span class="topic-pill">Secuenciación</span>
+                        <span class="topic-pill">Limiter</span>
+                        <span class="topic-pill">GVerb</span>
+                        <span class="topic-pill">CombC</span>
                     </div>
                 </aside>
             </div>
@@ -337,9 +370,9 @@
                 <h4 data-i18n="footer_project">Proyecto</h4>
                 <ul>
                     <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
-                    <li><a href="../assets/code/sc/sesion-01-pad-sustractivo.scd">Patch .scd</a></li>
+                    <li><a href="sesion-02-live-coding-ritmico.html">Sesión 02 · Live Coding Rítmico</a></li>
+                    <li><a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" download>Patch Sesión 02 .scd</a></li>
                     <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
-                    <li><span>SuperCollider</span></li>
                 </ul>
             </div>
         </div>
