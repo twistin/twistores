@@ -224,8 +224,23 @@
                 </div>
                 <p class="section-intro">Nuevo archivo de sesiones de estudio centradas en patches, técnicas de síntesis y desarrollo progresivo de material en SuperCollider.</p>
             </div>
-            <article class="feature-panel fade-in">
-                <img class="feature-panel-media" src="assets/img/sc-banner.png" alt="Fragmento de código SuperCollider: síntesis y live coding en desarrollo" loading="lazy">
+            <article class="feature-panel feature-panel--lab fade-in">
+                <div class="feature-panel-media code-editor-container">
+                    <div class="code-terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="terminal-title">supercollider // live_synthesis.scd</span>
+                    </div>
+                    <pre><code><span class="sc-comment">// Pad sustractivo base filtrado</span>
+<span class="sc-symbol">~pad</span> = {
+    <span class="sc-keyword">var</span> sig = <span class="sc-ugen">LFTri.ar</span>(<span class="sc-arg">\freq.kr</span>(<span class="sc-number">220</span>));
+    <span class="sc-keyword">var</span> env = <span class="sc-ugen">EnvGen.kr</span>(<span class="sc-ugen">Env.adsr</span>, <span class="sc-arg">\gate.kr</span>(<span class="sc-number">1</span>));
+    <span class="sc-ugen">BPF.ar</span>(sig * env, <span class="sc-arg">\ffreq.kr</span>(<span class="sc-number">800</span>));
+};</code></pre>
+                </div>
                 <div class="feature-panel-body">
                     <div class="feature-panel-kicker">
                         <span class="tag">Laboratorio</span>
@@ -256,7 +271,7 @@
                 </div>
                 <p class="section-intro" data-i18n="home_live_intro">Archivo de directos documentados con contexto, materiales y piezas interpretadas. La home solo destaca la sesión más reciente.</p>
             </div>
-            <article class="feature-panel fade-in">
+            <article class="feature-panel feature-panel--live fade-in">
                 <img class="feature-panel-media" src="assets/img/schmidt/s1.jpeg" alt="Sesión de live coding Schmidt en Sala SuperSonic, Vigo, el 3 de abril de 2026" loading="lazy">
                 <div class="feature-panel-body">
                     <div class="feature-panel-kicker">

@@ -22,146 +22,694 @@
     <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
     <link rel="stylesheet" href="../style.css">
     <style>
-        .lab-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-            gap: 24px;
-            align-items: start;
-        }
-        .lab-box {
+        /* ============================================================
+           LABORATORY DASHBOARD UPGRADE
+           ============================================================ */
+        
+        /* Page Header Cyber Accent */
+        .page-header {
+            position: relative;
+            padding: 36px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(12, 25, 35, 0.46), rgba(7, 17, 24, 0.76));
             border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(126, 227, 213, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .lab-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(126, 227, 213, 0.06);
+            border: 1px solid var(--border-strong);
+            padding: 5px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 var(--accent);
+            animation: pulse-ring 1.8s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(126, 227, 213, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 5px rgba(126, 227, 213, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(126, 227, 213, 0);
+            }
+        }
+
+        .status-text {
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* Filter bar */
+        .lab-filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn .filter-icon {
+            opacity: 0.5;
+            transition: opacity var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--heading);
+            border-color: var(--border-strong);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .filter-btn.active {
+            color: var(--bg);
+            background: var(--accent);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .filter-btn.active .filter-icon {
+            opacity: 1;
+            color: var(--bg);
+        }
+
+        /* Dashboard Layout */
+        .lab-dashboard {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+            gap: 36px;
+            align-items: start;
+            margin-top: 8px;
+        }
+        
+        .lab-main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dashboard-section-title {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .session-log-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Timeline Connection */
+        @media (min-width: 961px) {
+            .session-log-stack {
+                position: relative;
+                padding-left: 28px;
+            }
+            .session-log-stack::before {
+                content: '';
+                position: absolute;
+                left: 8px;
+                top: 24px;
+                bottom: 24px;
+                width: 1px;
+                border-left: 1px dashed var(--border-strong);
+                opacity: 0.5;
+            }
+        }
+
+        /* Session Cards */
+        .session-log-card {
+            border: 1px solid var(--border-strong);
             border-radius: var(--radius);
             background: var(--surface);
-            padding: 24px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            transition: all var(--transition);
+            box-shadow: var(--glow-sm);
+            position: relative;
         }
-        .lab-box h3 {
-            margin-bottom: 12px;
-            font-size: 0.98rem;
-            color: var(--heading);
+
+        .session-log-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
         }
-        .lab-box p,
-        .lab-box li {
-            font-size: 0.9rem;
-            line-height: 1.75;
-            color: var(--text-dim);
+
+        /* Card timeline dot */
+        @media (min-width: 961px) {
+            .session-log-card::before {
+                content: '';
+                position: absolute;
+                left: -24px;
+                top: 36px;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background: var(--bg);
+                border: 2px solid var(--border-strong);
+                transition: all var(--transition);
+                z-index: 2;
+            }
+            .session-log-card:hover::before {
+                background: var(--accent);
+                border-color: var(--accent);
+                box-shadow: 0 0 6px var(--accent);
+                transform: scale(1.2);
+            }
         }
-        .lab-box ul {
-            margin: 0;
-            padding-left: 18px;
-        }
-        .topic-cloud {
+
+        /* Technical Badges Row */
+        .session-badge-row {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 16px;
+            align-items: center;
+            margin-bottom: 4px;
+            width: 100%;
         }
-        .topic-pill {
+
+        .tech-badge {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tech-badge.session-num {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .tech-badge.category {
+            border: 1px solid var(--border-strong);
+            color: var(--heading);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tech-badge.difficulty {
+            background: rgba(126, 227, 213, 0.08);
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        .tech-badge.difficulty.easy {
+            background: rgba(126, 227, 213, 0.06);
+            color: var(--accent);
+            border-color: var(--border);
+        }
+
+        .tech-badge.difficulty.medium {
+            background: var(--signal-soft);
+            color: var(--signal);
+            border-color: var(--signal-border);
+        }
+
+        .tech-badge.lines {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+        }
+
+        .session-log-date {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            letter-spacing: 1.2px;
+            margin-left: auto;
+        }
+
+        .session-log-title {
+            font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+            line-height: 1.2;
+            color: var(--heading);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .session-log-desc {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        /* IDE/Terminal style Code Box */
+        .session-log-code-preview {
+            border: 1px solid rgba(126, 227, 213, 0.08);
+            border-radius: var(--radius);
+            background: rgba(2, 12, 18, 0.65);
+            overflow: hidden;
+            position: relative;
+            margin: 8px 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .code-terminal-header {
+            display: flex;
+            align-items: center;
+            background: rgba(2, 12, 18, 0.85);
+            border-bottom: 1px solid rgba(126, 227, 213, 0.06);
+            padding: 8px 16px;
             font-family: var(--mono);
             font-size: 0.64rem;
-            letter-spacing: 1px;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+            margin-right: 14px;
+        }
+
+        .terminal-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .terminal-dots .dot.red { background-color: #ff5f56; }
+        .terminal-dots .dot.yellow { background-color: #ffbd2e; }
+        .terminal-dots .dot.green { background-color: #27c93f; }
+
+        .terminal-title {
+            color: var(--text-dim);
+            opacity: 0.8;
+        }
+
+        .copy-btn {
+            background: rgba(126, 227, 213, 0.05);
+            border: 1px solid rgba(126, 227, 213, 0.15);
+            border-radius: 4px;
+            color: var(--accent);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            padding: 3px 8px;
+            margin-left: auto;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(126, 227, 213, 0.12);
+            color: var(--heading);
+        }
+
+        .copy-btn.copied {
+            background: rgba(43, 194, 83, 0.15);
+            border-color: rgba(43, 194, 83, 0.3);
+            color: #27c93f;
+        }
+
+        .session-log-code-preview pre {
+            margin: 0;
+            padding: 14px 18px;
+            overflow-x: auto;
+        }
+
+        .session-log-code-preview code {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            line-height: 1.6;
+            color: #dbe8e4;
+            white-space: pre;
+        }
+
+        /* Micro Syntax Highlighter inside previews */
+        .sc-comment { color: var(--text-dim); font-style: italic; opacity: 0.75; }
+        .sc-symbol { color: var(--accent); font-weight: bold; }
+        .sc-ugen { color: var(--heading); font-weight: 600; }
+        .sc-arg { color: var(--signal); }
+        .sc-number { color: #f78c6c; transition: color var(--transition); }
+        .sc-keyword { color: var(--accent2); }
+
+        /* Custom Bullet Highlights */
+        .session-log-highlights {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .session-log-highlights li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .session-log-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: var(--mono);
+            font-weight: bold;
+        }
+
+        .session-log-tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .micro-tag {
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            padding: 6px 10px;
+            padding: 3px 8px;
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .session-log-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+        }
+
+        /* Sidebar & Widgets */
+        .lab-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: var(--glow-sm);
+            border-left: 3px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .widget-title {
+            font-size: 0.76rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin: 0;
+        }
+
+        .widget-intro {
+            font-size: 0.86rem;
+            line-height: 1.6;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .widget-notes-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .widget-notes-list li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-dim);
+        }
+
+        .widget-notes-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.6rem;
+            color: var(--accent);
+        }
+
+        .widget-label {
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+        }
+
+        /* Reference card in sidebar */
+        .sidebar-widget.reference-widget {
+            border-left-color: var(--signal);
+            background: 
+                radial-gradient(circle at 90% 10%, rgba(240, 192, 109, 0.08), transparent 40%),
+                var(--surface-strong);
+        }
+
+        .widget-reference-card {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ref-author {
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .widget-reference-card h4 {
+            font-size: 1.05rem;
+            color: var(--heading);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .widget-reference-card p {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .btn-full {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 0.78rem;
+        }
+
+        /* Topic Cloud styling in sidebar */
+        .topic-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .topic-pill {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 4px 10px;
             border: 1px solid var(--border);
             border-radius: 999px;
             color: var(--text-dim);
-            background: rgba(255,255,255,0.02);
+            background: rgba(255,255,255,0.01);
+            transition: all var(--transition);
         }
-        .session-card-note {
-            margin-top: 10px;
-            font-family: var(--mono);
-            font-size: 0.68rem;
-            color: var(--accent2);
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
+
+        .topic-pill:hover {
+            color: var(--heading);
+            border-color: var(--accent);
+            background: rgba(126, 227, 213, 0.08);
+            box-shadow: 0 0 6px rgba(126, 227, 213, 0.2);
+            cursor: default;
+            transform: translateY(-1px);
         }
-        .reference-panel {
-            position: relative;
-            border: 1px solid var(--border-strong);
-            border-radius: var(--radius);
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 85% 18%, rgba(240,192,109,0.12), transparent 26%),
-                linear-gradient(145deg, rgba(126,227,213,0.08) 0%, rgba(7,17,24,0.06) 22%, var(--surface) 100%);
-            box-shadow: var(--glow-sm);
+
+        /* Custom Scrollbar for Code Blocks */
+        .session-log-code-preview pre::-webkit-scrollbar {
+            height: 6px;
         }
-        .reference-panel::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(90deg, transparent 0, rgba(255,255,255,0.03) 50%, transparent 100%),
-                radial-gradient(circle at 18% 24%, rgba(255,255,255,0.05), transparent 22%);
-            pointer-events: none;
+        .session-log-code-preview pre::-webkit-scrollbar-track {
+            background: rgba(2, 12, 18, 0.2);
         }
-        .reference-panel-inner {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-            gap: 24px;
-            padding: 30px;
+        .session-log-code-preview pre::-webkit-scrollbar-thumb {
+            background: var(--border-strong);
+            border-radius: 3px;
         }
-        .reference-panel-copy {
-            max-width: 60ch;
+        .session-log-code-preview pre::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
         }
-        .reference-panel-meta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-            font-family: var(--mono);
-            font-size: 0.64rem;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: var(--accent2);
+
+        /* LIGHT THEME OVERRIDES */
+        [data-theme="light"] .page-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(220, 235, 232, 0.5));
         }
-        .reference-panel-title {
-            font-size: clamp(1.3rem, 2.5vw, 2rem);
-            line-height: 1.1;
-            margin-bottom: 14px;
+
+        [data-theme="light"] .filter-btn:hover {
+            background: rgba(0, 122, 101, 0.02);
         }
-        .reference-panel-copy p {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.8;
+
+        [data-theme="light"] .filter-btn.active {
+            color: #ffffff;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        [data-theme="light"] .tech-badge.session-num {
+            color: #ffffff;
+        }
+
+        [data-theme="light"] .tech-badge.category {
+            background: rgba(0, 122, 101, 0.02);
+        }
+
+        [data-theme="light"] .session-log-code-preview {
+            background: #f4f8f7;
+            border-color: rgba(0, 122, 101, 0.12);
+            box-shadow: inset 0 2px 6px rgba(9, 37, 33, 0.04);
+        }
+
+        [data-theme="light"] .code-terminal-header {
+            background: #e5edea;
+            border-bottom-color: rgba(0, 122, 101, 0.08);
+        }
+
+        [data-theme="light"] .terminal-title {
             color: var(--text-dim);
         }
-        .reference-panel-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 22px;
+
+        [data-theme="light"] .copy-btn {
+            background: rgba(0, 122, 101, 0.04);
+            border-color: rgba(0, 122, 101, 0.12);
+            color: var(--accent);
         }
-        .reference-panel-notes {
-            border-left: 1px solid var(--border);
-            padding-left: 24px;
+
+        [data-theme="light"] .copy-btn:hover {
+            background: rgba(0, 122, 101, 0.08);
+            color: var(--heading);
         }
-        .reference-panel-notes h3 {
-            margin-bottom: 12px;
-            font-size: 0.88rem;
+
+        [data-theme="light"] .copy-btn.copied {
+            background: rgba(43, 194, 83, 0.08);
+            border-color: rgba(43, 194, 83, 0.2);
+            color: #1b8528;
         }
-        .reference-panel-notes ul {
-            margin: 0;
-            padding-left: 18px;
+
+        [data-theme="light"] .session-log-code-preview code {
+            color: var(--text);
         }
-        .reference-panel-notes li {
-            margin-bottom: 10px;
-            font-size: 0.86rem;
-            line-height: 1.7;
-            color: var(--text-dim);
+
+        [data-theme="light"] .sc-number {
+            color: #cc4e1f; /* Vibrant red-orange for high contrast in light mode */
         }
-        @media (max-width: 860px) {
-            .lab-grid {
+
+        [data-theme="light"] .session-log-code-preview pre::-webkit-scrollbar-track {
+            background: rgba(0, 122, 101, 0.02);
+        }
+
+        [data-theme="light"] .session-log-code-preview pre::-webkit-scrollbar-thumb {
+            background: rgba(0, 122, 101, 0.15);
+        }
+
+        [data-theme="light"] .session-log-code-preview pre::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        @media (max-width: 960px) {
+            .lab-dashboard {
                 grid-template-columns: 1fr;
+                gap: 28px;
             }
-            .reference-panel-inner {
-                grid-template-columns: 1fr;
-            }
-            .reference-panel-notes {
-                border-left: none;
-                border-top: 1px solid var(--border);
-                padding-left: 0;
-                padding-top: 20px;
+            .lab-sidebar {
+                position: static;
             }
         }
     </style>
@@ -194,160 +742,194 @@
     </header>
 
     <main class="container">
+        <!-- HEADER DE PÁGINA -->
         <div class="page-header fade-in">
+            <div class="lab-status-badge">
+                <span class="pulse-dot"></span>
+                <span class="status-text">LABORATORIO ACTIVO</span>
+            </div>
             <p class="section-label">// supercollider · síntesis · cuaderno abierto</p>
             <h1>Laboratorio de Síntesis con SC</h1>
-            <p class="page-intro">Una sección para ir publicando sesiones de estudio con SuperCollider como laboratorio técnico: patches, hallazgos, errores útiles, variaciones y ampliaciones sucesivas.</p>
+            <p class="page-intro">Una sección para publicar sesiones de estudio con SuperCollider como laboratorio técnico: patches de código, teoría acústica, diagramas y variaciones en tiempo real.</p>
+            
+            <div class="lab-filter-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <span class="filter-icon">⧉</span> Todas las sesiones
+                </button>
+                <button class="filter-btn" data-filter="sintesis">
+                    <span class="filter-icon">∿</span> Síntesis Sustractiva
+                </button>
+                <button class="filter-btn" data-filter="ritmica">
+                    <span class="filter-icon">⚡</span> Rítmica &amp; Live Coding
+                </button>
+            </div>
         </div>
 
-        <section class="page-section fade-in" aria-labelledby="lab-featured-title">
-            <div class="session-stack" style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- DASHBOARD GRID -->
+        <div class="lab-dashboard fade-in">
+            
+            <!-- COLUMNA IZQUIERDA: LAS SESIONES -->
+            <div class="lab-main-col">
+                <h2 class="dashboard-section-title">// Sesiones de estudio publicadas</h2>
                 
-                <!-- SESIÓN 01 -->
-                <article class="feature-panel">
-                    <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Fragmento de codigo SuperCollider sobre una interfaz oscura" loading="lazy">
-                    <div class="feature-panel-body">
-                        <div class="feature-panel-kicker">
-                            <span class="tag">Sesión 01</span>
-                            <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+                <div class="session-log-stack">
+                    
+                    <!-- SESIÓN 01 -->
+                    <article class="session-log-card" data-category="sintesis">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">SC-01</span>
+                            <span class="tech-badge category">Síntesis Sustractiva</span>
+                            <span class="tech-badge difficulty easy">Principiante</span>
+                            <span class="tech-badge lines">~6 lín.</span>
+                            <span class="session-log-date">MAYO 2026</span>
                         </div>
-                        <h2 class="feature-panel-title" id="lab-featured-title">Pad sustractivo y sus expansiones</h2>
-                        <p class="feature-panel-text">La primera sesión parte de un <code>~pad</code> en ProxySpace y avanza por control armónico, paneo por voz, ruido decorrelacionado, modulación lenta, resonadores y armonía móvil con <code>Tdef</code>.</p>
-                        <ul class="feature-panel-list">
-                            <li><strong>Base:</strong> ruido marrón filtrado con <code>BPF</code> en varias voces.</li>
-                            <li><strong>Control:</strong> diferencia entre <code>var</code>, <code>arg</code> y <code>\notes.kr</code> dentro de NodeProxy.</li>
-                            <li><strong>Ampliación:</strong> paso de síntesis sustractiva a ideas de resonancia con <code>Klank</code> y <code>Ringz</code>.</li>
+                        <h3 class="session-log-title">Pad sustractivo y sus expansiones</h3>
+                        <p class="session-log-desc">La primera sesión parte de un <code>~pad</code> sustractivo en ProxySpace y avanza hacia la decorrelación estéreo por fase, modulación analógica de filtros y transiciones hacia resonadores de modelado físico con Klank y Ringz.</p>
+                        
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // sesion_01_pad.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// Pad sustractivo base filtrado por voz</span>
+<span class="sc-symbol">~pad</span> = {
+    <span class="sc-keyword">var</span> sig = <span class="sc-ugen">LFTri.ar</span>(<span class="sc-arg">\freq.kr</span>(<span class="sc-number">220</span>));
+    <span class="sc-keyword">var</span> env = <span class="sc-ugen">EnvGen.kr</span>(<span class="sc-ugen">Env.adsr</span>, <span class="sc-arg">\gate.kr</span>(<span class="sc-number">1</span>));
+    <span class="sc-ugen">BPF.ar</span>(sig * env, <span class="sc-arg">\ffreq.kr</span>(<span class="sc-number">800</span>), <span class="sc-arg">\rq.kr</span>(<span class="sc-number">0.5</span>));
+};</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Base:</strong> ruido marrón decorrelacionado en varias voces espaciales.</li>
+                            <li><strong>Control armónico:</strong> diferencia práctica entre <code>var</code>, <code>arg</code> y <code>NamedControl</code>.</li>
+                            <li><strong>Expansión:</strong> transición hacia resonancia física con <code>Klank</code> y <code>Ringz</code>.</li>
                         </ul>
-                        <div class="feature-panel-actions">
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">ProxySpace</span>
+                            <span class="micro-tag">BPF</span>
+                            <span class="micro-tag">NamedControl</span>
+                            <span class="micro-tag">Klank</span>
+                            <span class="micro-tag">Ringz</span>
+                            <span class="micro-tag">Tdef</span>
+                        </div>
+
+                        <div class="session-log-actions">
                             <a href="sesion-01-pad-sustractivo.html" class="btn">Abrir sesión 01 →</a>
-                            <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost">Abrir patch .scd</a>
+                            <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- SESIÓN 02 -->
-                <article class="feature-panel">
-                    <img class="feature-panel-media" src="../assets/img/sc-banner.png" alt="Código de live coding en SuperCollider con diagramas rítmicos" loading="lazy">
-                    <div class="feature-panel-body">
-                        <div class="feature-panel-kicker">
-                            <span class="tag">Sesión 02</span>
-                            <span class="feature-panel-meta">Mayo 2026 · cuaderno en desarrollo</span>
+                    <!-- SESIÓN 02 -->
+                    <article class="session-log-card" data-category="ritmica">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">SC-02</span>
+                            <span class="tech-badge category">Rítmica &amp; Live Coding</span>
+                            <span class="tech-badge difficulty medium">Intermedio</span>
+                            <span class="tech-badge lines">~3 lín.</span>
+                            <span class="session-log-date">MAYO 2026</span>
                         </div>
-                        <h2 class="feature-panel-title">Sistema de live coding rítmico</h2>
-                        <p class="feature-panel-text">La segunda sesión aborda la construcción de un motor rítmico completo y robusto directamente en el servidor. Cubre reloj maestro con impulsos de kr, rejilla de secuenciación binaria con Select, limitación y envíos dinámicos de efectos paralelos sincronizados con el tempo.</p>
-                        <ul class="feature-panel-list">
-                            <li><strong>Reloj kr:</strong> estabilidad absoluta de tiempo mediante <code>Impulse</code> y <code>PulseCount</code>.</li>
-                            <li><strong>Síntesis rítmica:</strong> bombo, caja, hi-hat y un aplauso analógico con envolvente multi-burst.</li>
-                            <li><strong>Efectos paralelos:</strong> ruteo dinámico hacia buses de reverb y delay con interpolación tiempo-sincronizada.</li>
+                        <h3 class="session-log-title">Sistema de live coding rítmico</h3>
+                        <p class="session-log-desc">Construcción de un motor rítmico modular y robusto de alta estabilidad directamente en el servidor de audio (scsynth). Secuenciación por rejilla binaria por pasos con Select, limitación final e interpolación de efectos paralelos sincronizados.</p>
+                        
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // sesion_02_ritmo.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// Secuenciador rítmico por rejilla binaria en el servidor</span>
+pat = <span class="sc-arg">\pat.kr</span>([<span class="sc-number">1</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>, <span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>, <span class="sc-number">1</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>, <span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>,<span class="sc-number">0</span>]);
+gat = clk * <span class="sc-ugen">Select.kr</span>(cnt % <span class="sc-number">16</span>, pat);
+sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">120</span> + <span class="sc-number">48</span>) * envAmp;</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Reloj kr:</strong> estabilidad rítmica mediante <code>Impulse.kr</code> y <code>PulseCount.kr</code>.</li>
+                            <li><strong>Síntesis analógica:</strong> bombo, caja, hi-hat y clap con envolvente multi-burst.</li>
+                            <li><strong>Efectos paralelos:</strong> ruteo dinámico hacia buses de delay <code>CombC</code> y reverb.</li>
                         </ul>
-                        <div class="feature-panel-actions">
-                            <a href="sesion-02-live-coding-ritmico.html" class="btn">Abrir sesión 02 →</a>
-                            <a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" class="btn btn-ghost" download>Abrir patch .scd</a>
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">Impulse.kr</span>
+                            <span class="micro-tag">Secuenciación</span>
+                            <span class="micro-tag">Select.kr</span>
+                            <span class="micro-tag">GVerb</span>
+                            <span class="micro-tag">CombC</span>
+                            <span class="micro-tag">Limiter</span>
                         </div>
-                    </div>
-                </article>
 
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section class="page-section fade-in">
-            <div class="section-head">
-                <div>
-                    <p class="section-label">// método de trabajo</p>
-                    <h2 class="section-title">Cómo está pensada la sección</h2>
-                </div>
-                <p class="section-intro">No es un curso cerrado ni una serie de tutoriales rápidos. Esta sección funciona como archivo de estudio: cada sesión deja una versión legible del patch y un mapa de conceptos para retomarlos después.</p>
-            </div>
-
-            <div class="lab-grid">
-                <div class="card-grid">
-                    <article class="card fade-in">
-                        <p class="card-category">Formato</p>
-                        <h3>Sesiones acumulativas</h3>
-                        <p>Cada entrada parte de un problema concreto y deja abierta la siguiente ampliación. La idea es que el laboratorio crezca sin borrar el rastro del aprendizaje.</p>
-                    </article>
-                    <article class="card fade-in">
-                        <p class="card-category">Código</p>
-                        <h3>Patches comentados</h3>
-                        <p>Las sesiones combinan explicación técnica y código funcional para que el archivo sea útil tanto como bitácora personal como material consultable.</p>
-                    </article>
-                    <article class="card fade-in">
-                        <p class="card-category">Enfoque</p>
-                        <h3>Escucha y estructura</h3>
-                        <p>No solo importa que el patch funcione. Importa que cada cambio deje claro qué hace en el timbre, en el espacio estéreo y en la organización temporal.</p>
-                    </article>
-                    <article class="card fade-in">
-                        <p class="card-category">Próximas líneas</p>
-                        <h3>Lo que viene</h3>
-                        <p>Filtros, envolventes, síntesis FM, granularidad, feedback, espacialización y formas de composición en tiempo real con SC.</p>
+                        <div class="session-log-actions">
+                            <a href="sesion-02-live-coding-ritmico.html" class="btn">Abrir sesión 02 →</a>
+                            <a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
+                        </div>
                     </article>
                 </div>
+            </div>
 
-                <aside class="lab-box fade-in">
-                    <h3>Índice actual</h3>
-                    <ul>
-                        <li><strong>Sesión 01.</strong> Pad sustractivo y sus expansiones.</li>
-                        <li><strong>Sesión 02.</strong> Sistema de live coding rítmico.</li>
+            <!-- COLUMNA DERECHA: SIDEBAR DE RECURSOS -->
+            <aside class="lab-sidebar">
+                
+                <!-- WIDGET 1: ACERCA DEL LAB -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">// El Laboratorio</h3>
+                    <p class="widget-intro">Este espacio funciona como bitácora de estudio técnica y archivo de patches de código abiertos. No es un curso lineal, sino una serie de exploraciones modulares acumulativas de síntesis.</p>
+                    <ul class="widget-notes-list">
+                        <li><strong>Código puro:</strong> Cada sesión incluye su patch funcional comentado listo para ejecutar en ProxySpace.</li>
+                        <li><strong>Teoría aplicada:</strong> Conexión explícita entre acústica, matemática de señal y síntesis de audio.</li>
+                        <li><strong>Abierto al crecimiento:</strong> Patches diseñados para ser hackeados y modificados en directo.</li>
                     </ul>
-                    <p class="session-card-note">archivo en crecimiento</p>
-                    <div class="topic-cloud" aria-label="Temas del laboratorio">
+                </div>
+
+                <!-- WIDGET 2: LECTURA DE REFERENCIA (CURTIS ROADS) -->
+                <div class="sidebar-widget reference-widget">
+                    <span class="widget-label">Estudio Teórico</span>
+                    <h3 class="widget-title">// Lectura de Apoyo</h3>
+                    <div class="widget-reference-card">
+                        <span class="ref-author">Curtis Roads</span>
+                        <h4>Audio Digital · Cap. 1-2</h4>
+                        <p>Una traducción y resumen anotado de los dos primeros capítulos de <em>The Computer Music Tutorial</em>. Indispensable para comprender fase, magnitud, aliasing y mezcla digital en SC.</p>
+                        <a href="../curtis_roads_capitulos.html" class="btn btn-sm btn-full">Abrir lectura →</a>
+                    </div>
+                </div>
+
+                <!-- WIDGET 3: TOPIC CLOUD -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">// Nube de Conceptos</h3>
+                    <div class="topic-cloud">
                         <span class="topic-pill">ProxySpace</span>
                         <span class="topic-pill">BPF</span>
                         <span class="topic-pill">NamedControl</span>
                         <span class="topic-pill">Klank</span>
                         <span class="topic-pill">Ringz</span>
                         <span class="topic-pill">Tdef</span>
-                        <span class="topic-pill">Pad</span>
-                        <span class="topic-pill">Armonía móvil</span>
                         <span class="topic-pill">Impulse.kr</span>
                         <span class="topic-pill">Secuenciación</span>
+                        <span class="topic-pill">Select.kr</span>
                         <span class="topic-pill">Limiter</span>
                         <span class="topic-pill">GVerb</span>
                         <span class="topic-pill">CombC</span>
-                    </div>
-                </aside>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section class="page-section fade-in" aria-labelledby="lab-reading-title">
-            <div class="section-head">
-                <div>
-                    <p class="section-label">// lecturas y mapas de estudio</p>
-                    <h2 class="section-title" id="lab-reading-title">Material de referencia integrado</h2>
-                </div>
-                <p class="section-intro">No todo el laboratorio tiene que ser patching directo. También hay traducciones, síntesis de lecturas y materiales técnicos que alimentan las sesiones y organizan el estudio.</p>
-            </div>
-
-            <article class="reference-panel fade-in">
-                <div class="reference-panel-inner">
-                    <div class="reference-panel-copy">
-                        <div class="reference-panel-meta">
-                            <span>Lectura de referencia</span>
-                            <span>Curtis Roads</span>
-                            <span>Capítulos 1–2</span>
-                        </div>
-                        <h3 class="reference-panel-title">Audio Digital · Curtis Roads</h3>
-                        <p>Una versión traducida y comentada de los dos primeros capítulos de <em>The Computer Music Tutorial</em>, enfocada como material de apoyo para músicos y para el propio laboratorio. Sirve como base para pensar historia del audio digital, representación de la señal, fase, magnitud y rango dinámico desde una perspectiva utilizable en SuperCollider.</p>
-                        <div class="reference-panel-actions">
-                            <a href="../curtis_roads_capitulos.html" class="btn">Abrir lectura →</a>
-                            <a href="sesion-01-pad-sustractivo.html" class="btn btn-ghost">Volver a la sesión 01 →</a>
-                        </div>
-                    </div>
-                    <div class="reference-panel-notes">
-                        <h3>Por qué está en el laboratorio</h3>
-                        <ul>
-                            <li>conecta fundamentos acústicos con decisiones de síntesis y mezcla;</li>
-                            <li>extiende el laboratorio hacia materiales de lectura y no solo hacia patches;</li>
-                            <li>deja una línea clara para futuras entradas de teoría aplicada.</li>
-                        </ul>
+                        <span class="topic-pill">Síntesis</span>
+                        <span class="topic-pill">Audio digital</span>
                     </div>
                 </div>
-            </article>
-        </section>
+
+            </aside>
+
+        </div>
     </main>
 
     <footer>
@@ -383,5 +965,76 @@
     </footer>
 
     <script src="../assets/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Interactive Filter Selector
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const sessionCards = document.querySelectorAll('.session-log-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    sessionCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        
+                        // Check if card matches filter
+                        if (filterValue === 'all' || cardCategory === filterValue) {
+                            card.style.display = 'flex';
+                            // Trigger reflow/animation
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(10px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Clipboard Copy Handler
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    // Find the sibling code element within the same preview block
+                    const previewBlock = button.closest('.session-log-code-preview');
+                    const codeElement = previewBlock.querySelector('code');
+                    
+                    if (codeElement) {
+                        try {
+                            const textToCopy = codeElement.textContent;
+                            await navigator.clipboard.writeText(textToCopy);
+                            
+                            // Visual feedback
+                            button.classList.add('copied');
+                            const copyTextSpan = button.querySelector('.copy-text');
+                            if (copyTextSpan) {
+                                copyTextSpan.textContent = '¡Copiado!';
+                            }
+                            
+                            setTimeout(() => {
+                                button.classList.remove('copied');
+                                if (copyTextSpan) {
+                                    copyTextSpan.textContent = 'Copiar';
+                                }
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Error al copiar el código:', err);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
