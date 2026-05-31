@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 03 · Síntesis granular — TWISTORES</title>
+    <meta name="description" content="Tercera sesión del Laboratorio de Síntesis con SC: teoría, parámetros y bloques prácticos de síntesis granular en SuperCollider.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/sesion-03-sintesis-granular.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Sesión 03 · Síntesis granular — TWISTORES">
+    <meta property="og:description" content="Teoría Roads, parámetros de grano, fill factor y cuatro bloques prácticos en SuperCollider.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/sesion-03-sintesis-granular.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sesión 03 · Síntesis granular — TWISTORES">
+    <meta name="twitter:description" content="Teoría Roads, parámetros de grano, fill factor y cuatro bloques prácticos en SuperCollider.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .granular-page {
+            --granular-bg: #0c1018;
+            --granular-bg-soft: #151c25;
+            --granular-panel: #171d26;
+            --granular-panel-2: #1d242e;
+            --granular-border: #343d49;
+            --granular-border-soft: rgba(255, 255, 255, 0.08);
+            --granular-text: #d6dbe3;
+            --granular-text-dim: #99a3b1;
+            --granular-hot: #ff4f74;
+            --granular-blue: #58a6ff;
+            --granular-green: #43d158;
+            --granular-gold: #f0be43;
+            --granular-violet: #b989ff;
+            --granular-maroon: #301520;
+            max-width: 1120px;
+            margin: 0 auto 84px;
+            color: var(--granular-text);
+        }
+
+        .granular-page .page-header {
+            padding: 52px 0 30px;
+            margin-bottom: 34px;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .granular-page .section-label {
+            color: var(--granular-text-dim);
+        }
+
+        .granular-page h1,
+        .granular-page h2,
+        .granular-page h3,
+        .granular-page h4 {
+            font-family: var(--sans);
+            letter-spacing: -0.04em;
+        }
+
+        .granular-page h1 {
+            font-size: clamp(2.6rem, 6vw, 4.6rem);
+            line-height: 0.94;
+        }
+
+        .granular-page .article-meta {
+            color: var(--granular-text-dim);
+        }
+
+        .granular-page .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .granular-page .article-lead {
+            max-width: 78ch;
+            color: var(--granular-text);
+            margin: 24px 0 18px;
+        }
+
+        .granular-page .article-editorial-meta {
+            background: rgba(18, 24, 33, 0.8);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .granular-page .article-editorial-meta p {
+            color: var(--granular-text-dim);
+        }
+
+        .granular-page .article-jumpnav {
+            border-top-color: rgba(255, 255, 255, 0.1);
+            gap: 12px;
+        }
+
+        .granular-page .article-jumpnav a {
+            color: var(--granular-text-dim);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(23, 29, 38, 0.72);
+            padding: 7px 10px;
+            border-radius: 999px;
+        }
+
+        .granular-page .article-jumpnav a:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .granular-cover {
+            position: relative;
+            overflow: hidden;
+            padding: 74px 48px 72px;
+            border: 1px solid var(--granular-border-soft);
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at top center, rgba(255, 255, 255, 0.04), transparent 32%),
+                linear-gradient(180deg, #0b1118 0%, #0b1017 36%, #0c1018 100%);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+            margin-bottom: 26px;
+        }
+
+        .granular-cover::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 260px;
+            height: 300px;
+            background:
+                linear-gradient(180deg, rgba(255, 79, 116, 0.15), transparent 82%),
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255, 79, 116, 0.26) 0,
+                    rgba(255, 79, 116, 0.26) 7px,
+                    rgba(65, 24, 36, 0.96) 7px,
+                    rgba(65, 24, 36, 0.96) 14px
+                );
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .granular-cover > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .cover-title .line-top {
+            display: block;
+            color: #edf1f8;
+            font-size: clamp(3.2rem, 9vw, 6rem);
+            font-weight: 700;
+        }
+
+        .cover-title .line-bottom {
+            display: block;
+            color: var(--granular-hot);
+            font-size: clamp(3.6rem, 10vw, 6.6rem);
+            font-weight: 700;
+            margin-top: -6px;
+        }
+
+        .cover-subtitle {
+            text-align: center;
+            color: #dce4ee;
+            font-size: clamp(1.15rem, 2.2vw, 1.95rem);
+            margin-bottom: 18px;
+        }
+
+        .cover-rule {
+            width: min(430px, 52vw);
+            height: 4px;
+            margin: 0 auto 54px;
+            background: linear-gradient(90deg, transparent, var(--granular-hot) 12%, var(--granular-hot) 88%, transparent);
+        }
+
+        .cover-anatomy {
+            max-width: 1020px;
+            margin: 0 auto 56px;
+            padding: 18px 18px 12px;
+            border: 1px solid var(--granular-border);
+            border-radius: 16px;
+            background: rgba(12, 17, 24, 0.96);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+
+        .cover-anatomy-title {
+            margin-bottom: 14px;
+            color: var(--granular-hot);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cover-anatomy svg,
+        .figure-panel svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cover-sources {
+            text-align: center;
+            color: var(--granular-text-dim);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 170px;
+        }
+
+        .cover-footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.18);
+            font-size: 0.92rem;
+            letter-spacing: 0.02em;
+        }
+
+        .granular-page .article-section {
+            margin-bottom: 42px;
+        }
+
+        .granular-page .article-section h2 {
+            font-size: clamp(2.1rem, 4vw, 3.15rem);
+            color: var(--granular-hot);
+            margin: 0 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            line-height: 1.06;
+        }
+
+        .granular-page .article-section h2::before {
+            content: "";
+            width: 8px;
+            height: 58px;
+            border-radius: 999px;
+            background: var(--granular-hot);
+            flex: none;
+        }
+
+        .granular-page .article-section h3 {
+            margin: 28px 0 14px;
+            font-size: 1.05rem;
+            color: var(--granular-blue);
+        }
+
+        .granular-page p {
+            color: var(--granular-text);
+        }
+
+        .granular-page .article-content p {
+            font-size: 0.98rem;
+            line-height: 1.82;
+            color: var(--granular-text);
+        }
+
+        .threshold-list {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0 26px;
+        }
+
+        .threshold-item {
+            font-size: 1rem;
+            color: var(--granular-text);
+        }
+
+        .threshold-item strong {
+            display: inline-block;
+            min-width: 98px;
+            font-weight: 600;
+        }
+
+        .threshold-item--hot strong { color: var(--granular-hot); }
+        .threshold-item--gold strong { color: var(--granular-gold); }
+        .threshold-item--green strong { color: var(--granular-green); }
+
+        .figure-panel,
+        .law-card,
+        .code-panel,
+        .density-strip,
+        .final-map,
+        .table-wrap {
+            border: 1px solid var(--granular-border);
+            border-radius: 16px;
+            background: rgba(15, 20, 28, 0.98);
+        }
+
+        .figure-panel {
+            padding: 18px;
+            margin: 24px 0 16px;
+        }
+
+        .figure-panel-title,
+        .density-strip-title,
+        .code-panel-title {
+            color: var(--granular-hot);
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+            margin-bottom: 12px;
+        }
+
+        .quote-stack {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .quote-card {
+            padding: 16px 18px;
+            border-radius: 12px;
+            background: var(--granular-panel);
+            border-left: 4px solid transparent;
+        }
+
+        .quote-card h4 {
+            font-size: 0.96rem;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .quote-card p {
+            margin: 0;
+            color: var(--granular-text);
+            line-height: 1.75;
+        }
+
+        .quote-card--blue {
+            border-left-color: var(--granular-blue);
+        }
+
+        .quote-card--blue h4 {
+            color: var(--granular-blue);
+        }
+
+        .quote-card--violet {
+            border-left-color: var(--granular-violet);
+        }
+
+        .quote-card--violet h4 {
+            color: var(--granular-violet);
+        }
+
+        .law-card {
+            margin: 24px 0 26px;
+            padding: 22px 26px;
+            text-align: center;
+            background: rgba(38, 24, 46, 0.88);
+            border: 2px solid var(--granular-violet);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+        }
+
+        .law-card strong {
+            font-size: clamp(1.32rem, 2.6vw, 2rem);
+            color: #f0eff8;
+            font-weight: 500;
+        }
+
+        .time-band-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 10px;
+            align-items: end;
+            padding: 18px 20px 26px;
+            margin-top: 10px;
+        }
+
+        .time-band-box {
+            background: var(--granular-panel);
+            border-radius: 10px;
+            padding: 14px 12px 10px;
+            min-height: 120px;
+        }
+
+        .time-band-box svg {
+            width: 100%;
+            height: 82px;
+            display: block;
+        }
+
+        .time-band-box span {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            color: var(--granular-text-dim);
+            font-size: 0.88rem;
+        }
+
+        .time-band-arrow {
+            align-self: center;
+            color: var(--granular-text-dim);
+            font-size: 1.4rem;
+            margin-top: -8px;
+        }
+
+        .observation-card {
+            padding: 18px 20px;
+            border-left: 4px solid var(--granular-gold);
+            background: rgba(27, 31, 39, 0.95);
+            border-radius: 12px;
+            margin-top: 18px;
+        }
+
+        .observation-card strong {
+            color: var(--granular-gold);
+        }
+
+        .envelope-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .envelope-card {
+            background: var(--granular-panel);
+            border-radius: 10px;
+            padding: 12px 10px 8px;
+        }
+
+        .envelope-card h4 {
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .envelope-card svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .grain-table,
+        .ugens-table,
+        .map-table,
+        .density-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .grain-table th,
+        .ugens-table th,
+        .map-table th,
+        .density-table th {
+            text-align: left;
+            padding: 14px 14px;
+            color: var(--granular-hot);
+            font-family: var(--sans);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .grain-table td,
+        .ugens-table td,
+        .map-table td,
+        .density-table td {
+            padding: 12px 14px;
+            color: var(--granular-text);
+        }
+
+        .grain-table tbody tr:nth-child(even),
+        .ugens-table tbody tr:nth-child(even),
+        .map-table tbody tr:nth-child(even),
+        .density-table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .grain-table td:nth-child(1),
+        .map-table td:nth-child(1),
+        .density-table td:nth-child(1) {
+            color: var(--granular-gold);
+        }
+
+        .grain-table td:nth-child(2),
+        .ugens-table td:nth-child(1),
+        .ugens-table td:nth-child(2),
+        .map-table td:nth-child(2) {
+            color: var(--granular-green);
+            font-family: var(--mono);
+        }
+
+        .table-wrap {
+            padding: 0;
+            overflow: hidden;
+            margin: 16px 0 24px;
+        }
+
+        .formula-line {
+            font-size: 1.1rem;
+            margin: 0 0 18px;
+        }
+
+        .formula-line strong {
+            color: var(--granular-text);
+        }
+
+        .density-strip {
+            padding: 16px 20px 18px;
+            margin: 16px 0 18px;
+        }
+
+        .density-strip svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .critical-rule {
+            margin-top: 14px;
+            padding: 16px 18px;
+            background: rgba(32, 33, 39, 0.98);
+            border-left: 5px solid var(--granular-hot);
+            border-radius: 12px;
+        }
+
+        .critical-rule strong {
+            color: var(--granular-hot);
+        }
+
+        .code-panel {
+            padding: 14px 16px 6px;
+            margin: 18px 0 20px;
+            overflow: hidden;
+        }
+
+        .terminal-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .terminal-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot--red { background: #ff5f57; }
+        .terminal-dot--gold { background: #febc2e; }
+        .terminal-dot--green { background: #28c840; }
+
+        .code-panel pre {
+            margin: 0;
+            overflow-x: auto;
+            padding-bottom: 12px;
+        }
+
+        .code-panel code {
+            display: block;
+            color: #e6ecf2;
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            line-height: 1.78;
+            white-space: pre;
+        }
+
+        .code-comment { color: #4bd361; }
+        .code-command { color: var(--granular-blue); }
+        .code-param { color: var(--granular-violet); }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 20px 0 10px;
+        }
+
+        .mode-card {
+            border: 1px solid var(--granular-border);
+            border-radius: 14px;
+            background: rgba(15, 20, 28, 0.94);
+            padding: 14px 14px 10px;
+        }
+
+        .mode-card h4 {
+            text-align: center;
+            color: var(--granular-text);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .mode-card svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .texture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .texture-card {
+            background: var(--granular-panel);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .texture-card svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .texture-card p {
+            margin: 0;
+            text-align: center;
+            line-height: 1.45;
+            font-size: 0.92rem;
+        }
+
+        .texture-card strong {
+            display: block;
+        }
+
+        .texture-card--blue strong { color: var(--granular-blue); }
+        .texture-card--green strong { color: var(--granular-green); }
+        .texture-card--hot strong { color: var(--granular-hot); }
+
+        .final-map {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .granular-page .article-related {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .granular-page .article-related-link {
+            background: rgba(18, 24, 33, 0.85);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .granular-page .article-related-link:hover {
+            border-color: rgba(255, 255, 255, 0.16);
+            background: rgba(22, 29, 39, 0.95);
+        }
+
+        @media (max-width: 920px) {
+            .granular-cover {
+                padding: 56px 24px 54px;
+            }
+
+            .granular-cover::before {
+                top: 220px;
+                height: 260px;
+            }
+
+            .cover-sources {
+                margin-bottom: 120px;
+            }
+
+            .time-band-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .time-band-arrow {
+                display: none;
+            }
+
+            .envelope-row,
+            .mode-grid,
+            .texture-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .granular-page .page-header {
+                padding-top: 34px;
+            }
+
+            .granular-page .article-section h2 {
+                gap: 12px;
+                font-size: 1.9rem;
+            }
+
+            .granular-page .article-section h2::before {
+                width: 6px;
+                height: 44px;
+            }
+
+            .cover-subtitle {
+                font-size: 1rem;
+            }
+
+            .cover-rule {
+                margin-bottom: 34px;
+            }
+
+            .grain-table,
+            .ugens-table,
+            .map-table,
+            .density-table {
+                font-size: 0.82rem;
+            }
+
+            .grain-table th,
+            .ugens-table th,
+            .map-table th,
+            .density-table th,
+            .grain-table td,
+            .ugens-table td,
+            .map-table td,
+            .density-table td {
+                padding: 10px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content granular-page">
+            <div class="page-header fade-in">
+                <p class="section-label">// supercollider · roads · fieldsteel · síntesis granular</p>
+                <h1>Sesión 03 · Síntesis granular</h1>
+                <div class="article-meta">
+                    <span>Mayo 2026</span>
+                    <span>Laboratorio de Síntesis con SC</span>
+                    <span>Teoría + parámetros + patches</span>
+                </div>
+            </div>
+
+            <section class="granular-cover fade-in" aria-label="Portada de la sesión">
+                <div class="cover-title">
+                    <span class="line-top">Síntesis</span>
+                    <span class="line-bottom">Granular</span>
+                </div>
+                <p class="cover-subtitle">Teoría · Parámetros · SuperCollider</p>
+                <div class="cover-rule"></div>
+
+                <div class="cover-anatomy">
+                    <h2 class="cover-anatomy-title">Anatomía de un Grano</h2>
+                    <svg viewBox="0 0 980 260" aria-hidden="true">
+                        <rect x="0" y="0" width="980" height="260" fill="#0c1118"></rect>
+                        <line x1="34" y1="132" x2="946" y2="132" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                        <path d="M34 132 C88 82, 134 82, 190 132 C246 182, 292 182, 348 132 C404 82, 450 82, 506 132 C562 182, 608 182, 664 132 C720 82, 766 82, 822 132 C878 182, 920 182, 946 132" stroke="#aab3c2" stroke-width="2" fill="none"></path>
+                        <path d="M34 132 C182 132, 220 42, 490 42 C760 42, 798 132, 946 132" stroke="#ff4f74" stroke-width="4" fill="none"></path>
+                        <path d="M34 132 C182 132, 220 222, 490 222 C760 222, 798 132, 946 132" stroke="#ff4f74" stroke-width="4" fill="none"></path>
+                        <path d="M34 132 C128 132, 168 118, 218 112 C250 109, 278 172, 340 172 C398 172, 432 84, 494 84 C552 84, 590 158, 650 158 C720 158, 758 126, 812 126 C878 126, 914 132, 946 132" stroke="#43d158" stroke-width="3" fill="none"></path>
+                        <g font-family="Space Grotesk, sans-serif" font-size="12" fill="#cfd6df">
+                            <rect x="34" y="202" width="28" height="6" fill="#aab3c2"></rect>
+                            <text x="70" y="208">Sinusoide interna</text>
+                            <rect x="220" y="202" width="28" height="6" fill="#ff4f74"></rect>
+                            <text x="256" y="208">Envolvente gaussiana</text>
+                            <rect x="460" y="202" width="28" height="6" fill="#43d158"></rect>
+                            <text x="496" y="208">Grano resultante</text>
+                        </g>
+                        <line x1="50" y1="234" x2="946" y2="234" stroke="#f0be43" stroke-width="2"></line>
+                        <line x1="50" y1="224" x2="50" y2="244" stroke="#f0be43" stroke-width="2"></line>
+                        <line x1="946" y1="224" x2="946" y2="244" stroke="#f0be43" stroke-width="2"></line>
+                        <text x="490" y="231" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" fill="#f0be43">duración: 1–100 ms</text>
+                    </svg>
+                </div>
+
+                <div class="cover-sources">
+                    <p>Curtis Roads · The Computer Music Tutorial (2023)</p>
+                    <p>Eli Fieldsteel · SuperCollider for the Creative Musician (2024)</p>
+                </div>
+
+                <div class="cover-footer">KAIROS · Sesión Síntesis Granular</div>
+            </section>
+
+            <div class="action-row fade-in">
+                <a href="laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="../assets/code/sc/sesion-03-sintesis-granular.scd" class="btn" download>Descargar patch .scd</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Esta tercera sesión convierte el PDF de trabajo en una página navegable dentro del laboratorio: definición del grano, ley tiempo-banda, parámetros perceptivos y cuatro bloques de código que llevan la teoría de Roads a SuperCollider con GrainSin, GrainBuf y ProxySpace.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Base teórica:</strong> Curtis Roads, Gabor, Xenakis y la lectura práctica de Eli Fieldsteel.</p>
+                <p><strong>Idea central:</strong> entender que la duración del grano modela el espectro tanto como la fuente interna.</p>
+                <p><strong>Salida práctica:</strong> cuatro patches listos para explorar densidad, <em>scatter</em>, <em>read pointer</em> y <em>slow morphing</em>.</p>
+            </div>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones de la sesión">
+                <a href="#grano">El grano</a>
+                <a href="#tiempo-banda">Ley tiempo-banda</a>
+                <a href="#parametros">Parámetros</a>
+                <a href="#ugens">UGens</a>
+                <a href="#block1">GrainSin</a>
+                <a href="#block2">GrainBuf</a>
+                <a href="#block3">pos dinámico</a>
+                <a href="#block4">Slow morphing</a>
+                <a href="#mapa">Mapa final</a>
+            </nav>
+
+            <section class="article-section fade-in" id="grano">
+                <h2>1. El Grano: Unidad Mínima de Sonido</h2>
+                <p>
+                    La síntesis granular construye sonido a partir de partículas brevísimas llamadas granos. Un grano es un evento acústico de duración entre 1 ms y 100 ms, justo en el umbral de percepción auditiva.
+                </p>
+
+                <div class="threshold-list">
+                    <p class="threshold-item threshold-item--hot"><strong>&lt; 1 ms</strong> → click subsimbólico. El oído no distingue ninguna propiedad.</p>
+                    <p class="threshold-item threshold-item--gold"><strong>1–100 ms</strong> → el grano. Cada partícula puede tener pitch, color y posición únicos.</p>
+                    <p class="threshold-item threshold-item--green"><strong>&gt; 100 ms</strong> → sonido normal. El paradigma granular deja de aplicarse.</p>
+                </div>
+
+                <div class="figure-panel">
+                    <div class="figure-panel-title">Anatomía de un Grano</div>
+                    <svg viewBox="0 0 980 250" aria-hidden="true">
+                        <rect x="0" y="0" width="980" height="250" fill="#0d1219"></rect>
+                        <line x1="38" y1="124" x2="942" y2="124" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                        <path d="M38 124 C92 80, 138 80, 192 124 C246 168, 292 168, 346 124 C400 80, 446 80, 500 124 C554 168, 600 168, 654 124 C708 80, 754 80, 808 124 C862 168, 908 168, 942 124" stroke="#aab3c2" stroke-width="2" fill="none"></path>
+                        <path d="M38 124 C182 124, 246 42, 490 42 C734 42, 798 124, 942 124" stroke="#ff4f74" stroke-width="4" fill="none"></path>
+                        <path d="M38 124 C182 124, 246 206, 490 206 C734 206, 798 124, 942 124" stroke="#ff4f74" stroke-width="4" fill="none"></path>
+                        <path d="M38 124 C132 124, 174 108, 228 105 C274 103, 308 170, 366 170 C420 170, 454 88, 516 88 C574 88, 612 156, 674 156 C734 156, 778 121, 832 121 C886 121, 918 124, 942 124" stroke="#43d158" stroke-width="3" fill="none"></path>
+                        <g font-family="Space Grotesk, sans-serif" font-size="13" fill="#d6dbe3">
+                            <rect x="24" y="191" width="28" height="6" fill="#aab3c2"></rect>
+                            <text x="62" y="197">Sinusoide interna</text>
+                            <rect x="246" y="191" width="28" height="6" fill="#ff4f74"></rect>
+                            <text x="284" y="197">Envolvente gaussiana</text>
+                            <rect x="520" y="191" width="28" height="6" fill="#43d158"></rect>
+                            <text x="558" y="197">Grano resultante</text>
+                        </g>
+                        <line x1="72" y1="222" x2="924" y2="222" stroke="#f0be43" stroke-width="2"></line>
+                        <line x1="72" y1="212" x2="72" y2="232" stroke="#f0be43" stroke-width="2"></line>
+                        <line x1="924" y1="212" x2="924" y2="232" stroke="#f0be43" stroke-width="2"></line>
+                        <text x="498" y="218" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" fill="#f0be43">duración: 1–100 ms</text>
+                    </svg>
+                </div>
+
+                <div class="quote-stack">
+                    <div class="quote-card quote-card--blue">
+                        <h4>Gabor (1946):</h4>
+                        <p>Todo sonido puede representarse como una cuadrícula tiempo-frecuencia donde cada celda es un grano elemental de energía acústica.</p>
+                    </div>
+                    <div class="quote-card quote-card--violet">
+                        <h4>Xenakis (1960):</h4>
+                        <p>Todo sonido continuo puede concebirse como un ensamblaje de una gran cantidad de sonidos elementales dispuestos adecuadamente en el tiempo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="tiempo-banda">
+                <h2>2. La Ley Tiempo-Banda</h2>
+                <p>
+                    Esta es la ley más importante de la síntesis granular. Proviene de la física de señales: cuanto más corto el grano, mayor su ancho de banda espectral.
+                </p>
+
+                <div class="law-card">
+                    <strong>Cuanto más corto el grano → mayor su ancho de banda espectral</strong>
+                </div>
+
+                <div class="figure-panel">
+                    <div class="figure-panel-title">Ley Tiempo-Banda</div>
+                    <div class="time-band-grid">
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <path d="M2 49 C16 47, 26 55, 38 19 C50 68, 62 4, 74 69 C86 22, 98 58, 112 47 C126 36, 138 52, 148 48" stroke="#58a6ff" stroke-width="2" fill="none"></path>
+                            </svg>
+                            <span>100 ms</span>
+                        </div>
+                        <div class="time-band-arrow">→</div>
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <rect x="58" y="14" width="12" height="54" fill="#58a6ff"></rect>
+                                <rect x="48" y="44" width="9" height="24" fill="#58a6ff" opacity="0.6"></rect>
+                                <rect x="71" y="44" width="9" height="24" fill="#58a6ff" opacity="0.6"></rect>
+                            </svg>
+                            <span>Tono puro</span>
+                        </div>
+                        <div class="time-band-arrow">→</div>
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <path d="M2 48 C18 48, 24 46, 34 30 C46 12, 58 70, 72 48 C84 30, 92 44, 106 48 C120 52, 134 48, 148 48" stroke="#43d158" stroke-width="2" fill="none"></path>
+                            </svg>
+                            <span>20 ms</span>
+                        </div>
+                        <div class="time-band-arrow">→</div>
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <path d="M0 80 L22 72 L44 36 L64 14 L84 32 L108 70 L150 80 Z" fill="#43d158" opacity="0.8"></path>
+                            </svg>
+                            <span>Formante</span>
+                        </div>
+                        <div class="time-band-arrow">→</div>
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <path d="M0 48 C18 48, 32 28, 52 28 C74 28, 84 58, 102 58 C120 58, 130 48, 150 48" stroke="#ff4f74" stroke-width="2" fill="none"></path>
+                            </svg>
+                            <span>1 ms</span>
+                        </div>
+                        <div class="time-band-arrow">→</div>
+                        <div class="time-band-box">
+                            <svg viewBox="0 0 150 82" aria-hidden="true">
+                                <rect width="150" height="82" fill="#171d26"></rect>
+                                <path d="M0 80 L0 30 L8 28 L8 80 Z M8 80 L8 30 L16 22 L16 80 Z M16 80 L16 22 L24 16 L24 80 Z M24 80 L24 16 L32 10 L32 80 Z M32 80 L32 10 L40 18 L40 80 Z M40 80 L40 18 L48 24 L48 80 Z M48 80 L48 24 L56 30 L56 80 Z M56 80 L56 30 L64 35 L64 80 Z M64 80 L64 35 L72 40 L72 80 Z M72 80 L72 40 L80 44 L80 80 Z M80 80 L80 44 L88 48 L88 80 Z M88 80 L88 48 L96 50 L96 80 Z M96 80 L96 50 L104 52 L104 80 Z M104 80 L104 52 L112 54 L112 80 Z M112 80 L112 54 L120 56 L120 80 Z M120 80 L120 56 L128 58 L128 80 Z M128 80 L128 58 L136 60 L136 80 Z M136 80 L136 60 L144 62 L144 80 Z M144 80 L144 62 L150 64 L150 80 Z" fill="#ff4f74" opacity="0.76"></path>
+                            </svg>
+                            <span>Ruido banda ancha</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="observation-card">
+                    <p><strong>Observación experimental:</strong> con <code>GrainSin</code>, <code>grainDur 0.001</code> suena agudo y <code>grainDur 0.009</code> suena grave. No estás escuchando la frecuencia interna de la sinusoide, sino la forma espectral de la envolvente del grano.</p>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="parametros">
+                <h2>3. Parámetros del Grano</h2>
+                <p>
+                    Roads distingue parámetros por grano, que afectan cada partícula individualmente, y parámetros de densidad, que operan como control global.
+                </p>
+
+                <div class="figure-panel">
+                    <div class="figure-panel-title">Formas de Envolvente del Grano</div>
+                    <div class="envelope-row">
+                        <div class="envelope-card">
+                            <h4 style="color: var(--granular-blue);">Gaussiana</h4>
+                            <svg viewBox="0 0 150 92" aria-hidden="true">
+                                <rect width="150" height="92" fill="#171d26"></rect>
+                                <path d="M8 84 C38 84, 46 10, 75 10 C104 10, 112 84, 142 84" stroke="#58a6ff" stroke-width="3" fill="rgba(88,166,255,0.18)"></path>
+                            </svg>
+                        </div>
+                        <div class="envelope-card">
+                            <h4 style="color: var(--granular-green);">Tukey</h4>
+                            <svg viewBox="0 0 150 92" aria-hidden="true">
+                                <rect width="150" height="92" fill="#171d26"></rect>
+                                <path d="M8 84 C18 84, 20 8, 34 8 C42 8, 50 84, 58 84 L90 84 C98 84, 106 8, 114 8 C128 8, 130 84, 142 84" stroke="#43d158" stroke-width="3" fill="rgba(67,209,88,0.18)"></path>
+                            </svg>
+                        </div>
+                        <div class="envelope-card">
+                            <h4 style="color: var(--granular-gold);">Expodec</h4>
+                            <svg viewBox="0 0 150 92" aria-hidden="true">
+                                <rect width="150" height="92" fill="#171d26"></rect>
+                                <path d="M10 10 C16 36, 32 62, 142 82" stroke="#f0be43" stroke-width="3" fill="rgba(240,190,67,0.14)"></path>
+                            </svg>
+                        </div>
+                        <div class="envelope-card">
+                            <h4 style="color: var(--granular-violet);">Rexpodec</h4>
+                            <svg viewBox="0 0 150 92" aria-hidden="true">
+                                <rect width="150" height="92" fill="#171d26"></rect>
+                                <path d="M8 82 C96 78, 122 58, 142 10" stroke="#b989ff" stroke-width="3" fill="rgba(185,137,255,0.14)"></path>
+                            </svg>
+                        </div>
+                        <div class="envelope-card">
+                            <h4 style="color: var(--granular-hot);">Triangular</h4>
+                            <svg viewBox="0 0 150 92" aria-hidden="true">
+                                <rect width="150" height="92" fill="#171d26"></rect>
+                                <path d="M8 84 L75 8 L142 84" stroke="#ff4f74" stroke-width="3" fill="rgba(255,79,116,0.14)"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Tabla de parámetros por grano</h3>
+                <div class="table-wrap">
+                    <table class="grain-table">
+                        <thead>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Control SC</th>
+                                <th>Efecto perceptivo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Envolvente</td>
+                                <td>envbufnum: -1</td>
+                                <td>Bell curve por defecto. Ángulos bruscos → artefactos espectrales.</td>
+                            </tr>
+                            <tr>
+                                <td>Duración</td>
+                                <td>dur: 0.001–0.4</td>
+                                <td>Control del ancho de banda según la ley tiempo-banda.</td>
+                            </tr>
+                            <tr>
+                                <td>Forma de onda</td>
+                                <td>sndbuf: b</td>
+                                <td>Sinusoide en GrainSin o fragmento de audio en GrainBuf.</td>
+                            </tr>
+                            <tr>
+                                <td>Frecuencia</td>
+                                <td>rate: ratio</td>
+                                <td>1.0=original, 0.5=octava abajo, 2.0=octava arriba, -1=reverso.</td>
+                            </tr>
+                            <tr>
+                                <td>Posición</td>
+                                <td>pos: 0.0–1.0</td>
+                                <td><em>Read pointer</em> en el buffer. 0=inicio, 1=fin.</td>
+                            </tr>
+                            <tr>
+                                <td>Pan espacial</td>
+                                <td>pan: -1.0–1.0</td>
+                                <td>Dispersión per-grano → morfología espacial vívida.</td>
+                            </tr>
+                            <tr>
+                                <td>Sincronía</td>
+                                <td>Impulse / Dust</td>
+                                <td>Impulse=SGS periódico. Dust=AGS con <em>jitter</em> aleatorio.</td>
+                            </tr>
+                            <tr>
+                                <td>Scatter</td>
+                                <td>LFNoise1.bipolar(s)</td>
+                                <td>Jitter de posición. 0=lineal, 0.4=scramble total.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Densidad y Fill Factor</h3>
+                <p class="formula-line"><strong>FF = densidad × duración.</strong> FF &lt; 0.5 → esparso. FF ≥ 1.0 → continuo.</p>
+
+                <div class="density-strip">
+                    <div class="density-strip-title">Sincronía, Densidad y Fill Factor</div>
+                    <svg viewBox="0 0 980 250" aria-hidden="true">
+                        <rect width="980" height="250" fill="#0f141c"></rect>
+                        <g font-family="Space Grotesk, sans-serif" font-size="14">
+                            <text x="84" y="64" fill="#58a6ff">SGS — sincrónico</text>
+                            <text x="76" y="110" fill="#43d158">AGS — asincrónico</text>
+                            <text x="126" y="156" fill="#f0be43">Intermitente</text>
+                            <text x="88" y="202" fill="#b989ff">FF alto (continuo)</text>
+                        </g>
+                        <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                            <line x1="220" y1="56" x2="930" y2="56"></line>
+                            <line x1="220" y1="102" x2="930" y2="102"></line>
+                            <line x1="220" y1="148" x2="930" y2="148"></line>
+                            <line x1="220" y1="194" x2="930" y2="194"></line>
+                        </g>
+                        <g fill="#58a6ff">
+                            <rect x="300" y="40" width="58" height="28" rx="4"></rect>
+                            <rect x="440" y="40" width="58" height="28" rx="4"></rect>
+                            <rect x="582" y="40" width="58" height="28" rx="4"></rect>
+                            <rect x="728" y="40" width="58" height="28" rx="4"></rect>
+                            <rect x="872" y="40" width="58" height="28" rx="4"></rect>
+                        </g>
+                        <g fill="#43d158" opacity="0.65">
+                            <rect x="286" y="86" width="56" height="28" rx="4"></rect>
+                            <rect x="418" y="86" width="56" height="28" rx="4"></rect>
+                            <rect x="606" y="86" width="56" height="28" rx="4"></rect>
+                            <rect x="714" y="86" width="56" height="28" rx="4"></rect>
+                            <rect x="880" y="86" width="56" height="28" rx="4"></rect>
+                        </g>
+                        <g fill="#f0be43" opacity="0.75">
+                            <rect x="300" y="132" width="58" height="28" rx="4"></rect>
+                            <rect x="582" y="132" width="58" height="28" rx="4"></rect>
+                            <rect x="872" y="132" width="58" height="28" rx="4"></rect>
+                        </g>
+                        <rect x="220" y="182" width="710" height="28" fill="rgba(185,137,255,0.36)" stroke="#b989ff" stroke-width="2"></rect>
+                        <text x="575" y="199" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" fill="#d9c4ff">textura fusionada — FF ≥ 1.0</text>
+                        <g stroke="#7f8793" stroke-width="1.5" fill="none">
+                            <line x1="220" y1="226" x2="930" y2="226"></line>
+                            <line x1="220" y1="222" x2="220" y2="230"></line>
+                            <line x1="362" y1="222" x2="362" y2="230"></line>
+                            <line x1="504" y1="222" x2="504" y2="230"></line>
+                            <line x1="646" y1="222" x2="646" y2="230"></line>
+                            <line x1="788" y1="222" x2="788" y2="230"></line>
+                            <line x1="930" y1="222" x2="930" y2="230"></line>
+                        </g>
+                        <g font-family="Space Grotesk, sans-serif" font-size="12" fill="#99a3b1">
+                            <text x="220" y="244" text-anchor="middle">0.0s</text>
+                            <text x="362" y="244" text-anchor="middle">0.2s</text>
+                            <text x="504" y="244" text-anchor="middle">0.4s</text>
+                            <text x="646" y="244" text-anchor="middle">0.6s</text>
+                            <text x="788" y="244" text-anchor="middle">0.8s</text>
+                            <text x="930" y="244" text-anchor="middle">1.0s</text>
+                        </g>
+                        <text x="548" y="220" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" fill="#99a3b1">tiempo →</text>
+                    </svg>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="density-table">
+                        <thead>
+                            <tr>
+                                <th>Densidad (granos 25ms)</th>
+                                <th>Percepción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>&lt; 15 granos/s</td>
+                                <td>Secuencias rítmicas — cada grano se distingue.</td>
+                            </tr>
+                            <tr>
+                                <td>15–25 granos/s</td>
+                                <td>Aleteo — el ritmo desaparece, emerge flutter.</td>
+                            </tr>
+                            <tr>
+                                <td>25–50 granos/s</td>
+                                <td>Flujo granular — textura sin tempo perceptible.</td>
+                            </tr>
+                            <tr>
+                                <td>50–100 granos/s</td>
+                                <td>Banda de textura continua.</td>
+                            </tr>
+                            <tr>
+                                <td>&gt; 100 granos/s</td>
+                                <td>Masa sonora — fusión total. Como reverb densa.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="ugens">
+                <h2>4. UGens Granulares en SuperCollider</h2>
+                <p>
+                    SuperCollider implementa la teoría de Roads en seis UGens. Todos comparten la misma arquitectura: fuente de audio, envolvente y trigger. Difieren en el tipo de fuente y en el grado de flexibilidad.
+                </p>
+
+                <div class="table-wrap">
+                    <table class="ugens-table">
+                        <thead>
+                            <tr>
+                                <th>UGen</th>
+                                <th>Fuente</th>
+                                <th>Característica principal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GrainSin</td>
+                                <td>Sinusoide sintética</td>
+                                <td>Granular clásica tipo Gabor. Sin buffer. El pitch emerge de la duración.</td>
+                            </tr>
+                            <tr>
+                                <td>GrainBuf</td>
+                                <td>Sample en buffer</td>
+                                <td>El más versátil. <code>pos</code>, <code>rate</code>, <code>pan</code> y <code>envbufnum</code> configurables.</td>
+                            </tr>
+                            <tr>
+                                <td>TGrains</td>
+                                <td>Sample en buffer</td>
+                                <td>Como GrainBuf pero con <code>centerPos</code> en segundos y envolvente fija tipo bell.</td>
+                            </tr>
+                            <tr>
+                                <td>Warp1</td>
+                                <td>Sample en buffer</td>
+                                <td><code>numChannels</code> toma los canales del buffer fuente. Sin pan.</td>
+                            </tr>
+                            <tr>
+                                <td>GrainFM</td>
+                                <td>FM sintética</td>
+                                <td>FM dentro de cada grano. Gran riqueza espectral.</td>
+                            </tr>
+                            <tr>
+                                <td>GrainIn</td>
+                                <td>Señal en vivo</td>
+                                <td>Granulación en tiempo real. Sin <code>pos</code> ni <code>rate</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="critical-rule">
+                    <p><strong>Regla crítica (Fieldsteel):</strong> GrainBuf, TGrains y Warp1 requieren un buffer mono. Granular un buffer estéreo produce silencio o distorsión sin aviso. Mezcla a mono antes de cargar.</p>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="block1">
+                <h2>5. Bloque 1 — GrainSin: Granular Clásica</h2>
+                <p>
+                    Sinusoide dentro de cada grano. Este primer bloque permite explorar la ley tiempo-banda directamente sin necesidad de buffer.
+                </p>
+
+                <div class="code-panel">
+                    <div class="terminal-top">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--gold"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <pre><code><span class="code-comment">// ▮▮ BLOQUE 1: GrainSin — granular clásica (Gabor) ▮▮▮▮▮▮▮▮▮▮▮▮</span>
+<span class="code-comment">// Cada grano = sinusoide + envolvente gaussiana (bell curve por defecto)</span>
+(
+<span class="code-command">~gran</span> = {
+    <span class="code-param">var</span> trig, freq, sig;
+
+    <span class="code-comment">// DENSIDAD — Dust = asincrónico (AGS), Impulse = sincrónico (SGS)</span>
+    trig = Dust.kr(<span class="code-param">\density.kr</span>(12));
+
+    <span class="code-comment">// FRECUENCIA — LFNoise1 introduce dispersión per-grano (banda de frec.)</span>
+    freq = <span class="code-param">\baseFreq.kr</span>(220) * LFNoise1.kr(20).range(0.95, 1.05);
+
+    sig = GrainSin.ar(
+        numChannels: 2,
+        trigger: trig,
+        dur: <span class="code-param">\grainDur.kr</span>(0.08),   <span class="code-comment">// duración → color espectral</span>
+        freq: freq,
+        pan: LFNoise1.kr(15)                  <span class="code-comment">// dispersión espacial per-grano</span>
+    );
+    sig * <span class="code-param">\amp.kr</span>(0.3);
+};
+)
+<span class="code-command">~gran.fadeTime_(8).play;</span>
+
+<span class="code-comment">// Explorar la ley tiempo-banda:</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\density</span>, 50, <span class="code-param">\baseFreq</span>, 440, <span class="code-param">\grainDur</span>, 0.001);   <span class="code-comment">// agudo/ruido</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\density</span>, 50, <span class="code-param">\baseFreq</span>, 440, <span class="code-param">\grainDur</span>, 0.009);   <span class="code-comment">// grave</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\density</span>, 40, <span class="code-param">\baseFreq</span>, 440, <span class="code-param">\grainDur</span>, 0.02);    <span class="code-comment">// tonal (≥20ms)</span></code></pre>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="block2">
+                <h2>6. Bloque 2 — GrainBuf: Granular con Sample</h2>
+                <p>
+                    El contenido de cada grano ya no es una sinusoide, sino un fragmento de audio leído desde un buffer. El parámetro <code>pos</code> se convierte en el eje compositivo central.
+                </p>
+
+                <div class="code-panel">
+                    <div class="terminal-top">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--gold"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <pre><code><span class="code-comment">// ▮▮ BLOQUE 2: GrainBuf — granular con sample ▮▮▮▮▮▮▮▮▮▮▮▮▮▮</span>
+b = Buffer.read(s, Platform.resourceDir ++ "/sounds/a11wlk01.wav");
+
+(
+<span class="code-command">~gran</span> = {
+    <span class="code-param">var</span> trig, sig;
+    trig = Dust.kr(<span class="code-param">\density.kr</span>(15));
+    sig = GrainBuf.ar(
+        numChannels: 2,
+        trigger: trig,
+        dur: <span class="code-param">\grainDur.kr</span>(0.1),
+        sndbuf: b,
+        rate: <span class="code-param">\rate.kr</span>(1.0),    <span class="code-comment">// 1.0=original, 0.5=oct↓, 2.0=oct↑, -1=reverso</span>
+        pos: <span class="code-param">\pos.kr</span>(0.5),      <span class="code-comment">// 0=inicio buffer, 1=fin</span>
+        pan: LFNoise1.kr(20)
+    );
+    sig * <span class="code-param">\amp.kr</span>(0.4);
+};
+)
+<span class="code-command">~gran.set</span>(<span class="code-param">\pos</span>, 0.0);      <span class="code-comment">// inicio del sample</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\rate</span>, -1.0);    <span class="code-comment">// reproducción inversa</span></code></pre>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="block3">
+                <h2>7. Bloque 3 — pos Dinámico: Tres Modos</h2>
+                <p>
+                    Moviendo <code>pos</code> con un <code>LFSaw</code> lento y añadiendo <em>scatter</em> aleatorio emergen tres comportamientos clásicos: <em>time-stretch</em>, <em>scrubbing</em> y <em>scramble</em>.
+                </p>
+
+                <div class="mode-grid">
+                    <div class="mode-card">
+                        <h4>TIME-STRETCH</h4>
+                        <svg viewBox="0 0 280 130" aria-hidden="true">
+                            <rect width="280" height="130" fill="#171d26"></rect>
+                            <text x="20" y="20" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">1</text>
+                            <text x="20" y="112" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">0</text>
+                            <line x1="44" y1="102" x2="248" y2="102" stroke="#69717c"></line>
+                            <line x1="44" y1="102" x2="248" y2="18" stroke="#58a6ff" stroke-width="3"></line>
+                            <text x="188" y="116" font-family="Space Grotesk, sans-serif" font-size="12" fill="#99a3b1">tiempo lineal → lento</text>
+                        </svg>
+                    </div>
+                    <div class="mode-card">
+                        <h4>SCRUBBING</h4>
+                        <svg viewBox="0 0 280 130" aria-hidden="true">
+                            <rect width="280" height="130" fill="#171d26"></rect>
+                            <text x="20" y="20" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">1</text>
+                            <text x="20" y="112" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">0</text>
+                            <line x1="44" y1="102" x2="248" y2="102" stroke="#69717c"></line>
+                            <path d="M44 98 C86 80, 108 44, 150 62 C180 76, 214 20, 248 36" stroke="#43d158" stroke-width="3" fill="none"></path>
+                            <text x="152" y="116" font-family="Space Grotesk, sans-serif" font-size="12" fill="#99a3b1">tiempo lineal + jitter</text>
+                        </svg>
+                    </div>
+                    <div class="mode-card">
+                        <h4>SCRAMBLE</h4>
+                        <svg viewBox="0 0 280 130" aria-hidden="true">
+                            <rect width="280" height="130" fill="#171d26"></rect>
+                            <text x="20" y="20" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">1</text>
+                            <text x="20" y="112" font-family="Space Mono, monospace" font-size="12" fill="#cfd6df">0</text>
+                            <line x1="44" y1="102" x2="248" y2="102" stroke="#69717c"></line>
+                            <polyline points="44,82 76,44 102,96 128,36 156,88 190,20 214,78 248,56" fill="none" stroke="#ff4f74" stroke-width="3"></polyline>
+                            <text x="188" y="116" font-family="Space Grotesk, sans-serif" font-size="12" fill="#99a3b1">tiempo → aleatorio</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="code-panel">
+                    <div class="terminal-top">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--gold"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <pre><code><span class="code-comment">// ▮▮ BLOQUE 3: pos dinámico — time-stretch / scrub / scramble ▮▮▮▮</span>
+(
+<span class="code-command">~gran</span> = {
+    <span class="code-param">var</span> trig, pos, sig;
+    trig = Dust.kr(<span class="code-param">\density.kr</span>(20));
+    pos = LFSaw.kr(<span class="code-param">\stretchTime.kr</span>(30).reciprocal, iphase: 0).range(0, 1);
+    pos = (pos + LFNoise1.kr(30).bipolar(<span class="code-param">\scatter.kr</span>(0.0))).clip(0, 1);
+    sig = GrainBuf.ar(2, trig, <span class="code-param">\grainDur.kr</span>(0.12), b, <span class="code-param">\rate.kr</span>(1.0), pos,
+        LFNoise1.kr(20));
+    sig * <span class="code-param">\amp.kr</span>(0.4);
+};
+)
+<span class="code-command">~gran.set</span>(<span class="code-param">\stretchTime</span>, 30, <span class="code-param">\scatter</span>, 0.0,  <span class="code-param">\grainDur</span>, 0.12);  <span class="code-comment">// TIME-STRETCH</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\stretchTime</span>, 15, <span class="code-param">\scatter</span>, 0.05, <span class="code-param">\grainDur</span>, 0.08);  <span class="code-comment">// SCRUBBING</span>
+<span class="code-command">~gran.set</span>(<span class="code-param">\stretchTime</span>, 10, <span class="code-param">\scatter</span>, 0.4,  <span class="code-param">\grainDur</span>, 0.05);  <span class="code-comment">// SCRAMBLE</span></code></pre>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="block4">
+                <h2>8. Bloque 4 — ProxySpace con Slow Morphing</h2>
+                <p>
+                    Integración en entorno de <em>live coding</em>. LFOs con periodos primos de 29, 41 y 67 segundos garantizan que los parámetros nunca se alineen: el sonido evoluciona sin repetición perceptible.
+                </p>
+
+                <div class="code-panel">
+                    <div class="terminal-top">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--gold"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <pre><code><span class="code-comment">// ▮▮ BLOQUE 4: ProxySpace + slow morphing ▮▮▮▮▮▮▮▮▮▮▮▮</span>
+<span class="code-comment">// Periodos primos: 41s, 29s, 67s — nunca se sincronizan → evolución infinita</span>
+(
+<span class="code-command">~gran</span> = {
+    <span class="code-param">var</span> trig, pos, scatter, density, rate, sig;
+
+    density = LFNoise1.kr(1/41).range(8, 35);          <span class="code-comment">// 41s</span>
+    scatter = LFNoise1.kr(1/29).range(0.0, 0.25);      <span class="code-comment">// 29s</span>
+    rate = LFNoise1.kr(1/67).range(0.85, 1.15);        <span class="code-comment">// 67s</span>
+
+    trig = Dust.kr(density);
+    pos = LFSaw.kr(<span class="code-param">\stretchTime.kr</span>(40).reciprocal, iphase: 0).range(0, 1);
+    pos = (pos + LFNoise1.kr(30).bipolar(scatter)).clip(0, 1);
+
+    sig = GrainBuf.ar(
+        numChannels: 2,
+        trigger: trig,
+        dur: <span class="code-param">\grainDur.kr</span>(0.12),
+        sndbuf: b,
+        rate: rate,
+        pos: pos,
+        pan: LFNoise1.kr(20)
+    );
+
+    <span class="code-comment">// Reverb integrado</span>
+    sig = FreeVerb2.ar(sig[0], sig[1], mix: 0.35, room: 0.85, damp: 0.5);
+    sig * <span class="code-param">\amp.kr</span>(0.3);
+};
+)
+<span class="code-command">~gran.play;</span>
+
+<span class="code-comment">// Performance en vivo — solo dos parámetros mueven todo el espacio:</span>
+<span class="code-command">~gran.xset</span>(<span class="code-param">\stretchTime</span>, 60, <span class="code-param">\grainDur</span>, 0.15);  <span class="code-comment">// time-stretch suave</span>
+<span class="code-command">~gran.xset</span>(<span class="code-param">\stretchTime</span>, 10, <span class="code-param">\grainDur</span>, 0.04);  <span class="code-comment">// nube densa</span></code></pre>
+                </div>
+
+                <div class="density-strip">
+                    <div class="density-strip-title">Densidad → Textura (Fill Factor)</div>
+                    <div class="texture-grid">
+                        <div class="texture-card texture-card--blue">
+                            <svg viewBox="0 0 280 150" aria-hidden="true">
+                                <rect width="280" height="150" fill="#171d26"></rect>
+                                <text x="14" y="84" font-family="Space Mono, monospace" font-size="10" fill="#99a3b1">freq</text>
+                                <rect x="86" y="46" width="12" height="12" rx="2" fill="#4a79b6"></rect>
+                                <rect x="144" y="88" width="12" height="12" rx="2" fill="#4a79b6"></rect>
+                                <rect x="158" y="96" width="12" height="12" rx="2" fill="#4a79b6"></rect>
+                                <rect x="74" y="88" width="12" height="12" rx="2" fill="#4a79b6"></rect>
+                                <rect x="226" y="64" width="12" height="12" rx="2" fill="#4a79b6"></rect>
+                            </svg>
+                            <p><strong>FF=0.2 esparso</strong><br>5 granos/s</p>
+                        </div>
+                        <div class="texture-card texture-card--green">
+                            <svg viewBox="0 0 280 150" aria-hidden="true">
+                                <rect width="280" height="150" fill="#171d26"></rect>
+                                <rect x="28" y="86" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="46" y="96" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="60" y="74" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="96" y="66" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="132" y="58" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="146" y="70" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="184" y="56" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="194" y="44" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="210" y="52" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="230" y="60" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="244" y="68" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                                <rect x="216" y="82" width="14" height="14" rx="2" fill="#3e9047"></rect>
+                            </svg>
+                            <p><strong>FF=1.0 umbral</strong><br>20 granos/s</p>
+                        </div>
+                        <div class="texture-card texture-card--hot">
+                            <svg viewBox="0 0 280 150" aria-hidden="true">
+                                <rect width="280" height="150" fill="#171d26"></rect>
+                                <g fill="#dd4d69">
+                                    <rect x="12" y="52" width="14" height="10" rx="2"></rect>
+                                    <rect x="18" y="68" width="14" height="10" rx="2"></rect>
+                                    <rect x="30" y="58" width="14" height="10" rx="2"></rect>
+                                    <rect x="42" y="76" width="14" height="10" rx="2"></rect>
+                                    <rect x="52" y="44" width="14" height="10" rx="2"></rect>
+                                    <rect x="64" y="60" width="14" height="10" rx="2"></rect>
+                                    <rect x="74" y="54" width="14" height="10" rx="2"></rect>
+                                    <rect x="86" y="66" width="14" height="10" rx="2"></rect>
+                                    <rect x="98" y="50" width="14" height="10" rx="2"></rect>
+                                    <rect x="110" y="58" width="14" height="10" rx="2"></rect>
+                                    <rect x="122" y="62" width="14" height="10" rx="2"></rect>
+                                    <rect x="136" y="70" width="14" height="10" rx="2"></rect>
+                                    <rect x="152" y="58" width="14" height="10" rx="2"></rect>
+                                    <rect x="168" y="72" width="14" height="10" rx="2"></rect>
+                                    <rect x="178" y="48" width="14" height="10" rx="2"></rect>
+                                    <rect x="192" y="64" width="14" height="10" rx="2"></rect>
+                                    <rect x="206" y="58" width="14" height="10" rx="2"></rect>
+                                    <rect x="216" y="72" width="14" height="10" rx="2"></rect>
+                                    <rect x="228" y="54" width="14" height="10" rx="2"></rect>
+                                    <rect x="238" y="62" width="14" height="10" rx="2"></rect>
+                                    <rect x="250" y="58" width="14" height="10" rx="2"></rect>
+                                </g>
+                            </svg>
+                            <p><strong>FF=3.6 continuo</strong><br>60 granos/s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="article-section fade-in" id="mapa">
+                <h2>9. Mapa: Teoría Roads → SuperCollider</h2>
+                <div class="final-map">
+                    <table class="map-table">
+                        <thead>
+                            <tr>
+                                <th>Concepto Roads</th>
+                                <th>Parámetro SC</th>
+                                <th>Rango de interés</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Trigger / densidad</td>
+                                <td>Impulse.kr(n) / Dust.kr(n)</td>
+                                <td>8–100 granos/s</td>
+                            </tr>
+                            <tr>
+                                <td>Duración del grano</td>
+                                <td>dur:</td>
+                                <td>0.001 – 0.4 s</td>
+                            </tr>
+                            <tr>
+                                <td>Envolvente</td>
+                                <td>envbufnum: -1</td>
+                                <td>Bell curve gaussiana por defecto</td>
+                            </tr>
+                            <tr>
+                                <td>Fuente / forma de onda</td>
+                                <td>sndbuf: b</td>
+                                <td>Buffer mono obligatorio</td>
+                            </tr>
+                            <tr>
+                                <td>Read pointer</td>
+                                <td>pos: 0.0–1.0</td>
+                                <td>0=inicio, 1=fin buffer</td>
+                            </tr>
+                            <tr>
+                                <td>Pitch shift</td>
+                                <td>rate: ratio</td>
+                                <td>0.5=oct↓ 1.0=orig 2.0=oct↑</td>
+                            </tr>
+                            <tr>
+                                <td>Pan espacial</td>
+                                <td>pan: -1.0–1.0</td>
+                                <td>LFNoise1 para dispersión per-grano</td>
+                            </tr>
+                            <tr>
+                                <td>Scatter / jitter pos</td>
+                                <td>LFNoise1.bipolar(s)</td>
+                                <td>0.0=lineal 0.4=scramble</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="article-related fade-in" aria-label="Continuar navegando">
+                <h3 class="article-related-heading">Seguir en el laboratorio</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="laboratorio-sintesis-sc.html">
+                        <span class="article-related-title">Laboratorio de Síntesis con SC</span>
+                        <span class="article-related-desc">Volver al archivo principal de sesiones y al cuaderno técnico del laboratorio.</span>
+                    </a>
+                    <a class="article-related-link" href="sesion-02-live-coding-ritmico.html">
+                        <span class="article-related-title">Sesión 02 · Sistema de live coding rítmico</span>
+                        <span class="article-related-desc">Cruzar este estudio granular con la sesión centrada en reloj de servidor, secuenciación y envíos auxiliares.</span>
+                    </a>
+                    <a class="article-related-link" href="../assets/code/sc/sesion-03-sintesis-granular.scd" download>
+                        <span class="article-related-title">Descargar patch de la sesión 03</span>
+                        <span class="article-related-desc">Versión consolidada con los cuatro bloques y comentarios listos para ejecutar en SuperCollider.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
+                    <li><a href="../assets/code/sc/sesion-03-sintesis-granular.scd">Patch .scd</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Archivo del laboratorio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

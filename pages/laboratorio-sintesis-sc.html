@@ -762,6 +762,9 @@
                 <button class="filter-btn" data-filter="ritmica">
                     <span class="filter-icon">⚡</span> Rítmica &amp; Live Coding
                 </button>
+                <button class="filter-btn" data-filter="granular">
+                    <span class="filter-icon">⋱</span> Síntesis Granular
+                </button>
             </div>
         </div>
 
@@ -877,6 +880,59 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                             <a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
                         </div>
                     </article>
+
+                    <!-- SESIÓN 03 -->
+                    <article class="session-log-card" data-category="granular">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">SC-03</span>
+                            <span class="tech-badge category">Síntesis Granular</span>
+                            <span class="tech-badge difficulty medium">Intermedio</span>
+                            <span class="tech-badge lines">9 pág.</span>
+                            <span class="session-log-date">MAYO 2026</span>
+                        </div>
+                        <h3 class="session-log-title">Síntesis granular: teoría, parámetros y SuperCollider</h3>
+                        <p class="session-log-desc">Traslado completo del dossier de estudio al laboratorio web: definición del grano, ley tiempo-banda, fill factor, tabla de parámetros y cuatro bloques prácticos con <code>GrainSin</code>, <code>GrainBuf</code>, <code>pos</code> dinámico y <code>ProxySpace</code> con slow morphing.</p>
+                        
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // sesion_03_granular.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// GrainSin: duración corta = banda ancha, duración larga = tono</span>
+<span class="sc-symbol">~gran</span> = {
+    <span class="sc-keyword">var</span> trig = <span class="sc-ugen">Dust.kr</span>(<span class="sc-arg">\density.kr</span>(<span class="sc-number">12</span>));
+    <span class="sc-keyword">var</span> freq = <span class="sc-arg">\baseFreq.kr</span>(<span class="sc-number">220</span>) * <span class="sc-ugen">LFNoise1.kr</span>(<span class="sc-number">20</span>).range(<span class="sc-number">0.95</span>, <span class="sc-number">1.05</span>);
+    <span class="sc-ugen">GrainSin.ar</span>(<span class="sc-number">2</span>, trig, <span class="sc-arg">\grainDur.kr</span>(<span class="sc-number">0.08</span>), freq, <span class="sc-ugen">LFNoise1.kr</span>(<span class="sc-number">15</span>));
+};</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Ley central:</strong> cuanto más corto el grano, mayor su ancho de banda espectral.</li>
+                            <li><strong>Parámetros clave:</strong> <code>dur</code>, <code>rate</code>, <code>pos</code>, <code>pan</code>, densidad y <em>scatter</em>.</li>
+                            <li><strong>Aplicación:</strong> lectura de buffer con <code>GrainBuf</code>, modos <em>time-stretch</em>/<em>scrub</em>/<em>scramble</em> y morphing lento con periodos primos.</li>
+                        </ul>
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">GrainSin</span>
+                            <span class="micro-tag">GrainBuf</span>
+                            <span class="micro-tag">Fill Factor</span>
+                            <span class="micro-tag">Dust.kr</span>
+                            <span class="micro-tag">Roads</span>
+                            <span class="micro-tag">ProxySpace</span>
+                        </div>
+
+                        <div class="session-log-actions">
+                            <a href="sesion-03-sintesis-granular.html" class="btn">Abrir sesión 03 →</a>
+                            <a href="../assets/code/sc/sesion-03-sintesis-granular.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
+                        </div>
+                    </article>
                 </div>
             </div>
 
@@ -924,6 +980,10 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                         <span class="topic-pill">CombC</span>
                         <span class="topic-pill">Síntesis</span>
                         <span class="topic-pill">Audio digital</span>
+                        <span class="topic-pill">GrainSin</span>
+                        <span class="topic-pill">GrainBuf</span>
+                        <span class="topic-pill">Fill Factor</span>
+                        <span class="topic-pill">Scatter</span>
                     </div>
                 </div>
 
@@ -953,6 +1013,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                 <ul>
                     <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
                     <li><a href="sesion-02-live-coding-ritmico.html">Sesión 02 · Live Coding Rítmico</a></li>
+                    <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
                     <li><a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" download>Patch Sesión 02 .scd</a></li>
                     <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
                 </ul>
