@@ -21,21 +21,24 @@
     <meta name="twitter:description" content="Perfil de Silvino Díaz Carreras: investigación musical, docencia, live coding y grabación de paisajes sonoros desde Vigo.">
     <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/schmidt/s1.jpeg">
     <link rel="stylesheet" href="../style.css">
-    <style>
-        .research-areas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
-        .research-area { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--surface); transition: border-color var(--transition), background var(--transition), box-shadow var(--transition); }
-        .research-area:hover { border-color: var(--border-strong); background: var(--surface-strong); box-shadow: var(--glow-sm); }
-        .research-area h4 { font-size: 0.84rem; margin-bottom: 8px; color: var(--heading); }
-        .research-area p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.65; }
-        .thesis-block { border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 28px; background: var(--surface-strong); margin-bottom: 36px; }
-        .thesis-block .tag { margin-bottom: 14px; }
-        .thesis-block h3 { font-size: 1.1rem; line-height: 1.4; margin-bottom: 14px; color: var(--heading); }
-        .thesis-block p { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); }
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-        .skill-pill { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 1px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim); background: rgba(255,255,255,0.02); transition: var(--transition); }
-        .skill-pill:hover { border-color: var(--border-strong); color: var(--heading); background: rgba(255,255,255,0.04); }
-        @media (max-width: 768px) { .research-areas { grid-template-columns: 1fr; } }
-    </style>
+        <style>
+            .research-areas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+            .research-area { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--surface); transition: border-color var(--transition), background var(--transition), box-shadow var(--transition); }
+            .research-area:hover { border-color: var(--border-strong); background: var(--surface-strong); box-shadow: var(--glow-sm); }
+            .research-area h4 { font-size: 0.84rem; margin-bottom: 8px; color: var(--heading); }
+            .research-area p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.65; }
+            .thesis-block { border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 28px; background: var(--surface-strong); margin-bottom: 36px; }
+            .thesis-block .tag { margin-bottom: 14px; }
+            .thesis-block h3 { font-size: 1.1rem; line-height: 1.4; margin-bottom: 14px; color: var(--heading); }
+            .thesis-block p { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); }
+            .about-orientation { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; background: var(--surface); margin-bottom: 34px; }
+            .about-orientation p { font-size: 0.9rem; line-height: 1.75; color: var(--text-dim); margin: 0; }
+            .about-orientation strong { color: var(--heading); font-weight: 500; }
+            .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+            .skill-pill { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 1px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim); background: rgba(255,255,255,0.02); transition: var(--transition); }
+            .skill-pill:hover { border-color: var(--border-strong); color: var(--heading); background: rgba(255,255,255,0.04); }
+            @media (max-width: 768px) { .research-areas { grid-template-columns: 1fr; } }
+        </style>
 </head>
 <body>
 
@@ -67,7 +70,12 @@
     <main class="container">
         <div class="page-header fade-in">
             <p class="section-label" data-i18n="label_researcher">// investigador/a · performer · escuchante</p>
-            <h1 data-i18n="title_about_page">Acerca de</h1>
+            <h1 data-i18n="title_about_page">Silvino Díaz Carreras</h1>
+            <p class="page-intro" data-i18n="about_intro">Investigación doctoral, docencia musical y práctica sonora desde Vigo. TWISTORES organiza ese trabajo en artículos publicados, laboratorio técnico, archivo de live coding y soundscapes.</p>
+        </div>
+
+        <div class="about-orientation fade-in">
+            <p data-i18n="about_orientation"><strong>En esta web:</strong> artículos publicados, laboratorio técnico, archivo de live coding y soundscapes documentados. Si vienes a leer textos cerrados, entra por Artículos; si buscas proceso, código y estudio, entra por el Laboratorio.</p>
         </div>
 
         <div class="about-grid">
@@ -173,11 +181,6 @@
                         <li>
                             <a href="https://www.youtube.com/@twistin-p9" target="_blank" rel="noopener">
                                 YouTube
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://vimeo.com/home#_=_" target="_blank" rel="noopener">
-                                Vimeo
                             </a>
                         </li>
                     </ul>
