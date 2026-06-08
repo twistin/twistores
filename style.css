@@ -97,6 +97,28 @@ audio:focus-visible {
     outline-offset: 3px;
 }
 
+.skip-link {
+    position: fixed;
+    top: 10px;
+    left: 16px;
+    z-index: 1000;
+    transform: translateY(-140%);
+    padding: 10px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface-strong);
+    color: var(--heading);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    box-shadow: var(--glow-sm);
+    transition: transform var(--transition);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 /* ── Light Theme ─────────────────────────────────────────── */
 [data-theme="light"] {
     --bg:           #edf3f1;

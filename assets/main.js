@@ -39,6 +39,7 @@ const T = {
         label_research:     "// liñas de investigación",
         label_who:          "// quen son",
         label_tools:        "// ferramentas creativas",
+        skip_to_main:       "Saltar ao contido principal",
 
         // SECTION TITLES
         title_recent_articles: "Artigos recentes",
@@ -280,6 +281,7 @@ const T = {
         label_research:     "// líneas de investigación",
         label_who:          "// quién soy",
         label_tools:        "// herramientas creativas",
+        skip_to_main:       "Saltar al contenido principal",
         title_recent_articles: "Artículos recientes",
         title_events:          "Eventos",
         title_soundscapes:     "Soundscapes recientes",
@@ -495,6 +497,7 @@ const T = {
         label_research:     "// research lines",
         label_who:          "// who I am",
         label_tools:        "// creative tools",
+        skip_to_main:       "Skip to main content",
         title_recent_articles: "Recent articles",
         title_events:          "Events",
         title_soundscapes:     "Recent soundscapes",
@@ -1174,7 +1177,29 @@ function applyLang(lang, options = {}) {
     document.documentElement.lang =
         lang === 'gl' ? 'gl' : lang === 'en' ? 'en' : 'es';
 
+    ensureSkipLink();
     document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+}
+
+function ensureSkipLink() {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    if (!main.id) {
+        main.id = 'main-content';
+    }
+
+    main.setAttribute('tabindex', '-1');
+
+    let skipLink = document.querySelector('.skip-link');
+    if (!skipLink) {
+        skipLink = document.createElement('a');
+        skipLink.className = 'skip-link';
+        document.body.insertAdjacentElement('afterbegin', skipLink);
+    }
+
+    skipLink.href = `#${main.id}`;
+    skipLink.textContent = t('skip_to_main');
 }
 
 // ── Theme Engine ──────────────────────────────────────────────────────────────

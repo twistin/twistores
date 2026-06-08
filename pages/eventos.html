@@ -352,10 +352,24 @@
             transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
         }
 
+        .photo-trigger {
+            width: 100%;
+            padding: 0;
+            background: none;
+            text-align: inherit;
+        }
+
         .photo-item:hover {
             border-color: var(--border-strong);
             transform: scale(1.01);
             box-shadow: var(--glow);
+        }
+
+        .photo-item:focus-visible,
+        .photo-item:focus-within {
+            border-color: var(--accent);
+            box-shadow: var(--glow-sm);
+            outline: none;
         }
 
         .photo-item img {
@@ -568,12 +582,12 @@
                     <div class="session-sidebar">
                         <p class="sidebar-block-title">// fotografías</p>
                         <div class="photo-gallery photo-gallery-sidebar">
-                            <div class="photo-item" onclick="openLightbox('../assets/img/schmidt/s1.jpeg','Schmidt · Sala SuperSonic, Vigo')" title="Ver imagen completa">
+                            <button class="photo-item photo-trigger" type="button" data-lightbox-src="../assets/img/schmidt/s1.jpeg" data-lightbox-alt="Schmidt · Sala SuperSonic, Vigo" aria-label="Ampliar fotografía de Schmidt en Sala SuperSonic, Vigo">
                                 <img src="../assets/img/schmidt/s1.jpeg" alt="Sesión live coding Schmidt — Sala SuperSonic, Vigo, 3 abr 2026" loading="lazy">
-                            </div>
-                            <div class="photo-item" onclick="openLightbox('../assets/img/schmidt/s3.jpeg','Schmidt · Sala SuperSonic, Vigo')" title="Ver imagen completa">
+                            </button>
+                            <button class="photo-item photo-trigger" type="button" data-lightbox-src="../assets/img/schmidt/s3.jpeg" data-lightbox-alt="Schmidt · Sala SuperSonic, Vigo" aria-label="Ampliar segunda fotografía de Schmidt en Sala SuperSonic, Vigo">
                                 <img src="../assets/img/schmidt/s3.jpeg" alt="Sesión live coding Schmidt — Sala SuperSonic, Vigo, 3 abr 2026" loading="lazy">
-                            </div>
+                            </button>
                         </div>
                         <p style="font-family:var(--mono);font-size:0.62rem;color:var(--text-dim);margin-top:10px;">📷 Marcos López</p>
                     </div>
@@ -629,8 +643,8 @@
         </section>
 
         <!-- Lightbox -->
-        <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
-            <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true">
+            <button class="lightbox-close" type="button" aria-label="Cerrar">✕</button>
             <img id="lightbox-img" src="" alt="">
         </div>
 
@@ -686,12 +700,12 @@
 
                         <div>
                             <p class="sidebar-block-title" style="margin-bottom:10px;">// galería</p>
-                            <div class="photo-item" onclick="openLightbox('../assets/img/aveleira/ave1.jpg','Live Coding Sessions · Aveleira — 15 nov 2025')" title="Ver imagen completa" style="margin-bottom:8px;">
+                            <button class="photo-item photo-trigger" type="button" data-lightbox-src="../assets/img/aveleira/ave1.jpg" data-lightbox-alt="Live Coding Sessions · Aveleira — 15 nov 2025" aria-label="Ampliar fotografía de Live Coding Sessions en Aveleira" style="margin-bottom:8px;">
                                 <img src="../assets/img/aveleira/ave1.jpg" alt="Vinoteca Aveleira, Vigo, 15 nov 2025" style="width:100%;height:140px;object-fit:cover;object-position:top;display:block;" loading="lazy">
-                            </div>
-                            <div class="photo-item" onclick="openLightbox('../assets/img/aveleira/ave2.png','Live Coding Sessions · Aveleira — 15 nov 2025')" title="Ver imagen completa">
+                            </button>
+                            <button class="photo-item photo-trigger" type="button" data-lightbox-src="../assets/img/aveleira/ave2.png" data-lightbox-alt="Live Coding Sessions · Aveleira — 15 nov 2025" aria-label="Ampliar segunda fotografía de Live Coding Sessions en Aveleira">
                                 <img src="../assets/img/aveleira/ave2.png" alt="Vinoteca Aveleira, Vigo, 15 nov 2025" style="width:100%;height:140px;object-fit:cover;display:block;" loading="lazy">
-                            </div>
+                            </button>
                         </div>
 
                         <div>
@@ -768,15 +782,17 @@
 
                         <div>
                             <p class="sidebar-block-title" style="margin-bottom:10px;">// cartel</p>
-                            <div class="photo-item"
-                                 onclick="openLightbox('../assets/img/sons/sons.jpg','OS SONS DAS MUTACIÓNS · Tempo Intermedio, Vigo — 14 dic 2024')"
-                                 title="Ver imagen completa">
+                            <button class="photo-item photo-trigger"
+                                 type="button"
+                                 data-lightbox-src="../assets/img/sons/sons.jpg"
+                                 data-lightbox-alt="OS SONS DAS MUTACIÓNS · Tempo Intermedio, Vigo — 14 dic 2024"
+                                 aria-label="Ampliar cartel de Os Sons das Mutacións">
                                 <img
                                     src="../assets/img/sons/sons.jpg"
                                     alt="Cartel OS SONS DAS MUTACIÓNS — Tempo Intermedio. Vinoteca La Revoltosa, Vigo, 14 dic 2024"
                                     style="width:100%;height:190px;object-fit:cover;object-position:top;display:block;"
                                     loading="lazy">
-                            </div>
+                            </button>
                         </div>
 
                         <div>
@@ -873,15 +889,17 @@
 
                         <div>
                             <p class="sidebar-block-title" style="margin-bottom:10px;">// fotografía</p>
-                            <div class="photo-item"
-                                 onclick="openLightbox('../assets/img/emao/emao.jpeg','EMAO · Biblioteca Escuela de Artes y Oficios, Vigo — 21 jun 2024')"
-                                 title="Ver imagen completa">
+                            <button class="photo-item photo-trigger"
+                                 type="button"
+                                 data-lightbox-src="../assets/img/emao/emao.jpeg"
+                                 data-lightbox-alt="EMAO · Biblioteca Escuela de Artes y Oficios, Vigo — 21 jun 2024"
+                                 aria-label="Ampliar fotografía de la performance EMAO en Vigo">
                                 <img
                                     src="../assets/img/emao/emao.jpeg"
                                     alt="Performance EMAO — José Tono Martínez, Darío Basso y Silvino Díaz. Biblioteca Escuela de Artes y Oficios de Vigo, 21 junio 2024"
                                     style="width:100%;height:auto;object-fit:cover;display:block;"
                                     loading="lazy">
-                            </div>
+                            </button>
                         </div>
 
                         <div>
@@ -979,18 +997,39 @@
 
     <script src="../assets/main.js"></script>
     <script>
+        let lastLightboxTrigger = null;
+
         function openLightbox(src, alt) {
             const lb = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
+            const closeBtn = lb.querySelector('.lightbox-close');
             img.src = src;
             img.alt = alt || '';
             lb.classList.add('open');
+            lb.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            closeBtn?.focus();
         }
         function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('open');
+            const lb = document.getElementById('lightbox');
+            if (!lb.classList.contains('open')) return;
+            lb.classList.remove('open');
+            lb.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+            lastLightboxTrigger?.focus();
         }
+        document.querySelectorAll('.photo-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                lastLightboxTrigger = button;
+                openLightbox(button.dataset.lightboxSrc, button.dataset.lightboxAlt);
+            });
+        });
+        document.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
+        document.getElementById('lightbox')?.addEventListener('click', event => {
+            if (event.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') closeLightbox();
         });

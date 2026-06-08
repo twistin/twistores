@@ -58,6 +58,8 @@
         .soundscape-remote-notes { margin-top: 4px; margin-bottom: 18px; }
         .soundscape-remote-notes strong { display: block; margin-bottom: 6px; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); }
         .soundscape-remote-notes p { margin-bottom: 0; }
+        .soundscape-fallback-note { margin-bottom: 22px; padding: 16px 18px; border: 1px dashed var(--border); border-radius: var(--radius); background: rgba(255,255,255,0.02); }
+        .soundscape-fallback-note p { margin: 0; font-size: 0.84rem; line-height: 1.7; color: var(--text-dim); }
         @media (max-width: 768px) {
             .soundscape-full { grid-template-columns: 1fr; }
             .soundscape-info { padding: 22px; }
@@ -102,10 +104,60 @@
                 Salidas de campo para escuchar, registrar y explorar los paisajes sonoros de la ciudad y del campo.
                 Cada sesión incluye fotografías del entorno y grabaciones de audio.
             </p>
-            <p class="section-note" id="soundscapes-archive-note"></p>
+            <p class="section-note" id="soundscapes-archive-note" role="status" aria-live="polite">Archivo en crecimiento · Sesiones publicadas: Chan de Brito (mar. 2026) · O Castro de Vigo (nov. 2024).</p>
         </div>
 
-        <section id="soundscapes-archive"></section>
+        <section id="soundscapes-archive">
+            <div class="soundscape-fallback-note">
+                <p>Versión base del archivo disponible incluso sin carga interactiva. Con JavaScript activo se añaden el feed remoto y la navegación completa por puntos de escucha.</p>
+            </div>
+
+            <article class="soundscape-full fade-in visible" id="session-chandebrito">
+                <div class="soundscape-gallery soundscape-gallery--remote">
+                    <div class="photo-main" role="img" aria-label="Chan de Brito" style="background-image:url('../assets/img/chandebrito/2-1.jpg'); color: transparent;"></div>
+                </div>
+                <div class="soundscape-info">
+                    <p class="soundscape-date">Mar 2026</p>
+                    <h2>Chan de Brito</h2>
+                    <p class="soundscape-helper">Tres localizaciones en el monte registradas en una salida publicada como archivo curado.</p>
+                    <div class="soundscape-remote-summary">
+                        <p>Camino entre pinos, Caseta dos Cazadores y sendero de monte. Pájaros, viento, voces lejanas y relieve acústico de media montaña.</p>
+                    </div>
+                    <div class="field-meta field-meta--remote">
+                        <div class="field-meta-item"><strong>Lugar / sesión</strong><span>Chan de Brito</span></div>
+                        <div class="field-meta-item"><strong>Fecha</strong><span>22/03/2026</span></div>
+                        <div class="field-meta-item"><strong>Coordenadas</strong><span>42.1659, -8.7740</span></div>
+                        <div class="field-meta-item"><strong>Grabación</strong><span>Zoom H6, X/Y</span></div>
+                    </div>
+                    <div class="audio-player-full soundscape-player-shell">
+                        <audio class="soundscape-audio-embed" controls preload="none" src="../assets/audio/chandebrito/2a.mp3"></audio>
+                    </div>
+                </div>
+            </article>
+
+            <article class="soundscape-full fade-in visible" id="session-castro">
+                <div class="soundscape-gallery soundscape-gallery--remote">
+                    <div class="photo-main" role="img" aria-label="O Castro de Vigo" style="background-image:url('../assets/img/castro/1.jpg'); color: transparent;"></div>
+                </div>
+                <div class="soundscape-info">
+                    <p class="soundscape-date">Nov 2024</p>
+                    <h2>O Castro de Vigo</h2>
+                    <p class="soundscape-helper">Sesión urbana publicada con nueve puntos de escucha distribuidos por el monte y la fortaleza.</p>
+                    <div class="soundscape-remote-summary">
+                        <p>Rumor de ciudad, pájaros, tráfico, pasos, conversaciones y capas de escucha urbana desde una de las elevaciones más reconocibles de Vigo.</p>
+                    </div>
+                    <div class="field-meta field-meta--remote">
+                        <div class="field-meta-item"><strong>Lugar / sesión</strong><span>O Castro de Vigo</span></div>
+                        <div class="field-meta-item"><strong>Fecha</strong><span>03/11/2024</span></div>
+                        <div class="field-meta-item"><strong>Coordenadas</strong><span>42.2309, -8.7254</span></div>
+                        <div class="field-meta-item"><strong>Grabación</strong><span>Zoom H6, X/Y</span></div>
+                    </div>
+                    <div class="audio-player-full soundscape-player-shell">
+                        <audio class="soundscape-audio-embed" controls preload="none" src="../assets/audio/castro/1.mp3"></audio>
+                    </div>
+                </div>
+            </article>
+        </section>
     </main>
 
     <footer>
