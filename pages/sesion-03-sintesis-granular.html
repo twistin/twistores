@@ -109,12 +109,54 @@
             border-color: rgba(255, 255, 255, 0.18);
         }
 
+        .granular-page .lab-family-band {
+            background:
+                linear-gradient(145deg, rgba(88, 166, 255, 0.08), rgba(255, 79, 116, 0.06) 46%, rgba(12, 16, 24, 0.96)),
+                var(--granular-bg);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .granular-page .lab-family-kicker {
+            color: var(--granular-blue);
+        }
+
+        .granular-page .lab-family-intro,
+        .granular-page .lab-family-meta span,
+        .granular-page .lab-family-nav a {
+            color: var(--granular-text-dim);
+        }
+
+        .granular-page .lab-family-meta span,
+        .granular-page .lab-family-nav a {
+            border-color: rgba(255, 255, 255, 0.08);
+            background: rgba(23, 29, 38, 0.72);
+        }
+
+        .granular-page .lab-family-nav a:hover,
+        .granular-page .lab-family-nav a:focus-visible {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(29, 36, 46, 0.9);
+        }
+
+        .granular-page .lab-family-nav a.is-current {
+            color: #fff;
+            border-color: var(--granular-hot);
+            background: var(--granular-hot);
+        }
+
+        .granular-page .lab-family-nav a.is-support {
+            color: var(--granular-gold);
+            border-color: rgba(240, 190, 67, 0.26);
+            background: rgba(48, 21, 32, 0.42);
+        }
+
         .granular-cover {
             position: relative;
             overflow: hidden;
             padding: 74px 48px 72px;
             border: 1px solid var(--granular-border-soft);
-            border-radius: 28px;
+            border-radius: var(--radius);
             background:
                 radial-gradient(circle at top center, rgba(255, 255, 255, 0.04), transparent 32%),
                 linear-gradient(180deg, #0b1118 0%, #0b1017 36%, #0c1018 100%);
@@ -684,6 +726,10 @@
                 padding-top: 34px;
             }
 
+            .granular-page .lab-family-band {
+                margin-bottom: 24px;
+            }
+
             .granular-page .article-section h2 {
                 gap: 12px;
                 font-size: 1.9rem;
@@ -760,6 +806,26 @@
                     <span>Teoría + parámetros + patches</span>
                 </div>
             </div>
+
+            <section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+                <div class="lab-family-copy">
+                    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+                    <h2 class="lab-family-title">La serie se abre a la escala microtemporal</h2>
+                    <p class="lab-family-intro">Esta tercera sesión conecta teoría, percepción y práctica: del grano como unidad mínima a los patches con <code>GrainSin</code> y <code>GrainBuf</code>, enlazando el cuaderno con la lectura de Roads.</p>
+                    <div class="lab-family-meta">
+                        <span>Sesión 03 de 04</span>
+                        <span>Curtis Roads + Fieldsteel</span>
+                        <span>Síntesis granular</span>
+                    </div>
+                </div>
+                <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+                    <a href="laboratorio-sintesis-sc.html">Archivo</a>
+                    <a href="sesion-02-live-coding-ritmico.html">SC-02</a>
+                    <a href="sesion-03-sintesis-granular.html" class="is-current" aria-current="page">SC-03</a>
+                    <a href="sesion-04-deriva-metodo-composicion-algoritmica.html">SC-04</a>
+                    <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                </nav>
+            </section>
 
             <section class="granular-cover fade-in" aria-label="Portada de la sesión">
                 <div class="cover-title">

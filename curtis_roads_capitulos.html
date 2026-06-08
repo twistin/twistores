@@ -99,6 +99,48 @@
     padding-bottom: 84px;
   }
 
+  .roads-main .lab-family-band {
+    max-width: 1100px;
+    margin: 26px auto 18px;
+    background:
+      radial-gradient(circle at 84% 16%, rgba(240, 192, 109, 0.16), transparent 26%),
+      linear-gradient(145deg, rgba(121, 224, 209, 0.1), transparent 22%),
+      var(--roads-panel);
+    border-color: var(--roads-rule-strong);
+  }
+
+  .roads-main .lab-family-intro,
+  .roads-main .lab-family-meta span,
+  .roads-main .lab-family-nav a {
+    color: var(--roads-copy-dim);
+  }
+
+  .roads-main .lab-family-meta span,
+  .roads-main .lab-family-nav a {
+    border-color: var(--roads-rule);
+    background: var(--roads-panel-soft);
+  }
+
+  .roads-main .lab-family-nav a:hover,
+  .roads-main .lab-family-nav a:focus-visible {
+    color: var(--heading);
+    border-color: var(--roads-rule-strong);
+    background: var(--roads-panel-strong);
+  }
+
+  .roads-main .lab-family-nav a.is-current {
+    color: #20160a;
+    border-color: var(--roads-warm);
+    background: var(--roads-warm);
+    box-shadow: 0 10px 24px rgba(240, 192, 109, 0.14);
+  }
+
+  .roads-main .lab-family-nav a.is-support {
+    color: var(--accent);
+    border-color: rgba(121, 224, 209, 0.2);
+    background: rgba(121, 224, 209, 0.08);
+  }
+
   .hero {
     min-height: auto;
     max-width: 1100px;
@@ -904,19 +946,26 @@
   </div>
 </header>
 
-<div class="roads-subnav-wrap">
-  <nav class="roads-subnav" aria-label="Navegación de la lectura">
-    <a class="roads-brand" href="pages/laboratorio-sintesis-sc.html">Lectura integrada · Curtis Roads</a>
-    <ul class="roads-links">
-      <li><a href="pages/laboratorio-sintesis-sc.html" class="is-external">Laboratorio</a></li>
-      <li><a href="pages/sesion-01-pad-sustractivo.html" class="is-external">Sesión 01</a></li>
-      <li><a href="#" onclick="showChapter(0)">Cap. 1</a></li>
-      <li><a href="#" onclick="showChapter(1)">Cap. 2</a></li>
-    </ul>
-  </nav>
-</div>
-
 <main class="roads-main">
+
+<section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+  <div class="lab-family-copy">
+    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+    <h2 class="lab-family-title">Lectura de apoyo integrada en la misma serie técnica</h2>
+    <p class="lab-family-intro">Esta página funciona como base teórica expandida para el laboratorio: historia del audio digital, fundamentos de señal y una traducción comentada de Roads conectada con la práctica en SuperCollider.</p>
+    <div class="lab-family-meta">
+      <span>Capítulos 1 y 2</span>
+      <span>Historia + señal</span>
+      <span>Lectura comentada</span>
+    </div>
+  </div>
+  <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+    <a href="pages/laboratorio-sintesis-sc.html">Archivo</a>
+    <a href="pages/sesion-01-pad-sustractivo.html">SC-01</a>
+    <a href="pages/sesion-03-sintesis-granular.html">SC-03</a>
+    <a href="curtis_roads_capitulos.html" class="is-current" aria-current="page">Lectura Roads</a>
+  </nav>
+</section>
 
 <!-- HERO -->
 <section class="hero">

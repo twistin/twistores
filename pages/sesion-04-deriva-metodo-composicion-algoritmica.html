@@ -187,6 +187,46 @@
             color: var(--heading);
         }
 
+        .deriva-page .lab-family-band {
+            background:
+                radial-gradient(circle at 84% 18%, rgba(240, 192, 109, 0.16), transparent 28%),
+                linear-gradient(135deg, rgba(126, 227, 213, 0.09), transparent 24%),
+                var(--deriva-panel);
+            border-color: var(--deriva-border-strong);
+        }
+
+        .deriva-page .lab-family-intro,
+        .deriva-page .lab-family-meta span,
+        .deriva-page .lab-family-nav a {
+            color: var(--deriva-copy-dim);
+        }
+
+        .deriva-page .lab-family-meta span,
+        .deriva-page .lab-family-nav a {
+            border-color: var(--deriva-border);
+            background: var(--deriva-panel-soft);
+        }
+
+        .deriva-page .lab-family-nav a:hover,
+        .deriva-page .lab-family-nav a:focus-visible {
+            color: var(--heading);
+            border-color: var(--deriva-border-strong);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .deriva-page .lab-family-nav a.is-current {
+            color: #20160a;
+            border-color: var(--deriva-hot);
+            background: var(--deriva-hot);
+            box-shadow: 0 10px 24px rgba(240, 192, 109, 0.16);
+        }
+
+        .deriva-page .lab-family-nav a.is-support {
+            color: var(--accent);
+            border-color: rgba(126, 227, 213, 0.18);
+            background: var(--deriva-mint-soft);
+        }
+
         .deriva-manuscript {
             margin-top: 10px;
         }
@@ -535,6 +575,10 @@
             .deriva-cover-meta {
                 grid-template-columns: 1fr;
             }
+
+            .deriva-page .lab-family-band {
+                margin-bottom: 24px;
+            }
         }
 
         @media (max-width: 700px) {
@@ -592,6 +636,25 @@
 
     <main class="container">
         <article class="article-shell article-content deriva-page">
+            <section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+                <div class="lab-family-copy">
+                    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+                    <h2 class="lab-family-title">La serie pasa del patch a la composición como sistema</h2>
+                    <p class="lab-family-intro">Esta cuarta sesión formaliza el laboratorio como método: una arquitectura temporal donde ritmo, voz, forma y mezcla dejan de ser parches aislados y pasan a operar como agentes coordinados.</p>
+                    <div class="lab-family-meta">
+                        <span>Sesión 04 de 04</span>
+                        <span>NodeProxy + Tdef</span>
+                        <span>Método y arquitectura</span>
+                    </div>
+                </div>
+                <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+                    <a href="laboratorio-sintesis-sc.html">Archivo</a>
+                    <a href="sesion-03-sintesis-granular.html">SC-03</a>
+                    <a href="sesion-04-deriva-metodo-composicion-algoritmica.html" class="is-current" aria-current="page">SC-04</a>
+                    <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                </nav>
+            </section>
+
             <section class="deriva-cover fade-in" aria-label="Portada de la sesión">
                 <div class="deriva-kicker">
                     <span class="deriva-dot"></span>
