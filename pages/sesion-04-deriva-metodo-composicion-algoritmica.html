@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 04 · Deriva: método de composición algorítmica — TWISTORES</title>
+    <meta name="description" content="Cuarta entrada del Laboratorio de Síntesis con SC: una arquitectura del tiempo en SuperCollider a partir de ProxySpace, Tdef, reloj maestro y macroforma áurea.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/sesion-04-deriva-metodo-composicion-algoritmica.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Sesión 04 · Deriva: método de composición algorítmica — TWISTORES">
+    <meta property="og:description" content="Arquitectura del tiempo en SuperCollider: escalas temporales, reloj maestro, NodeProxy, Tdef y arco áureo como sistema compositivo.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/sesion-04-deriva-metodo-composicion-algoritmica.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sesión 04 · Deriva: método de composición algorítmica — TWISTORES">
+    <meta name="twitter:description" content="Cuaderno metodológico sobre composición algorítmica en capas dentro del Laboratorio de Síntesis con SC.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .deriva-page {
+            --deriva-panel: rgba(13, 25, 35, 0.8);
+            --deriva-panel-strong: rgba(18, 32, 43, 0.92);
+            --deriva-panel-soft: rgba(255,255,255,0.025);
+            --deriva-border: var(--border);
+            --deriva-border-strong: var(--border-strong);
+            --deriva-copy: var(--text);
+            --deriva-copy-dim: var(--text-dim);
+            --deriva-hot: var(--signal);
+            --deriva-mint: var(--accent);
+            --deriva-mint-soft: rgba(126, 227, 213, 0.08);
+            --deriva-warm-soft: var(--signal-soft);
+            --deriva-warm-border: var(--signal-border);
+        }
+
+        [data-theme="light"] .deriva-page {
+            --deriva-panel: rgba(255, 255, 255, 0.8);
+            --deriva-panel-strong: rgba(255, 255, 255, 0.92);
+            --deriva-panel-soft: rgba(8, 102, 86, 0.04);
+        }
+
+        .deriva-cover {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 26px;
+            padding: clamp(28px, 4vw, 44px);
+            border: 1px solid var(--deriva-border-strong);
+            border-radius: var(--radius);
+            background:
+                radial-gradient(circle at 84% 18%, rgba(240, 192, 109, 0.16), transparent 24%),
+                linear-gradient(135deg, rgba(126, 227, 213, 0.1), transparent 22%),
+                var(--deriva-panel);
+            box-shadow: var(--glow-sm);
+        }
+
+        .deriva-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent),
+                radial-gradient(circle at 15% 20%, rgba(255,255,255,0.04), transparent 18%);
+            pointer-events: none;
+        }
+
+        .deriva-cover > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .deriva-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent2);
+        }
+
+        .deriva-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--deriva-hot);
+            box-shadow: 0 0 0 0 rgba(240, 192, 109, 0.55);
+            animation: deriva-pulse 1.8s infinite;
+        }
+
+        @keyframes deriva-pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(240, 192, 109, 0.55); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(240, 192, 109, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(240, 192, 109, 0); }
+        }
+
+        .deriva-title {
+            max-width: 11ch;
+            margin: 0;
+            font-family: var(--mono);
+            font-size: clamp(2.7rem, 8vw, 5.8rem);
+            line-height: 0.92;
+            letter-spacing: -0.08em;
+            color: var(--heading);
+        }
+
+        .deriva-title .ital {
+            color: var(--deriva-hot);
+            font-style: normal;
+        }
+
+        .deriva-subtitle {
+            max-width: 56ch;
+            margin: 18px 0 0;
+            font-size: 1.02rem;
+            line-height: 1.82;
+            color: var(--deriva-copy);
+        }
+
+        .deriva-cover-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .deriva-meta-box {
+            padding: 14px 16px;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: var(--deriva-panel-soft);
+        }
+
+        .deriva-meta-box span {
+            display: block;
+        }
+
+        .deriva-meta-label {
+            margin-bottom: 6px;
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--accent2);
+        }
+
+        .deriva-meta-value {
+            font-size: 0.92rem;
+            color: var(--heading);
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .deriva-page .article-lead {
+            color: var(--deriva-copy);
+        }
+
+        .deriva-page .article-editorial-meta {
+            background: var(--deriva-panel);
+            border: 1px solid var(--deriva-border);
+        }
+
+        .deriva-page .article-editorial-meta p {
+            color: var(--deriva-copy-dim);
+        }
+
+        .deriva-page .article-jumpnav {
+            border-color: var(--deriva-border);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .deriva-page .article-jumpnav a {
+            color: var(--deriva-copy-dim);
+        }
+
+        .deriva-page .article-jumpnav a:hover {
+            color: var(--heading);
+        }
+
+        .deriva-manuscript {
+            margin-top: 10px;
+        }
+
+        .title-block {
+            margin-bottom: 48px;
+            padding: 0 0 28px;
+            border-bottom: 1px solid var(--deriva-border);
+        }
+
+        .eyebrow {
+            margin-bottom: 14px;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 1.9px;
+            text-transform: uppercase;
+            color: var(--accent2);
+        }
+
+        .title-block h2 {
+            margin: 0;
+            font-family: var(--mono);
+            font-size: clamp(2rem, 5.2vw, 4.2rem);
+            line-height: 0.98;
+            letter-spacing: -0.06em;
+            color: var(--heading);
+        }
+
+        .title-block h2 .ital {
+            color: var(--deriva-hot);
+            font-style: normal;
+        }
+
+        .subtitle {
+            max-width: 50ch;
+            margin-top: 18px;
+            font-size: 1.04rem;
+            line-height: 1.72;
+            color: var(--deriva-copy);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 22px;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--deriva-copy-dim);
+        }
+
+        .preamble {
+            margin-bottom: 56px;
+        }
+
+        .preamble p:first-of-type::first-letter {
+            float: left;
+            margin: 8px 12px 0 0;
+            font-family: var(--mono);
+            font-size: 4.1rem;
+            line-height: 0.82;
+            color: var(--deriva-hot);
+        }
+
+        .section {
+            margin: 28px 0 0;
+            padding: 28px;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: var(--deriva-panel);
+            box-shadow: var(--glow-sm);
+            scroll-margin-top: 112px;
+        }
+
+        .section.coda {
+            margin-top: 34px;
+            border-color: var(--deriva-warm-border);
+            background:
+                linear-gradient(135deg, rgba(240, 192, 109, 0.08), transparent 24%),
+                var(--deriva-panel);
+        }
+
+        .section-marker {
+            margin-bottom: 10px;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 1.9px;
+            text-transform: uppercase;
+            color: var(--deriva-hot);
+        }
+
+        .section h2 {
+            margin: 0 0 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--deriva-border);
+            font-family: var(--mono);
+            font-size: clamp(1.2rem, 3vw, 1.9rem);
+            line-height: 1.08;
+            color: var(--heading);
+        }
+
+        .section h2 .ital {
+            color: var(--accent2);
+            font-style: normal;
+        }
+
+        .section h3 {
+            margin: 28px 0 12px;
+            font-family: var(--mono);
+            font-size: 0.94rem;
+            color: var(--accent2);
+        }
+
+        .deriva-page p {
+            margin: 0 0 16px;
+            font-size: 0.95rem;
+            line-height: 1.82;
+            color: var(--deriva-copy);
+        }
+
+        .deriva-page strong {
+            color: var(--heading);
+        }
+
+        .pull {
+            margin: 24px 0;
+            padding: 20px 22px;
+            border-left: 3px solid var(--deriva-hot);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            background: linear-gradient(135deg, var(--deriva-warm-soft), rgba(255,255,255,0.02));
+            font-size: 1.08rem;
+            line-height: 1.72;
+            color: var(--heading);
+        }
+
+        .def,
+        .nota,
+        .warning {
+            margin: 22px 0;
+            padding: 20px 22px;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .def {
+            border-left: 3px solid var(--deriva-hot);
+            background: var(--deriva-warm-soft);
+        }
+
+        .nota {
+            border-left: 3px solid var(--deriva-mint);
+            background: var(--deriva-mint-soft);
+        }
+
+        .warning {
+            border-left: 3px solid var(--deriva-hot);
+            background: rgba(240, 192, 109, 0.08);
+        }
+
+        .def .term,
+        .nota .lab,
+        .warning .lab,
+        figcaption .num {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+        }
+
+        .def .term {
+            color: var(--deriva-hot);
+        }
+
+        .nota .lab {
+            color: var(--accent);
+        }
+
+        .warning .lab,
+        figcaption .num {
+            color: var(--deriva-hot);
+        }
+
+        pre,
+        .codigo-completo {
+            margin: 22px 0;
+            padding: 18px 20px;
+            overflow-x: auto;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: rgba(2, 12, 18, 0.78);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+            color: #d8ece6;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            line-height: 1.7;
+            white-space: pre;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.88em;
+            background: rgba(240, 192, 109, 0.12);
+            padding: 1px 6px;
+            border-radius: 3px;
+            color: var(--heading);
+        }
+
+        pre code,
+        .codigo-completo code {
+            padding: 0;
+            background: transparent;
+            color: inherit;
+        }
+
+        .c-comment { color: rgba(154, 175, 170, 0.82); font-style: italic; }
+        .c-key { color: #f3ba68; }
+        .c-str { color: #7ce2d4; }
+
+        figure {
+            margin: 28px 0;
+            padding: 18px;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: var(--deriva-panel-soft);
+        }
+
+        figure svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        figcaption {
+            max-width: 70ch;
+            margin: 16px auto 0;
+            font-size: 0.84rem;
+            line-height: 1.66;
+            color: var(--deriva-copy-dim);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin: 22px 0;
+            border-collapse: collapse;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--deriva-border);
+            text-align: left;
+            vertical-align: top;
+            font-size: 0.89rem;
+        }
+
+        th {
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--heading);
+            background: rgba(126, 227, 213, 0.08);
+            border-bottom: 1px solid var(--deriva-border-strong);
+        }
+
+        td .scale {
+            font-family: var(--mono);
+            color: var(--deriva-hot);
+        }
+
+        ul,
+        ol {
+            margin: 16px 0;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--deriva-copy);
+            line-height: 1.72;
+        }
+
+        .appendix-toggle {
+            margin-top: 26px;
+            border: 1px solid var(--deriva-border);
+            border-radius: var(--radius);
+            background: var(--deriva-panel);
+            overflow: hidden;
+        }
+
+        .appendix-toggle summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 18px 22px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--heading);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .appendix-toggle summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .appendix-toggle[open] summary {
+            border-bottom: 1px solid var(--deriva-border);
+        }
+
+        .appendix-toggle .codigo-completo {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            background: rgba(2, 12, 18, 0.78);
+        }
+
+        .colophon {
+            margin-top: 42px;
+            padding-top: 22px;
+            border-top: 1px solid var(--deriva-border);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+            color: var(--deriva-copy-dim);
+            text-align: center;
+            line-height: 1.9;
+        }
+
+        .deriva-page .article-related {
+            margin-top: 34px;
+            border-top-color: var(--deriva-border);
+        }
+
+        @media (max-width: 860px) {
+            .deriva-cover-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .section,
+            .deriva-cover,
+            .article-editorial-meta,
+            .appendix-toggle summary {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            figure {
+                padding: 14px;
+            }
+
+            th,
+            td {
+                padding: 10px 12px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="../index.html">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="../index.html" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content deriva-page">
+            <section class="deriva-cover fade-in" aria-label="Portada de la sesión">
+                <div class="deriva-kicker">
+                    <span class="deriva-dot"></span>
+                    <span>Sesión 04 · KAIROS · Cuaderno I · revisión II</span>
+                </div>
+                <h1 class="deriva-title">Deriva<span class="ital">.</span></h1>
+                <p class="deriva-subtitle">Método de composición algorítmica en capas: una arquitectura del tiempo en SuperCollider construida con ProxySpace, NodeProxy, Tdef y un único reloj compartido.</p>
+                <div class="deriva-cover-meta">
+                    <div class="deriva-meta-box">
+                        <span class="deriva-meta-label">Marco</span>
+                        <span class="deriva-meta-value">Roads + ProxySpace</span>
+                    </div>
+                    <div class="deriva-meta-box">
+                        <span class="deriva-meta-label">Enfoque</span>
+                        <span class="deriva-meta-value">Método y arquitectura</span>
+                    </div>
+                    <div class="deriva-meta-box">
+                        <span class="deriva-meta-label">Formato</span>
+                        <span class="deriva-meta-value">Cuaderno técnico expandido</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="action-row fade-in">
+                <a href="laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="../assets/code/sc/sesion-04-deriva-v2.scd" class="btn" download>Descargar script .scd</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Esta entrada no parte de un patch aislado, sino de una pregunta de método: cómo organizar una pieza algorítmica cuando timbre, patrón, frase y forma global operan simultáneamente en escalas distintas. <em>Deriva</em> propone una respuesta práctica dentro de SuperCollider: un reparto de agentes donde cada nivel temporal tiene su mecanismo propio y todos se sincronizan a un mismo pulso.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Origen:</strong> HTML de trabajo convertido en entrada web del laboratorio.</p>
+                <p><strong>Núcleo conceptual:</strong> cinco escalas temporales, cinco agentes técnicos.</p>
+                <p><strong>Salida práctica:</strong> script completo descargable en <code>.scd</code>.</p>
+            </div>
+
+            <nav class="article-jumpnav fade-in" aria-label="Secciones del cuaderno">
+                <a href="#marco">Marco</a>
+                <a href="#arquitectura">Arquitectura</a>
+                <a href="#rejilla">Rejilla</a>
+                <a href="#voz">Voz</a>
+                <a href="#paso">Paso</a>
+                <a href="#control">Control</a>
+                <a href="#macroforma">Macroforma</a>
+                <a href="#proporcion">Proporción</a>
+                <a href="#mezcla">Mezcla</a>
+                <a href="#apendice">Apéndice</a>
+            </nav>
+
+            <div class="deriva-manuscript">
+                <header class="title-block fade-in">
+                    <div class="eyebrow">Twistin · 2026 · SC3 · ProxySpace</div>
+                    <h2>Deriva<span class="ital">.</span></h2>
+                    <div class="subtitle">Método de composición algorítmica en capas: una manera de organizar forma, timbre y evolución temporal como una jerarquía de agentes técnicos.</div>
+                    <div class="meta">
+                        <span>Laboratorio de Síntesis con SC</span>
+                        <span>Arquitectura temporal</span>
+                        <span>SuperCollider</span>
+                    </div>
+                </header>
+
+                <section class="preamble fade-in">
+                    <p>Lo que sigue no es un manual de SuperCollider. Es la formalización de un método: una manera de organizar la composición sonora como una jerarquía de agentes, donde cada capa temporal de la música, desde el sample hasta la forma global, tiene su propio mecanismo, su propia herramienta, y todas se sincronizan a un único pulso compartido.</p>
+                    <p>La premisa es de Curtis Roads y la heredamos directamente: la música ocurre en escalas temporales distintas a la vez, y cada escala requiere un modo de pensamiento diferente. Aquí la idea se traduce al entorno ProxySpace de SuperCollider, no como teoría abstracta sino como ingeniería compositiva operativa.</p>
+                </section>
+
+                <section class="section fade-in" id="marco">
+                    <div class="section-marker">I — El marco</div>
+                    <h2>Las capas <span class="ital">del tiempo</span></h2>
+                    <p>Toda pieza musical existe simultáneamente en varias escalas temporales. La nota es solo una de ellas. Por encima están las frases, las secciones y la forma global. Por debajo viven las partículas que componen el timbre, los samples individuales y el grano. Roads identifica nueve escalas; para este método, las cinco centrales son las que importan, y cada una se materializa en un mecanismo técnico distinto.</p>
+                    <figure>
+                        <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Las cinco escalas temporales operativas y sus agentes técnicos</title>
+                            <style>
+                                .lab-d { font-family: monospace; font-size: 17px; fill: #58aa9e; }
+                                .lab-m { font-family: monospace; font-size: 11px; fill: #9aafaa; letter-spacing: 0.05em; }
+                                .lab-t { font-family: monospace; font-size: 15px; fill: #eef8f5; }
+                                .lab-s { font-family: sans-serif; font-size: 13px; fill: #dbe8e4; }
+                            </style>
+                            <g>
+                                <rect x="60" y="30" width="560" height="44" fill="rgba(255,255,255,0.05)" stroke="rgba(126,227,213,0.16)" stroke-width="0.7"/>
+                                <text class="lab-d" x="76" y="58">macro</text>
+                                <text class="lab-m" x="76" y="70">minutos · forma global</text>
+                                <text class="lab-t" x="604" y="58" text-anchor="end">Tdef · arco áureo</text>
+                            </g>
+                            <g>
+                                <rect x="60" y="86" width="560" height="44" fill="rgba(255,255,255,0.05)" stroke="rgba(126,227,213,0.16)" stroke-width="0.7"/>
+                                <text class="lab-d" x="76" y="114">meso</text>
+                                <text class="lab-m" x="76" y="126">compases · frases</text>
+                                <text class="lab-t" x="604" y="114" text-anchor="end">Tdef · cambios por compás</text>
+                            </g>
+                            <g>
+                                <rect x="60" y="142" width="560" height="44" fill="rgba(240,192,109,0.82)" stroke="rgba(240,192,109,0.6)" stroke-width="0.7"/>
+                                <text class="lab-d" x="76" y="170" style="fill:#071118">objeto sonoro</text>
+                                <text class="lab-m" x="76" y="182" style="fill:#071118; opacity:0.78">la “nota” · ~100 ms a varios seg</text>
+                                <text class="lab-t" x="604" y="170" text-anchor="end" style="fill:#071118">NodeProxy con NamedControls</text>
+                            </g>
+                            <g>
+                                <rect x="60" y="198" width="560" height="44" fill="rgba(255,255,255,0.05)" stroke="rgba(126,227,213,0.16)" stroke-width="0.7"/>
+                                <text class="lab-d" x="76" y="226">micro</text>
+                                <text class="lab-m" x="76" y="238">grano · ~ms a 100 ms</text>
+                                <text class="lab-t" x="604" y="226" text-anchor="end">envolventes · granular</text>
+                            </g>
+                            <g>
+                                <rect x="60" y="254" width="560" height="44" fill="rgba(255,255,255,0.05)" stroke="rgba(126,227,213,0.16)" stroke-width="0.7"/>
+                                <text class="lab-d" x="76" y="282">sample</text>
+                                <text class="lab-m" x="76" y="294">microsegundos · DSP</text>
+                                <text class="lab-t" x="604" y="282" text-anchor="end">UGens en scsynth</text>
+                            </g>
+                            <text class="lab-s" x="340" y="332" text-anchor="middle">cada escala tiene su agente y todas se sincronizan al mismo reloj</text>
+                        </svg>
+                        <figcaption><span class="num">Figura I</span>Cinco escalas operativas con sus mecanismos. El <em>objeto sonoro</em> es el centro de gravedad: por encima está la forma, por debajo está la materia, y en medio vive la voz como entidad mutable.</figcaption>
+                    </figure>
+                    <div class="pull">No componemos en una sola escala. Componemos articulando las escalas entre sí.</div>
+                    <p>La consecuencia práctica es directa: cuando una pieza no funciona, hay que preguntarse <em>en qué escala está el problema</em>. Si la batería suena tímbricamente plana, la respuesta no está en el patrón rítmico sino en la voz o en la envolvente del grano. Si la pieza es monótona pese a tener voces ricas, el problema está arriba: falta arquitectura macro.</p>
+                </section>
+
+                <section class="section fade-in" id="arquitectura">
+                    <div class="section-marker">II — La arquitectura</div>
+                    <h2>Servidor <span class="ital">e intérprete</span></h2>
+                    <p>SuperCollider está partido en dos mundos que se comunican por una grieta estrecha. Saber qué vive a cada lado de esa grieta es la base del resto: el servidor produce sonido continuo; el intérprete decide cuándo y cómo cambian las cosas.</p>
+                    <figure>
+                        <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Arquitectura sclang ↔ scsynth ↔ ProxySpace</title>
+                            <style>
+                                .h { font-family: monospace; font-size: 18px; }
+                                .l { font-family: sans-serif; font-size: 14px; fill: #dbe8e4; }
+                                .m { font-family: monospace; font-size: 11px; fill: #9aafaa; }
+                            </style>
+                            <g>
+                                <rect x="40" y="40" width="240" height="220" fill="rgba(255,255,255,0.03)" stroke="rgba(126,227,213,0.24)" stroke-width="1.2" rx="3"/>
+                                <text class="h" x="160" y="68" text-anchor="middle" fill="#79e0d1">sclang</text>
+                                <text class="m" x="160" y="84" text-anchor="middle">intérprete · eventos discretos</text>
+                                <line x1="60" y1="98" x2="260" y2="98" stroke="rgba(126,227,213,0.16)"/>
+                                <text class="l" x="64" y="124">· TempoClock t</text>
+                                <text class="l" x="64" y="146">· Tdef (macro / meso)</text>
+                                <text class="l" x="64" y="168">· Routines, .set, .xset</text>
+                                <text class="l" x="64" y="190">· decisiones musicales</text>
+                                <text class="l" x="64" y="220" style="fill:#9aafaa;font-style:italic">“¿qué pasa ahora?”</text>
+                            </g>
+                            <g stroke="#f0c06d" stroke-width="1.5" fill="none">
+                                <path d="M280 130 L400 130" marker-end="url(#arr)"/>
+                                <path d="M400 170 L280 170" marker-end="url(#arr)"/>
+                            </g>
+                            <defs>
+                                <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M1 1L9 5L1 9" fill="none" stroke="#f0c06d" stroke-width="1.5"/>
+                                </marker>
+                            </defs>
+                            <text class="m" x="340" y="122" text-anchor="middle" fill="#f0c06d">OSC: /n_set</text>
+                            <text class="m" x="340" y="184" text-anchor="middle" fill="#f0c06d">audio buses</text>
+                            <g>
+                                <rect x="400" y="40" width="240" height="220" fill="rgba(255,255,255,0.03)" stroke="rgba(126,227,213,0.24)" stroke-width="1.2" rx="3"/>
+                                <text class="h" x="520" y="68" text-anchor="middle" fill="#f0c06d">scsynth</text>
+                                <text class="m" x="520" y="84" text-anchor="middle">servidor · DSP continuo</text>
+                                <line x1="420" y1="98" x2="620" y2="98" stroke="rgba(126,227,213,0.16)"/>
+                                <text class="l" x="424" y="124">· UGens (Osc, Filter, Env)</text>
+                                <text class="l" x="424" y="146">· nodos sintetizadores</text>
+                                <text class="l" x="424" y="168">· buses de audio / control</text>
+                                <text class="l" x="424" y="190">· señal a 44.1/48 kHz</text>
+                                <text class="l" x="424" y="220" style="fill:#9aafaa;font-style:italic">“¿qué suena?”</text>
+                            </g>
+                            <rect x="220" y="280" width="240" height="30" fill="#58aa9e" stroke="rgba(126,227,213,0.24)" stroke-width="0.5" rx="3"/>
+                            <text class="h" x="340" y="300" text-anchor="middle" fill="#071118">ProxySpace · el puente</text>
+                        </svg>
+                        <figcaption><span class="num">Figura II</span>La grieta entre intérprete y servidor. El ProxySpace mantiene buses con nombre que ambos lados pueden referenciar: el territorio compartido sobre el que se apoya el método.</figcaption>
+                    </figure>
+                    <p>La arquitectura clave es que los mensajes no van a nodos numerados sino a proxies con nombre: estructuras del ProxySpace que sobreviven a redefiniciones, mantienen su bus de salida y permiten esculpir el sonido en vivo sin rehacer la topología completa.</p>
+                    <div class="def">
+                        <span class="term">NodeProxy</span>
+                        Estructura del ProxySpace que envuelve un nodo sintetizador del servidor. Tiene identidad, un bus de salida persistente y un mecanismo de crossfade al redefinirse. Es la unidad básica de composición en este sistema.
+                    </div>
+                </section>
+
+                <section class="section fade-in" id="rejilla">
+                    <div class="section-marker">III — La rejilla</div>
+                    <h2>Un solo pulso, <span class="ital">muchas lentes</span></h2>
+                    <p>Todo el tiempo de la pieza desciende de un único impulso. No hay tres relojes; hay uno y varias lentes sobre él. Esta es la decisión arquitectónica más importante del método.</p>
+<pre><code><span class="c-comment">// el latido único — semicorcheas a tempo</span>
+~clkMaster = { Impulse.kr((~bpm.kr / 60) * 4) };
+
+<span class="c-comment">// el contador que cuenta los latidos</span>
+~cnt16 = { PulseCount.kr(~clkMaster.kr.first) - 1 };
+
+<span class="c-comment">// lentes derivadas sobre el mismo contador</span>
+~cnt4  = { (~cnt16.kr.first / 4).floor };
+~cnt1  = { (~cnt16.kr.first / 16).floor };</code></pre>
+                    <div class="nota">
+                        <span class="lab">Nota técnica · UGen expansion</span>
+                        Dentro del cuerpo de un proxy, <code>~cnt16.kr.first</code> devuelve una referencia a una señal del servidor. Cualquier operación aritmética sobre ella genera UGens en el grafo de audio. Nada de estas líneas ocurre realmente en <code>sclang</code>; lo que haces es describir un circuito.
+                    </div>
+                    <figure>
+                        <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Arquitectura del reloj maestro</title>
+                            <style>
+                                .nh { font-family: monospace; font-size: 13px; fill: #eef8f5; }
+                                .ns { font-family: sans-serif; font-size: 12px; fill: #9aafaa; font-style: italic; }
+                            </style>
+                            <g>
+                                <rect x="240" y="30" width="200" height="50" fill="#071118" rx="3"/>
+                                <text class="nh" x="340" y="52" text-anchor="middle">~clkMaster</text>
+                                <text class="ns" x="340" y="68" text-anchor="middle" fill="#dbe8e4">Impulse.kr · 1/16</text>
+                            </g>
+                            <line x1="340" y1="80" x2="340" y2="118" stroke="#79e0d1" stroke-width="1.2"/>
+                            <line x1="100" y1="118" x2="580" y2="118" stroke="#79e0d1" stroke-width="1.2"/>
+                            <line x1="100" y1="118" x2="100" y2="148" stroke="#79e0d1" stroke-width="1.2"/>
+                            <line x1="260" y1="118" x2="260" y2="148" stroke="#79e0d1" stroke-width="1.2"/>
+                            <line x1="420" y1="118" x2="420" y2="148" stroke="#79e0d1" stroke-width="1.2"/>
+                            <line x1="580" y1="118" x2="580" y2="148" stroke="#79e0d1" stroke-width="1.2"/>
+                            <g>
+                                <rect x="30" y="148" width="140" height="50" fill="#58aa9e" rx="3"/>
+                                <text class="nh" x="100" y="170" text-anchor="middle">~cnt16</text>
+                                <text class="ns" x="100" y="186" text-anchor="middle" fill="#eef8f5">contador</text>
+                            </g>
+                            <g>
+                                <rect x="190" y="148" width="140" height="50" fill="#f0c06d" rx="3"/>
+                                <text class="nh" x="260" y="170" text-anchor="middle" fill="#071118">~gate4</text>
+                                <text class="ns" x="260" y="186" text-anchor="middle" fill="#071118">% 4 — negra</text>
+                            </g>
+                            <g>
+                                <rect x="350" y="148" width="140" height="50" fill="#f0c06d" rx="3"/>
+                                <text class="nh" x="420" y="170" text-anchor="middle" fill="#071118">~gate1</text>
+                                <text class="ns" x="420" y="186" text-anchor="middle" fill="#071118">% 16 — compás</text>
+                            </g>
+                            <g>
+                                <rect x="510" y="148" width="140" height="50" fill="#f0c06d" rx="3"/>
+                                <text class="nh" x="580" y="170" text-anchor="middle" fill="#071118">~gateBar4</text>
+                                <text class="ns" x="580" y="186" text-anchor="middle" fill="#071118">% 64 — 4 cp</text>
+                            </g>
+                        </svg>
+                        <figcaption><span class="num">Figura III</span>Del impulso único salen dos linajes paralelos: los contadores como resoluciones temporales y las gates como máscaras periódicas. Todo queda bloqueado en fase porque consume el mismo reloj.</figcaption>
+                    </figure>
+                    <div class="pull">El patrón no se ejecuta: se enmascara. La rejilla siempre late; la voz decide qué latidos consume.</div>
+                    <ul>
+                        <li>Toda gate debe derivar del mismo <code>~cnt16</code>, no inventar su propio <code>PulseCount</code>.</li>
+                        <li>Al leer un proxy desde otro, conviene ser explícito con <code>.kr.first</code>.</li>
+                        <li>Cambiar el tempo en vivo requiere reinyectar el valor al servidor; no basta con modificar una variable en <code>sclang</code>.</li>
+                    </ul>
+                </section>
+
+                <section class="section fade-in" id="voz">
+                    <div class="section-marker">IV — La voz</div>
+                    <h2>Objeto sonoro <span class="ital">vivo</span></h2>
+                    <p>Una voz, aquí, no es un sonido que se dispara y muere. Es una escultura que se mantiene activa y se deforma en tiempo real. La encarnación técnica de esa idea es el NodeProxy con NamedControls.</p>
+<pre><code>~bd = {
+    var clk, cnt, pat, gat, envAmp, envFreq, sig;
+    clk = ~clkMaster.kr.first;
+    cnt = ~cnt16.kr.first;
+    pat = <span class="c-key">\pat</span>.kr([1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0]);
+    gat = clk * Select.kr(cnt % 16, pat);
+
+    envAmp  = EnvGen.kr(Env.perc(0.002, <span class="c-key">\dec</span>.kr(0.3), curve: -4), gat, doneAction: 0);
+    envFreq = EnvGen.kr(Env.perc(0.001, <span class="c-key">\pdec</span>.kr(0.05), curve: -8), gat, doneAction: 0);
+    sig = SinOsc.ar((envFreq * <span class="c-key">\sweep</span>.kr(120) + <span class="c-key">\base</span>.kr(48)).clip(20, 18000), 0.5pi) * envAmp;
+    sig = (sig * <span class="c-key">\drive</span>.kr(1)).distort * <span class="c-key">\amp</span>.kr(0.6);
+    sig ! 2;
+};</code></pre>
+                    <div class="def">
+                        <span class="term">Regla del NamedControl</span>
+                        Cualquier número del sintetizador que quizá quieras tocar en vivo debe exponerse como <code>\nombre.kr(default)</code>. Los números que se quedan duros son decisiones permanentes; los que se exponen son decisiones en curso.
+                    </div>
+                    <h3><code>doneAction: 0</code> dentro de proxies</h3>
+                    <p>El default de <code>EnvGen</code> es <code>doneAction: 2</code>, que libera el nodo entero al terminar la envolvente. En un Synth efímero esto es correcto. En un NodeProxy es desastroso: el proxy sigue sosteniendo su bus, pero el sintetizador ya no existe. El resultado no es un error visible, sino un fantasma silencioso.</p>
+                    <h3>Patrón canónico de modulación con offset</h3>
+<pre><code>(<span class="c-key">\base</span>.kr(500) + (envOrLfo * <span class="c-key">\amount</span>.kr(800))).clip(min, max)</code></pre>
+                    <p>Los paréntesis externos hacen que <code>.clip</code> envuelva la suma completa. Sin ellos, el recorte solo afectaría al último factor y el barrido podría cruzar rangos absurdos.</p>
+                </section>
+
+                <section class="section fade-in" id="paso">
+                    <div class="section-marker">V — El paso</div>
+                    <h2>La rejilla <span class="ital">como partitura</span></h2>
+                    <p>Un patrón rítmico es literalmente un array de unos y ceros. Esa frase no es metáfora: el array que escribes en tu código <em>es</em> la partitura del secuenciador. <code>Select.kr</code> es la cabeza lectora que la recorre.</p>
+<pre><code>pat = <span class="c-key">\pat</span>.kr([1,0,0,0, 0,0,1,0, 1,0,0,0, 1,0,1,0]);
+gat = clk * Select.kr(cnt % 16, pat);</code></pre>
+                    <p>Hay dos regímenes de patrón. El primero es <strong>periódico</strong>: módulo, división, fase. El segundo es <strong>irregular</strong>: array literal y lectura por índice. El cambio entre uno y otro no es cosmético; define si piensas la rítmica como filtro regular o como partitura explícita.</p>
+                    <figure>
+                        <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Tres figuras rítmicas como máscaras de módulo</title>
+                            <style>.h { font-family: monospace; font-size: 15px; fill: #eef8f5; }</style>
+                            <text class="h" x="80" y="60" text-anchor="end">1/16</text>
+                            <g fill="#f0c06d">
+                                <rect x="92" y="46" width="30" height="28" rx="3"/><rect x="126" y="46" width="30" height="28" rx="3"/><rect x="160" y="46" width="30" height="28" rx="3"/><rect x="194" y="46" width="30" height="28" rx="3"/><rect x="228" y="46" width="30" height="28" rx="3"/><rect x="262" y="46" width="30" height="28" rx="3"/><rect x="296" y="46" width="30" height="28" rx="3"/><rect x="330" y="46" width="30" height="28" rx="3"/><rect x="364" y="46" width="30" height="28" rx="3"/><rect x="398" y="46" width="30" height="28" rx="3"/><rect x="432" y="46" width="30" height="28" rx="3"/><rect x="466" y="46" width="30" height="28" rx="3"/><rect x="500" y="46" width="30" height="28" rx="3"/><rect x="534" y="46" width="30" height="28" rx="3"/><rect x="568" y="46" width="30" height="28" rx="3"/><rect x="602" y="46" width="30" height="28" rx="3"/>
+                            </g>
+                            <text class="h" x="80" y="106" text-anchor="end">corchea</text>
+                            <g>
+                                <rect x="92" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="126" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="160" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="194" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="228" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="262" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="296" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="330" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="364" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="398" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="432" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="466" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="500" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="534" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="568" y="92" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="602" y="92" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/>
+                            </g>
+                            <text class="h" x="80" y="152" text-anchor="end">negra</text>
+                            <g>
+                                <rect x="92" y="138" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="126" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="160" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="194" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="228" y="138" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="262" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="296" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="330" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="364" y="138" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="398" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="432" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="466" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="500" y="138" width="30" height="28" rx="3" fill="#f0c06d"/><rect x="534" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="568" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/><rect x="602" y="138" width="30" height="28" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)" stroke-width="0.5"/>
+                            </g>
+                        </svg>
+                        <figcaption><span class="num">Figura IV</span>La figura rítmica es una máscara sobre la misma rejilla. Cambiar de corcheas a negras es cambiar el filtro, no inventar otro tiempo.</figcaption>
+                    </figure>
+                </section>
+
+                <section class="section fade-in" id="control">
+                    <div class="section-marker">VI — El control</div>
+                    <h2><code>.set</code>, <code>.xset</code>, <span class="ital">map</span></h2>
+                    <p>Una voz parametrizada tiene tres modos de mutación, y elegir el correcto es media composición.</p>
+                    <table>
+                        <thead>
+                            <tr><th>Modo</th><th>Comportamiento</th><th>Uso musical</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>.set(\x, v)</code></td>
+                                <td>Instantáneo, salto duro</td>
+                                <td>Cortes, drops, eventos donde el cambio mismo es la decisión musical.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.xset(\x, v)</code></td>
+                                <td>Crossfade durante <code>fadeTime</code></td>
+                                <td>Entradas, salidas y transiciones continuas.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.map(\x, ~lfo)</code></td>
+                                <td>Conexión continua a otro proxy</td>
+                                <td>Modulación viva. El parámetro respira por sí mismo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+<pre><code>~lfoCutoff = { LFNoise1.kr(0.5).range(400, 4000) };
+~lead.map(<span class="c-key">\cutoff</span>, ~lfoCutoff);</code></pre>
+                    <div class="pull">Set para el corte, xset para la transición, map para la respiración.</div>
+                </section>
+
+                <section class="section fade-in" id="macroforma">
+                    <div class="section-marker">VII — La macroforma</div>
+                    <h2>El director <span class="ital">de orquesta</span></h2>
+                    <p>Hasta aquí todo vive en escalas pequeñas. Falta la capa que decide qué pasa a lo largo de la pieza entera: cuándo entra cada voz, cuándo cambia el groove, cuándo llega el climax. Esa capa se llama <code>Tdef</code>.</p>
+<pre><code>Tdef(<span class="c-key">\macro</span>, {
+    var bar = 0;
+    loop {
+        if (bar == 0) {
+            p[<span class="c-key">\pad</span>].xset(<span class="c-key">\amp</span>, 0.14);
+            [<span class="c-key">\bass</span>, <span class="c-key">\hh</span>, <span class="c-key">\bd</span>].do { |k| p[k].set(<span class="c-key">\amp</span>, 0) };
+        };
+        if (bar == 8)  { p[<span class="c-key">\bass</span>].xset(<span class="c-key">\amp</span>, 0.45) };
+        if (bar == 13) { p[<span class="c-key">\hh</span>].xset(<span class="c-key">\amp</span>, 0.40) };
+        if (bar == 21) {
+            p[<span class="c-key">\bd</span>].set(<span class="c-key">\pat</span>, [1,0,0,0, 0,0,1,0, 1,0,0,0, 1,0,1,0]);
+            p[<span class="c-key">\bd</span>].xset(<span class="c-key">\amp</span>, 0.70);
+        };
+        bar = (bar + 1) % 34;
+        4.wait;
+    };
+}).play(t, quant: 4);</code></pre>
+                    <p>Dentro del <code>Tdef</code>, la referencia correcta a los proxies es <code>p[\nombre]</code>, no <code>~nombre</code>. También hay una regla temporal simple: <code>4.wait</code> es un compás en 4/4 porque el Tdef mide su espera en beats del <code>TempoClock</code>.</p>
+                    <p>La decisión estructural clave es si la forma es cíclica o de una sola pasada. Un <code>loop</code> con módulo devuelve siempre la pieza al compás cero. Un bucle finito deja la forma morir una vez y conservar el último estado de las voces.</p>
+                    <div class="pull">El Tdef es el único agente del sistema que puede pensar en compases enteros. Por eso es el único que puede dar forma a la pieza.</div>
+                </section>
+
+                <section class="section fade-in" id="proporcion">
+                    <div class="section-marker">VIII — La proporción</div>
+                    <h2>La sección <span class="ital">áurea</span></h2>
+                    <p>Si ya puedes decidir cuándo entran las voces, la siguiente pregunta es dónde. La respuesta de este método es concreta: en posiciones guiadas por la razón áurea, <code>φ = 1.618...</code>.</p>
+                    <p>Una forma de 34 compases con su climax en el compás 21 cumple que <code>21 / 34 = 0.618</code>. Esa asimetría crea un peso estructural que la simetría 1:1 raramente produce: más buildup que release, más gravedad dramática.</p>
+                    <figure>
+                        <svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Arco áureo de 34 compases con entradas en posiciones Fibonacci</title>
+                            <style>
+                                .secl { font-family: sans-serif; font-size: 14px; fill: #9aafaa; font-style: italic; }
+                                .secc { font-family: sans-serif; font-size: 14px; fill: #f0c06d; font-style: italic; }
+                                .voi { font-family: monospace; font-size: 12px; fill: #eef8f5; }
+                                .bar { font-family: monospace; font-size: 12px; fill: #9aafaa; }
+                                .climaxn { font-family: monospace; font-size: 12px; fill: #f0c06d; font-weight: 600; }
+                            </style>
+                            <text class="secl" x="154" y="22" text-anchor="middle">intro</text>
+                            <text class="secl" x="322" y="22" text-anchor="middle">build</text>
+                            <text class="secc" x="466" y="22" text-anchor="middle">climax</text>
+                            <text class="secl" x="570" y="22" text-anchor="middle">release</text>
+                            <text class="voi" x="82" y="54" text-anchor="end">pad</text>
+                            <rect x="90" y="42" width="544" height="24" rx="3" fill="#58aa9e"/>
+                            <text class="voi" x="82" y="86" text-anchor="end">organic</text>
+                            <rect x="90" y="74" width="544" height="24" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)"/>
+                            <rect x="170" y="74" width="464" height="24" rx="3" fill="#f0c06d"/>
+                            <text class="voi" x="82" y="118" text-anchor="end">bass</text>
+                            <rect x="90" y="106" width="544" height="24" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)"/>
+                            <rect x="218" y="106" width="416" height="24" rx="3" fill="#79e0d1"/>
+                            <text class="voi" x="82" y="150" text-anchor="end">ritmo</text>
+                            <rect x="90" y="138" width="544" height="24" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)"/>
+                            <rect x="298" y="138" width="336" height="24" rx="3" fill="#58aa9e" opacity="0.8"/>
+                            <text class="voi" x="82" y="182" text-anchor="end">kit</text>
+                            <rect x="90" y="170" width="544" height="24" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)"/>
+                            <rect x="426" y="170" width="208" height="24" rx="3" fill="#f0c06d"/>
+                            <text class="voi" x="82" y="214" text-anchor="end">lead</text>
+                            <rect x="90" y="202" width="544" height="24" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(126,227,213,0.16)"/>
+                            <rect x="426" y="202" width="80" height="24" rx="3" fill="#79e0d1"/>
+                            <line x1="426" y1="34" x2="426" y2="234" stroke="#f0c06d" stroke-width="2.5"/>
+                            <text class="bar" x="90" y="248" text-anchor="middle">0</text>
+                            <text class="bar" x="170" y="248" text-anchor="middle">5</text>
+                            <text class="bar" x="218" y="248" text-anchor="middle">8</text>
+                            <text class="bar" x="298" y="248" text-anchor="middle">13</text>
+                            <text class="climaxn" x="426" y="248" text-anchor="middle">21</text>
+                            <text class="bar" x="506" y="248" text-anchor="middle">26</text>
+                            <text class="bar" x="554" y="248" text-anchor="middle">29</text>
+                            <text class="bar" x="634" y="248" text-anchor="middle">34</text>
+                        </svg>
+                        <figcaption><span class="num">Figura V</span>Arco de 34 compases. Las entradas caen en posiciones Fibonacci y el climax aparece en 21, justo donde el cociente con la longitud total produce la proporción áurea.</figcaption>
+                    </figure>
+                    <div class="pull">La asimetría áurea da gravedad estructural a lo que la simetría dejaría plano.</div>
+                </section>
+
+                <section class="section fade-in" id="mezcla">
+                    <div class="section-marker">IX — La mezcla</div>
+                    <h2>Un solo bus <span class="ital">de salida</span></h2>
+                    <p>Si cada voz se reproduce directamente sobre el bus principal del servidor, no hay un punto donde gestionar la dinámica global. La solución es disciplinada y simple: un único bus máster que lee a todos los demás y aplica el último tramo de la cadena.</p>
+                    <figure>
+                        <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <title>Topología del bus máster</title>
+                            <style>
+                                .nh { font-family: monospace; font-size: 12px; fill: #071118; }
+                                .nh2 { font-family: monospace; font-size: 12px; fill: #eef8f5; }
+                                .vp { font-family: sans-serif; font-size: 13px; fill: #9aafaa; font-style: italic; }
+                            </style>
+                            <g>
+                                <rect x="40" y="30" width="130" height="34" rx="3" fill="#58aa9e"/><text class="nh" x="105" y="52" text-anchor="middle">~pad</text>
+                                <rect x="40" y="72" width="130" height="34" rx="3" fill="#f0c06d"/><text class="nh" x="105" y="94" text-anchor="middle">~organic</text>
+                                <rect x="40" y="114" width="130" height="34" rx="3" fill="#79e0d1"/><text class="nh" x="105" y="136" text-anchor="middle">~bass</text>
+                                <rect x="40" y="156" width="130" height="34" rx="3" fill="#58aa9e" opacity="0.78"/><text class="nh" x="105" y="178" text-anchor="middle">~arp</text>
+                                <rect x="40" y="198" width="130" height="34" rx="3" fill="#79e0d1"/><text class="nh" x="105" y="220" text-anchor="middle">~drums</text>
+                                <rect x="40" y="240" width="130" height="34" rx="3" fill="#f0c06d"/><text class="nh" x="105" y="262" text-anchor="middle">~lead</text>
+                            </g>
+                            <g>
+                                <rect x="40" y="294" width="130" height="34" rx="3" fill="#071118"/><text class="nh2" x="105" y="316" text-anchor="middle">~verb / ~delay</text>
+                                <text class="vp" x="105" y="350" text-anchor="middle">retornos FX</text>
+                            </g>
+                            <g stroke="#79e0d1" stroke-width="0.8" fill="none">
+                                <path d="M170 47 L330 175"/><path d="M170 89 L330 175"/><path d="M170 131 L330 175"/><path d="M170 173 L330 175"/><path d="M170 215 L330 175"/><path d="M170 257 L330 175"/><path d="M170 311 L330 175"/>
+                            </g>
+                            <rect x="330" y="140" width="200" height="70" rx="3" fill="rgba(255,255,255,0.05)" stroke="rgba(126,227,213,0.24)" stroke-width="2"/>
+                            <text class="nh2" x="430" y="166" text-anchor="middle" style="font-size:14px;">~master</text>
+                            <text class="vp" x="430" y="184" text-anchor="middle">compander · tanh · limiter</text>
+                            <text class="vp" x="430" y="200" text-anchor="middle">niveles por voz</text>
+                        </svg>
+                        <figcaption><span class="num">Figura VI</span>El bus máster colapsa toda la red de voces y efectos en un único punto de control. <code>.play</code> se llama una sola vez en todo el sistema.</figcaption>
+                    </figure>
+<pre><code>~master = {
+    var dr, bs, pd, sum;
+    dr = ~drums.ar(2) * <span class="c-key">\drumsLvl</span>.kr(0.55);
+    bs = ~bass.ar(2)  * <span class="c-key">\bassLvl</span>.kr(0.45);
+    pd = ~pad.ar(2)   * <span class="c-key">\padLvl</span>.kr(0.50);
+    sum = dr + bs + pd;
+    sum = Compander.ar(sum, sum, 0.4, 1, 0.5, 0.01, 0.1);
+    sum = (sum * <span class="c-key">\drive</span>.kr(1.2)).tanh;
+    Limiter.ar(sum, 0.92) * <span class="c-key">\master</span>.kr(0.85);
+};</code></pre>
+                    <ul>
+                        <li><strong>Faders por canal:</strong> cada voz entra al cuadro desde un único lugar.</li>
+                        <li><strong>Pegamento:</strong> un <code>Compander</code> suave amalgama sin aplastar.</li>
+                        <li><strong>Carácter:</strong> una saturación <code>tanh</code> añade armónicos y cohesión.</li>
+                        <li><strong>Seguridad:</strong> el <code>Limiter</code> final impide desbordes.</li>
+                    </ul>
+                </section>
+
+                <section class="section coda fade-in">
+                    <div class="section-marker">Coda</div>
+                    <h2>Cinco escalas, <span class="ital">cinco agentes</span></h2>
+                    <p>El método consiste en aceptar que ningún objeto del sistema puede pensar en más de una o dos escalas temporales a la vez y en repartir el trabajo coherentemente entre los agentes que sí saben pensar en su escala.</p>
+                    <table>
+                        <thead>
+                            <tr><th>Escala</th><th>Agente</th><th>Mecanismo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="scale">sample</span></td><td>UGens del servidor</td><td>DSP continuo a 44.1 kHz</td></tr>
+                            <tr><td><span class="scale">micro</span></td><td>Envolventes</td><td>Env.perc, Env.asr con <code>doneAction: 0</code></td></tr>
+                            <tr><td><span class="scale">objeto sonoro</span></td><td>NodeProxy</td><td>NamedControls, <code>.set</code>, <code>.xset</code>, <code>.map</code></td></tr>
+                            <tr><td><span class="scale">meso</span></td><td>Tdef + <code>~clkMaster</code></td><td>Cambios por compás y patrones</td></tr>
+                            <tr><td><span class="scale">macro</span></td><td>Tdef + φ</td><td>Arco áureo de N compases Fibonacci</td></tr>
+                        </tbody>
+                    </table>
+                    <p>Cada agente hace lo que solo él sabe hacer, y todos comparten un único pulso. El compositor no se limita a tocar botones: compone el sistema y luego escucha qué hace.</p>
+                </section>
+
+                <section class="section fade-in" id="apendice">
+                    <div class="section-marker">Apéndice — código operativo</div>
+                    <h2>Deriva v.2 <span class="ital">— el script entero</span></h2>
+                    <div class="warning">
+                        <span class="lab">Advertencia · ejemplo pedagógico</span>
+                        <p>Este código no es <em>Deriva</em> como pieza terminada. Es la suma didáctica de las técnicas que el cuaderno explica: voces, efectos, Tdef y topología del máster puestos juntos para que se vea el método ejecutándose a la vez.</p>
+                        <p>La pieza estética empieza después: quitando capas, refinando timbres, dejando respirar al material y decidiendo qué sobra.</p>
+                    </div>
+                    <details class="appendix-toggle">
+                        <summary>Desplegar script completo</summary>
+                        <div class="codigo-completo">// DERIVA v.2 — script completo
+// Descarga recomendada: assets/code/sc/sesion-04-deriva-v2.scd
+
+t = TempoClock.new(100/60).permanent_(true);
+p = ProxySpace.push(s.boot);
+
+~bpm = { 100 };
+~clkMaster = { Impulse.kr((~bpm.kr / 60) * 4) };
+~cnt16 = { PulseCount.kr(~clkMaster.kr.first) - 1 };
+~cnt4  = { (~cnt16.kr.first / 4).floor };
+~cnt1  = { (~cnt16.kr.first / 16).floor };
+
+// ... ver archivo .scd para el script pedagógico completo
+
+Tdef(\macro, {
+    var bar = 0;
+    loop {
+        if (bar == 0) {
+            p[\pad].xset(\amp, 0.14);
+            [\bass, \hh, \bd, \clap, \snare, \lead, \arp, \organicArp].do { |k|
+                p[k].set(\amp, 0)
+            };
+        };
+        if (bar == 5)  { p[\organicArp].xset(\amp, 0.20) };
+        if (bar == 8)  { p[\bass].xset(\amp, 0.45) };
+        if (bar == 13) { p[\hh].xset(\amp, 0.40); p[\arp].xset(\amp, 0.30) };
+        if (bar == 21) {
+            p[\bd].set(\pat, [1,0,0,0, 0,0,1,0, 1,0,0,0, 1,0,1,0]);
+            p[\bd].xset(\amp, 0.70);
+            p[\clap].xset(\amp, 0.50);
+            p[\snare].xset(\amp, 0.45);
+            p[\lead].xset(\amp, 0.50);
+            p[\bass].xset(\cutoff, 2000);
+        };
+        if (bar == 26) { p[\lead].xset(\amp, 0) };
+        if (bar == 29) { p[\bass].xset(\cutoff, 600) };
+        bar = (bar + 1) % 34;
+        4.wait;
+    };
+}).play(t, quant: 4);</div>
+                    </details>
+                    <div class="colophon">
+                        KAIROS · Cuaderno I · Deriva · revisión II<br>
+                        Twistin · MMXXVI · Vigo<br>
+                        El código es ejemplo pedagógico; la pieza es lo que se hace con él.
+                    </div>
+                </section>
+            </div>
+
+            <section class="article-related fade-in" aria-label="Lecturas relacionadas">
+                <h3 class="article-related-heading">Seguir desde aquí</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="sesion-02-live-coding-ritmico.html">
+                        <span class="article-related-title">Sesión 02 · Sistema de live coding rítmico</span>
+                        <span class="article-related-desc">Cruzar este cuaderno metodológico con la sesión dedicada al reloj de servidor, secuenciación y buses de efectos.</span>
+                    </a>
+                    <a class="article-related-link" href="sesion-03-sintesis-granular.html">
+                        <span class="article-related-title">Sesión 03 · Síntesis granular</span>
+                        <span class="article-related-desc">Extender la arquitectura temporal hacia escalas micro y granularidad explícita.</span>
+                    </a>
+                    <a class="article-related-link" href="../assets/code/sc/sesion-04-deriva-v2.scd" download>
+                        <span class="article-related-title">Descargar script completo</span>
+                        <span class="article-related-desc">Abrir el archivo <code>.scd</code> con la versión pedagógica completa de Deriva.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="../index.html">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-04-deriva-metodo-composicion-algoritmica.html">Sesión 04 · Deriva</a></li>
+                    <li><a href="../assets/code/sc/sesion-04-deriva-v2.scd">Patch .scd</a></li>
+                    <li><a href="sesion-02-live-coding-ritmico.html">Sesión 02 · Live Coding Rítmico</a></li>
+                    <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
+                    <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

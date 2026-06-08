@@ -765,6 +765,9 @@
                 <button class="filter-btn" data-filter="granular">
                     <span class="filter-icon">⋱</span> Síntesis Granular
                 </button>
+                <button class="filter-btn" data-filter="metodo">
+                    <span class="filter-icon">⌘</span> Método &amp; Arquitectura
+                </button>
             </div>
         </div>
 
@@ -776,6 +779,58 @@
                 <h2 class="dashboard-section-title">// Sesiones de estudio publicadas</h2>
                 
                 <div class="session-log-stack">
+
+                    <!-- SESIÓN 04 -->
+                    <article class="session-log-card" data-category="metodo">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">SC-04</span>
+                            <span class="tech-badge category">Método &amp; Arquitectura</span>
+                            <span class="tech-badge difficulty medium">Avanzado</span>
+                            <span class="tech-badge lines">Cuaderno</span>
+                            <span class="session-log-date">JUNIO 2026</span>
+                        </div>
+                        <h3 class="session-log-title">Deriva: método de composición algorítmica</h3>
+                        <p class="session-log-desc">Un cuaderno técnico sobre composición en capas en SuperCollider: reloj maestro único, contadores derivados, NodeProxy con NamedControls, Tdef macroformal y mezcla centralizada en un solo bus.</p>
+
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // sesion_04_deriva_v2.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// un solo pulso, varias lentes sobre el mismo contador</span>
+<span class="sc-symbol">~clkMaster</span> = { <span class="sc-ugen">Impulse.kr</span>((<span class="sc-symbol">~bpm</span>.kr / <span class="sc-number">60</span>) * <span class="sc-number">4</span>) };
+<span class="sc-symbol">~cnt16</span> = { <span class="sc-ugen">PulseCount.kr</span>(<span class="sc-symbol">~clkMaster</span>.kr.first) - <span class="sc-number">1</span> };
+<span class="sc-symbol">~cnt4</span>  = { (<span class="sc-symbol">~cnt16</span>.kr.first / <span class="sc-number">4</span>).floor };
+<span class="sc-symbol">~cnt1</span>  = { (<span class="sc-symbol">~cnt16</span>.kr.first / <span class="sc-number">16</span>).floor };</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Escalas temporales:</strong> reparto explícito entre sample, micro, objeto sonoro, meso y macro.</li>
+                            <li><strong>Control vivo:</strong> <code>.set</code>, <code>.xset</code> y <code>.map</code> como tres regímenes distintos de mutación.</li>
+                            <li><strong>Forma:</strong> arco áureo de 34 compases organizado con <code>Tdef</code> y puntos Fibonacci.</li>
+                        </ul>
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">Tdef</span>
+                            <span class="micro-tag">TempoClock</span>
+                            <span class="micro-tag">NodeProxy</span>
+                            <span class="micro-tag">NamedControls</span>
+                            <span class="micro-tag">Fibonacci</span>
+                            <span class="micro-tag">Master Bus</span>
+                        </div>
+
+                        <div class="session-log-actions">
+                            <a href="sesion-04-deriva-metodo-composicion-algoritmica.html" class="btn">Abrir sesión 04 →</a>
+                            <a href="../assets/code/sc/sesion-04-deriva-v2.scd" class="btn btn-ghost" download>Descargar script .scd</a>
+                        </div>
+                    </article>
                     
                     <!-- SESIÓN 01 -->
                     <article class="session-log-card" data-category="sintesis">
@@ -984,6 +1039,10 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                         <span class="topic-pill">GrainBuf</span>
                         <span class="topic-pill">Fill Factor</span>
                         <span class="topic-pill">Scatter</span>
+                        <span class="topic-pill">TempoClock</span>
+                        <span class="topic-pill">NodeProxy</span>
+                        <span class="topic-pill">Fibonacci</span>
+                        <span class="topic-pill">Macroforma</span>
                     </div>
                 </div>
 
@@ -1011,10 +1070,11 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
             <div class="footer-col">
                 <h4 data-i18n="footer_project">Proyecto</h4>
                 <ul>
+                    <li><a href="sesion-04-deriva-metodo-composicion-algoritmica.html">Sesión 04 · Deriva</a></li>
+                    <li><a href="../assets/code/sc/sesion-04-deriva-v2.scd" download>Script Sesión 04 .scd</a></li>
                     <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
                     <li><a href="sesion-02-live-coding-ritmico.html">Sesión 02 · Live Coding Rítmico</a></li>
                     <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
-                    <li><a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" download>Patch Sesión 02 .scd</a></li>
                     <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
                 </ul>
             </div>
