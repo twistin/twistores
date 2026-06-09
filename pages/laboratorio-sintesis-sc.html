@@ -639,6 +639,208 @@
             background: var(--accent);
         }
 
+        /* ACID PAGE VARIANT */
+        body.acid-lab .page-header {
+            padding: 36px;
+            margin-bottom: 32px;
+            background:
+                radial-gradient(circle at 86% 14%, rgba(102, 230, 255, 0.12), transparent 24%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 42%),
+                var(--surface-strong);
+            border: 1px solid var(--border-strong);
+            box-shadow: var(--glow);
+        }
+
+        body.acid-lab .page-header::before {
+            display: none;
+        }
+
+        body.acid-lab .page-header::after {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(102, 230, 255, 0.12) 0%, transparent 72%);
+        }
+
+        body.acid-lab .lab-status-badge {
+            background: rgba(255, 107, 74, 0.08);
+            border-color: rgba(255, 107, 74, 0.26);
+        }
+
+        body.acid-lab .pulse-dot {
+            background-color: var(--acid-page-red);
+            box-shadow: 0 0 0 var(--acid-page-red);
+        }
+
+        body.acid-lab .status-text {
+            color: var(--acid-page-red);
+        }
+
+        body.acid-lab .filter-btn {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        body.acid-lab .filter-btn:hover {
+            background: rgba(102, 230, 255, 0.08);
+            border-color: var(--border-hover);
+        }
+
+        body.acid-lab .filter-btn.active {
+            color: #071013;
+            background: var(--signal);
+            border-color: var(--signal);
+            box-shadow: 0 10px 24px rgba(183, 255, 74, 0.16);
+        }
+
+        body.acid-lab .filter-btn.active .filter-icon {
+            color: #071013;
+        }
+
+        body.acid-lab .dashboard-section-title {
+            color: var(--acid-page-red);
+            border-bottom-color: var(--border-strong);
+        }
+
+        body.acid-lab .session-log-stack::before {
+            border-left-color: rgba(102, 230, 255, 0.24);
+        }
+
+        body.acid-lab .session-log-card {
+            background:
+                radial-gradient(circle at 88% 16%, rgba(102, 230, 255, 0.08), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 38%),
+                rgba(255, 255, 255, 0.03);
+            border-color: var(--border);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+        }
+
+        body.acid-lab .session-log-card:hover {
+            border-color: var(--accent);
+            background:
+                radial-gradient(circle at 88% 16%, rgba(102, 230, 255, 0.12), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 38%),
+                rgba(102, 230, 255, 0.06);
+        }
+
+        body.acid-lab .session-log-card::before {
+            background: #071013;
+            border-color: var(--border);
+        }
+
+        body.acid-lab .tech-badge.category,
+        body.acid-lab .tech-badge.lines,
+        body.acid-lab .micro-tag,
+        body.acid-lab .topic-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border);
+        }
+
+        body.acid-lab .tech-badge.session-num {
+            background: var(--acid-page-red);
+            color: #150805;
+        }
+
+        body.acid-lab .tech-badge.difficulty.easy,
+        body.acid-lab .tech-badge.difficulty.medium {
+            background: var(--signal-soft);
+            color: var(--signal);
+            border-color: var(--signal-border);
+        }
+
+        body.acid-lab .session-log-code-preview {
+            border-color: rgba(102, 230, 255, 0.16);
+            background: rgba(6, 15, 18, 0.84);
+            box-shadow: inset 0 1px 0 rgba(102, 230, 255, 0.08), inset 0 12px 28px rgba(0, 0, 0, 0.34);
+        }
+
+        body.acid-lab .code-terminal-header {
+            background: rgba(7, 14, 17, 0.94);
+            border-bottom-color: rgba(102, 230, 255, 0.12);
+        }
+
+        body.acid-lab .copy-btn {
+            background: rgba(102, 230, 255, 0.08);
+            border-color: rgba(102, 230, 255, 0.22);
+        }
+
+        body.acid-lab .copy-btn:hover {
+            background: rgba(102, 230, 255, 0.16);
+        }
+
+        body.acid-lab .copy-btn.copied {
+            background: rgba(183, 255, 74, 0.14);
+            border-color: rgba(183, 255, 74, 0.28);
+            color: var(--signal);
+        }
+
+        body.acid-lab .session-log-code-preview code {
+            color: #def5fb;
+        }
+
+        body.acid-lab .sc-comment {
+            color: #8ea19e;
+        }
+
+        body.acid-lab .sc-arg,
+        body.acid-lab .sc-number {
+            color: var(--signal);
+        }
+
+        body.acid-lab .sc-number {
+            transition: color var(--transition);
+        }
+
+        body.acid-lab .sc-keyword {
+            color: var(--acid-page-red);
+        }
+
+        body.acid-lab .session-log-highlights li::before,
+        body.acid-lab .widget-notes-list li::before {
+            color: var(--accent);
+        }
+
+        body.acid-lab .sidebar-widget {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                var(--surface-strong);
+            border-color: var(--border);
+            border-left-color: var(--accent);
+        }
+
+        body.acid-lab .sidebar-widget.reference-widget {
+            border-left-color: var(--signal);
+            background:
+                radial-gradient(circle at 88% 12%, rgba(183, 255, 74, 0.09), transparent 36%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                var(--surface-strong);
+        }
+
+        body.acid-lab .widget-title {
+            color: var(--accent);
+            border-bottom-color: var(--border);
+        }
+
+        body.acid-lab .widget-label,
+        body.acid-lab .lab-family-kicker {
+            color: var(--acid-page-red);
+        }
+
+        body.acid-lab .ref-author {
+            color: var(--signal);
+        }
+
+        body.acid-lab .topic-pill:hover {
+            border-color: var(--accent);
+            background: rgba(102, 230, 255, 0.08);
+            box-shadow: 0 0 6px rgba(102, 230, 255, 0.18);
+        }
+
+        body.acid-lab .lab-family-band {
+            background:
+                radial-gradient(circle at 86% 14%, rgba(102, 230, 255, 0.09), transparent 24%),
+                linear-gradient(180deg, var(--surface-strong), var(--surface));
+            box-shadow: var(--glow-sm);
+        }
+
         /* LIGHT THEME OVERRIDES */
         [data-theme="light"] .page-header {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(220, 235, 232, 0.5));
@@ -754,7 +956,7 @@
         }
     </style>
 </head>
-<body>
+<body class="acid-page acid-lab">
 
     <header>
         <div class="header-inner">

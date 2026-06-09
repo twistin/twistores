@@ -423,9 +423,135 @@
         }
 
         .lightbox-close:hover { color: var(--heading); }
+
+        body.acid-live .page-header {
+            margin-bottom: 26px;
+        }
+
+        body.acid-live .page-header h1 {
+            max-width: 11ch;
+        }
+
+        body.acid-live .events-header-info {
+            background:
+                radial-gradient(circle at 86% 18%, rgba(102, 230, 255, 0.1), transparent 24%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 36%),
+                var(--surface-strong);
+            border-color: var(--border);
+            border-radius: 24px;
+            box-shadow: var(--glow-sm);
+        }
+
+        body.acid-live .events-header-info strong {
+            color: var(--signal);
+        }
+
+        body.acid-live .session-card {
+            background:
+                radial-gradient(circle at 84% 16%, rgba(102, 230, 255, 0.08), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 34%),
+                rgba(255, 255, 255, 0.03);
+            border-color: var(--border);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+        }
+
+        body.acid-live .session-card:hover {
+            border-color: var(--accent);
+            background:
+                radial-gradient(circle at 84% 16%, rgba(102, 230, 255, 0.12), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 34%),
+                rgba(102, 230, 255, 0.06);
+        }
+
+        body.acid-live .session-card-featured-strip {
+            background: linear-gradient(90deg, var(--acid-page-red), var(--accent), transparent);
+        }
+
+        body.acid-live .session-badge {
+            color: #150805;
+            background: var(--acid-page-red);
+        }
+
+        body.acid-live .session-badge-past {
+            color: var(--accent);
+            background: rgba(102, 230, 255, 0.08);
+            border-color: rgba(102, 230, 255, 0.22);
+        }
+
+        body.acid-live .session-sidebar {
+            border-left-color: var(--border);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                rgba(6, 13, 16, 0.3);
+        }
+
+        body.acid-live .sidebar-block-title,
+        body.acid-live .media-section-title {
+            color: var(--acid-page-red);
+            opacity: 1;
+        }
+
+        body.acid-live .piece-item,
+        body.acid-live .archive-note-box,
+        body.acid-live .video-player-wrap {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border);
+        }
+
+        body.acid-live .piece-item:hover,
+        body.acid-live .photo-item:hover {
+            border-color: var(--accent);
+        }
+
+        body.acid-live .status-panel {
+            background:
+                radial-gradient(circle at 84% 24%, rgba(183, 255, 74, 0.08), transparent 20%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 36%),
+                var(--surface);
+            border-color: var(--border);
+            box-shadow: var(--glow-sm);
+        }
+
+        body.acid-live .status-panel .tag {
+            color: #071013;
+            background: var(--signal);
+            border-color: var(--signal-border);
+        }
+
+        body.acid-live .video-label {
+            background: rgba(7, 14, 17, 0.92);
+            border-top-color: var(--border);
+        }
+
+        body.acid-live .photo-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border);
+        }
+
+        body.acid-live .lightbox {
+            background: rgba(3, 7, 10, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        body.acid-live .archive-note-box {
+            border-style: solid;
+            box-shadow: var(--glow-sm);
+        }
+
+        body.acid-live .emao-grid > div:last-child {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                rgba(6, 13, 16, 0.3) !important;
+        }
+
+        body.acid-live #session-aveleira .session-card-featured-strip,
+        body.acid-live #session-sons .session-card-featured-strip,
+        body.acid-live #session-emao .session-card-featured-strip {
+            background: linear-gradient(90deg, rgba(255, 107, 74, 0.42), rgba(102, 230, 255, 0.12), transparent) !important;
+        }
     </style>
 </head>
-<body>
+<body class="acid-page acid-live">
 
     <header>
         <div class="header-inner">

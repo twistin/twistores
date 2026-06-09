@@ -1416,6 +1416,254 @@ footer {
     line-height: 1.65;
 }
 
+/* ── INNER PAGES: ACID SYSTEM ──────────────────────────── */
+body.acid-page {
+    --acid-page-cyan: #66e6ff;
+    --acid-page-lime: #b7ff4a;
+    --acid-page-red: #ff6b4a;
+    --bg: #091013;
+    --bg2: #0d1518;
+    --surface: rgba(18, 28, 33, 0.72);
+    --surface-strong: rgba(22, 34, 40, 0.9);
+    --border: rgba(102, 230, 255, 0.16);
+    --border-strong: rgba(102, 230, 255, 0.28);
+    --border-hover: rgba(102, 230, 255, 0.42);
+    --accent: var(--acid-page-cyan);
+    --accent2: #89b8bf;
+    --signal: var(--acid-page-lime);
+    --signal-soft: rgba(183, 255, 74, 0.12);
+    --signal-border: rgba(183, 255, 74, 0.28);
+    --heading: #f5f4ed;
+    --text: #d6ddd7;
+    --text-dim: #95a5a1;
+    --glow: 0 24px 56px rgba(0, 0, 0, 0.28);
+    --glow-sm: 0 14px 30px rgba(0, 0, 0, 0.18);
+    background:
+        radial-gradient(circle at 15% 12%, rgba(183, 255, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 84% 10%, rgba(102, 230, 255, 0.12), transparent 18%),
+        radial-gradient(circle at 50% 44%, rgba(255, 107, 74, 0.045), transparent 18%),
+        linear-gradient(180deg, #0b1216 0%, var(--bg) 44%, #05080a 100%);
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+body.acid-page::before {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 100% 34px, 34px 100%;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 84%);
+    opacity: 0.28;
+}
+
+[data-theme="light"] body.acid-page {
+    --bg: #eff3ea;
+    --bg2: #dfe7db;
+    --surface: rgba(255, 255, 255, 0.78);
+    --surface-strong: rgba(255, 255, 255, 0.94);
+    --border: rgba(18, 126, 136, 0.14);
+    --border-strong: rgba(18, 126, 136, 0.26);
+    --border-hover: rgba(18, 126, 136, 0.36);
+    --accent: #127e88;
+    --accent2: #5a7d82;
+    --signal: #7ea700;
+    --signal-soft: rgba(126, 167, 0, 0.11);
+    --signal-border: rgba(126, 167, 0, 0.24);
+    --heading: #182927;
+    --text: #2d403d;
+    --text-dim: #59706c;
+    --glow: 0 20px 42px rgba(11, 33, 31, 0.08);
+    --glow-sm: 0 12px 24px rgba(11, 33, 31, 0.05);
+    background:
+        radial-gradient(circle at 15% 12%, rgba(126, 167, 0, 0.09), transparent 20%),
+        radial-gradient(circle at 84% 10%, rgba(18, 126, 136, 0.1), transparent 18%),
+        linear-gradient(180deg, #f5f8f3 0%, var(--bg) 46%, var(--bg2) 100%);
+    background-color: var(--bg);
+}
+
+[data-theme="light"] body.acid-page::before {
+    background:
+        linear-gradient(rgba(18, 126, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 126, 136, 0.03) 1px, transparent 1px);
+}
+
+body.acid-page header {
+    top: 10px;
+    margin: 0 auto 20px;
+    width: min(1280px, calc(100% - 36px));
+    border-bottom: none;
+    background: transparent;
+    backdrop-filter: none;
+}
+
+body.acid-page .header-inner {
+    max-width: none;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(10, 16, 19, 0.72);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme="light"] body.acid-page .header-inner {
+    background: rgba(255, 255, 255, 0.78);
+}
+
+body.acid-page .site-logo {
+    color: var(--accent);
+}
+
+body.acid-page nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-dim);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+}
+
+body.acid-page nav a:hover,
+body.acid-page nav a.active {
+    color: #071013;
+    border-color: var(--signal);
+    background: var(--signal);
+    transform: translateY(-1px);
+}
+
+body.acid-page .theme-toggle,
+body.acid-page .lang-btn,
+body.acid-page .nav-toggle {
+    border-color: var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--accent);
+}
+
+body.acid-page .nav-toggle[aria-expanded="true"] {
+    background: rgba(102, 230, 255, 0.14);
+    border-color: var(--border-strong);
+    color: var(--heading);
+}
+
+body.acid-page .lang-btn:hover,
+body.acid-page .lang-btn.active {
+    color: var(--heading);
+    background: rgba(102, 230, 255, 0.16);
+}
+
+[data-theme="light"] body.acid-page .lang-btn:hover,
+[data-theme="light"] body.acid-page .lang-btn.active {
+    background: rgba(18, 126, 136, 0.12);
+}
+
+body.acid-page .container {
+    max-width: 1240px;
+}
+
+body.acid-page .page-header {
+    position: relative;
+    padding: 74px clamp(22px, 3vw, 30px) 30px;
+    margin-bottom: 34px;
+    border-bottom: none;
+    overflow: hidden;
+}
+
+body.acid-page .page-header::before {
+    content: "";
+    position: absolute;
+    inset: 18px 0 0;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 36%),
+        linear-gradient(180deg, var(--surface-strong), var(--surface));
+    box-shadow: var(--glow-sm);
+    z-index: -1;
+}
+
+body.acid-page .page-header::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: -20px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(102, 230, 255, 0.14) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body.acid-page .page-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+body.acid-page .page-header .section-label,
+body.acid-page .section-label {
+    color: var(--acid-page-red);
+    opacity: 1;
+}
+
+body.acid-page .page-header h1,
+body.acid-page .section-title {
+    color: var(--heading);
+}
+
+body.acid-page .page-header .page-intro {
+    max-width: 62ch;
+    color: var(--text-dim);
+}
+
+body.acid-page .divider {
+    border-top-color: var(--border-strong);
+}
+
+body.acid-page .btn {
+    border-color: var(--border);
+    color: var(--heading);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+body.acid-page .btn:hover {
+    color: var(--heading);
+    border-color: var(--accent);
+    background: rgba(102, 230, 255, 0.08);
+}
+
+body.acid-page .btn.btn-ghost {
+    color: var(--text-dim);
+    background: transparent;
+}
+
+body.acid-page .tag {
+    color: #081013;
+    border-color: rgba(255, 107, 74, 0.32);
+    background: var(--acid-page-red);
+}
+
+body.acid-page footer {
+    border-top-color: var(--border);
+}
+
+body.acid-page .footer-brand p,
+body.acid-page .footer-col li a,
+body.acid-page .footer-col span,
+body.acid-page .footer-bottom p {
+    color: var(--text-dim);
+}
+
+body.acid-page .footer-col h4 {
+    color: var(--accent);
+}
+
+body.acid-page .footer-col a:hover {
+    color: var(--heading);
+}
+
 /* ── HOME: ARCHIVO ACIDO ───────────────────────────────── */
 body.home-acid {
     --home-acid-bg: #091013;
@@ -2063,6 +2311,24 @@ body.home-acid .footer-col h4 {
 }
 
 @media (max-width: 860px) {
+    body.acid-page header {
+        width: calc(100% - 24px);
+    }
+
+    body.acid-page .header-inner {
+        padding: 12px 14px;
+        border-radius: 16px;
+    }
+
+    body.acid-page .page-header {
+        padding: 66px 18px 24px;
+    }
+
+    body.acid-page .page-header::before {
+        inset: 12px 0 0;
+        border-radius: 20px;
+    }
+
     body.home-acid .hero-routes,
     body.home-acid .card-grid,
     body.home-acid .soundscapes-grid {
@@ -2251,6 +2517,19 @@ body.home-acid .footer-col h4 {
         padding: 24px;
         gap: 20px;
         box-shadow: var(--glow-sm);
+    }
+
+    body.acid-page nav ul.open {
+        top: 68px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(10, 16, 19, 0.96);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="light"] body.acid-page nav ul.open {
+        background: rgba(255, 255, 255, 0.94);
     }
 
     .footer-inner { grid-template-columns: 1fr; gap: 24px; }
