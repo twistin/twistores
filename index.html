@@ -22,7 +22,7 @@
     <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/sc-banner.png">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home-acid">
 
     <!-- ═══════ HEADER ═══════════════════════════════════════════ -->
     <header>
@@ -51,47 +51,75 @@
     </header>
 
     <!-- ═══════ HERO ════════════════════════════════════════════ -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <p class="hero-eyebrow" data-i18n="hero_eyebrow">// Música · Migración · Tecnología</p>
-            <p class="hero-brand cursor-blink">TWISTORES</p>
-            <h1 class="hero-title" data-i18n="hero_title">Música, investigación, live coding y soundscapes desde Vigo</h1>
-            <p class="hero-sub" data-i18n="hero_sub">
-                Silvino Díaz Carreras. Investigador, docente y performer centrado en música, migración, tecnología y escucha de campo.
-            </p>
-            <p class="hero-support" data-i18n="hero_support">
-                Aquí conviven escritura larga, archivo de sesiones en vivo y paisajes sonoros publicados con contexto, imagen y audio.
-            </p>
-            <div class="hero-cta-row">
-            <a href="pages/articulos.html" class="btn" data-i18n="hero_cta1">Explorar artículos</a>
-            <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver archivo en vivo</a>
-            </div>
-            <div class="hero-routes" aria-label="Rutas principales">
-                <a class="hero-route" href="pages/articulos.html">
-                    <span class="hero-route-label" data-i18n="hero_route_articles_label">// investigación</span>
-                    <strong data-i18n="hero_route_articles_title">Leer artículos y ensayos</strong>
-                    <span data-i18n="hero_route_articles_desc">Textos publicados sobre sociología de la música, migración y tecnología.</span>
-                </a>
-                <a class="hero-route" href="pages/eventos.html">
-                    <span class="hero-route-label" data-i18n="hero_route_live_label">// archivo en vivo</span>
-                    <strong data-i18n="hero_route_live_title">Ver sesiones documentadas</strong>
-                    <span data-i18n="hero_route_live_desc">Directos con vídeo, fotografías, contexto y piezas interpretadas.</span>
-                </a>
-                <a class="hero-route" href="pages/soundscapes.html">
-                    <span class="hero-route-label" data-i18n="hero_route_sound_label">// escucha de campo</span>
-                    <strong data-i18n="hero_route_sound_title">Escuchar soundscapes</strong>
-                    <span data-i18n="hero_route_sound_desc">Grabaciones de campo con notas de escucha, coordenadas e imágenes.</span>
-                </a>
-            </div>
+    <section class="hero hero-acid">
+        <div class="hero-acid-shell container">
+            <article class="hero-acid-main fade-in">
+                <div class="hero-acid-kicker">
+                    <span class="hero-acid-pulse"></span>
+                    <span data-i18n="hero_acid_kicker">Archivo activo · música, código y escucha</span>
+                </div>
+                <p class="hero-eyebrow" data-i18n="hero_eyebrow">// Música · Migración · Tecnología</p>
+                <p class="hero-brand cursor-blink">TWISTORES</p>
+                <h1 class="hero-title" data-i18n="hero_title">Música, investigación, live coding y soundscapes desde Vigo</h1>
+                <p class="hero-sub" data-i18n="hero_sub">
+                    Silvino Díaz Carreras. Investigador, docente y performer centrado en música, migración, tecnología y escucha de campo.
+                </p>
+                <p class="hero-support" data-i18n="hero_support">
+                    Aquí conviven escritura larga, archivo de sesiones en vivo y paisajes sonoros publicados con contexto, imagen y audio.
+                </p>
+                <div class="hero-cta-row">
+                    <a href="pages/articulos.html" class="btn btn-acid-primary" data-i18n="hero_cta1">Explorar artículos</a>
+                    <a href="pages/laboratorio-sintesis-sc.html" class="btn btn-acid-secondary" data-i18n="hero_cta_lab">Abrir laboratorio</a>
+                    <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver archivo en vivo</a>
+                </div>
+                <div class="hero-routes" aria-label="Rutas principales">
+                    <a class="hero-route" href="pages/articulos.html">
+                        <span class="hero-route-label" data-i18n="hero_route_articles_label">// investigación</span>
+                        <strong data-i18n="hero_route_articles_title">Leer artículos y ensayos</strong>
+                        <span data-i18n="hero_route_articles_desc">Textos publicados sobre sociología de la música, migración y tecnología.</span>
+                    </a>
+                    <a class="hero-route" href="pages/laboratorio-sintesis-sc.html">
+                        <span class="hero-route-label" data-i18n="hero_route_lab_label">// supercollider</span>
+                        <strong data-i18n="hero_route_lab_title">Entrar en el laboratorio</strong>
+                        <span data-i18n="hero_route_lab_desc">Patches, síntesis, composición algorítmica y cuadernos técnicos con SC.</span>
+                    </a>
+                    <a class="hero-route" href="pages/eventos.html">
+                        <span class="hero-route-label" data-i18n="hero_route_live_label">// archivo en vivo</span>
+                        <strong data-i18n="hero_route_live_title">Ver sesiones documentadas</strong>
+                        <span data-i18n="hero_route_live_desc">Directos con vídeo, fotografías, contexto y piezas interpretadas.</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="hero-acid-side fade-in" aria-label="Accesos editoriales">
+                <article class="hero-side-card">
+                    <p class="hero-side-label" data-i18n="home_acid_side1_label">Ahora</p>
+                    <h2 data-i18n="home_acid_side1_title">Laboratorio activo</h2>
+                    <p data-i18n="home_acid_side1_desc">Cuatro sesiones publicadas y una línea cada vez más clara entre patch, método y composición.</p>
+                    <a href="pages/sesion-04-deriva-metodo-composicion-algoritmica.html" class="hero-side-link" data-i18n="home_acid_side1_cta">Abrir sesión 04 →</a>
+                </article>
+                <article class="hero-side-card">
+                    <p class="hero-side-label" data-i18n="home_acid_side2_label">Investigación</p>
+                    <h2 data-i18n="home_acid_side2_title">Música, migración e identidad</h2>
+                    <p data-i18n="home_acid_side2_desc">La escritura y la tesis doctoral siguen siendo el otro eje del proyecto, con artículos cerrados y notas de campo publicadas.</p>
+                    <a href="pages/about.html" class="hero-side-link" data-i18n="home_acid_side2_cta">Ver contexto →</a>
+                </article>
+                <article class="hero-side-card">
+                    <p class="hero-side-label" data-i18n="home_acid_side3_label">Lectura integrada</p>
+                    <h2 data-i18n="home_acid_side3_title">Curtis Roads dentro del laboratorio</h2>
+                    <p data-i18n="home_acid_side3_desc">Una traducción comentada de Audio Digital conectada directamente con el trabajo en SuperCollider.</p>
+                    <a href="curtis_roads_capitulos.html" class="hero-side-link" data-i18n="home_acid_side3_cta">Abrir lectura →</a>
+                </article>
+            </aside>
         </div>
     </section>
 
-    <main class="container">
+    <main class="container home-acid-main-wrap">
+        <div class="home-acid-grid">
+            <div class="home-acid-main">
 
         <!-- ── Artículos recientes ──────────────────────────────── -->
-        <section class="page-section fade-in">
+        <section class="page-section fade-in home-acid-panel">
             <div class="section-head">
                 <div>
                     <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
@@ -159,9 +187,9 @@
             </div>
         </section>
 
-        <hr class="divider">
+        <hr class="divider home-acid-divider">
 
-        <section class="page-section fade-in" aria-labelledby="home-lab-title">
+        <section class="page-section fade-in home-acid-panel" aria-labelledby="home-lab-title">
             <div class="section-head">
                 <div>
                     <p class="section-label">// estudio con supercollider</p>
@@ -207,10 +235,10 @@
             </article>
         </section>
 
-        <hr class="divider">
+        <hr class="divider home-acid-divider">
 
         <!-- ── Live Coding — Sesión destacada ─────────────────────── -->
-        <section class="page-section fade-in" aria-labelledby="home-livecoding-title">
+        <section class="page-section fade-in home-acid-panel" aria-labelledby="home-livecoding-title">
             <div class="section-head">
                 <div>
                     <p class="section-label">// sets de live coding</p>
@@ -239,10 +267,10 @@
             </article>
         </section>
 
-        <hr class="divider">
+        <hr class="divider home-acid-divider">
 
         <!-- ── Soundscapes recientes ────────────────────────────── -->
-        <section class="page-section fade-in">
+        <section class="page-section fade-in home-acid-panel">
             <div class="section-head">
                 <div>
                     <p class="section-label" data-i18n="label_soundscapes">// grabaciones de campo</p>
@@ -284,6 +312,37 @@
                 <a href="pages/soundscapes.html" class="btn" data-i18n="all_ss_btn">Ver todas las sesiones →</a>
             </div>
         </section>
+
+            </div>
+
+            <aside class="home-acid-side-rail fade-in" aria-label="Panel lateral de portada">
+                <article class="home-acid-aside-card">
+                    <p class="home-acid-aside-label" data-i18n="home_acid_aside1_label">Diagnóstico</p>
+                    <h3 data-i18n="home_acid_aside1_title">Una portada con más presencia escénica</h3>
+                    <p data-i18n="home_acid_aside1_desc">La home deja de ser sólo sobria y técnica. Ahora separa mejor escritura, laboratorio y directo sin depender de un solo acento cromático.</p>
+                </article>
+
+                <article class="home-acid-aside-card home-acid-aside-card--media">
+                    <img src="assets/img/schmidt/s1.jpeg" alt="Schmidt en Sala SuperSonic, Vigo, el 3 de abril de 2026" loading="lazy">
+                    <div class="home-acid-aside-body">
+                        <p class="home-acid-aside-label" data-i18n="home_acid_aside2_label">Live destacado</p>
+                        <h3 data-i18n="home_acid_aside2_title">Schmidt · Sala SuperSonic</h3>
+                        <p data-i18n="home_acid_aside2_desc">En directo, esta dirección cromática encaja casi sola: más noche, más señal y más memoria visual.</p>
+                        <a href="pages/eventos.html#session-schmidt" class="hero-side-link" data-i18n="home_acid_aside2_cta">Ver sesión →</a>
+                    </div>
+                </article>
+
+                <article class="home-acid-aside-card home-acid-aside-card--media">
+                    <img src="assets/img/chandebrito/2-1.jpg" alt="Chan de Brito, marzo de 2026" loading="lazy">
+                    <div class="home-acid-aside-body">
+                        <p class="home-acid-aside-label" data-i18n="home_acid_aside3_label">Escucha de campo</p>
+                        <h3 data-i18n="home_acid_aside3_title">Chan de Brito</h3>
+                        <p data-i18n="home_acid_aside3_desc">Los soundscapes siguen funcionando, pero ahora con un borde más performativo y menos neutral.</p>
+                        <a href="pages/soundscapes.html#session-chandebrito" class="hero-side-link" data-i18n="home_acid_aside3_cta">Abrir salida →</a>
+                    </div>
+                </article>
+            </aside>
+        </div>
 
     </main>
 

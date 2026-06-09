@@ -155,6 +155,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-width: 0;
         }
 
         .dashboard-section-title {
@@ -203,6 +204,7 @@
             transition: all var(--transition);
             box-shadow: var(--glow-sm);
             position: relative;
+            min-width: 0;
         }
 
         .session-log-card:hover {
@@ -323,6 +325,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: inset 0 4px 12px rgba(0,0,0,0.3);
+            min-width: 0;
         }
 
         .code-terminal-header {
@@ -333,6 +336,8 @@
             padding: 8px 16px;
             font-family: var(--mono);
             font-size: 0.64rem;
+            gap: 10px;
+            min-width: 0;
         }
 
         .terminal-dots {
@@ -355,6 +360,11 @@
         .terminal-title {
             color: var(--text-dim);
             opacity: 0.8;
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .copy-btn {
@@ -388,6 +398,7 @@
             margin: 0;
             padding: 14px 18px;
             overflow-x: auto;
+            min-width: 0;
         }
 
         .session-log-code-preview code {
@@ -710,6 +721,35 @@
             }
             .lab-sidebar {
                 position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .session-log-card {
+                padding: 22px;
+            }
+
+            .code-terminal-header {
+                flex-wrap: wrap;
+                padding: 8px 12px;
+            }
+
+            .terminal-dots {
+                margin-right: 0;
+            }
+
+            .terminal-title {
+                flex-basis: 100%;
+                order: 2;
+            }
+
+            .copy-btn {
+                margin-left: 0;
+            }
+
+            .session-log-actions .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>

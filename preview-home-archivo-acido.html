@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWISTORES · Preview Archivo Ácido</title>
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+        :root {
+            --bg: #091013;
+            --bg-deep: #05080a;
+            --panel: rgba(20, 28, 33, 0.82);
+            --panel-strong: rgba(25, 36, 42, 0.94);
+            --panel-soft: rgba(255, 255, 255, 0.035);
+            --line: rgba(102, 230, 255, 0.18);
+            --line-strong: rgba(102, 230, 255, 0.32);
+            --cyan: #66e6ff;
+            --lime: #b7ff4a;
+            --red: #ff6b4a;
+            --ink: #f5f4ed;
+            --copy: #d6ddd7;
+            --muted: #95a5a1;
+            --mono: "Space Mono", Consolas, monospace;
+            --sans: "Space Grotesk", system-ui, sans-serif;
+            --radius: 16px;
+            --shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+            --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.22);
+            --transition: 180ms ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--copy);
+            background:
+                radial-gradient(circle at 16% 10%, rgba(183, 255, 74, 0.08), transparent 18%),
+                radial-gradient(circle at 82% 12%, rgba(102, 230, 255, 0.12), transparent 18%),
+                radial-gradient(circle at 50% 40%, rgba(255, 107, 74, 0.05), transparent 20%),
+                linear-gradient(180deg, #0c1216 0%, var(--bg) 42%, var(--bg-deep) 100%);
+            background-color: var(--bg);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 100% 36px, 36px 100%;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.6), transparent 78%);
+            opacity: 0.3;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .shell {
+            width: min(1280px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 18px 0 54px;
+        }
+
+        .preview-banner {
+            margin-bottom: 18px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 107, 74, 0.22);
+            border-radius: 999px;
+            background: rgba(255, 107, 74, 0.08);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--red);
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        header {
+            position: sticky;
+            top: 12px;
+            z-index: 20;
+            margin-bottom: 18px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(10, 16, 19, 0.72);
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .logo {
+            font-family: var(--mono);
+            font-size: 1.18rem;
+            letter-spacing: 0.16em;
+            color: var(--cyan);
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .nav a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 7px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: border-color var(--transition), background var(--transition), color var(--transition), transform var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--ink);
+            border-color: var(--cyan);
+            transform: translateY(-1px);
+        }
+
+        .nav a.is-current {
+            color: #081114;
+            background: var(--lime);
+            border-color: var(--lime);
+            box-shadow: 0 0 0 1px rgba(183, 255, 74, 0.1), 0 10px 24px rgba(183, 255, 74, 0.16);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) 320px;
+            gap: 18px;
+            align-items: stretch;
+            margin-bottom: 22px;
+        }
+
+        .hero-main,
+        .hero-side {
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-main {
+            padding: 28px;
+            background:
+                radial-gradient(circle at 84% 16%, rgba(102, 230, 255, 0.12), transparent 22%),
+                radial-gradient(circle at 10% 18%, rgba(183, 255, 74, 0.08), transparent 18%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 36%),
+                var(--panel-strong);
+            position: relative;
+            min-height: 540px;
+        }
+
+        .hero-main::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 34%;
+            background:
+                linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2)),
+                repeating-linear-gradient(90deg, rgba(102, 230, 255, 0.15) 0 2px, transparent 2px 42px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 8px 12px;
+            border: 1px solid rgba(102, 230, 255, 0.22);
+            border-radius: 999px;
+            background: rgba(102, 230, 255, 0.06);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--cyan);
+        }
+
+        .hero-kicker .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 0 0 rgba(255, 107, 74, 0.45);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 107, 74, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 107, 74, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 107, 74, 0); }
+        }
+
+        .hero-title {
+            max-width: 11ch;
+            margin: 0 0 18px;
+            font-family: var(--mono);
+            font-size: clamp(3rem, 6vw, 5.4rem);
+            line-height: 0.9;
+            letter-spacing: -0.08em;
+            color: var(--ink);
+        }
+
+        .hero-title .acid {
+            color: var(--lime);
+        }
+
+        .hero-copy {
+            max-width: 58ch;
+            margin: 0 0 14px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--copy);
+        }
+
+        .hero-copy.support {
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 22px 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--ink);
+            font-family: var(--mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: border-color var(--transition), background var(--transition), color var(--transition), transform var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn.primary {
+            color: #071013;
+            border-color: var(--lime);
+            background: var(--lime);
+            box-shadow: 0 10px 28px rgba(183, 255, 74, 0.16);
+        }
+
+        .btn.secondary {
+            border-color: rgba(102, 230, 255, 0.22);
+            color: var(--cyan);
+            background: rgba(102, 230, 255, 0.08);
+        }
+
+        .hero-routes {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .route {
+            min-height: 144px;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            display: grid;
+            gap: 8px;
+        }
+
+        .route-label,
+        .section-label,
+        .card-meta,
+        .card-type,
+        .mini-code-label,
+        .side-note-label {
+            font-family: var(--mono);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .route-label {
+            font-size: 0.56rem;
+            color: var(--cyan);
+        }
+
+        .route strong {
+            color: var(--ink);
+            font-size: 0.96rem;
+            line-height: 1.3;
+        }
+
+        .route p {
+            margin: 0;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: var(--muted);
+        }
+
+        .hero-side {
+            padding: 20px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                var(--panel);
+            display: grid;
+            align-content: space-between;
+            gap: 16px;
+        }
+
+        .side-card {
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .side-note-label {
+            font-size: 0.56rem;
+            color: var(--red);
+        }
+
+        .side-card h2,
+        .side-card h3 {
+            margin: 10px 0 10px;
+            font-size: 1rem;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        .side-card p,
+        .side-card li {
+            margin: 0;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            color: var(--muted);
+        }
+
+        .side-card ul {
+            margin: 12px 0 0;
+            padding-left: 18px;
+        }
+
+        .grid-main {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .section-panel {
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: var(--panel);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 18px;
+            align-items: end;
+            margin-bottom: 16px;
+        }
+
+        .section-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.58rem;
+            color: var(--red);
+        }
+
+        .section-title {
+            margin: 0;
+            font-family: var(--mono);
+            font-size: clamp(1.25rem, 2vw, 1.9rem);
+            line-height: 1.02;
+            color: var(--ink);
+        }
+
+        .section-intro {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .story-card,
+        .sound-card,
+        .lab-card,
+        .aside-block {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .story-card {
+            padding: 18px;
+            min-height: 280px;
+            display: grid;
+            gap: 12px;
+            align-content: start;
+        }
+
+        .story-card.featured {
+            grid-column: span 2;
+            background:
+                radial-gradient(circle at 88% 18%, rgba(255, 107, 74, 0.1), transparent 20%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 40%),
+                rgba(255, 255, 255, 0.03);
+        }
+
+        .story-card.featured::after {
+            content: "Destacado";
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--red);
+            color: #150805;
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .card-type {
+            font-size: 0.56rem;
+            color: var(--cyan);
+        }
+
+        .story-card h3,
+        .lab-copy h3,
+        .sound-card h3 {
+            margin: 0;
+            font-size: 1.08rem;
+            line-height: 1.28;
+            color: var(--ink);
+        }
+
+        .story-card p,
+        .sound-card p,
+        .lab-copy p {
+            margin: 0;
+            font-size: 0.86rem;
+            line-height: 1.66;
+            color: var(--muted);
+        }
+
+        .card-meta {
+            margin-top: auto;
+            font-size: 0.58rem;
+            color: var(--lime);
+        }
+
+        .lab-card {
+            display: grid;
+            grid-template-columns: 320px minmax(0, 1fr);
+            min-height: 328px;
+        }
+
+        .mini-code {
+            padding: 0;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+                #0a1013;
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mini-code-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(102, 230, 255, 0.12);
+            background: rgba(102, 230, 255, 0.05);
+        }
+
+        .mini-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mini-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .mini-dots .r { background: #ff6b4a; }
+        .mini-dots .y { background: #ffc65c; }
+        .mini-dots .g { background: #8be45d; }
+
+        .mini-code-label {
+            font-size: 0.58rem;
+            color: var(--muted);
+        }
+
+        .mini-code pre {
+            margin: 0;
+            padding: 18px 18px 20px;
+            overflow: auto;
+            color: var(--cyan);
+            font-family: var(--mono);
+            font-size: 0.74rem;
+            line-height: 1.75;
+        }
+
+        .mini-code .comment {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .mini-code .signal {
+            color: var(--lime);
+        }
+
+        .mini-code .alert {
+            color: var(--red);
+        }
+
+        .lab-copy {
+            padding: 22px;
+            display: grid;
+            gap: 14px;
+            align-content: start;
+        }
+
+        .lab-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .lab-pills span {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .sound-card img,
+        .aside-block img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--line);
+            filter: saturate(0.9) contrast(1.02);
+        }
+
+        .sound-card .body,
+        .aside-block .body {
+            padding: 14px 16px 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .aside-stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .aside-block .body h3 {
+            margin: 0;
+            color: var(--ink);
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        .aside-block .body p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.84rem;
+            line-height: 1.62;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            padding: 16px 18px;
+            border: 1px dashed rgba(102, 230, 255, 0.22);
+            border-radius: 18px;
+            font-size: 0.84rem;
+            line-height: 1.72;
+            color: var(--muted);
+        }
+
+        @media (max-width: 1120px) {
+            .hero,
+            .grid-main,
+            .section-head,
+            .lab-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-side {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .hero-routes,
+            .card-grid,
+            .sound-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .shell {
+                width: min(100% - 22px, 1280px);
+            }
+
+            .topbar,
+            .hero-main,
+            .hero-side,
+            .section-panel {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .topbar {
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+
+            .nav {
+                justify-content: flex-start;
+            }
+
+            .hero-main {
+                min-height: auto;
+                padding-top: 22px;
+                padding-bottom: 22px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 13vw, 4rem);
+            }
+
+            .mini-code pre {
+                font-size: 0.68rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <div class="preview-banner">Preview separada · Opción C · sin tocar la web principal</div>
+
+        <header>
+            <div class="topbar">
+                <a href="#" class="logo">TWISTORES</a>
+                <nav class="nav" aria-label="Rutas principales">
+                    <a href="#" class="is-current">Inicio</a>
+                    <a href="#">Artículos</a>
+                    <a href="#">Laboratorio</a>
+                    <a href="#">Live Coding</a>
+                    <a href="#">Soundscapes</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero">
+            <article class="hero-main">
+                <div class="hero-kicker"><span class="pulse"></span> Archivo ácido · señal editorial en vivo</div>
+                <h1 class="hero-title">TWISTORES <span class="acid">en modo</span> escena.</h1>
+                <p class="hero-copy">Esta versión empuja el sitio hacia una presencia más performativa: más contraste, más tensión entre secciones y una identidad menos contenida.</p>
+                <p class="hero-copy support">La pregunta aquí no es si se ve “bonita”, sino si la web gana una memoria visual propia sin perder legibilidad ni densidad editorial.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn primary">Explorar artículos</a>
+                    <a href="#" class="btn secondary">Abrir laboratorio</a>
+                    <a href="#" class="btn">Ver archivo en vivo</a>
+                </div>
+                <div class="hero-routes">
+                    <article class="route">
+                        <span class="route-label">// investigación</span>
+                        <strong>Escritura larga con más temperatura de señal</strong>
+                        <p>Los ensayos dejan de vivir sólo en una atmósfera sobria y ganan una entrada más definida.</p>
+                    </article>
+                    <article class="route">
+                        <span class="route-label">// supercollider</span>
+                        <strong>Laboratorio técnico más eléctrico</strong>
+                        <p>El cian pasa a funcionar como sistema, navegación y código al mismo tiempo.</p>
+                    </article>
+                    <article class="route">
+                        <span class="route-label">// live + field</span>
+                        <strong>Archivo más performativo y más escena</strong>
+                        <p>La lima y el rojo hacen que la web se acerque más al directo y menos al archivo neutral.</p>
+                    </article>
+                </div>
+            </article>
+
+            <aside class="hero-side">
+                <section class="side-card">
+                    <span class="side-note-label">Diagnóstico</span>
+                    <h2>Qué cambia respecto a la web actual</h2>
+                    <p>La paleta deja de ser prudente. Los acentos ya no sólo acompañan: jerarquizan, tensan y separan mejor las capas del proyecto.</p>
+                </section>
+                <section class="side-card">
+                    <span class="side-note-label">Riesgo</span>
+                    <h3>Puede volverse demasiado intensa</h3>
+                    <ul>
+                        <li>Si se usa en todos los módulos por igual.</li>
+                        <li>Si el rojo compite con el texto largo.</li>
+                        <li>Si el lima sustituye al silencio visual.</li>
+                    </ul>
+                </section>
+                <section class="side-card">
+                    <span class="side-note-label">Mejor encaje</span>
+                    <h3>Dónde funciona mejor</h3>
+                    <p>Laboratorio, live coding, portada y piezas sobre tecnología. En artículos largos convendría dosificarla para no fatigar.</p>
+                </section>
+            </aside>
+        </section>
+
+        <div class="grid-main">
+            <div class="stack">
+                <section class="section-panel">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-label">// artículos recientes</span>
+                            <h2 class="section-title">La escritura gana una entrada más agresiva y más memorable</h2>
+                        </div>
+                        <p class="section-intro">La estructura sigue siendo la misma, pero los bloques se separan mejor y las piezas destacadas tienen una energía más decidida.</p>
+                    </div>
+
+                    <div class="card-grid">
+                        <article class="story-card featured">
+                            <span class="card-type">Investigación</span>
+                            <h3>Venezolanos en Galicia: qué pasa cuando la Virgen de la Chinita llega a Ourense</h3>
+                            <p>El artículo destacado deja de sentirse como “otra tarjeta más”. El rojo editorial introduce tensión y el fondo sostiene una presencia más escénica.</p>
+                            <div class="card-meta">Abr 2026 · Lectura 7 min</div>
+                        </article>
+
+                        <article class="story-card">
+                            <span class="card-type">Música &amp; Tech</span>
+                            <h3>El Estado del Arte Digital</h3>
+                            <p>Con esta paleta, los textos sobre tecnología parecen menos académicos en lo visual y más próximos a una cultura digital viva.</p>
+                            <div class="card-meta">Mar 2026 · Lectura 24 min</div>
+                        </article>
+
+                        <article class="story-card">
+                            <span class="card-type">Ensayo</span>
+                            <h3>Escenas musicales locales hoy en día</h3>
+                            <p>El sistema funciona, pero aquí se nota también el límite: no todos los textos necesitan este mismo nivel de excitación cromática.</p>
+                            <div class="card-meta">Mar 2026 · Lectura 10 min</div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="section-panel">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-label">// laboratorio de síntesis con sc</span>
+                            <h2 class="section-title">La parte técnica es donde Archivo Ácido mejor respira</h2>
+                        </div>
+                        <p class="section-intro">Aquí la paleta parece menos decorativa y más natural: el código, la modulación y la idea de sistema se benefician de una presencia más eléctrica.</p>
+                    </div>
+
+                    <article class="lab-card">
+                        <div class="mini-code">
+                            <div class="mini-code-head">
+                                <div class="mini-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+                                <span class="mini-code-label">supercollider // deriva.scd</span>
+                            </div>
+                            <pre><span class="comment">// un solo pulso, varias lentes</span>
+~clkMaster = { Impulse.kr((~bpm.kr / <span class="signal">60</span>) * <span class="signal">4</span>) };
+~cnt16 = { PulseCount.kr(~clkMaster.kr.first) - <span class="signal">1</span> };
+
+<span class="comment">// gates y patrones derivados</span>
+~gate4 = { PulseDivider.kr(~clkMaster.kr.first, <span class="signal">4</span>) };
+~bd = {
+  var pat = <span class="alert">\pat</span>.kr([1,0,0,0, 0,0,1,0]);
+  var gat = ~clkMaster.kr.first * Select.kr(~cnt16.kr.first % <span class="signal">8</span>, pat);
+};</pre>
+                        </div>
+                        <div class="lab-copy">
+                            <div class="lab-pills">
+                                <span>SC-04</span>
+                                <span>NodeProxy</span>
+                                <span>Tdef</span>
+                                <span>Arquitectura temporal</span>
+                            </div>
+                            <h3>Deriva como objeto central de una home más radical</h3>
+                            <p>En esta dirección, la sesión 04 deja de parecer simplemente “nuevo contenido” y pasa a sentirse como manifiesto técnico del sitio.</p>
+                            <p>Es probablemente la parte de TWISTORES que más justificaría una paleta como esta: laboratorio, live coding y escritura sobre tecnología musical.</p>
+                            <div class="hero-actions">
+                                <a href="#" class="btn primary">Abrir laboratorio</a>
+                                <a href="#" class="btn">Ver sesión 04</a>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="section-panel">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-label">// escucha y territorio</span>
+                            <h2 class="section-title">Soundscapes y directo siguen funcionando, pero con otro peso escénico</h2>
+                        </div>
+                        <p class="section-intro">La paleta no sólo cambia color: cambia la lectura del sitio. Todo parece más presente, más intensificado y menos archivístico.</p>
+                    </div>
+
+                    <div class="sound-grid">
+                        <article class="sound-card">
+                            <img src="assets/img/chandebrito/2-1.jpg" alt="Chan de Brito">
+                            <div class="body">
+                                <span class="card-type">Soundscape</span>
+                                <h3>Chan de Brito</h3>
+                                <p>El paisaje sonoro gana una capa de tensión artificial que puede ser interesante o excesiva según cuánto quieras teatralizar la escucha.</p>
+                                <div class="card-meta">Mar 2026 · Archivo curado</div>
+                            </div>
+                        </article>
+                        <article class="sound-card">
+                            <img src="assets/img/schmidt/s1.jpeg" alt="Schmidt en Sala SuperSonic">
+                            <div class="body">
+                                <span class="card-type">Live Coding</span>
+                                <h3>Schmidt · Sala SuperSonic</h3>
+                                <p>Aquí la paleta sí encaja de forma muy orgánica: convierte el bloque en algo más vivo, más nocturno y más cercano al escenario.</p>
+                                <div class="card-meta">Abr 2026 · Vigo</div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="aside-stack">
+                <article class="aside-block">
+                    <div class="body">
+                        <span class="card-type">Lectura del color</span>
+                        <h3>Lo mejor de esta dirección</h3>
+                        <p>Hace que TWISTORES deje de ser sólo sobria y pase a tener una firma visual mucho más inmediata. No se olvida rápido.</p>
+                    </div>
+                </article>
+
+                <article class="aside-block">
+                    <div class="body">
+                        <span class="card-type">Dónde moderarla</span>
+                        <h3>Textos largos y páginas muy densas</h3>
+                        <p>Si aplicases esta paleta al sitio entero, convendría bajar la intensidad en artículos extensos y en vistas de archivo para que el color no canse.</p>
+                    </div>
+                </article>
+
+                <article class="aside-block">
+                    <div class="body">
+                        <span class="card-type">Mi veredicto</span>
+                        <h3>Funciona como lenguaje de portada o de secciones concretas</h3>
+                        <p>Yo no la pondría idéntica en toda la web. Sí la usaría para portada, laboratorio y live, dejando artículos largos en una modulación más calma del mismo sistema.</p>
+                    </div>
+                </article>
+            </aside>
+        </div>
+
+        <div class="footer-note">
+            Esta maqueta no modifica la web principal. Sirve para ver cómo se comporta `Archivo Ácido` cuando ya no se presenta como paleta abstracta sino como una home plausible de TWISTORES. Mi juicio sigue siendo el mismo: es la opción más memorable, pero pide control editorial para no saturar.
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Paletas TWISTORES</title>
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --outer-bg: #091118;
+            --outer-panel: rgba(255, 255, 255, 0.04);
+            --outer-border: rgba(255, 255, 255, 0.08);
+            --outer-text: #d6e3de;
+            --outer-dim: #94aaa3;
+            --mono: "Space Mono", Consolas, monospace;
+            --sans: "Space Grotesk", system-ui, sans-serif;
+            --radius: 14px;
+            --radius-sm: 10px;
+            --shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--outer-text);
+            background:
+                radial-gradient(circle at top center, rgba(126, 227, 213, 0.06), transparent 22%),
+                radial-gradient(circle at 85% 12%, rgba(240, 192, 109, 0.08), transparent 18%),
+                linear-gradient(180deg, #0a1218 0%, #060b10 100%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .compare-page {
+            width: min(1440px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 36px 0 56px;
+        }
+
+        .compare-header {
+            margin-bottom: 28px;
+            padding: 24px;
+            border: 1px solid var(--outer-border);
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+        }
+
+        .compare-kicker {
+            margin: 0 0 10px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #8bc9bf;
+        }
+
+        .compare-header h1 {
+            margin: 0 0 10px;
+            font-family: var(--mono);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1;
+        }
+
+        .compare-header p {
+            max-width: 72ch;
+            margin: 0;
+            color: var(--outer-dim);
+            line-height: 1.75;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+
+        .theme-sample {
+            --bg: #091219;
+            --bg2: #101a22;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-strong: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.18);
+            --accent: #63d6c6;
+            --accent-soft: rgba(99, 214, 198, 0.14);
+            --signal: #f2a65a;
+            --signal-soft: rgba(242, 166, 90, 0.15);
+            --editorial: #d96b5f;
+            --heading: #f4efe6;
+            --text: #dbe3de;
+            --text-dim: #96aba5;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background:
+                radial-gradient(circle at 86% 10%, rgba(255,255,255,0.05), transparent 22%),
+                linear-gradient(180deg, color-mix(in srgb, var(--bg2) 72%, black 28%) 0%, var(--bg) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .theme-atlantico {
+            --bg: #08131a;
+            --bg2: #11242c;
+            --surface: rgba(12, 29, 36, 0.74);
+            --surface-strong: rgba(18, 36, 44, 0.92);
+            --border: rgba(99, 214, 198, 0.14);
+            --border-strong: rgba(99, 214, 198, 0.28);
+            --accent: #63d6c6;
+            --accent-soft: rgba(99, 214, 198, 0.16);
+            --signal: #f2a65a;
+            --signal-soft: rgba(242, 166, 90, 0.16);
+            --editorial: #d96b5f;
+            --heading: #f3f0e8;
+            --text: #d7e3de;
+            --text-dim: #95aaa4;
+        }
+
+        .theme-cobre {
+            --bg: #0a1018;
+            --bg2: #16202b;
+            --surface: rgba(19, 27, 37, 0.78);
+            --surface-strong: rgba(24, 34, 45, 0.94);
+            --border: rgba(105, 168, 255, 0.14);
+            --border-strong: rgba(105, 168, 255, 0.26);
+            --accent: #69a8ff;
+            --accent-soft: rgba(105, 168, 255, 0.14);
+            --signal: #c97a2b;
+            --signal-soft: rgba(201, 122, 43, 0.18);
+            --editorial: #e7d7b3;
+            --heading: #f6f1e8;
+            --text: #d8ddd8;
+            --text-dim: #9ca8b4;
+        }
+
+        .theme-acido {
+            --bg: #0a0f12;
+            --bg2: #141b1f;
+            --surface: rgba(18, 24, 28, 0.78);
+            --surface-strong: rgba(23, 31, 36, 0.94);
+            --border: rgba(102, 230, 255, 0.14);
+            --border-strong: rgba(102, 230, 255, 0.24);
+            --accent: #66e6ff;
+            --accent-soft: rgba(102, 230, 255, 0.14);
+            --signal: #b7ff4a;
+            --signal-soft: rgba(183, 255, 74, 0.16);
+            --editorial: #ff6b4a;
+            --heading: #f4f2eb;
+            --text: #d9dfd9;
+            --text-dim: #9db0ad;
+        }
+
+        .theme-caption {
+            padding: 18px 18px 16px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+        }
+
+        .theme-label-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .theme-name {
+            font-family: var(--mono);
+            font-size: 0.96rem;
+            color: var(--heading);
+        }
+
+        .theme-mood {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .theme-caption p {
+            margin: 0 0 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            font-size: 0.86rem;
+        }
+
+        .swatch-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .swatch {
+            display: grid;
+            gap: 6px;
+        }
+
+        .swatch-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .swatch label {
+            font-family: var(--mono);
+            font-size: 0.54rem;
+            color: var(--text-dim);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .sample-window {
+            padding: 14px;
+        }
+
+        .window-frame {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top center, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 32%),
+                linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+        }
+
+        .sample-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .sample-logo {
+            font-family: var(--mono);
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+
+        .sample-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .sample-nav span,
+        .meta-pill,
+        .route-card span,
+        .story-meta,
+        .lab-meta span {
+            font-family: var(--mono);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .sample-nav span {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.58rem;
+            color: var(--text-dim);
+        }
+
+        .sample-body {
+            padding: 18px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .hero-panel,
+        .story-card,
+        .lab-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface);
+        }
+
+        .hero-panel {
+            padding: 20px;
+            background:
+                radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--signal) 24%, transparent), transparent 26%),
+                linear-gradient(145deg, color-mix(in srgb, var(--accent) 14%, transparent), transparent 28%),
+                var(--surface-strong);
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 28px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 0.58rem;
+            color: var(--signal);
+            border: 1px solid color-mix(in srgb, var(--signal) 35%, transparent);
+            background: var(--signal-soft);
+            margin-bottom: 14px;
+        }
+
+        .hero-panel h2 {
+            margin: 0 0 12px;
+            font-family: var(--mono);
+            font-size: clamp(1.35rem, 2vw, 1.9rem);
+            line-height: 0.98;
+            color: var(--heading);
+        }
+
+        .hero-panel p,
+        .story-copy,
+        .lab-copy {
+            margin: 0;
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 0.88rem;
+        }
+
+        .hero-actions,
+        .story-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .sample-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 9px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--heading);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .sample-btn.primary {
+            color: color-mix(in srgb, var(--bg) 68%, black 32%);
+            border-color: color-mix(in srgb, var(--signal) 78%, transparent);
+            background: var(--signal);
+        }
+
+        .route-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .route-card {
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .route-card span {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.56rem;
+            color: var(--accent);
+        }
+
+        .route-card strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--heading);
+            font-size: 0.86rem;
+            line-height: 1.25;
+        }
+
+        .route-card p {
+            margin: 0;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            line-height: 1.55;
+        }
+
+        .section-label {
+            margin: 4px 0 10px;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--editorial);
+        }
+
+        .story-card {
+            padding: 16px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .story-meta {
+            font-size: 0.56rem;
+            color: var(--text-dim);
+        }
+
+        .story-card h3,
+        .lab-card h3 {
+            margin: 0;
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.22;
+            color: var(--heading);
+        }
+
+        .lab-card {
+            display: grid;
+            grid-template-columns: 132px minmax(0, 1fr);
+        }
+
+        .code-pane {
+            min-height: 172px;
+            padding: 16px;
+            border-right: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.04), transparent),
+                color-mix(in srgb, var(--bg) 80%, black 20%);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            line-height: 1.6;
+            color: var(--accent);
+        }
+
+        .code-pane .comment {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .code-pane .signal {
+            color: var(--signal);
+        }
+
+        .lab-content {
+            padding: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .lab-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .lab-meta span {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+            font-size: 0.56rem;
+            color: var(--text-dim);
+        }
+
+        .lab-copy {
+            color: var(--text-dim);
+        }
+
+        .footer-note {
+            padding: 0 18px 18px;
+            color: var(--text-dim);
+            font-size: 0.76rem;
+            line-height: 1.55;
+        }
+
+        @media (max-width: 1160px) {
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sample-window {
+                padding: 14px 14px 18px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .compare-page {
+                width: min(100% - 24px, 1440px);
+                padding-top: 22px;
+            }
+
+            .compare-header {
+                padding: 18px;
+            }
+
+            .sample-topbar,
+            .sample-body {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .route-grid,
+            .lab-card {
+                grid-template-columns: 1fr;
+            }
+
+            .code-pane {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                min-height: 132px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="compare-page">
+        <section class="compare-header">
+            <p class="compare-kicker">Prueba separada · sin tocar TWISTORES</p>
+            <h1>Tres direcciones cromáticas para la misma web</h1>
+            <p>La comparación usa el mismo contenido y la misma jerarquía visual en los tres casos: portada editorial, rutas de navegación, una tarjeta de artículo y un bloque de laboratorio. Así se puede evaluar el color sin mezclarlo con cambios de estructura.</p>
+        </section>
+
+        <section class="compare-grid" aria-label="Comparativa de paletas">
+            <article class="theme-sample theme-atlantico">
+                <div class="theme-caption">
+                    <div class="theme-label-row">
+                        <div class="theme-name">Atlántico Cálido</div>
+                        <div class="theme-mood">Orgánica · Atlántica · Autoral</div>
+                    </div>
+                    <p>La base más natural para TWISTORES. Conserva el turquesa actual, pero mete coral editorial y un ámbar más vivo para que la web tenga más pulso.</p>
+                    <div class="swatch-row">
+                        <div class="swatch"><span class="swatch-dot" style="background:#63d6c6"></span><label>Frío</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#f2a65a"></span><label>Cálido</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#d96b5f"></span><label>Editorial</label></div>
+                    </div>
+                </div>
+                <div class="sample-window">
+                    <div class="window-frame">
+                        <div class="sample-topbar">
+                            <div class="sample-logo">TWISTORES</div>
+                            <div class="sample-nav">
+                                <span>Artículos</span>
+                                <span>Laboratorio</span>
+                                <span>Live</span>
+                            </div>
+                        </div>
+                        <div class="sample-body">
+                            <section class="hero-panel">
+                                <div class="meta-pill">Edición editorial en tránsito</div>
+                                <h2>Música, investigación y sistemas sonoros con más temperatura visual</h2>
+                                <p>El coral activa artículos y llamadas. El ámbar da dirección a los CTAs. El turquesa sigue ordenando la parte técnica sin enfriar toda la experiencia.</p>
+                                <div class="hero-actions">
+                                    <span class="sample-btn primary">Explorar artículos</span>
+                                    <span class="sample-btn">Abrir laboratorio</span>
+                                </div>
+                            </section>
+
+                            <div class="route-grid">
+                                <article class="route-card">
+                                    <span>Artículos</span>
+                                    <strong>Notas de campo y crítica</strong>
+                                    <p>Más cálidos y más legibles, con momentos editoriales claros.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Laboratorio</span>
+                                    <strong>SuperCollider técnico</strong>
+                                    <p>El turquesa sigue siendo sistema y estructura.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Live</span>
+                                    <strong>Archivo de directos</strong>
+                                    <p>El ámbar ayuda a dar energía sin ensuciar el fondo.</p>
+                                </article>
+                            </div>
+
+                            <div class="section-label">Artículo reciente</div>
+                            <article class="story-card">
+                                <div class="story-meta">Jun 2026 · Campo · Migración</div>
+                                <h3>Venezolanos en Galicia: qué pasa cuando la Chinita llega a Ourense</h3>
+                                <p class="story-copy">Una paleta más cálida hace que la escritura gane presencia y que el componente humano no quede absorbido por el tono técnico general.</p>
+                                <div class="story-actions">
+                                    <span class="sample-btn">Leer entrada</span>
+                                </div>
+                            </article>
+
+                            <div class="section-label">Laboratorio destacado</div>
+                            <article class="lab-card">
+                                <div class="code-pane">
+                                    <div class="comment">// pad sustractivo</div>
+                                    ~pad = {<br>
+                                    &nbsp;&nbsp;BPF.ar(<span class="signal">sig</span>, ffreq, rq)<br>
+                                    };
+                                </div>
+                                <div class="lab-content">
+                                    <div class="lab-meta">
+                                        <span>SC-01</span>
+                                        <span>ProxySpace</span>
+                                        <span>Pad</span>
+                                    </div>
+                                    <h3>Cuaderno técnico con más respiración cromática</h3>
+                                    <p class="lab-copy">Aquí el laboratorio sigue siendo preciso, pero ya no vive en una sola temperatura. Se nota más el cambio entre teoría, código y navegación.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="footer-note">Impresión general: la más equilibrada para evolucionar TWISTORES sin cambiarle el carácter.</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="theme-sample theme-cobre">
+                <div class="theme-caption">
+                    <div class="theme-label-row">
+                        <div class="theme-name">Cobre y Ultramar</div>
+                        <div class="theme-mood">Revista · Ensayo · Sofisticada</div>
+                    </div>
+                    <p>La opción más editorial. El azul ordena tecnología y archivo; el cobre calienta la lectura y vuelve los acentos más elegantes que eléctricos.</p>
+                    <div class="swatch-row">
+                        <div class="swatch"><span class="swatch-dot" style="background:#69a8ff"></span><label>Ultramar</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#c97a2b"></span><label>Cobre</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#e7d7b3"></span><label>Crema</label></div>
+                    </div>
+                </div>
+                <div class="sample-window">
+                    <div class="window-frame">
+                        <div class="sample-topbar">
+                            <div class="sample-logo">TWISTORES</div>
+                            <div class="sample-nav">
+                                <span>Archivo</span>
+                                <span>Ensayo</span>
+                                <span>SC</span>
+                            </div>
+                        </div>
+                        <div class="sample-body">
+                            <section class="hero-panel">
+                                <div class="meta-pill">Archivo expandido</div>
+                                <h2>Una web más refinada, más seria y más revista</h2>
+                                <p>El cobre da prestigio y foco, mientras el azul ultramar se encarga de lo técnico. Es menos cálida que la primera, pero más distintiva en lectura larga.</p>
+                                <div class="hero-actions">
+                                    <span class="sample-btn primary">Ver archivo</span>
+                                    <span class="sample-btn">Entrar en laboratorio</span>
+                                </div>
+                            </section>
+
+                            <div class="route-grid">
+                                <article class="route-card">
+                                    <span>Ensayo</span>
+                                    <strong>Textos con peso editorial</strong>
+                                    <p>La crema y el cobre favorecen una lectura más sobria y sofisticada.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Técnica</span>
+                                    <strong>SC como sistema</strong>
+                                    <p>El ultramar organiza herramientas y navegación.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Archivo</span>
+                                    <strong>Fondo y memoria</strong>
+                                    <p>Menos futurista, más curatorial.</p>
+                                </article>
+                            </div>
+
+                            <div class="section-label">Artículo reciente</div>
+                            <article class="story-card">
+                                <div class="story-meta">Jun 2026 · Arte digital</div>
+                                <h3>El Estado del Arte Digital</h3>
+                                <p class="story-copy">Esta dirección le da a la web una voz más de publicación cultural. Se siente menos dashboard y más proyecto editorial con archivo técnico.</p>
+                                <div class="story-actions">
+                                    <span class="sample-btn">Abrir texto</span>
+                                </div>
+                            </article>
+
+                            <div class="section-label">Laboratorio destacado</div>
+                            <article class="lab-card">
+                                <div class="code-pane">
+                                    <div class="comment">// reloj único</div>
+                                    ~clk = {<br>
+                                    &nbsp;&nbsp;Impulse.kr(bpm)<br>
+                                    };
+                                </div>
+                                <div class="lab-content">
+                                    <div class="lab-meta">
+                                        <span>SC-04</span>
+                                        <span>Tdef</span>
+                                        <span>Forma</span>
+                                    </div>
+                                    <h3>Más autoridad visual en piezas largas</h3>
+                                    <p class="lab-copy">Funciona especialmente bien si quieres que TWISTORES se acerque a una publicación de investigación y música, no solo a un archivo personal.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="footer-note">Impresión general: la más elegante y editorial; menos visceral, más curada.</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="theme-sample theme-acido">
+                <div class="theme-caption">
+                    <div class="theme-label-row">
+                        <div class="theme-name">Archivo Ácido</div>
+                        <div class="theme-mood">Experimental · Escénica · Digital</div>
+                    </div>
+                    <p>La más arriesgada. Cian, lima y señal roja convierten la web en un objeto más performativo, más live coding y más contemporáneo.</p>
+                    <div class="swatch-row">
+                        <div class="swatch"><span class="swatch-dot" style="background:#66e6ff"></span><label>Cian</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#b7ff4a"></span><label>Lima</label></div>
+                        <div class="swatch"><span class="swatch-dot" style="background:#ff6b4a"></span><label>Señal</label></div>
+                    </div>
+                </div>
+                <div class="sample-window">
+                    <div class="window-frame">
+                        <div class="sample-topbar">
+                            <div class="sample-logo">TWISTORES</div>
+                            <div class="sample-nav">
+                                <span>Live</span>
+                                <span>Code</span>
+                                <span>Field</span>
+                            </div>
+                        </div>
+                        <div class="sample-body">
+                            <section class="hero-panel">
+                                <div class="meta-pill">Señal en vivo</div>
+                                <h2>Una presencia mucho más radical y difícil de olvidar</h2>
+                                <p>La web se vuelve más escena digital y menos cuaderno sobrio. Bien dosificado puede ser potente; mal dosificado puede cansar rápido.</p>
+                                <div class="hero-actions">
+                                    <span class="sample-btn primary">Entrar al live</span>
+                                    <span class="sample-btn">Ver laboratorio</span>
+                                </div>
+                            </section>
+
+                            <div class="route-grid">
+                                <article class="route-card">
+                                    <span>Live</span>
+                                    <strong>Energía inmediata</strong>
+                                    <p>La lima y el rojo suben la tensión visual desde el primer scroll.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Code</span>
+                                    <strong>Laboratorio vibrante</strong>
+                                    <p>El cian técnico gana protagonismo y contraste.</p>
+                                </article>
+                                <article class="route-card">
+                                    <span>Archivo</span>
+                                    <strong>Más experimental</strong>
+                                    <p>Pierde sobriedad, gana impacto.</p>
+                                </article>
+                            </div>
+
+                            <div class="section-label">Artículo reciente</div>
+                            <article class="story-card">
+                                <div class="story-meta">Nov 2025 · Música e identidad</div>
+                                <h3>Música que no evoca: construye</h3>
+                                <p class="story-copy">Es la versión que mejor comunica riesgo y contemporaneidad, pero también la que más puede competir con el propio contenido.</p>
+                                <div class="story-actions">
+                                    <span class="sample-btn">Leer ensayo</span>
+                                </div>
+                            </article>
+
+                            <div class="section-label">Laboratorio destacado</div>
+                            <article class="lab-card">
+                                <div class="code-pane">
+                                    <div class="comment">// granularidad</div>
+                                    GrainBuf.ar(<br>
+                                    &nbsp;&nbsp;<span class="signal">dens</span>, buf, pos<br>
+                                    );
+                                </div>
+                                <div class="lab-content">
+                                    <div class="lab-meta">
+                                        <span>SC-03</span>
+                                        <span>GrainBuf</span>
+                                        <span>Microtiempo</span>
+                                    </div>
+                                    <h3>La opción más fuerte para live coding y escena</h3>
+                                    <p class="lab-copy">Encaja si quieres que TWISTORES se sienta más festival, más performance y menos publicación editorial estable.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="footer-note">Impresión general: la más memorable, pero también la más exigente de sostener en todo el sitio.</div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
