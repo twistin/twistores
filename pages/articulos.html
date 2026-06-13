@@ -21,8 +21,142 @@
     <meta name="twitter:description" content="Archivo de artículos y ensayos sobre música, sociología, escenas locales y tecnología sonora.">
     <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/escenas-locales-banner.png">
     <link rel="stylesheet" href="../style.css">
+    <style>
+        body.acid-articles .page-header {
+            margin-bottom: 24px;
+        }
+
+        body.acid-articles .page-header h1 {
+            max-width: 9ch;
+        }
+
+        .articles-archive-note {
+            margin: 0 0 24px;
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 86% 18%, rgba(255, 107, 74, 0.08), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 38%),
+                rgba(255, 255, 255, 0.03);
+            box-shadow: var(--glow-sm);
+        }
+
+        .articles-archive-note p {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.72;
+            color: var(--text-dim);
+        }
+
+        .articles-archive-note strong {
+            color: var(--heading);
+            font-weight: 500;
+        }
+
+        body.acid-articles .filter-tabs {
+            padding: 10px;
+            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: var(--glow-sm);
+        }
+
+        body.acid-articles .filter-tab:hover,
+        body.acid-articles .filter-tab.active {
+            color: #071013;
+            border-color: var(--signal);
+            background: var(--signal);
+        }
+
+        body.acid-articles .card-grid {
+            gap: 22px;
+        }
+
+        body.acid-articles .card {
+            border-radius: 22px;
+            border-color: var(--border);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
+                rgba(255, 255, 255, 0.03);
+            box-shadow: var(--glow-sm);
+        }
+
+        body.acid-articles .card:hover,
+        body.acid-articles .card:focus-within {
+            border-color: var(--accent);
+            background:
+                radial-gradient(circle at 84% 16%, rgba(102, 230, 255, 0.1), transparent 22%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 22%),
+                rgba(102, 230, 255, 0.06);
+        }
+
+        body.acid-articles .card.featured {
+            border-color: rgba(255, 107, 74, 0.2);
+            background:
+                radial-gradient(circle at 86% 16%, rgba(255, 107, 74, 0.11), transparent 22%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 38%),
+                rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 0 22px rgba(255, 107, 74, 0.05), var(--glow-sm);
+        }
+
+        body.acid-articles .card.featured:hover {
+            border-color: var(--acid-page-red);
+            box-shadow: inset 0 0 22px rgba(255, 107, 74, 0.08), 0 16px 36px rgba(0, 0, 0, 0.18);
+        }
+
+        body.acid-articles .card-category {
+            color: var(--accent);
+        }
+
+        body.acid-articles .card[data-category="investigacion"] .card-category {
+            color: var(--acid-page-red);
+        }
+
+        body.acid-articles .card[data-category="musica-tech"] .card-category {
+            color: var(--accent);
+        }
+
+        body.acid-articles .card[data-category="otros"] .card-category {
+            color: var(--signal);
+        }
+
+        body.acid-articles .card-meta {
+            padding-top: 10px;
+            border-top: 1px solid rgba(102, 230, 255, 0.1);
+        }
+
+        body.acid-articles .card-featured-badge {
+            color: #150805;
+            background: var(--acid-page-red);
+            border: 1px solid rgba(255, 107, 74, 0.28);
+        }
+
+        body.acid-articles .card-link {
+            color: var(--heading);
+        }
+
+        body.acid-articles .card-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 640px) {
+            .articles-archive-note {
+                border-radius: 18px;
+            }
+
+            body.acid-articles .filter-tabs {
+                width: 100%;
+                border-radius: 22px;
+            }
+
+            body.acid-articles .filter-tab {
+                flex: 1 1 calc(50% - 8px);
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="acid-page acid-articles">
 
     <header>
         <div class="header-inner">
@@ -54,6 +188,10 @@
             <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
             <h1 data-i18n="title_articles_page">Artículos</h1>
             <p class="page-intro" data-i18n="articles_page_intro">Archivo de textos publicados sobre sociología de la música, escenas locales y tecnología sonora.</p>
+        </div>
+
+        <div class="articles-archive-note fade-in">
+            <p><strong>Archivo editorial:</strong> textos recientes, ensayos de fondo y piezas anteriores reunidas por temas. La portada prioriza lo nuevo; este índice conserva la continuidad completa del archivo.</p>
         </div>
 
         <div class="filter-tabs fade-in">

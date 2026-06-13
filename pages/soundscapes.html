@@ -31,19 +31,18 @@
         }
 
         body.acid-soundscapes .page-header .section-note {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: block;
             margin-top: 18px;
-            padding: 8px 12px;
+            padding: 12px 14px;
             border: 1px solid var(--border);
-            border-radius: 999px;
+            border-radius: 18px;
             background: rgba(255, 255, 255, 0.03);
             font-family: var(--mono);
-            font-size: 0.64rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-size: 0.66rem;
+            letter-spacing: 0.04em;
+            line-height: 1.7;
             color: var(--signal);
+            max-width: 64ch;
         }
 
         .soundscape-full { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 32px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
@@ -199,7 +198,7 @@
             border-color: rgba(102, 230, 255, 0.12);
         }
 
-        body.acid-soundscapes #soundscapes-archive > .section-note {
+        body.acid-soundscapes .soundscapes-divider-note {
             display: inline-flex;
             align-items: center;
             margin: 10px 0 22px;

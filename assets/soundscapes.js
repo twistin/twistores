@@ -425,7 +425,7 @@
 
     const staticHtml = hasStaticSessions
       ? `
-        <div class="section-note" style="margin:18px 0 22px;">${escapeHtml(t('curatedLabel'))}</div>
+        <div class="section-note soundscapes-divider-note">${escapeHtml(t('curatedLabel'))}</div>
         ${buildStaticArchiveEntries(sortSessions(staticData.sessions))}
       `
       : '';
