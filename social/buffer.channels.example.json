@@ -1,0 +1,17 @@
+{
+  "organization_id": "org_example",
+  "channels": [
+    {
+      "key": "x-main",
+      "id": "channel_x_example",
+      "service": "twitter",
+      "label": "X principal"
+    },
+    {
+      "key": "linkedin-main",
+      "id": "channel_linkedin_example",
+      "service": "linkedin",
+      "label": "LinkedIn principal"
+    }
+  ]
+}
