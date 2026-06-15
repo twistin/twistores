@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 05 · DERIVA: cuaderno de sesión — TWISTORES</title>
+    <meta name="description" content="Quinta entrada del Laboratorio de Síntesis con SC: un cuaderno de sesión sobre pad, bajo, ritmo, espacio y el continuo tono-ruido en SuperCollider y ProxySpace.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/sesion-05-deriva-cuaderno-sesion.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Sesión 05 · DERIVA: cuaderno de sesión — TWISTORES">
+    <meta property="og:description" content="Cuaderno técnico expandido sobre síntesis, ritmo, espacio y forma en SuperCollider, publicado dentro del Laboratorio de Síntesis con SC.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/sesion-05-deriva-cuaderno-sesion.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sesión 05 · DERIVA: cuaderno de sesión — TWISTORES">
+    <meta name="twitter:description" content="Cuaderno técnico expandido sobre síntesis, ritmo, espacio y forma en SuperCollider, publicado dentro del Laboratorio de Síntesis con SC.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .kairos-page .lab-family-band {
+            margin-bottom: 24px;
+        }
+
+        .kairos-page .article-editorial-meta {
+            margin-bottom: 28px;
+        }
+
+        .kairos-page .article-editorial-meta code {
+            white-space: normal;
+        }
+
+        .kairos-manuscript {
+            --paper: #fbfaf6;
+            --ink: #16150f;
+            --ink-soft: #55524a;
+            --line: #d8d4c8;
+            --line-strong: #16150f;
+            --accent: #d6402a;
+            --accent-deep: #9e2d1c;
+            --code-bg: #f2f0e8;
+            --comment: #8a8576;
+            --sym: #9e2d1c;
+            --num: #3c6e5a;
+            margin: 0 auto 28px;
+            background: var(--paper);
+            color: var(--ink);
+            border: 1px solid rgba(240, 192, 109, 0.3);
+            border-radius: calc(var(--radius) + 6px);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+        }
+
+        .kairos-manuscript * {
+            box-sizing: border-box;
+        }
+
+        .kairos-manuscript .kairos-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .kairos-manuscript .mono {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .kairos-manuscript .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            font-weight: 500;
+        }
+
+        .kairos-manuscript .cover {
+            padding: 64px 0 36px;
+            border-bottom: 2px solid var(--line-strong);
+        }
+
+        .kairos-manuscript .cover .reg {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-bottom: 40px;
+        }
+
+        .kairos-manuscript .cover h1 {
+            font-family: "Fraunces", serif;
+            font-weight: 900;
+            font-size: clamp(44px, 9vw, 86px);
+            line-height: 0.94;
+            letter-spacing: -0.015em;
+            margin: 0;
+            font-optical-sizing: auto;
+            color: var(--ink);
+        }
+
+        .kairos-manuscript .cover h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .kairos-manuscript .cover .sub {
+            font-family: "EB Garamond", Georgia, serif;
+            font-style: italic;
+            font-size: 21px;
+            color: var(--ink-soft);
+            margin: 20px 0 0;
+            max-width: 54ch;
+        }
+
+        .kairos-manuscript .continuum {
+            margin: 38px 0 6px;
+        }
+
+        .kairos-manuscript .continuum svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .kairos-manuscript .continuum .legend {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10.5px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 8px;
+        }
+
+        .kairos-manuscript .toc {
+            padding: 34px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .kairos-manuscript .toc h2 {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin: 0 0 18px;
+        }
+
+        .kairos-manuscript .toc ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            columns: 2;
+            column-gap: 48px;
+        }
+
+        .kairos-manuscript .toc li {
+            break-inside: avoid;
+            padding: 7px 0;
+            border-bottom: 1px dotted var(--line);
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            font-size: 16px;
+            font-family: "EB Garamond", Georgia, serif;
+        }
+
+        .kairos-manuscript .toc .n {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .kairos-manuscript .toc a {
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .kairos-manuscript .toc a:hover,
+        .kairos-manuscript .toc a:focus-visible {
+            color: var(--accent);
+        }
+
+        .kairos-manuscript section {
+            padding: 44px 0 8px;
+            border-bottom: 1px solid var(--line);
+            scroll-margin-top: 110px;
+        }
+
+        .kairos-manuscript .sec-head {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .kairos-manuscript .sec-head .num {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--paper);
+            background: var(--ink);
+            padding: 5px 9px;
+            border-radius: 2px;
+            letter-spacing: 0.06em;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .kairos-manuscript h2.title {
+            font-family: "Fraunces", serif;
+            font-weight: 600;
+            font-size: clamp(26px, 4.4vw, 38px);
+            line-height: 1.04;
+            letter-spacing: -0.01em;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .kairos-manuscript .kicker {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            margin: 0 0 4px;
+        }
+
+        .kairos-manuscript p {
+            margin: 0 0 16px;
+            font-family: "EB Garamond", Georgia, serif;
+            font-size: 18px;
+            line-height: 1.62;
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .kairos-manuscript p .term {
+            font-style: italic;
+        }
+
+        .kairos-manuscript strong {
+            font-weight: 600;
+        }
+
+        .kairos-manuscript code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82em;
+            background: var(--code-bg);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent-deep);
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .kairos-manuscript pre {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            background: var(--code-bg);
+            border-left: 3px solid var(--accent);
+            padding: 16px 18px;
+            margin: 18px 0;
+            overflow-x: auto;
+            border-radius: 0 3px 3px 0;
+            break-inside: avoid;
+        }
+
+        .kairos-manuscript pre code {
+            background: none;
+            padding: 0;
+            color: var(--ink);
+            white-space: pre;
+            font-size: 13px;
+        }
+
+        .kairos-manuscript .c {
+            color: var(--comment);
+            font-style: italic;
+        }
+
+        .kairos-manuscript .s {
+            color: var(--sym);
+        }
+
+        .kairos-manuscript .nm {
+            color: var(--num);
+        }
+
+        .kairos-manuscript .k {
+            color: var(--accent-deep);
+            font-weight: 500;
+        }
+
+        .kairos-manuscript .rule {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 18px 22px;
+            margin: 20px 0;
+            border-radius: 3px;
+            break-inside: avoid;
+        }
+
+        .kairos-manuscript .rule .lab,
+        .kairos-manuscript .warn .lab {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10.5px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .kairos-manuscript .rule .lab {
+            color: var(--accent);
+        }
+
+        .kairos-manuscript .rule p {
+            margin: 0;
+            font-size: 17px;
+            color: var(--paper);
+        }
+
+        .kairos-manuscript .rule code {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffd9cf;
+        }
+
+        .kairos-manuscript .warn {
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            break-inside: avoid;
+            background: rgba(214, 64, 42, 0.05);
+        }
+
+        .kairos-manuscript .warn .lab {
+            color: var(--accent-deep);
+            font-weight: 500;
+        }
+
+        .kairos-manuscript .warn p:last-child {
+            margin-bottom: 0;
+        }
+
+        .kairos-manuscript .cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin: 20px 0;
+            border: 1px solid var(--line-strong);
+            border-radius: 3px;
+            overflow: hidden;
+            break-inside: avoid;
+        }
+
+        .kairos-manuscript .cols > div {
+            padding: 16px 18px;
+        }
+
+        .kairos-manuscript .cols > div:first-child {
+            border-right: 1px solid var(--line);
+        }
+
+        .kairos-manuscript .cols h4 {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            margin: 0 0 8px;
+            letter-spacing: 0.04em;
+            color: var(--accent-deep);
+        }
+
+        .kairos-manuscript .cols p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .kairos-manuscript .cols code {
+            font-size: 11.5px;
+        }
+
+        .kairos-manuscript figure {
+            margin: 24px 0;
+            break-inside: avoid;
+        }
+
+        .kairos-manuscript figure svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .kairos-manuscript figcaption {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .kairos-manuscript ul.clean {
+            margin: 14px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .kairos-manuscript ul.clean li {
+            padding: 5px 0 5px 22px;
+            position: relative;
+            font-family: "EB Garamond", Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .kairos-manuscript ul.clean li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .kairos-manuscript .colophon {
+            padding: 40px 0 80px;
+        }
+
+        .kairos-manuscript .colophon p {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            color: var(--ink-soft);
+            letter-spacing: 0.04em;
+            line-height: 1.8;
+        }
+
+        @media print {
+            .kairos-manuscript {
+                box-shadow: none;
+                border: 0;
+            }
+
+            .kairos-manuscript .kairos-wrap {
+                max-width: none;
+                padding: 0;
+            }
+
+            .kairos-manuscript section,
+            .kairos-manuscript .toc,
+            .kairos-manuscript .cover {
+                border-color: #bbb;
+            }
+
+            .kairos-manuscript pre,
+            .kairos-manuscript .rule,
+            .kairos-manuscript .warn,
+            .kairos-manuscript .cols,
+            .kairos-manuscript figure,
+            .kairos-manuscript .toc li {
+                break-inside: avoid;
+            }
+
+            .kairos-manuscript .cover {
+                padding-top: 0;
+            }
+
+            .kairos-manuscript .toc ol {
+                columns: 2;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .kairos-manuscript .kairos-wrap {
+                padding: 0 20px;
+            }
+
+            .kairos-manuscript .cover .reg,
+            .kairos-manuscript .continuum .legend {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .kairos-manuscript .toc ol {
+                columns: 1;
+            }
+
+            .kairos-manuscript .cols {
+                grid-template-columns: 1fr;
+            }
+
+            .kairos-manuscript .cols > div:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .kairos-manuscript .sec-head {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .kairos-manuscript p,
+            .kairos-manuscript ul.clean li {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body class="acid-page acid-lab kairos-page">
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="/">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="/" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content kairos-page">
+            <section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+                <div class="lab-family-copy">
+                    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+                    <h1 class="lab-family-title">Deriva pasa del método al cuaderno de sesión</h1>
+                    <p class="lab-family-intro">Esta quinta entrada recoge lo aprendido construyendo pad, bajo, ritmo y espacio dentro de <em>DERIVA</em>, y convierte ese proceso en un cuaderno técnico centrado en el continuo entre tono y ruido.</p>
+                    <div class="lab-family-meta">
+                        <span>Sesión 05 de 05</span>
+                        <span>ProxySpace + JITLib</span>
+                        <span>Cuaderno técnico expandido</span>
+                    </div>
+                </div>
+                <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+                    <a href="laboratorio-sintesis-sc.html">Archivo</a>
+                    <a href="sesion-04-deriva-metodo-composicion-algoritmica.html">SC-04</a>
+                    <a href="sesion-05-deriva-cuaderno-sesion.html" class="is-current" aria-current="page">SC-05</a>
+                    <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                </nav>
+            </section>
+
+            <div class="action-row fade-in">
+                <a href="laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="sesion-04-deriva-metodo-composicion-algoritmica.html" class="btn">Ir a la sesión 04 →</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Este cuaderno no introduce una pieza nueva, sino una capa más concreta de <em>Deriva</em>: cómo se resolvieron en práctica la sintaxis de ProxySpace, el control de parámetros, el diseño del pad, el bajo, la rejilla rítmica, la reverb compartida y la forma macro. El hilo conductor es claro: usar el continuo tono-ruido como principio tímbrico y compositivo.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Origen:</strong> HTML de trabajo convertido en entrada del laboratorio.</p>
+                <p><strong>Idea central:</strong> documentar aprendizajes técnicos reales de una sesión completa, no solo un patch suelto.</p>
+                <p><strong>Cruce:</strong> síntesis sustractiva, bajo orgánico, L-System rítmico, bus de reverb y macroforma.</p>
+            </div>
+
+            <div class="kairos-manuscript fade-in">
+                <div class="kairos-wrap">
+                    <header class="cover">
+                        <div class="reg">
+                            <span>KAIROS · Cuaderno técnico</span>
+                            <span>SuperCollider 3 / JITLib</span>
+                        </div>
+                        <h1>DERIVA<br><em>sesión de síntesis</em></h1>
+                        <p class="sub">Lo aprendido construyendo el pad, el bajo, el ritmo y el espacio — con el continuo entre el tono y el ruido como hilo conductor.</p>
+
+                        <div class="continuum">
+                            <svg viewBox="0 0 820 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Continuo tono-ruido">
+                                <line x1="0" y1="118" x2="820" y2="118" stroke="#16150F" stroke-width="1.5"/>
+                                <g stroke="#D6402A" stroke-width="2">
+                                    <line x1="40" y1="118" x2="40" y2="20"/>
+                                    <line x1="120" y1="118" x2="120" y2="46"/>
+                                    <line x1="180" y1="118" x2="180" y2="64"/>
+                                </g>
+                                <path d="M250 118 Q295 30 340 118" fill="none" stroke="#16150F" stroke-width="1.6"/>
+                                <path d="M360 118 Q420 44 480 118" fill="none" stroke="#16150F" stroke-width="1.6"/>
+                                <path d="M500 118 Q590 64 680 118 Q620 82 560 90 Q540 100 500 118" fill="#16150F" fill-opacity="0.08" stroke="#55524A" stroke-width="1.2"/>
+                                <path d="M640 118 Q740 70 820 110 L820 118 Z" fill="#16150F" fill-opacity="0.06" stroke="#55524A" stroke-width="1.1"/>
+                            </svg>
+                            <div class="legend">
+                                <span>← tono · banda estrecha · rq 0.0001</span>
+                                <span>ruido · banda ancha · rq 0.4 →</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <nav class="toc" aria-label="Índice de temas">
+                        <h2>Índice de temas</h2>
+                        <ol>
+                            <li><span class="n">01</span><a href="#s1">Dos sintaxis: <code>~name</code> y <code>p[\name]</code></a></li>
+                            <li><span class="n">02</span><a href="#s2">Dónde colocar <code>.lag</code></a></li>
+                            <li><span class="n">03</span><a href="#s3">El pad: drone por filtro resonante</a></li>
+                            <li><span class="n">04</span><a href="#s4">El continuo tono ↔ ruido</a></li>
+                            <li><span class="n">05</span><a href="#s5">El bajo orgánico</a></li>
+                            <li><span class="n">06</span><a href="#s6">Una sola fuente de tempo</a></li>
+                            <li><span class="n">07</span><a href="#s7">Percusión sintetizada</a></li>
+                            <li><span class="n">08</span><a href="#s8">L-System para el ritmo</a></li>
+                            <li><span class="n">09</span><a href="#s9">Reverb como bus de retorno</a></li>
+                            <li><span class="n">10</span><a href="#s10">Aleatorizar eventos</a></li>
+                            <li><span class="n">11</span><a href="#s11">Limpiar nodos</a></li>
+                            <li><span class="n">12</span><a href="#s12">Forma: navegar las escalas</a></li>
+                        </ol>
+                    </nav>
+
+                    <section id="s1">
+                        <div class="sec-head">
+                            <div class="num">01</div>
+                            <div>
+                                <p class="kicker">ProxySpace · contexto</p>
+                                <h2 class="title">Dos sintaxis: <span class="mono" style="font-size:.7em">~name</span> y <span class="mono" style="font-size:.7em">p[\name]</span></h2>
+                            </div>
+                        </div>
+                        <p><code>~pad</code> es azúcar para <code>currentEnvironment[\pad]</code>, y <code>currentEnvironment</code> se resuelve <em>en tiempo de ejecución</em> según el contexto. <code>p[\pad]</code> accede directamente a <code>p</code>, que es una variable global de letra, ajena al environment. En el top-level los dos coinciden porque el ProxySpace <em>es</em> el environment actual.</p>
+                        <p>El problema aparece en contextos diferidos. Un <code>Tdef</code>, <code>Routine</code> o <code>Task</code> se reanuda en su propio hilo, donde <code>currentEnvironment</code> ya no es <code>p</code>. Ahí <code>~pad</code> devuelve <code>nil</code> en silencio y revienta al primer <code>.set</code> — no al definir el Tdef, lo que lo hace traicionero.</p>
+                        <div class="cols">
+                            <div>
+                                <h4>~name</h4>
+                                <p>Evaluación interactiva en el editor: definir y redefinir proxies, pruebas en vivo, <code>~pad.play</code>.</p>
+                            </div>
+                            <div>
+                                <h4>p[\name]</h4>
+                                <p>Dentro de <code>Tdef</code>, <code>Routine</code>, <code>Task</code>, callbacks, funciones en <code>.do</code>. El orquestador macro va siempre por aquí.</p>
+                            </div>
+                        </div>
+                        <div class="rule">
+                            <div class="lab">Regla</div>
+                            <p>Una vez empujado el ProxySpace, <code>~</code> queda reservado para audio. Los <strong>datos</strong> (arrays, diccionarios, secuencias, rutinas auxiliares) van en variables de letra — <code>q</code>, <code>r</code> — nunca en <code>~</code>, o se convierten en NodeProxy y se corrompen.</p>
+                        </div>
+                    </section>
+
+                    <section id="s2">
+                        <div class="sec-head">
+                            <div class="num">02</div>
+                            <div>
+                                <p class="kicker">Suavizado de parámetros</p>
+                                <h2 class="title">Dónde colocar <span class="mono" style="font-size:.7em">.lag</span></h2>
+                            </div>
+                        </div>
+                        <p><code>.lag</code> persigue su entrada de forma exponencial. El mismo UGen tiene efecto opuesto según dónde se enchufe: sobre un <strong>control escalar</strong> (la amplitud, una nota) convierte un salto en una rampa suave; sobre una <strong>señal de audio</strong> es un filtro paso-bajo de un polo con corte ≈ <code>1/(2π·t)</code> — con <code>.lag(3)</code> eso son ~0,05 Hz, una guillotina que borra todo lo audible.</p>
+                        <pre><code><span class="c">// MAL: lag sobre el audio -> LPF a 0.05 Hz -> silencio</span>
+sig = BrownNoise.ar(<span class="nm">1</span>).lag(<span class="nm">3</span>);
+
+<span class="c">// BIEN: lag sobre el VALOR del control -> rampa suave</span>
+sig = sig * <span class="s">\amp</span>.kr(<span class="nm">0.2</span>).lag(<span class="nm">3</span>);</code></pre>
+                        <p>Para automatizar un parámetro desde un Tdef, <code>.lag</code> dentro del proxy es superior a <code>.xset</code>: el Tdef manda saltos con <code>.set</code> y el <code>Lag.kr</code> los suaviza en el servidor.</p>
+                        <div class="warn">
+                            <div class="lab">Por qué no .xset aquí</div>
+                            <p><code>.xset</code> no interpola el valor: hace un <em>crossfade entre dos copias enteras del synth</em> durante el <code>fadeTime</code>. Sobre una fuente aleatoria como <code>BrownNoise</code>, las dos copias generan ruido descorrelacionado y la transición se oye como engrosamiento, no como rampa de volumen. <code>.xset</code> se reserva para recrear la fuente con crossfade (cambios tímbricos grandes), no para mover un número.</p>
+                        </div>
+                    </section>
+
+                    <section id="s3">
+                        <div class="sec-head">
+                            <div class="num">03</div>
+                            <div>
+                                <p class="kicker">Síntesis sustractiva</p>
+                                <h2 class="title">El pad: drone por filtro resonante</h2>
+                            </div>
+                        </div>
+                        <p>Un banco de <code>BPF</code> estrechos sobre <code>BrownNoise</code>, afinados a las notas de un acorde y esparcidos al estéreo con <code>Splay</code>. Cada nota es un control escalar independiente (<code>\n0</code>…<code>\n3</code>) con <code>.lag</code> para que los cambios de altura sean glissandos.</p>
+                        <pre><code>~pad = {
+    <span class="k">var</span> sig, n0, n1, n2, n3, rq, gain;
+    n0 = <span class="s">\n0</span>.kr(<span class="nm">60</span>).lag(<span class="nm">2</span>);
+    n1 = <span class="s">\n1</span>.kr(<span class="nm">67</span>).lag(<span class="nm">2</span>);
+    n2 = <span class="s">\n2</span>.kr(<span class="nm">72</span>).lag(<span class="nm">2</span>);
+    n3 = <span class="s">\n3</span>.kr(<span class="nm">76</span>).lag(<span class="nm">2</span>);
+    rq = <span class="s">\rq</span>.kr(<span class="nm">0.005</span>).lag(<span class="nm">4</span>);
+    gain = (<span class="nm">0.005</span> / rq).sqrt * <span class="nm">10</span>;
+    sig = BrownNoise.ar(<span class="nm">1</span>);
+    sig = BPF.ar(sig, [n0, n1, n2, n3].midicps, rq, gain);
+    sig = Splay.ar(sig);
+    sig = sig * <span class="s">\amp</span>.kr(<span class="nm">0.2</span>).lag(<span class="nm">3</span>);
+};
+~pad.play;</code></pre>
+                        <div class="rule">
+                            <div class="lab">Dos trampas que ya mordieron</div>
+                            <p>Toda variable local va declarada en <code>var</code> (si no: <em>Variable not defined</em>). Y los NamedControls multicanal se indexan como <code>notes</code>, <code>notes1</code>… — por eso se usan controles escalares independientes y no un único <code>\notes</code> con array.</p>
+                        </div>
+                    </section>
+
+                    <section id="s4">
+                        <div class="sec-head">
+                            <div class="num">04</div>
+                            <div>
+                                <p class="kicker">Curtis Roads · Microsound</p>
+                                <h2 class="title">El continuo tono ↔ ruido</h2>
+                            </div>
+                        </div>
+                        <p>El sonido no se divide en categorías limpias sino que ocupa un <strong>continuo</strong>, y lo que fija dónde caes es la <em>concentración de energía en frecuencia</em>: el ancho de banda. Energía en una banda estrechísima → el oído percibe <strong>pitch</strong>. Energía repartida en una banda ancha → percibe <strong>ruido</strong>. Entre medias vive la zona de tonos sucios, parcialmente afinados, donde respira buena parte de la música ambient.</p>
+                        <figure>
+                            <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El rq como eje del continuo">
+                                <line x1="40" y1="180" x2="660" y2="180" stroke="#16150F" stroke-width="1.4"/>
+                                <line x1="90" y1="180" x2="90" y2="40" stroke="#D6402A" stroke-width="2.5"/>
+                                <text x="90" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#55524A">0.0001</text>
+                                <text x="90" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#9E2D1C">TONO</text>
+                                <path d="M210 180 Q235 70 260 180" fill="none" stroke="#16150F" stroke-width="1.8"/>
+                                <text x="235" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#55524A">0.02</text>
+                                <path d="M340 180 Q380 88 420 180" fill="none" stroke="#16150F" stroke-width="1.6"/>
+                                <text x="380" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#55524A">0.05</text>
+                                <text x="380" y="62" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#8A8576">¿tono o color?</text>
+                                <path d="M490 180 Q580 96 670 180 Q600 120 540 130 Q515 150 490 180" fill="#16150F" fill-opacity="0.08" stroke="#55524A" stroke-width="1.3"/>
+                                <text x="585" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#55524A">0.4</text>
+                                <text x="585" y="86" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#55524A">RUIDO</text>
+                            </svg>
+                            <figcaption>ancho de banda = frecuencia central × rq · el rq es el mando del continuo</figcaption>
+                        </figure>
+                        <p>En un <code>BPF</code>, el ancho de banda es <code>frecuencia × rq</code>. Con <code>rq 0.005</code> sobre 261 Hz la banda mide ~1,3 Hz: casi un oscilador puro. El <strong>factor Q</strong> es el inverso: Q alto = banda estrecha = rq bajo. La resonancia del MoogFF en el bajo es ese mismo Q.</p>
+                        <p>Llevado al extremo, <code>rq 0.0001</code> da una banda de ~0,026 Hz: un resonador al borde de la autooscilación que <em>canta</em> la nota casi limpia; el ruido apenas lo excita. Es lento de cargar (régimen transitorio largo) y sube mucho de nivel — la compensación <code>(0.005/rq).sqrt</code> daría ×71, así que hay que vigilar el medidor.</p>
+                        <div class="rule">
+                            <div class="lab">Gesto compositivo</div>
+                            <p>Barrer el <code>rq</code> de <code>0.0001</code> a <code>0.4</code> y volver <em>es</em> recorrer el continuo de Roads en tiempo real: el pad pasa de armonía cristalina a nube de ruido. En el FreqScope se ve como picos finos que se ensanchan en colinas. Cruzar ese umbral puede ser un evento de forma — revelar la armonía en el clímax.</p>
+                        </div>
+                    </section>
+
+                    <section id="s5">
+                        <div class="sec-head">
+                            <div class="num">05</div>
+                            <div>
+                                <p class="kicker">Voz de bajo</p>
+                                <h2 class="title">El bajo orgánico</h2>
+                            </div>
+                        </div>
+                        <p>Lo orgánico se construye apilando inestabilidades pequeñas: tres saws ligeramente desafinados que <strong>laten</strong> entre sí, micro-deriva de afinación, un cutoff que respira y una amplitud que nunca queda fija.</p>
+                        <pre><code>~bass = {
+    <span class="k">var</span> sig, note, freq, cutoff, amp;
+    note = <span class="s">\bn</span>.kr(<span class="nm">48</span>).lag(<span class="nm">5</span>);
+    note = note + LFNoise2.kr(<span class="nm">0.08</span>).range(<span class="nm">-0.04</span>, <span class="nm">0.04</span>);
+    freq = note.midicps;
+    sig = Saw.ar(freq * [<span class="nm">0.998</span>, <span class="nm">1</span>, <span class="nm">1.002</span>]);
+    cutoff = (freq * <span class="nm">4</span> + (SinOsc.kr(<span class="nm">0.06</span>) * freq * <span class="nm">2</span>)).clip(<span class="nm">40</span>, <span class="nm">6000</span>);
+    sig = MoogFF.ar(sig, cutoff, <span class="nm">1.5</span>);
+    amp = <span class="s">\amp</span>.kr(<span class="nm">0.3</span>).lag(<span class="nm">3</span>);
+    sig = sig * amp * LFNoise2.kr(<span class="nm">0.07</span>).range(<span class="nm">0.7</span>, <span class="nm">1.0</span>);
+    Splay.ar(sig);
+};</code></pre>
+                        <p>El <strong>beating</strong> es el continuo en su zona más fina: a 0,2–0,3 Hz de diferencia el oído no separa dos tonos ni los funde en uno, percibe fluctuación — la frontera donde una diferencia de frecuencia se oye como ritmo lento, no como altura. El patrón del cutoff es el canónico de <em>modulación con offset</em>: <code>(base + (mod * profundidad)).clip(min, max)</code>, con los paréntesis externos obligatorios para que <code>.clip</code> envuelva toda la suma.</p>
+                        <div class="warn">
+                            <div class="lab">Adam A3X</div>
+                            <p>El sub a <code>freq * 0.5</code> cae en ~65 Hz, dentro del rolloff de los monitores. Verificar en FreqScope antes de fiarse del oído; si no aporta o enturbia, quitarlo.</p>
+                        </div>
+                    </section>
+
+                    <section id="s6">
+                        <div class="sec-head">
+                            <div class="num">06</div>
+                            <div>
+                                <p class="kicker">Coherencia de reloj</p>
+                                <h2 class="title">Una sola fuente de tempo</h2>
+                            </div>
+                        </div>
+                        <p>El tempo vive solo en <code>t</code>. Todo lo que deba seguirlo se lanza con <code>.play(t, quant: 4)</code> — nunca con <code>.play</code> a secas, que va al <code>TempoClock.default</code> y queda sordo a los cambios de <code>t</code>. Ese fue justo el motivo de que <code>t.tempo_(120/60)</code> no cambiara nada: los Tdefs corrían en otro reloj.</p>
+                        <pre><code><span class="c">// inmediato (salto)</span>
+t.tempo_(<span class="nm">120</span>/<span class="nm">60</span>);
+
+<span class="c">// rampa suave — en SystemClock, NO en t (sus waits son segundos reales)</span>
+(
+r = Routine({
+    <span class="k">var</span> from = t.tempo, to = <span class="nm">120</span>/<span class="nm">60</span>, dur = <span class="nm">15</span>;
+    <span class="k">var</span> n = (dur * <span class="nm">20</span>).asInteger;
+    n.do { |i|
+        t.tempo_(from + ((to - from) * ((i+<span class="nm">1</span>)/n)));
+        (dur / n).wait;
+    };
+}).play(SystemClock);
+)</code></pre>
+                        <div class="rule">
+                            <div class="lab">Principio</div>
+                            <p><code>t</code> como única fuente de verdad. Cambiar <code>t</code> reajusta pad, bajo y ritmo a la vez, gratis. El reverso oscuro — la triple fuente de verdad (<code>t</code> + <code>~bpm</code> + un <code>\bpm.kr</code> hardcodeado) — es un bug a evitar. La rampa es la única excepción que vive en otro reloj.</p>
+                        </div>
+                    </section>
+
+                    <section id="s7">
+                        <div class="sec-head">
+                            <div class="num">07</div>
+                            <div>
+                                <p class="kicker">SynthDef percusivos</p>
+                                <h2 class="title">Percusión sintetizada</h2>
+                            </div>
+                        </div>
+                        <p>Bombo (barrido de pitch + click + <code>tanh</code>), caja (cuerpo de ruido <code>BPF</code> + parciales tonales) y charles (ruido <code>HPF</code> + pulsos inarmónicos, con <code>rel</code> que decide cerrado u abierto).</p>
+                        <pre><code>SynthDef(<span class="s">\hh</span>, { |out=<span class="nm">0</span>, amp=<span class="nm">0.3</span>, pan=<span class="nm">0</span>, rel=<span class="nm">0.04</span>|
+    <span class="k">var</span> aenv, noise, metal, sig;
+    aenv  = EnvGen.kr(Env.perc(<span class="nm">0.001</span>, rel), doneAction: <span class="nm">2</span>);
+    noise = HPF.ar(WhiteNoise.ar, <span class="nm">9000</span>);
+    metal = Mix(Pulse.ar([<span class="nm">4100</span>, <span class="nm">5300</span>, <span class="nm">6700</span>, <span class="nm">8200</span>], <span class="nm">0.5</span>)) * <span class="nm">0.15</span>;
+    metal = HPF.ar(metal, <span class="nm">8000</span>);
+    sig   = (noise + metal) * aenv * amp;
+    Out.ar(out, Pan2.ar(sig, pan));
+}).add;</code></pre>
+                        <div class="warn">
+                            <div class="lab">doneAction según contexto</div>
+                            <p>En synths percusivos efímeros disparados por evento: <code>doneAction: 2</code> (deben autodestruirse). Dentro de NodeProxies de señal continua: <code>doneAction: 0</code> (matar el nodo silenciaría el proxy). Contextos opuestos — no es contradicción.</p>
+                        </div>
+                    </section>
+
+                    <section id="s8">
+                        <div class="sec-head">
+                            <div class="num">08</div>
+                            <div>
+                                <p class="kicker">Ritmo generativo</p>
+                                <h2 class="title">L-System para el ritmo</h2>
+                            </div>
+                        </div>
+                        <p>Un sistema de reescritura produce una secuencia determinista, autosimilar e irregular — pulso reconocible sin caer en bucles cuadrados. Implementado a mano en sclang termina seguro y se puede inspeccionar:</p>
+                        <pre><code>q = {
+    <span class="k">var</span> rules = ( <span class="s">\k</span>: [<span class="s">\k</span>,<span class="s">\r</span>,<span class="s">\s</span>,<span class="s">\r</span>], <span class="s">\s</span>: [<span class="s">\s</span>,<span class="s">\r</span>,<span class="s">\k</span>,<span class="s">\r</span>], <span class="s">\r</span>: [<span class="s">\r</span>] );
+    <span class="k">var</span> seq = [<span class="s">\k</span>];
+    <span class="nm">3</span>.do { seq = seq.collect({ |s| rules.atFail(s, { [s] }) }).flat };
+    <span class="c">// rellena a múltiplo de 16 -> encaja en compases</span>
+    seq = seq ++ Array.fill((<span class="nm">16</span> - (seq.size % <span class="nm">16</span>)) % <span class="nm">16</span>, <span class="s">\r</span>);
+    seq
+}.value;</code></pre>
+                        <div class="warn">
+                            <div class="lab">Sincronía</div>
+                            <p>Sin el relleno, la secuencia mide 22 pasos × 0.25 = 5,5 beats — no múltiplo de 4, así que el patrón se desliza contra la rejilla y el hi-hat lo delata como "desincronizado". Rellenar a 32 pasos lo encaja en 2 compases exactos.</p>
+                        </div>
+                    </section>
+
+                    <section id="s9">
+                        <div class="sec-head">
+                            <div class="num">09</div>
+                            <div>
+                                <p class="kicker">Espacio compartido</p>
+                                <h2 class="title">Reverb como bus de retorno</h2>
+                            </div>
+                        </div>
+                        <p>Una sola reverb como retorno crea un espacio coherente para todo. Se usa <code>JPverb</code> — evita el crash de <code>GVerb</code> por encima de roomsize 290 y sus parámetros (<code>t60</code>, <code>size</code>) son modulables sin sustos. La percusión, al ser Synths, escribe a un bus auxiliar con un segundo <code>Out.ar</code> escalado por <code>\rvb</code>:</p>
+                        <pre><code>SynthDef(<span class="s">\sn</span>, { |out=<span class="nm">0</span>, amp=<span class="nm">0.5</span>, pan=<span class="nm">0</span>, rvb=<span class="nm">0.25</span>|
+    <span class="c">/* … síntesis … */</span>
+    Out.ar(out, sig);
+    Out.ar(~rvbBus.index, sig * rvb);
+}).add;</code></pre>
+                        <div class="warn">
+                            <div class="lab">Bajo + reverb = barro</div>
+                            <p>Reverberar contenido grave enturbia toda la mezcla. Mandar el bajo muy poco al bus o no mandarlo; reservar el espacio para pad y percusión. El charles va bajo (~0.15) porque demasiada cola lo vuelve un siseo difuso.</p>
+                        </div>
+                    </section>
+
+                    <section id="s10">
+                        <div class="sec-head">
+                            <div class="num">10</div>
+                            <div>
+                                <p class="kicker">Indeterminación controlada</p>
+                                <h2 class="title">Aleatorizar eventos</h2>
+                            </div>
+                        </div>
+                        <p>Tres grados de azar para el orden de los acordes, de menos a más orgánico:</p>
+                        <ul class="clean">
+                            <li><code>.scramble</code> — baraja: oyes todos antes de repetir, variedad asegurada.</li>
+                            <li><code>.choose</code> — azar puro: puede insistir en el mismo (a veces bonito, a veces se atasca).</li>
+                            <li><code>.reject({ |x| x == prev }).choose</code> — azar que evita la repetición inmediata: la deriva natural sin atascos.</li>
+                        </ul>
+                        <pre><code>loop {
+    <span class="k">var</span> ac = acordes.reject({ |x| x == prev }).choose;
+    prev = ac;
+    p[<span class="s">\pad</span>].set(<span class="s">\n0</span>, ac[<span class="nm">0</span>], <span class="s">\n1</span>, ac[<span class="nm">1</span>], <span class="s">\n2</span>, ac[<span class="nm">2</span>], <span class="s">\n3</span>, ac[<span class="nm">3</span>]);
+    [<span class="nm">8</span>, <span class="nm">13</span>, <span class="nm">21</span>].choose.wait;
+};</code></pre>
+                        <p>Aleatorizar también el <code>wait</code> con valores Fibonacci hace que el tiempo entre cambios respire de forma irregular pero dentro del sistema de proporciones de DERIVA: el azar vive <em>dentro</em> de la estructura, no contra ella.</p>
+                        <div class="warn">
+                            <div class="lab">Evaluación por bloques</div>
+                            <p><code>prev</code> es local al bloque del Tdef. Evaluar una línea suelta que la use da <em>Variable not defined</em> — en SC se evalúa la función entera entre paréntesis, nunca una línea interior aislada.</p>
+                        </div>
+                    </section>
+
+                    <section id="s11">
+                        <div class="sec-head">
+                            <div class="num">11</div>
+                            <div>
+                                <p class="kicker">Higiene de servidor</p>
+                                <h2 class="title">Limpiar nodos</h2>
+                            </div>
+                        </div>
+                        <div class="cols">
+                            <div>
+                                <h4>s.freeAll · Cmd-.</h4>
+                                <p>Pánico: mata todos los synths del servidor pero deja vivos los objetos NodeProxy. Quedan listados pero mudos — se recuperan con <code>.play</code>.</p>
+                            </div>
+                            <div>
+                                <h4>Reset ordenado</h4>
+                                <p><code>Tdef.all.do(_.clear)</code> para los disparadores; <code>currentEnvironment.clear</code> libera todos los proxies. Deja servidor y <code>t</code> intactos.</p>
+                            </div>
+                        </div>
+                        <pre><code><span class="c">// barrido ordenado: parar disparadores + liberar proxies</span>
+Tdef.all.do(_.clear);
+currentEnvironment.clear;
+</code></pre>
+                        <p>Tras <code>freeAll</code> los proxies vuelven con <code>~pad.play; ~bass.play; ~verb.play;</code> y los Tdefs con <code>.play(t, quant: 4)</code>. El <code>TempoClock</code> sobrevive a <code>Cmd-.</code> por estar marcado <code>.permanent_(true)</code>.</p>
+                    </section>
+
+                    <section id="s12">
+                        <div class="sec-head">
+                            <div class="num">12</div>
+                            <div>
+                                <p class="kicker">Roads · escalas temporales</p>
+                                <h2 class="title">Forma: navegar las escalas</h2>
+                            </div>
+                        </div>
+                        <p>Del análisis del set de co34pt salió una arquitectura formal legible en términos de Roads — la pieza navega entre la micro-escala (granos, onsets), la meso (frases, compases) y la macro (forma global), transformando la relación entre ellas:</p>
+                        <figure>
+                            <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arco formal del set">
+                                <line x1="20" y1="120" x2="680" y2="120" stroke="#16150F" stroke-width="1.4"/>
+                                <path d="M20 115 Q200 110 320 95 Q480 78 600 30 L660 22" fill="none" stroke="#D6402A" stroke-width="2.2"/>
+                                <g font-family="JetBrains Mono, monospace" font-size="9.5" fill="#55524A">
+                                    <line x1="60" y1="120" x2="60" y2="114" stroke="#16150F"/>
+                                    <text x="60" y="138" text-anchor="middle">ambigüedad</text>
+                                    <line x1="230" y1="120" x2="230" y2="114" stroke="#16150F"/>
+                                    <text x="230" y="138" text-anchor="middle">acumulación</text>
+                                    <line x1="400" y1="120" x2="400" y2="114" stroke="#16150F"/>
+                                    <text x="400" y="138" text-anchor="middle">lente de pulso</text>
+                                    <line x1="600" y1="120" x2="600" y2="114" stroke="#16150F"/>
+                                    <text x="600" y="138" text-anchor="middle">clímax · 2 vectores</text>
+                                </g>
+                                <circle cx="600" cy="30" r="4" fill="#D6402A"/>
+                            </svg>
+                            <figcaption>ambigüedad métrica → acumulación → recontextualización del pulso → intensificación</figcaption>
+                        </figure>
+                        <p>El giro clave: introducir tarde un elemento de rejilla estable (el hi-hat en 1 y 3) que <strong>recontextualiza</strong> retroactivamente todo el material flotante anterior — el oído reinterpreta como "colocado" lo que oía como libre. No cambió el material; cambió el marco de referencia.</p>
+                        <p>El clímax usa <strong>dos vectores de tensión a la vez</strong>: temporal (tempo arriba) y tímbrico (un elemento conocido vuelve deformado). La memoria del oyente de la versión limpia es lo que carga de sentido su retorno corrupto.</p>
+                        <div class="rule">
+                            <div class="lab">Hacia DERIVA</div>
+                            <p>El arco Fibonacci con clímax en el compás 21 (21/34 ≈ 1/φ) puede adoptar el doble vector: que el cruce del continuo tono→ruido del pad coincida con la deformación del bajo, ambos en su extremo en el bar 21. Y la entrada del ritmo no como "ahora empieza la batería" sino como la lente que revela un pulso oculto en la deriva previa.</p>
+                        </div>
+                    </section>
+
+                    <footer class="colophon">
+                        <p>
+                            DERIVA · KAIROS — cuaderno de sesión<br>
+                            SuperCollider 3 / ProxySpace · JITLib<br>
+                            Marco teórico: Curtis Roads, <em>Microsound</em> & <em>The Computer Music Tutorial</em><br>
+                            Referencias de escucha: Alva Noto + Sakamoto · Basinski · Huerco S · co34pt<br>
+                            Monitoreo: Adam A3X — verificar sub-graves en FreqScope
+                        </p>
+                    </footer>
+                </div>
+            </div>
+
+            <section class="article-related fade-in" aria-label="Lecturas relacionadas">
+                <h3 class="article-related-heading">Seguir desde aquí</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="sesion-04-deriva-metodo-composicion-algoritmica.html">
+                        <span class="article-related-title">Sesión 04 · Deriva: método de composición algorítmica</span>
+                        <span class="article-related-desc">Volver al cuaderno metodológico que formaliza las capas temporales, el reloj compartido y la macroforma.</span>
+                    </a>
+                    <a class="article-related-link" href="sesion-03-sintesis-granular.html">
+                        <span class="article-related-title">Sesión 03 · Síntesis granular</span>
+                        <span class="article-related-desc">Cruzar el continuo tono-ruido con la escala microtemporal y el marco teórico de Roads.</span>
+                    </a>
+                    <a class="article-related-link" href="../curtis_roads_capitulos.html">
+                        <span class="article-related-title">Curtis Roads · Audio Digital</span>
+                        <span class="article-related-desc">Releer la base teórica integrada en el laboratorio para fase, aliasing y mezcla digital.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="/">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-05-deriva-cuaderno-sesion.html">Sesión 05 · DERIVA</a></li>
+                    <li><a href="sesion-04-deriva-metodo-composicion-algoritmica.html">Sesión 04 · Deriva</a></li>
+                    <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
+                    <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>
