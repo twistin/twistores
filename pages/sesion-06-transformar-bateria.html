@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 06 · Cuatro vías para transformar la batería — TWISTORES</title>
+    <meta name="description" content="Sexta entrada del Laboratorio de Síntesis con SC: cuatro vías para transformar la batería en DERIVA, del golpe individual a la forma.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/pages/sesion-06-transformar-bateria.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Sesión 06 · Cuatro vías para transformar la batería — TWISTORES">
+    <meta property="og:description" content="Cuaderno práctico sobre cuatro modos de transformar bd, sn y hh en DERIVA: parámetro, timbre, espacio y tiempo.">
+    <meta property="og:url" content="https://twistores.vercel.app/pages/sesion-06-transformar-bateria.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sesión 06 · Cuatro vías para transformar la batería — TWISTORES">
+    <meta name="twitter:description" content="Cuaderno práctico sobre cuatro modos de transformar bd, sn y hh en DERIVA: parámetro, timbre, espacio y tiempo.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .drums-page .lab-family-band {
+            margin-bottom: 24px;
+        }
+
+        .drums-page .article-editorial-meta {
+            margin-bottom: 28px;
+        }
+
+        .drums-page .article-editorial-meta code {
+            white-space: normal;
+        }
+
+        .drums-manuscript {
+            --paper: #fbfaf6;
+            --ink: #16150f;
+            --ink-soft: #55524a;
+            --line: #d8d4c8;
+            --line-strong: #16150f;
+            --accent: #d6402a;
+            --accent-deep: #9e2d1c;
+            --code-bg: #f2f0e8;
+            --comment: #8a8576;
+            --sym: #9e2d1c;
+            --num: #3c6e5a;
+            --fill: #16150f;
+            margin: 0 auto 28px;
+            background: var(--paper);
+            color: var(--ink);
+            border: 1px solid rgba(240, 192, 109, 0.3);
+            border-radius: calc(var(--radius) + 6px);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+        }
+
+        .drums-manuscript * {
+            box-sizing: border-box;
+        }
+
+        .drums-manuscript .wrap {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .drums-manuscript .mono {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .drums-manuscript .cover {
+            padding: 60px 0 30px;
+            border-bottom: 2px solid var(--line-strong);
+        }
+
+        .drums-manuscript .cover .reg {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-bottom: 36px;
+        }
+
+        .drums-manuscript .cover h1 {
+            font-family: "Fraunces", serif;
+            font-weight: 900;
+            font-size: clamp(40px, 8vw, 76px);
+            line-height: 0.95;
+            letter-spacing: -0.015em;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .drums-manuscript .cover h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .drums-manuscript .cover .sub {
+            font-family: "EB Garamond", Georgia, serif;
+            font-style: italic;
+            font-size: 21px;
+            color: var(--ink-soft);
+            margin: 18px 0 0;
+            max-width: 56ch;
+        }
+
+        .drums-manuscript .map {
+            padding: 36px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .drums-manuscript .map h2,
+        .drums-manuscript .map-lab {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin: 0 0 16px;
+        }
+
+        .drums-manuscript .map svg,
+        .drums-manuscript .schema svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .drums-manuscript .map .cap {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: var(--ink-soft);
+            text-align: center;
+            margin-top: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        .drums-manuscript section {
+            padding: 46px 0 10px;
+            border-bottom: 1px solid var(--line);
+            scroll-margin-top: 110px;
+        }
+
+        .drums-manuscript .head {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+
+        .drums-manuscript .head .num {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--paper);
+            background: var(--ink);
+            padding: 6px 10px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .drums-manuscript .kicker {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            margin: 0 0 4px;
+        }
+
+        .drums-manuscript h2.title {
+            font-family: "Fraunces", serif;
+            font-weight: 600;
+            font-size: clamp(25px, 4.2vw, 36px);
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .drums-manuscript p {
+            margin: 0 0 15px;
+            font-family: "EB Garamond", Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--ink);
+        }
+
+        .drums-manuscript strong {
+            font-weight: 600;
+        }
+
+        .drums-manuscript code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.8em;
+            background: var(--code-bg);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent-deep);
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .drums-manuscript .schema {
+            margin: 8px 0 22px;
+            padding: 22px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            break-inside: avoid;
+        }
+
+        .drums-manuscript .schema .lab {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            margin-bottom: 14px;
+        }
+
+        .drums-manuscript pre {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12.5px;
+            line-height: 1.55;
+            background: var(--code-bg);
+            border-left: 3px solid var(--accent);
+            padding: 15px 17px;
+            margin: 16px 0;
+            overflow-x: auto;
+            border-radius: 0 3px 3px 0;
+            break-inside: avoid;
+        }
+
+        .drums-manuscript pre code {
+            background: none;
+            padding: 0;
+            color: var(--ink);
+            white-space: pre;
+            font-size: 12.5px;
+        }
+
+        .drums-manuscript .c {
+            color: var(--comment);
+            font-style: italic;
+        }
+
+        .drums-manuscript .s {
+            color: var(--sym);
+        }
+
+        .drums-manuscript .nm {
+            color: var(--num);
+        }
+
+        .drums-manuscript .k {
+            color: var(--accent-deep);
+            font-weight: 500;
+        }
+
+        .drums-manuscript .scale-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 7px 13px;
+            border-radius: 2px;
+            margin: 8px 0 18px;
+        }
+
+        .drums-manuscript .scale-tag .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .drums-manuscript .colophon {
+            padding: 38px 0 80px;
+        }
+
+        .drums-manuscript .colophon p {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            color: var(--ink-soft);
+            letter-spacing: 0.04em;
+            line-height: 1.8;
+        }
+
+        @media print {
+            .drums-manuscript {
+                box-shadow: none;
+                border: 0;
+            }
+
+            .drums-manuscript .wrap {
+                max-width: none;
+                padding: 0;
+            }
+
+            .drums-manuscript section,
+            .drums-manuscript .map,
+            .drums-manuscript .cover {
+                border-color: #bbb;
+            }
+
+            .drums-manuscript .head .num,
+            .drums-manuscript .scale-tag {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .drums-manuscript pre,
+            .drums-manuscript .schema,
+            .drums-manuscript .scale-tag {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .drums-manuscript .wrap {
+                padding: 0 20px;
+            }
+
+            .drums-manuscript .cover .reg {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .drums-manuscript p {
+                font-size: 17px;
+            }
+
+            .drums-manuscript .schema {
+                padding: 14px;
+            }
+
+            .drums-manuscript .head {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="acid-page acid-lab drums-page">
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="/">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="/" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content drums-page">
+            <section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+                <div class="lab-family-copy">
+                    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+                    <h1 class="lab-family-title">DERIVA enfoca ahora la batería como problema de escalas</h1>
+                    <p class="lab-family-intro">Esta sexta entrada toma el set mínimo de bd, sn y hh y lo desplaza por cuatro capas distintas: el golpe, el timbre, el espacio y el tiempo. La pregunta ya no es cómo programar la batería, sino qué escala conviene tocar para volverla propia.</p>
+                    <div class="lab-family-meta">
+                        <span>Sesión 06 de 06</span>
+                        <span>bd · sn · hh</span>
+                        <span>Ritmo, timbre y forma</span>
+                    </div>
+                </div>
+                <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+                    <a href="laboratorio-sintesis-sc.html">Archivo</a>
+                    <a href="sesion-05-deriva-cuaderno-sesion.html">SC-05</a>
+                    <a href="sesion-06-transformar-bateria.html" class="is-current" aria-current="page">SC-06</a>
+                    <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                </nav>
+            </section>
+
+            <div class="action-row fade-in">
+                <a href="laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="sesion-05-deriva-cuaderno-sesion.html" class="btn">Ir a la sesión 05 →</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Este cuaderno se concentra en una decisión compositiva precisa: cómo transformar una batería sintética sin abandonar el mismo set de tres elementos. La respuesta se organiza en cuatro vías, cada una ligada a una escala temporal distinta en el sentido de Roads. No todas cambian el sonido de la misma forma; algunas cambian el significado del patrón más que su materia.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Origen:</strong> HTML de trabajo convertido en entrada del laboratorio.</p>
+                <p><strong>Núcleo:</strong> cuatro modos de intervención sobre <code>bd</code>, <code>sn</code> y <code>hh</code>.</p>
+                <p><strong>Marco:</strong> del objeto sonoro a la forma, pasando por timbre y espacio.</p>
+            </div>
+
+            <div class="drums-manuscript fade-in">
+                <div class="wrap">
+                    <header class="cover">
+                        <div class="reg"><span>DERIVA · práctica</span><span>bd · sn · hh</span></div>
+                        <h1>Cuatro vías para<br><em>transformar la batería</em></h1>
+                        <p class="sub">El mismo set de tres elementos, intervenido en cuatro capas distintas — del golpe individual a la forma. Cada vía toca una escala temporal diferente.</p>
+                    </header>
+
+                    <div class="map">
+                        <p class="map-lab">Mapa · qué capa toca cada vía</p>
+                        <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de las cuatro vías por escala temporal">
+                            <line x1="40" y1="210" x2="760" y2="210" stroke="#16150F" stroke-width="1.4"/>
+                            <text x="40" y="235" font-family="JetBrains Mono,monospace" font-size="10" fill="#55524A">MICRO</text>
+                            <text x="760" y="235" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" fill="#55524A">MACRO</text>
+                            <rect x="60" y="150" width="120" height="50" fill="none" stroke="#D6402A" stroke-width="1.6"/>
+                            <text x="120" y="140" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#9E2D1C" font-weight="700">01</text>
+                            <text x="120" y="180" text-anchor="middle" font-family="EB Garamond,serif" font-size="13" fill="#16150F">el golpe</text>
+                            <text x="120" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">objeto</text>
+                            <text x="120" y="73" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">sonoro</text>
+                            <line x1="120" y1="150" x2="120" y2="80" stroke="#D8D4C8" stroke-dasharray="2 3"/>
+                            <rect x="210" y="135" width="150" height="65" fill="none" stroke="#16150F" stroke-width="1.4"/>
+                            <text x="285" y="125" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#9E2D1C" font-weight="700">02</text>
+                            <text x="285" y="172" text-anchor="middle" font-family="EB Garamond,serif" font-size="13" fill="#16150F">el timbre</text>
+                            <text x="285" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">tono ↔ ruido</text>
+                            <line x1="285" y1="135" x2="285" y2="72" stroke="#D8D4C8" stroke-dasharray="2 3"/>
+                            <rect x="390" y="120" width="180" height="80" fill="none" stroke="#16150F" stroke-width="1.4"/>
+                            <text x="480" y="110" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#9E2D1C" font-weight="700">03</text>
+                            <text x="480" y="165" text-anchor="middle" font-family="EB Garamond,serif" font-size="13" fill="#16150F">el espacio</text>
+                            <text x="480" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">contexto</text>
+                            <line x1="480" y1="120" x2="480" y2="72" stroke="#D8D4C8" stroke-dasharray="2 3"/>
+                            <rect x="600" y="100" width="160" height="100" fill="none" stroke="#16150F" stroke-width="1.4"/>
+                            <text x="680" y="90" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#9E2D1C" font-weight="700">04</text>
+                            <text x="680" y="155" text-anchor="middle" font-family="EB Garamond,serif" font-size="13" fill="#16150F">el tiempo</text>
+                            <text x="680" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">meso · forma</text>
+                            <line x1="680" y1="100" x2="680" y2="72" stroke="#D8D4C8" stroke-dasharray="2 3"/>
+                        </svg>
+                        <p class="cap">cuanto más a la derecha, más estructural el cambio · escalas temporales de Roads</p>
+                    </div>
+
+                    <section>
+                        <div class="head">
+                            <div class="num">01</div>
+                            <div><p class="kicker">Escala del objeto sonoro</p><h2 class="title">Variación por parámetro</h2></div>
+                        </div>
+                        <p>No tocas el synth: tocas <em>cómo lo disparas</em>. Cada golpe recibe valores ligeramente distintos en amplitud, paneo, afinación o cierre. Es el gesto más barato —una línea— y el que separa una caja de ritmos de un percusionista: ningún golpe natural es idéntico al anterior.</p>
+                        <div class="schema">
+                            <div class="lab">idéntico vs. micro-variado</div>
+                            <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Golpes idénticos frente a golpes variados">
+                                <text x="0" y="40" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A8576">máquina</text>
+                                <g fill="#8A8576">
+                                    <rect x="120" y="20" width="14" height="40"/>
+                                    <rect x="260" y="20" width="14" height="40"/>
+                                    <rect x="400" y="20" width="14" height="40"/>
+                                    <rect x="540" y="20" width="14" height="40"/>
+                                </g>
+                                <text x="0" y="130" font-family="JetBrains Mono,monospace" font-size="10" fill="#9E2D1C">vivo</text>
+                                <g fill="#D6402A">
+                                    <rect x="120" y="100" width="14" height="48"/>
+                                    <rect x="262" y="108" width="13" height="40"/>
+                                    <rect x="398" y="96" width="15" height="52"/>
+                                    <rect x="543" y="104" width="13" height="44"/>
+                                </g>
+                                <g stroke="#D8D4C8" stroke-width="1">
+                                    <line x1="120" y1="158" x2="134" y2="158"/>
+                                    <line x1="262" y1="158" x2="275" y2="158"/>
+                                    <line x1="398" y1="158" x2="413" y2="158"/>
+                                    <line x1="543" y1="158" x2="556" y2="158"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <pre><code><span class="c">// amplitud, cierre y paneo variando por evento</span>
+Synth(<span class="s">\hh</span>, [<span class="s">\amp</span>, rrand(<span class="nm">0.2</span>, <span class="nm">0.35</span>),
+           <span class="s">\rel</span>, [<span class="nm">0.04</span>, <span class="nm">0.04</span>, <span class="nm">0.04</span>, <span class="nm">0.3</span>].choose,
+           <span class="s">\pan</span>, rrand(<span class="nm">-0.3</span>, <span class="nm">0.3</span>)]);</code></pre>
+                        <div class="scale-tag"><span class="dot"></span>opera en el golpe individual · coste mínimo · efecto inmediato</div>
+                    </section>
+
+                    <section>
+                        <div class="head">
+                            <div class="num">02</div>
+                            <div><p class="kicker">Continuo tono ↔ ruido</p><h2 class="title">Transformación tímbrica</h2></div>
+                        </div>
+                        <p>Mutas el instrumento mismo, llevándolo por el eje de Roads. Cada elemento tiene su recorrido: el bombo de ruidoso (más click) a tonal (cola larga, barrido suave); la caja de tonal (parciales arriba) a ruido puro (solo el <code>BPF</code>); el charles abriendo o cerrando su filtro. Los mismos tres synths cambian de carácter sin dejar de ser ellos.</p>
+                        <div class="schema">
+                            <div class="lab">cada elemento en su recorrido del continuo</div>
+                            <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Continuo tono-ruido por instrumento">
+                                <g font-family="JetBrains Mono,monospace" font-size="11" fill="#16150F">
+                                    <text x="0" y="40">bd</text><text x="0" y="105">sn</text><text x="0" y="170">hh</text>
+                                </g>
+                                <g font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">
+                                    <text x="60" y="20">tono</text><text x="640" y="20">ruido</text>
+                                </g>
+                                <line x1="60" y1="36" x2="660" y2="36" stroke="#D8D4C8" stroke-width="1.4"/>
+                                <circle cx="180" cy="36" r="6" fill="#D6402A"/>
+                                <text x="180" y="58" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#8A8576">cola larga</text>
+                                <line x1="60" y1="101" x2="660" y2="101" stroke="#D8D4C8" stroke-width="1.4"/>
+                                <circle cx="420" cy="101" r="6" fill="#D6402A"/>
+                                <text x="420" y="123" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#8A8576">parciales+ruido</text>
+                                <line x1="60" y1="166" x2="660" y2="166" stroke="#D8D4C8" stroke-width="1.4"/>
+                                <circle cx="600" cy="166" r="6" fill="#D6402A"/>
+                                <text x="600" y="188" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#8A8576">ruido HPF</text>
+                            </svg>
+                        </div>
+                        <pre><code><span class="c">// caja deslizándose hacia el ruido: matar los parciales tonales</span>
+SynthDef(<span class="s">\sn</span>, { |out=<span class="nm">0</span>, amp=<span class="nm">0.5</span>, tone=<span class="nm">1</span>|
+    <span class="k">var</span> aenv = EnvGen.kr(Env.perc(<span class="nm">0.001</span>, <span class="nm">0.16</span>), doneAction:<span class="nm">2</span>);
+    <span class="k">var</span> noise = BPF.ar(WhiteNoise.ar, <span class="nm">1850</span>, <span class="nm">0.7</span>);
+    <span class="k">var</span> t = ((SinOsc.ar(<span class="nm">185</span>)*<span class="nm">0.5</span>)+(SinOsc.ar(<span class="nm">330</span>)*<span class="nm">0.3</span>)) * tone;
+    Out.ar(out, Pan2.ar((noise + t) * aenv * amp, <span class="nm">0</span>));
+}).add;</code></pre>
+                        <div class="scale-tag"><span class="dot"></span>opera en el timbre · imprime carácter propio · edita el synth</div>
+                    </section>
+
+                    <section>
+                        <div class="head">
+                            <div class="num">03</div>
+                            <div><p class="kicker">Contexto · procesado</p><h2 class="title">El espacio que los rodea</h2></div>
+                        </div>
+                        <p>No tocas los synths: cambias el espacio en que viven. El send de reverb que montaste es la palanca —subir el <code>t60</code> vuelve la percusión cavernosa—, pero también saturación, bitcrush, delay sincronizado al tempo, o la degradación tipo cassette (LPF + saturación + hiss) de tu estética Huerco S. El mismo patrón suena radicalmente distinto según el cuarto.</p>
+                        <div class="schema">
+                            <div class="lab">señal seca → procesado → espacio compartido</div>
+                            <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cadena de procesado y espacio">
+                                <g fill="#16150F"><rect x="40" y="70" width="10" height="30"/><rect x="70" y="70" width="10" height="30"/><rect x="100" y="70" width="10" height="30"/></g>
+                                <text x="75" y="120" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">seco</text>
+                                <line x1="130" y1="85" x2="200" y2="85" stroke="#16150F" stroke-width="1.4" marker-end="url(#a)"/>
+                                <rect x="210" y="55" width="150" height="60" fill="#16150F" fill-opacity="0.05" stroke="#9E2D1C" stroke-width="1.4"/>
+                                <text x="285" y="80" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#9E2D1C">reverb · satur</text>
+                                <text x="285" y="96" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#9E2D1C">delay · deg</text>
+                                <line x1="370" y1="85" x2="440" y2="85" stroke="#16150F" stroke-width="1.4" marker-end="url(#a)"/>
+                                <g fill="#D6402A"><rect x="470" y="70" width="10" height="30"/><rect x="510" y="70" width="10" height="30"/><rect x="550" y="70" width="10" height="30"/></g>
+                                <path d="M480 100 Q520 100 560 100" fill="none" stroke="#D6402A" stroke-opacity="0.3" stroke-width="8"/>
+                                <ellipse cx="540" cy="85" rx="120" ry="55" fill="none" stroke="#D8D4C8" stroke-width="1.2" stroke-dasharray="3 4"/>
+                                <text x="540" y="150" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55524A">en el espacio</text>
+                                <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16150F"/></marker></defs>
+                            </svg>
+                        </div>
+                        <pre><code><span class="c">// un gesto en vivo: agrandar la sala de TODA la percusión a la vez</span>
+~verb.set(<span class="s">\t60</span>, <span class="nm">8</span>);
+~verb.set(<span class="s">\size</span>, <span class="nm">2.5</span>);
+
+<span class="c">// o ensuciar por insert un bus de percusión (degradación cassette)</span>
+~drumFx = { |in| (in * <span class="nm">1.5</span>).tanh }</code></pre>
+                        <div class="scale-tag"><span class="dot"></span>opera en el contexto · cohesiona la mezcla · un punto de control global</div>
+                    </section>
+
+                    <section>
+                        <div class="head">
+                            <div class="num">04</div>
+                            <div><p class="kicker">Meso-escala · forma</p><h2 class="title">Reorganización temporal</h2></div>
+                        </div>
+                        <p>La más profunda: no cambias <em>qué</em> suena sino <em>cuándo</em> y con qué densidad. Subir los niveles del L-System densifica; cambiar las reglas cambia el carácter; el swing humaniza; y la “lente de pulso” —entrar el hi-hat tarde para recontextualizar lo anterior— es transformación de la forma. Aquí la batería no cambia de timbre: cambia de significado según cómo la colocas en el tiempo.</p>
+                        <div class="schema">
+                            <div class="lab">densidad creciente del L-System · niveles 2 → 3 → 4</div>
+                            <svg viewBox="0 0 700 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Densidad rítmica creciente">
+                                <text x="0" y="35" font-family="JetBrains Mono,monospace" font-size="10" fill="#55524A">niv 2</text>
+                                <line x1="60" y1="30" x2="660" y2="30" stroke="#D8D4C8"/>
+                                <g fill="#16150F"><rect x="80" y="22" width="8" height="16"/><rect x="380" y="22" width="8" height="16"/></g>
+                                <text x="0" y="90" font-family="JetBrains Mono,monospace" font-size="10" fill="#55524A">niv 3</text>
+                                <line x1="60" y1="85" x2="660" y2="85" stroke="#D8D4C8"/>
+                                <g fill="#16150F"><rect x="80" y="77" width="8" height="16"/><rect x="230" y="77" width="8" height="16"/><rect x="380" y="77" width="8" height="16"/><rect x="530" y="77" width="8" height="16"/></g>
+                                <text x="0" y="150" font-family="JetBrains Mono,monospace" font-size="10" fill="#9E2D1C">niv 4</text>
+                                <line x1="60" y1="145" x2="660" y2="145" stroke="#D8D4C8"/>
+                                <g fill="#D6402A"><rect x="80" y="137" width="8" height="16"/><rect x="155" y="137" width="8" height="16"/><rect x="230" y="137" width="8" height="16"/><rect x="305" y="137" width="8" height="16"/><rect x="380" y="137" width="8" height="16"/><rect x="455" y="137" width="8" height="16"/><rect x="530" y="137" width="8" height="16"/><rect x="605" y="137" width="8" height="16"/></g>
+                            </svg>
+                        </div>
+                        <pre><code><span class="c">// densificar: subir las iteraciones del sistema de reescritura</span>
+q = {
+    <span class="k">var</span> rules = ( <span class="s">\k</span>:[<span class="s">\k</span>,<span class="s">\r</span>,<span class="s">\s</span>,<span class="s">\r</span>], <span class="s">\s</span>:[<span class="s">\s</span>,<span class="s">\r</span>,<span class="s">\k</span>,<span class="s">\r</span>], <span class="s">\r</span>:[<span class="s">\r</span>] );
+    <span class="k">var</span> seq = [<span class="s">\k</span>];
+    <span class="nm">4</span>.do { seq = seq.collect({ |x| rules.atFail(x,{[x]}) }).flat };
+    seq = seq ++ Array.fill((<span class="nm">16</span> - (seq.size % <span class="nm">16</span>)) % <span class="nm">16</span>, <span class="s">\r</span>);
+    seq
+}.value;
+
+<span class="c">// la "lente de pulso": el hh en 1 y 3 recontextualiza lo flotante</span>
+Tdef(<span class="s">\charles</span>, { loop { Synth(<span class="s">\hh</span>); <span class="nm">2</span>.wait } }).play(t, quant:<span class="nm">4</span>);</code></pre>
+                        <div class="scale-tag"><span class="dot"></span>opera en el patrón y la forma · cambia el significado, no el sonido</div>
+                    </section>
+
+                    <footer class="colophon">
+                        <p>
+                            DERIVA · KAIROS — cuatro vías de transformación<br>
+                            Material: bd · sn · hh (SynthDefs sintetizados)<br>
+                            Marco: escalas temporales de Curtis Roads · del objeto sonoro a la forma<br>
+                            Para tu estética: las vías 03 (espacio) y 04 (tiempo) rinden más que afinar timbres<br>
+                            — pero la 02 es la que hace que la batería suene <em>tuya</em>.
+                        </p>
+                    </footer>
+                </div>
+            </div>
+
+            <section class="article-related fade-in" aria-label="Lecturas relacionadas">
+                <h3 class="article-related-heading">Seguir desde aquí</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="sesion-05-deriva-cuaderno-sesion.html">
+                        <span class="article-related-title">Sesión 05 · DERIVA: cuaderno de sesión</span>
+                        <span class="article-related-desc">Volver al cuaderno expandido donde pad, bajo, ritmo, espacio y forma se piensan como un sistema único.</span>
+                    </a>
+                    <a class="article-related-link" href="sesion-04-deriva-metodo-composicion-algoritmica.html">
+                        <span class="article-related-title">Sesión 04 · Deriva: método de composición algorítmica</span>
+                        <span class="article-related-desc">Recuperar la arquitectura temporal y el reparto de agentes del que sale esta práctica rítmica.</span>
+                    </a>
+                    <a class="article-related-link" href="../curtis_roads_capitulos.html">
+                        <span class="article-related-title">Curtis Roads · Audio Digital</span>
+                        <span class="article-related-desc">Cruzar esta práctica con el marco teórico que organiza las escalas temporales y la escucha del continuo.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="/">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="sesion-06-transformar-bateria.html">Sesión 06 · Transformar la batería</a></li>
+                    <li><a href="sesion-05-deriva-cuaderno-sesion.html">Sesión 05 · DERIVA</a></li>
+                    <li><a href="sesion-04-deriva-metodo-composicion-algoritmica.html">Sesión 04 · Deriva</a></li>
+                    <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script src="../assets/main.js"></script>
+</body>
+</html>

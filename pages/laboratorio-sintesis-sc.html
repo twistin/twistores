@@ -1019,12 +1019,13 @@
                 <h2 class="lab-family-title">Una misma serie, tres ritmos de lectura</h2>
                 <p class="lab-family-intro">Las sesiones publican procesos de estudio, los scripts fijan materiales ejecutables y las lecturas integradas sostienen el marco teórico. Todo pertenece al mismo archivo, aunque cada página tenga su propia densidad y tono.</p>
                 <div class="lab-family-meta">
-                    <span>5 sesiones publicadas</span>
+                    <span>6 sesiones publicadas</span>
                     <span>1 lectura integrada</span>
                     <span>SuperCollider · ProxySpace · DSP</span>
                 </div>
             </div>
             <nav class="lab-family-nav" aria-label="Accesos rápidos del laboratorio">
+                <a href="sesion-06-transformar-bateria.html">SC-06</a>
                 <a href="sesion-05-deriva-cuaderno-sesion.html">SC-05</a>
                 <a href="sesion-01-pad-sustractivo.html">SC-01</a>
                 <a href="sesion-02-live-coding-ritmico.html">SC-02</a>
@@ -1042,6 +1043,57 @@
                 <h2 class="dashboard-section-title">// Sesiones de estudio publicadas</h2>
                 
                 <div class="session-log-stack">
+
+                    <!-- SESIÓN 06 -->
+                    <article class="session-log-card" data-category="ritmica">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">SC-06</span>
+                            <span class="tech-badge category">Rítmica &amp; Forma</span>
+                            <span class="tech-badge difficulty medium">Intermedio</span>
+                            <span class="tech-badge lines">4 vías</span>
+                            <span class="session-log-date">JUNIO 2026</span>
+                        </div>
+                        <h3 class="session-log-title">Cuatro vías para transformar la batería</h3>
+                        <p class="session-log-desc">Un cuaderno práctico para mover bd, sn y hh en cuatro escalas distintas: microvariación por evento, transformación tímbrica, espacio compartido y reorganización temporal.</p>
+
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // transformar_bateria.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// micro-variación del hi-hat por evento</span>
+Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, <span class="sc-ugen">rrand</span>(<span class="sc-number">0.2</span>, <span class="sc-number">0.35</span>),
+                   <span class="sc-symbol">\rel</span>, [<span class="sc-number">0.04</span>, <span class="sc-number">0.04</span>, <span class="sc-number">0.04</span>, <span class="sc-number">0.3</span>].choose,
+                   <span class="sc-symbol">\pan</span>, <span class="sc-ugen">rrand</span>(<span class="sc-number">-0.3</span>, <span class="sc-number">0.3</span>)]);</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Cuatro capas:</strong> golpe, timbre, espacio y tiempo como escalas separadas de intervención.</li>
+                            <li><strong>Marco:</strong> lectura explícita de la batería desde las escalas temporales de Roads.</li>
+                            <li><strong>Aplicación:</strong> orientado a <em>Deriva</em> y a sets donde el carácter viene más de la organización que del preset.</li>
+                        </ul>
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">bd</span>
+                            <span class="micro-tag">sn</span>
+                            <span class="micro-tag">hh</span>
+                            <span class="micro-tag">L-System</span>
+                            <span class="micro-tag">Roads</span>
+                            <span class="micro-tag">Forma</span>
+                        </div>
+
+                        <div class="session-log-actions">
+                            <a href="sesion-06-transformar-bateria.html" class="btn">Abrir sesión 06 →</a>
+                            <a href="sesion-05-deriva-cuaderno-sesion.html" class="btn btn-ghost">Ver sesión 05 →</a>
+                        </div>
+                    </article>
 
                     <!-- SESIÓN 05 -->
                     <article class="session-log-card" data-category="metodo">
@@ -1337,6 +1389,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                 <div class="sidebar-widget">
                     <h3 class="widget-title">// Nube de Conceptos</h3>
                     <div class="topic-cloud">
+                        <span class="topic-pill">bd · sn · hh</span>
                         <span class="topic-pill">Continuo tono-ruido</span>
                         <span class="topic-pill">ProxySpace</span>
                         <span class="topic-pill">BPF</span>
@@ -1363,6 +1416,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                         <span class="topic-pill">MoogFF</span>
                         <span class="topic-pill">JPverb</span>
                         <span class="topic-pill">L-System</span>
+                        <span class="topic-pill">Reorganización temporal</span>
                     </div>
                 </div>
 
@@ -1390,6 +1444,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
             <div class="footer-col">
                 <h4 data-i18n="footer_project">Proyecto</h4>
                 <ul>
+                    <li><a href="sesion-06-transformar-bateria.html">Sesión 06 · Transformar la batería</a></li>
                     <li><a href="sesion-05-deriva-cuaderno-sesion.html">Sesión 05 · DERIVA</a></li>
                     <li><a href="sesion-04-deriva-metodo-composicion-algoritmica.html">Sesión 04 · Deriva</a></li>
                     <li><a href="../assets/code/sc/sesion-04-deriva-v2.scd" download>Script Sesión 04 .scd</a></li>
