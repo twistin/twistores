@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de artistas — KAIROS · TWISTORES</title>
+    <meta name="description" content="Cartografía de referencias sonoras para KAIROS: un registro vivo de artistas ordenado por ámbitos, del microsonido al ruido y del live coding a la acusmática.">
+    <meta name="author" content="Silvino Díaz Carreras">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#071118">
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://twistores.vercel.app/registro-artistas-kairos.html">
+    <meta property="og:site_name" content="TWISTORES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Registro de artistas — KAIROS · TWISTORES">
+    <meta property="og:description" content="Cartografía de referencias sonoras para KAIROS: microsonido, acusmática, live coding, club expandido y ruido.">
+    <meta property="og:url" content="https://twistores.vercel.app/registro-artistas-kairos.html">
+    <meta property="og:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Registro de artistas — KAIROS · TWISTORES">
+    <meta name="twitter:description" content="Cartografía de referencias sonoras para KAIROS: microsonido, acusmática, live coding, club expandido y ruido.">
+    <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .registry-page .lab-family-band {
+            max-width: 1100px;
+            margin: 0 auto 24px;
+        }
+
+        .registry-page .article-shell {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .registry-page .article-editorial-meta {
+            margin-bottom: 28px;
+        }
+
+        .registry-manuscript {
+            --ink: #0c0d11;
+            --panel: #15161c;
+            --hair: #262833;
+            --paper: #eceae3;
+            --muted: #888a97;
+            --muted-dim: #5c5e6b;
+            --signal: #d9a441;
+            --signal-dim: #8a6a2c;
+            --serif: "Spectral", Georgia, serif;
+            --sans: var(--sans);
+            --mono: "JetBrains Mono", monospace;
+            background: var(--ink);
+            color: var(--paper);
+            border: 1px solid rgba(240, 192, 109, 0.18);
+            border-radius: calc(var(--radius) + 6px);
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.26);
+        }
+
+        .registry-manuscript * {
+            box-sizing: border-box;
+        }
+
+        .registry-manuscript .wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: clamp(28px, 6vw, 72px) clamp(20px, 5vw, 44px) 96px;
+        }
+
+        .registry-manuscript .mono {
+            font-family: var(--mono);
+        }
+
+        .registry-manuscript .registry-surface {
+            position: relative;
+            background: var(--ink);
+            background-image: linear-gradient(var(--hair) 1px, transparent 1px), linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+            background-size: 64px 64px, 64px 64px;
+            background-position: center top;
+            background-attachment: fixed;
+        }
+
+        .registry-manuscript .registry-surface::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--ink);
+            opacity: 0.93;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .registry-manuscript .wrap > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .registry-manuscript .cover {
+            border-bottom: 1px solid var(--hair);
+            padding-bottom: 30px;
+            margin-bottom: 14px;
+        }
+
+        .registry-manuscript .eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: var(--signal);
+            margin: 0 0 18px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .registry-manuscript .eyebrow::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--hair);
+        }
+
+        .registry-manuscript h1 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(34px, 7vw, 62px);
+            line-height: 1.02;
+            letter-spacing: -0.01em;
+            margin: 0 0 18px;
+            color: var(--paper);
+        }
+
+        .registry-manuscript h1 em {
+            font-style: italic;
+            color: var(--signal);
+        }
+
+        .registry-manuscript .lede {
+            font-family: var(--serif);
+            font-size: clamp(15px, 2.4vw, 18px);
+            color: var(--muted);
+            max-width: 60ch;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .registry-manuscript .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 26px;
+            margin-top: 24px;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            color: var(--muted-dim);
+        }
+
+        .registry-manuscript .meta-row span b {
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .registry-manuscript .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 26px 0 8px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--hair);
+        }
+
+        .registry-manuscript .legend .lk {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted-dim);
+            align-self: center;
+            margin-right: 6px;
+        }
+
+        .registry-manuscript .amb {
+            margin: 58px 0 8px;
+        }
+
+        .registry-manuscript .amb .ae {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--signal);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .registry-manuscript .amb .ae .box {
+            width: 9px;
+            height: 9px;
+            border: 1px solid var(--signal);
+            flex: none;
+        }
+
+        .registry-manuscript .amb .ae .ln {
+            flex: 1;
+            height: 1px;
+            background: var(--hair);
+        }
+
+        .registry-manuscript .amb .ae .acount {
+            color: var(--muted-dim);
+            letter-spacing: 0.06em;
+        }
+
+        .registry-manuscript .amb h2 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(21px, 3.2vw, 28px);
+            margin: 0;
+            letter-spacing: -0.01em;
+            color: var(--paper);
+        }
+
+        .registry-manuscript .amb p {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--muted);
+            font-size: 14px;
+            margin: 3px 0 0;
+        }
+
+        .registry-manuscript .entry {
+            border-bottom: 1px solid var(--hair);
+            padding: 30px 0;
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 0 22px;
+        }
+
+        .registry-manuscript .idx {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--signal-dim);
+            padding-top: 6px;
+            letter-spacing: 0.04em;
+        }
+
+        .registry-manuscript .idx .tick {
+            display: block;
+            width: 14px;
+            height: 1px;
+            background: var(--signal);
+            margin-top: 10px;
+        }
+
+        .registry-manuscript .ebody {
+            min-width: 0;
+        }
+
+        .registry-manuscript .name {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(22px, 3.4vw, 29px);
+            line-height: 1.08;
+            margin: 0;
+            letter-spacing: -0.01em;
+            color: var(--paper);
+        }
+
+        .registry-manuscript .alias {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--muted);
+            font-size: 0.6em;
+        }
+
+        .registry-manuscript .coords {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            color: var(--muted-dim);
+            margin: 7px 0 0;
+        }
+
+        .registry-manuscript .coords b {
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .registry-manuscript .sig {
+            margin: 16px 0 14px;
+        }
+
+        .registry-manuscript .sig svg {
+            display: block;
+            width: 100%;
+            max-width: 340px;
+            height: 46px;
+            overflow: visible;
+        }
+
+        .registry-manuscript .sig .baseline {
+            stroke: var(--hair);
+            stroke-width: 1;
+        }
+
+        .registry-manuscript .sig .trace {
+            fill: none;
+            stroke: var(--signal);
+            stroke-width: 1.4;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .registry-manuscript .sig .trace-soft {
+            fill: none;
+            stroke: var(--paper);
+            stroke-width: 1;
+            opacity: 0.5;
+            vector-effect: non-scaling-stroke;
+        }
+
+        .registry-manuscript .sig .dot {
+            fill: var(--signal);
+        }
+
+        .registry-manuscript .sig .band {
+            fill: var(--signal);
+            opacity: 0.16;
+        }
+
+        .registry-manuscript .sig-cap {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: var(--muted-dim);
+            margin-top: -2px;
+        }
+
+        .registry-manuscript .desc {
+            font-size: 15px;
+            margin: 0 0 14px;
+            max-width: 64ch;
+            color: #d6d4cc;
+            font-family: var(--sans);
+        }
+
+        .registry-manuscript .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 14px;
+        }
+
+        .registry-manuscript .tag {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: 1px solid var(--hair);
+            border-radius: 2px;
+            padding: 4px 9px;
+        }
+
+        .registry-manuscript .tag.sc {
+            border-color: var(--signal-dim);
+            color: var(--signal);
+        }
+
+        .registry-manuscript .rel {
+            border-left: 2px solid var(--signal);
+            padding: 2px 0 2px 16px;
+            margin: 0;
+            max-width: 62ch;
+        }
+
+        .registry-manuscript .rel .rl {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--signal-dim);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .registry-manuscript .rel p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--muted);
+            font-style: italic;
+            font-family: var(--serif);
+        }
+
+        .registry-manuscript .manuscript-footer {
+            margin-top: 54px;
+            padding-top: 30px;
+            border-top: 1px solid var(--hair);
+            font-family: var(--mono);
+            font-size: 11px;
+            line-height: 1.9;
+            color: var(--muted-dim);
+            letter-spacing: 0.03em;
+        }
+
+        .registry-manuscript .manuscript-footer b {
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .registry-manuscript .manuscript-footer code {
+            color: var(--signal);
+            background: var(--panel);
+            padding: 1px 5px;
+            border-radius: 2px;
+        }
+
+        .registry-manuscript :focus-visible {
+            outline: 2px solid var(--signal);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 560px) {
+            .registry-manuscript .entry {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .registry-manuscript .idx {
+                padding-top: 0;
+                margin-bottom: 8px;
+            }
+
+            .registry-manuscript .idx .tick {
+                display: inline-block;
+                margin: 0 0 2px 8px;
+                vertical-align: middle;
+                width: 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .registry-manuscript .sig .trace,
+            .registry-manuscript .sig .trace-soft {
+                stroke-dasharray: 1600;
+                stroke-dashoffset: 1600;
+                animation: sweep 1.3s cubic-bezier(.2,.7,.2,1) forwards;
+            }
+
+            .registry-manuscript .sig .dot {
+                opacity: 0;
+                animation: fadein 0.5s ease forwards 0.85s;
+            }
+
+            .registry-manuscript .sig .band {
+                opacity: 0;
+                animation: bandin 0.9s ease forwards 0.3s;
+            }
+
+            @keyframes sweep {
+                to { stroke-dashoffset: 0; }
+            }
+
+            @keyframes fadein {
+                to { opacity: 1; }
+            }
+
+            @keyframes bandin {
+                to { opacity: 0.16; }
+            }
+        }
+    </style>
+</head>
+<body class="acid-page acid-lab registry-page">
+
+    <header>
+        <div class="header-inner">
+            <a class="site-logo" href="/">TWISTORES</a>
+            <nav id="main-nav">
+                <ul id="nav-list">
+                    <li><a href="/" data-i18n="nav_home">Inicio</a></li>
+                    <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="pages/laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">☀</button>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="gl">GL</button>
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-shell article-content registry-page">
+            <section class="lab-family-band lab-family-band--compact fade-in" aria-label="Mapa de la serie">
+                <div class="lab-family-copy">
+                    <p class="lab-family-kicker">Laboratorio de Síntesis con SC</p>
+                    <h1 class="lab-family-title">KAIROS abre su cartografía de referencias sonoras</h1>
+                    <p class="lab-family-intro">Esta página no documenta un patch ni una sesión, sino el ecosistema de escucha que rodea el proyecto: artistas, escenas y afinidades organizados por ámbitos, con una firma gráfica para cada orientación sonora.</p>
+                    <div class="lab-family-meta">
+                        <span>Recurso integrado</span>
+                        <span>Microsonido · acusmática · código · ruido</span>
+                        <span>Registro vivo</span>
+                    </div>
+                </div>
+                <nav class="lab-family-nav" aria-label="Recorridos del laboratorio">
+                    <a href="pages/laboratorio-sintesis-sc.html">Archivo</a>
+                    <a href="pages/sesion-05-deriva-cuaderno-sesion.html">SC-05</a>
+                    <a href="pages/sesion-06-transformar-bateria.html">SC-06</a>
+                    <a href="curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                    <a href="registro-artistas-kairos.html" class="is-current" aria-current="page">Registro KAIROS</a>
+                </nav>
+            </section>
+
+            <div class="action-row fade-in">
+                <a href="pages/laboratorio-sintesis-sc.html" class="btn btn-ghost">← Volver al laboratorio</a>
+                <a href="pages/sesion-06-transformar-bateria.html" class="btn">Ir a la sesión 06 →</a>
+            </div>
+
+            <p class="article-lead fade-in">
+                Esta cartografía funciona como archivo de referencias para KAIROS y como mapa de escucha para el laboratorio. No es una lista enciclopédica: es un registro vivo de artistas que ayudan a pensar timbre, forma, espacialización, ruido, sistemas y escucha profunda desde distintos ámbitos.
+            </p>
+
+            <div class="article-editorial-meta fade-in">
+                <p><strong>Función:</strong> recurso de apoyo e investigación dentro del laboratorio.</p>
+                <p><strong>Estructura:</strong> artistas agrupados por ámbitos y representados con una firma espectral sintética.</p>
+                <p><strong>Uso:</strong> brújula estética para KAIROS, Deriva y las próximas sesiones de síntesis.</p>
+            </div>
+
+            <div class="registry-manuscript fade-in">
+                <div class="registry-surface">
+                    <div class="wrap">
+                        <header class="cover">
+                            <p class="eyebrow">Registro · KAIROS</p>
+                            <h1>Cartografía de <em>referencias</em> sonoras</h1>
+                            <p class="lede">Catálogo vivo de artistas que orbitan el proyecto, ordenado por ámbito: del microsonido clínico a la acusmática, del live coding al muro de ruido. Cada ficha lleva una firma espectral —un trazo que intenta dibujar el carácter de su sonido.</p>
+                            <div class="meta-row">
+                                <span><b id="count">—</b> entradas</span>
+                                <span><b id="ambcount">—</b> ámbitos</span>
+                                <span>actualizado <b id="today">—</b></span>
+                            </div>
+                        </header>
+
+                        <div class="legend" id="legend"><span class="lk">Etiquetas</span></div>
+
+                        <div id="registro"></div>
+
+                        <footer class="manuscript-footer">
+                            <b>Cómo ampliar este registro</b><br>
+                            Añade un objeto al array <code>ARTISTAS</code> en el código de esta página y vuelve a abrirla.<br>
+                            Campos: <code>nombre</code>, <code>alias</code>, <code>origen</code>, <code>anios</code>, <code>ambito</code>, <code>firma</code>, <code>estilo</code>, <code>tags</code>, <code>sc</code> (true si usa SuperCollider), <code>relevancia</code>.<br>
+                            Ámbitos: <code>micro · acus · code · club · ruido</code> · Firmas: <code>data · sparse · pulso · grano · grid · curva · drone · caos · decaer · niebla · campo · ruido</code>.
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <section class="article-related fade-in" aria-label="Lecturas relacionadas">
+                <h3 class="article-related-heading">Seguir desde aquí</h3>
+                <div class="article-related-list">
+                    <a class="article-related-link" href="pages/laboratorio-sintesis-sc.html">
+                        <span class="article-related-title">Laboratorio de Síntesis con SC</span>
+                        <span class="article-related-desc">Volver al archivo principal de sesiones, cuadernos y recursos integrados del laboratorio.</span>
+                    </a>
+                    <a class="article-related-link" href="pages/sesion-05-deriva-cuaderno-sesion.html">
+                        <span class="article-related-title">Sesión 05 · DERIVA: cuaderno de sesión</span>
+                        <span class="article-related-desc">Cruzar esta cartografía de influencias con el cuaderno donde Deriva organiza pad, bajo, ritmo y espacio.</span>
+                    </a>
+                    <a class="article-related-link" href="curtis_roads_capitulos.html">
+                        <span class="article-related-title">Curtis Roads · Audio Digital</span>
+                        <span class="article-related-desc">Complementar el mapa de referencias con el marco técnico que sostiene buena parte del laboratorio.</span>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a class="site-logo" href="/">TWISTORES</a>
+                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_sections">Secciones</h4>
+                <ul>
+                    <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
+                    <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
+                    <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
+                    <li><a href="pages/laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_project">Proyecto</h4>
+                <ul>
+                    <li><a href="registro-artistas-kairos.html">Registro de artistas · KAIROS</a></li>
+                    <li><a href="pages/sesion-06-transformar-bateria.html">Sesión 06 · Transformar la batería</a></li>
+                    <li><a href="pages/sesion-05-deriva-cuaderno-sesion.html">Sesión 05 · DERIVA</a></li>
+                    <li><a href="curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TWISTORES</p>
+            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
+        </div>
+    </footer>
+
+    <script>
+    const AMBITOS = [
+      {id:"micro", titulo:"Microsonido & ambient",            sub:"canon de escucha — sinusoide, cinta, deriva"},
+      {id:"acus",  titulo:"Electroacústica & acusmática",     sub:"difusión, paisaje, cuerpo"},
+      {id:"code",  titulo:"Live coding & síntesis generativa",sub:"tu terreno — el sistema como instrumento"},
+      {id:"club",  titulo:"Electrónica & club expandido",     sub:"techno con vocación de diseño sonoro"},
+      {id:"ruido", titulo:"Ruido, industrial & deconstrucción",sub:"saturación, collage, performance"}
+    ];
+
+    const ARTISTAS = [
+      {nombre:"Ryoji Ikeda", alias:"池田亮司", origen:"Gifu, JP", anios:"1966–", ambito:"micro", firma:"sparse", estilo:"Composición e instalación reducidas a lo esencial: sinusoides puras, frecuencias en los extremos del oído, ráfagas de datos y silencio. Estética blanco-y-negro casi clínica que persigue un sublime matemático. Núcleo histórico de Raster-Noton (dataplex, test pattern, +/−).", tags:["microsonido","sinusoides","datos","minimal"], relevancia:"Economía extrema: el contenido vive en los bordes del espectro y en la tensión entre sinusoide y silencio."},
+      {nombre:"Alva Noto", alias:"Carsten Nicolai", origen:"Chemnitz, DE", anios:"1965–", ambito:"micro", firma:"grid", estilo:"Cofundador de Raster-Noton. Construye con clicks, impulsos y sinusoides cuantizados sobre una retícula digital: glitch minimalista de precisión casi arquitectónica. Sus dúos con Sakamoto (Vrioon, Insen) cruzan ese mundo con el piano.", tags:["glitch","clicks","microsonido","raster-noton"], relevancia:"Referencia directa: la rejilla de impulsos y la disciplina del click como evento mínimo."},
+      {nombre:"Ryuichi Sakamoto", alias:"坂本龍一", origen:"Tokio, JP", anios:"1952–2023", ambito:"micro", firma:"curva", estilo:"De YMO al neoclásico, el ambient y la banda sonora. Su última etapa (async, 12) abraza la imperfección, el ruido ambiente y el decaimiento del sonido. Sus dúos con Alva Noto funden lirismo y glitch.", tags:["neoclásico","ambient","piano","textura"], relevancia:"El polo cálido y expresivo del eje: melodía y resonancia frente a la retícula."},
+      {nombre:"Brian Eno", origen:"Suffolk, UK", anios:"1948–", ambito:"micro", firma:"drone", estilo:"Padre del ambient (Music for Airports) y de la música generativa: sistemas que se tocan solos y evolucionan sin repetirse. Sus Oblique Strategies y su trabajo como productor convirtieron el estudio y el proceso en instrumento.", tags:["ambient","generativo","sistemas","drone"], relevancia:"Fundamento conceptual del enfoque generativo: definir reglas y dejar que el tiempo componga."},
+      {nombre:"William Basinski", origen:"Houston, US", anios:"1958–", ambito:"micro", firma:"decaer", estilo:"Loops de cinta magnética que se degradan físicamente al reproducirse: The Disintegration Loops convierte la pérdida de material en forma musical. Ambient melancólico sobre la memoria y la entropía.", tags:["cinta","loops","ambient","decaimiento"], relevancia:"Modelo de proceso por degradación: la repetición no es estática, se erosiona. Idea de forma para drones largos."},
+      {nombre:"Huerco S.", alias:"Brian Leeds", origen:"Kansas City, US", anios:"~1990–", ambito:"micro", firma:"niebla", estilo:"Ambient y house de baja fidelidad: drones brumosos, hiss de cinta y bucles hipnóticos cubiertos de polvo. For Those of You Who Have Never (And Also Those Who Have) llevó el lo-fi a la deriva contemplativa.", tags:["ambient","lo-fi","drone","hiss"], relevancia:"Textura sucia como estética: el ruido de fondo y la saturación leve como capa, no como defecto."},
+      {nombre:"Colleen ‘Cosmo’ Murphy", origen:"Londres, UK", anios:"act.", ambito:"micro", firma:"drone", estilo:"DJ y curadora estadounidense afincada en Londres, heredera de la tradición de escucha en alta fidelidad del Loft de David Mancuso. Su práctica —Classic Album Sundays incluido— gira en torno a la escucha profunda, el ambient, la library music y el soundscape.", tags:["escucha-profunda","ambient","curaduría","hi-fi"], relevancia:"Recordatorio de que la escucha —el sistema, el espacio, la atención— es parte de la obra tanto como el código."},
+      {nombre:"Jonty Harrison", origen:"Scunthorpe, UK", anios:"1952–", ambito:"acus", firma:"campo", estilo:"Compositor electroacústico británico y figura central de la acusmática. Fundó el BEAST (Birmingham ElectroAcoustic Sound Theatre) y desarrolló la difusión sonora: proyectar una obra fija sobre decenas de altavoces como interpretación en vivo. Su material parte a menudo de sonidos concretos transformados hasta lo irreconocible.", tags:["acusmática","difusión","concreta","beast"], relevancia:"La difusión como gesto interpretativo: el espacio y el número de canales como parámetro compositivo, no como detalle técnico."},
+      {nombre:"Annie Mahtani", origen:"Birmingham, UK", anios:"act.", ambito:"acus", firma:"campo", estilo:"Compositora electroacústica afincada en Birmingham, codirige el BEAST. Trabaja desde la grabación de campo y la acusmática, esculpiendo paisajes inmersivos a partir de sonidos del entorno y sistemas multicanal.", tags:["acusmática","campo","inmersivo","beast"], relevancia:"Grabación de campo como fuente: el entorno como banco de muestras orgánico frente a la síntesis pura."},
+      {nombre:"Otto Sidharta", origen:"Bandung, ID", anios:"1955–", ambito:"acus", firma:"campo", estilo:"Pionero de la música electrónica indonesia. Estudió con Slamet Abdul Sjukur y con Ton de Leeuw en Ámsterdam. Construye paisajes a partir de sonidos de la naturaleza —agua, selva, animales recogidos en Nias y Borneo— fundidos con fuentes electrónicas, en una ecología sonora de su país (Ngendau, Hutan Plastik).", tags:["concreta","ecología-sonora","paisaje","archivo"], relevancia:"Ecología sonora histórica: integrar grabación de naturaleza y electrónica como un mismo tejido, no como capas separadas."},
+      {nombre:"Myriam Boucher", origen:"Montreal, CA", anios:"act.", ambito:"acus", firma:"niebla", estilo:"Compositora y videoartista de Montreal, profesora en la Université de Montréal. Practica la videomúsica: una gramática del diálogo entre sonido e imagen donde el paisaje cotidiano muta de sólido a líquido. Parte de grabación de campo, escucha profunda y ecología sonora.", tags:["videomúsica","paisaje","escucha-profunda","av"], relevancia:"Si KAIROS crece hacia lo audiovisual: sonido e imagen como una sola materia sincronizada, no como acompañamiento."},
+      {nombre:"Penélope Bekiari", alias:"Πηνελόπη Μπεκιάρη", origen:"Atenas, GR", anios:"act.", ambito:"acus", firma:"pulso", estilo:"Artista sonora e investigadora griega, con máster en composición electroacústica por Mánchester. Explora la relación entre sonido y cuerpo mediante biosensores —respiración, conductancia galvánica, latido— traducidos a paisaje en Max/MSP. Circuito BEAST FEaST / MANTIS.", tags:["electroacústica","cuerpo","biosensores","max/msp"], relevancia:"El cuerpo como fuente de control: bio-señales como LFOs orgánicos e impredecibles para modular la síntesis."},
+      {nombre:"Akihiko Matsumoto", alias:"松本昭彦", origen:"Tokio, JP", anios:"act.", ambito:"code", firma:"data", sc:true, estilo:"Artista, compositor y programador en la intersección de arte y tecnología. Construye con Max/MSP y SuperCollider; su producción va del wave/hardwave al ambient y la sonificación de datos. Su pieza emblemática es una instalación de 8.1 canales generada a partir de datos de fluctuación del universo (Kavli IPMU).", tags:["generativo","data-art","wave","max/msp"], relevancia:"El sistema como obra: el código generativo es el material, y la sonificación de datos define la forma a gran escala."},
+      {nombre:"Nathan Ho", alias:"nhthn", origen:"SF Bay Area, US", anios:"act.", ambito:"code", firma:"caos", sc:true, estilo:"Músico e ingeniero de software, mantenedor de SuperCollider. Compone ex nihilo, todo sintetizado en SC sin samples ni plugins, cruzando clásica contemporánea con percusión brutal de breakcore y glitch. Documenta su DSP en el blog y el canal SynthDef (Haywire Frontier, Steganography).", tags:["dsp","síntesis pura","breakcore","glitch"], relevancia:"Referencia técnica de cabecera junto a Fieldsteel: síntesis sin samples, ritmo sin rejilla y método documentado."},
+      {nombre:"Patrick Hartono", origen:"Makassar, ID", anios:"1988–", ambito:"code", firma:"caos", sc:true, estilo:"Compositor electroacústico y artista audiovisual indonesio, formado en Sonology (Róterdam), Goldsmiths e IRCAM. Hace live coding de ruido con SuperCollider (escena Algorave de Yogyakarta) y obras audiovisuales generativas con espacialización 3D, partiendo de instrumentos tradicionales indonesios y grabaciones transformadas por reglas matemáticas.", tags:["live-coding","generativo","espacialización","audiovisual"], relevancia:"Modelo cercano a tu práctica: SuperCollider en vivo, reglas matemáticas sobre material concreto y saturación controlada."},
+      {nombre:"Sippapas Thienwiwat", alias:"SKYKYS", origen:"Bangkok, TH", anios:"2006–", ambito:"code", firma:"data", sc:true, estilo:"Artista digital y compositor tailandés. Hace live coding audiovisual multicanal y composición electroacústica, y ha construido su propio sistema de difusión (TEAMSmulch) sobre Pure Data, llevando los algoritmos a arrays de altavoces como el BEAST.", tags:["live-coding","audiovisual","difusión","puredata"], relevancia:"Cruce directo de tus dos mundos: algoritmo en vivo + difusión espacial. El código como partitura del espacio."},
+      {nombre:"Daito Manabe", alias:"真鍋大度", origen:"Tokio, JP", anios:"act.", ambito:"code", firma:"data", estilo:"Artista multimedia y programador japonés (Rhizomatiks). Trabaja en la frontera entre código, cuerpo y datos: visuales generativos, diseño sonoro experimental y performances donde señal y movimiento se sincronizan en tiempo real.", tags:["multimedia","generativo","datos","código"], relevancia:"Sincronía señal-cuerpo-imagen a partir de datos: la forma como consecuencia de un sistema, no de una línea de tiempo fija."},
+      {nombre:"Annie Aries", alias:"Annie Rüfenacht", origen:"Berna, CH", anios:"1988–", ambito:"code", firma:"pulso", estilo:"Compositora suizo-filipina afincada en Berna. Toca y compone con un sintetizador modular a medida, explorando el cruce entre procesos generativos e improvisación en vivo: texturas que oscilan entre la claridad mínima y la densidad. Perspectiva feminista sobre la interacción humano-máquina.", tags:["modular","generativo","improvisación","electroacústica"], relevancia:"Tu mismo dilema, en hardware: equilibrio entre dejar correr el proceso e intervenir en vivo. Control frente a azar."},
+      {nombre:"Holly Herndon", origen:"Tennessee, US", anios:"1980–", ambito:"code", firma:"grano", estilo:"Doctorada en CCRMA (Stanford). Voz humana procesada y multiplicada en coro digital, y machine learning como colaborador (la 'IA' Spawn en PROTO). Electrónica conceptual sobre identidad, red y autoría.", tags:["voz","ml/ia","granular","conceptual"], relevancia:"La voz como fuente granular y la máquina como co-intérprete: vía para integrar proceso y material vocal."},
+      {nombre:"Jon Hopkins", origen:"Londres, UK", anios:"1979–", ambito:"club", firma:"pulso", estilo:"Techno melódico y ambient que oscila entre lo brutal y lo contemplativo (Immunity, Singularity). Texturas orgánicas, distorsión analógica y arquitecturas dinámicas que respiran de la euforia al reposo.", tags:["techno","ambient","dinámica","orgánico"], relevancia:"Manejo de la dinámica macroformal: cómo construir y soltar tensión a lo largo de una pieza."},
+      {nombre:"Speedy J", alias:"Jochem Paap · STOOR", origen:"Róterdam, NL", anios:"act.", ambito:"club", firma:"caos", estilo:"Pionero neerlandés de la electrónica experimental y el techno abstracto. Sus sesiones STOOR son colaboraciones en vivo con artistas de la escena más experimental y del diseño sonoro, lejos de la estructura de pista.", tags:["techno","experimental","diseño-sonoro","live"], relevancia:"Techno tratado como diseño sonoro en tiempo real: textura y proceso por encima del beat."},
+      {nombre:"Daniel Avery", origen:"Bournemouth, UK", anios:"act.", ambito:"club", firma:"drone", estilo:"Productor británico que funde techno ambiental, drone y texturas abstractas; en directo prioriza la atmósfera y la erosión tímbrica sobre el groove rígido.", tags:["techno","ambient","drone","textura"], relevancia:"Drone y techno conviviendo: cómo sostener una textura continua bajo un pulso."},
+      {nombre:"Wata Igarashi", alias:"五十嵐わた", origen:"Tokio, JP", anios:"act.", ambito:"club", firma:"pulso", estilo:"Artista japonés de techno hipnótico construido sobre paisajes densos y microdetallados, muy próximo al arte sonoro.", tags:["techno","hipnótico","micro-detalle","paisaje"], relevancia:"Microdetalle dentro del pulso: la escala del grano operando bajo la del compás (Roads)."},
+      {nombre:"GOTH-TRAD", origen:"Tokio, JP", anios:"act.", ambito:"club", firma:"niebla", estilo:"Productor japonés que cruza dub, experimental y diseño sonoro con un aire de hauntología y paisajes oscuros.", tags:["dub","experimental","oscuro","bass"], relevancia:"Peso del subgrave y espacio del dub: el delay y el reverb como instrumento, no como adorno."},
+      {nombre:"FJAAK × Kittin", origen:"Berlín · FR", anios:"act.", ambito:"club", firma:"pulso", estilo:"Colaboración en vivo que, partiendo del techno, explora estructuras no lineales y procesamiento en tiempo real.", tags:["techno","no-lineal","tiempo-real","live"], relevancia:"Estructura no lineal en directo: improvisar la forma en vez de reproducir un arreglo cerrado."},
+      {nombre:"Modeselektor", origen:"Berlín, DE", anios:"act.", ambito:"club", firma:"caos", estilo:"Dúo alemán de electro/techno cuyos directos incorporan glitch, IDM y experimentación sonora.", tags:["idm","glitch","techno","experimental"], relevancia:"El glitch y el IDM como ruptura rítmica controlada sobre una base de club."},
+      {nombre:"SBTRKT", origen:"Londres, UK", anios:"act.", ambito:"club", firma:"pulso", estilo:"Productor británico que combina electrónica, dubstep y texturas ambientales con foco en el diseño del sonido.", tags:["electrónica","dubstep","textura","diseño-sonoro"], relevancia:"Diseño tímbrico al servicio del groove: cada percusión es un sonido construido, no una muestra."},
+      {nombre:"WhoMadeWho", origen:"Copenhague, DK", anios:"act.", ambito:"club", firma:"pulso", estilo:"Banda danesa que mezcla indie dance con electrónica experimental y atmósferas envolventes.", tags:["indie-dance","electrónica","atmósfera","banda"], relevancia:"Lo orgánico (banda) y lo sintético conviviendo en una misma pieza."},
+      {nombre:"Scaler", origen:"—", anios:"act.", ambito:"club", firma:"pulso", estilo:"Proyecto de techno experimental con un diseño sonoro detallado y de grano fino.", tags:["techno","experimental","diseño-sonoro"], relevancia:"Detalle de alta resolución dentro de los formatos de club."},
+      {nombre:"Reinier Zonneveld", alias:"R2 · b2b AI", origen:"La Haya, NL", anios:"act.", ambito:"club", firma:"data", estilo:"Productor neerlandés de techno en directo; su propuesta R2 incorpora inteligencia artificial y visuales generativos (AV holográfico).", tags:["techno","ia","generativo","av"], relevancia:"IA y generación visual en vivo: el sistema decide parte del material en tiempo real."},
+      {nombre:"Cabaret Voltaire", origen:"Sheffield, UK", anios:"1973–", ambito:"ruido", firma:"ruido", estilo:"Grupo británico legendario, pionero del industrial, la música concreta y el arte sonoro experimental desde los años 70, con collage de cinta y electrónica cruda.", tags:["industrial","concreta","cinta","pionero"], relevancia:"Raíz histórica del collage y la cinta manipulada: el ruido como material legítimo."},
+      {nombre:"SYSTEMA", origen:"—", anios:"act.", ambito:"ruido", firma:"ruido", estilo:"Colectivo/artista que explora el arte sonoro, el ruido y la performance electrónica.", tags:["arte-sonoro","ruido","performance","colectivo"], relevancia:"Ruido como performance: la saturación llevada al límite del sistema."},
+      {nombre:"YHWH Nailgun", origen:"Nueva York, US", anios:"act.", ambito:"ruido", firma:"caos", estilo:"Proyecto experimental con influencias de noise, industrial y collage sonoro, de energía abrasiva.", tags:["noise","industrial","collage","experimental"], relevancia:"Densidad caótica controlada: máxima información en el espectro."},
+      {nombre:"Beatrix Weapons", alias:"BO$$Y OF MUSIC", origen:"—", anios:"act.", ambito:"ruido", firma:"grano", estilo:"Artista que funde electrónica deconstruida con spoken word y arte sonoro.", tags:["deconstruido","spoken-word","arte-sonoro"], relevancia:"La voz como material granular y rítmico dentro de una estructura rota."},
+      {nombre:"Ático Corp. & R.I.P. Bestia", alias:"present UFC", origen:"ES", anios:"act.", ambito:"ruido", firma:"ruido", estilo:"Propuesta experimental con elementos de performance y sonido inmersivo.", tags:["experimental","performance","inmersivo"], relevancia:"Sonido inmersivo y performático: la sala como instrumento."},
+      {nombre:"Mercromina Club", origen:"ES", anios:"act.", ambito:"ruido", firma:"caos", estilo:"Colectivo con enfoque en la experimentación sonora y la performance.", tags:["experimental","performance","colectivo"], relevancia:"Formato colectivo/curatorial: la experimentación como práctica de comunidad."},
+      {nombre:"Fukcnormal", origen:"ES", anios:"act.", ambito:"ruido", firma:"ruido", estilo:"Proyecto español de electrónica experimental y noise.", tags:["noise","experimental","electrónica","españa"], relevancia:"Escena local de ruido: referencia de contexto cercano."},
+      {nombre:"Perra Inmunda", origen:"ES", anios:"act.", ambito:"ruido", firma:"ruido", estilo:"Artista española de electrónica experimental y ruidismo.", tags:["noise","ruidismo","experimental","españa"], relevancia:"Ruidismo desde el contexto español: actitud y textura como contenido."},
+      {nombre:"Arca", alias:"Alejandra Ghersi", origen:"Caracas, VE", anios:"1989–", ambito:"ruido", firma:"caos", estilo:"Productora y artista venezolana afincada en Barcelona. Pionera del club deconstruido: desarma el reggaetón, el pop y el techno en glitch visceral, ritmos rotos y voz radicalmente procesada. De los discos abstractos (Xen, Mutant) a la serie mutante KiCk; colaboraciones con Björk, FKA twigs y Kanye West. La identidad fluida y el cuerpo son material central de su obra.", tags:["club-deconstruido","glitch","mutante","voz"], relevancia:"Voz y cuerpo como materia prima sometida a procesamiento extremo; la ruptura y la inestabilidad del ritmo como recurso expresivo."}
+    ];
+
+    const W = 340;
+    const H = 44;
+    const MID = 22;
+
+    function seeded(s) {
+      return function() {
+        s = (s * 9301 + 49297) % 233280;
+        return s / 233280;
+      };
+    }
+
+    function poly(pts) {
+      return "M" + pts.map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L");
+    }
+
+    function firmaSVG(tipo) {
+      const rnd = seeded(tipo.length * 37 + 7);
+      const baseline = `<line class="baseline" x1="0" y1="${MID}" x2="${W}" y2="${MID}"/>`;
+      let parts = "";
+      if (tipo === "sparse") {
+        let p = [[0, MID]];
+        const spikes = [[20, 4], [36, 40], [170, 15], [300, 6], [322, 38]];
+        spikes.forEach(s => { p.push([s[0] - 2, MID], [s[0], s[1]], [s[0] + 2, MID]); });
+        p.push([W, MID]);
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "grid") {
+        for (let x = 12; x < W; x += 26) { const h = 6 + rnd() * 14; parts += `<line class="trace" x1="${x}" y1="${MID - h}" x2="${x}" y2="${MID + h}"/>`; }
+      } else if (tipo === "curva") {
+        let p = [];
+        const notes = [0, 5, 3, 7, 12, 10, 7, 5, 3, 0, -4, 2];
+        const n = 46;
+        for (let i = 0; i < n; i++) {
+          const t = i / (n - 1);
+          const idx = t * (notes.length - 1);
+          const a = notes[Math.floor(idx)];
+          const b = notes[Math.ceil(idx)];
+          const f = idx - Math.floor(idx);
+          p.push([t * W, MID - (a + (b - a) * f) * 1.4]);
+        }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "drone") {
+        let p = [];
+        for (let i = 0; i <= 120; i++) { p.push([i / 120 * W, MID - Math.sin(i / 120 * Math.PI * 1.5) * 11 - Math.sin(i / 120 * Math.PI * 0.5) * 3]); }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "decaer") {
+        let p = [];
+        for (let i = 0; i <= 200; i++) { const t = i / 200; p.push([t * W, MID - Math.sin(t * Math.PI * 2 * 5) * 16 * (1 - t * 0.85)]); }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "niebla") {
+        let top = [], bot = [];
+        for (let i = 0; i <= 80; i++) {
+          const x = i / 80 * W;
+          const c = Math.sin(i / 80 * Math.PI * 2) * 5 + rnd() * 3;
+          top.push([x, MID - 9 - c]);
+          bot.push([x, MID + 9 + c]);
+        }
+        const band = poly(top) + " L" + bot.reverse().map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L") + " Z";
+        let line = [];
+        for (let i = 0; i <= 80; i++) { line.push([i / 80 * W, MID + (rnd() - .5) * 8]); }
+        parts = `<path class="band" d="${band}"/><path class="trace-soft" d="${poly(line)}"/>`;
+      } else if (tipo === "pulso") {
+        let p = [];
+        for (let i = 0; i <= 240; i++) { const t = i / 240; p.push([t * W, MID - Math.sin(t * Math.PI * 2 * 9) * (2 + t * t * 16)]); }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "caos") {
+        let p = [];
+        for (let i = 0; i <= 300; i++) { const burst = (Math.sin(i / 9) > 0.3) ? 1 : 0.25; p.push([i / 300 * W, MID - (rnd() - .5) * 34 * burst]); }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "grano") {
+        for (let i = 0; i < 70; i++) {
+          const x = rnd() * W, fy = MID - 14 + (i % 3) * 9 + (rnd() - .5) * 6, r = 0.8 + rnd() * 1.8;
+          parts += `<circle class="dot" cx="${x.toFixed(1)}" cy="${fy.toFixed(1)}" r="${r.toFixed(1)}"/>`;
+        }
+      } else if (tipo === "data") {
+        let p = [[0, MID]], y = MID;
+        for (let i = 0; i < 22; i++) {
+          const x = i / 22 * W;
+          y = MID - (Math.round((rnd() - .5) * 5)) * 4.2;
+          p.push([x, y], [x + W / 22, y]);
+        }
+        p.push([W, y]);
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+      } else if (tipo === "campo") {
+        let p = [];
+        for (let i = 0; i <= 150; i++) {
+          const t = i / 150, x = t * W;
+          const v = Math.sin(t * Math.PI * 3.1) * 6 * Math.sin(t * Math.PI * 0.7) + Math.sin(t * Math.PI * 7.3 + 1) * 3 * (rnd() * .6 + .4);
+          p.push([x, MID - v]);
+        }
+        parts = `<path class="trace" d="${poly(p)}"/>`;
+        for (let i = 0; i < 8; i++) {
+          const x = rnd() * W, yy = MID - (rnd() - .5) * 26, r = 0.7 + rnd() * 1.3;
+          parts += `<circle class="dot" cx="${x.toFixed(1)}" cy="${yy.toFixed(1)}" r="${r.toFixed(1)}"/>`;
+        }
+      } else if (tipo === "ruido") {
+        for (let x = 2; x < W; x += 2.5) { const h = 5 + rnd() * 16; parts += `<line class="trace" x1="${x.toFixed(1)}" y1="${(MID - h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${(MID + h).toFixed(1)}"/>`; }
+      }
+      return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="firma espectral">${baseline}${parts}</svg>`;
+    }
+
+    const FIRMA_CAP = {
+      data:"línea cuantizada · datos→sonido", sparse:"sinusoides aisladas en los extremos",
+      pulso:"envolvente creciente · build", grano:"nube granular · formantes / voz",
+      grid:"impulsos sobre rejilla · clicks", curva:"contorno melódico · lírico",
+      drone:"oscilación lenta de baja amplitud", caos:"clusters densos de alta frecuencia",
+      decaer:"bucle que se desintegra", niebla:"banda brumosa · lo-fi drone",
+      campo:"gesto acusmático · grabación de campo", ruido:"muro de ruido · saturación"
+    };
+
+    const reg = document.getElementById("registro");
+    let idx = 0;
+    AMBITOS.forEach(amb => {
+      const lista = ARTISTAS.filter(a => a.ambito === amb.id);
+      if (!lista.length) return;
+      reg.insertAdjacentHTML("beforeend", `
+        <div class="amb">
+          <div class="ae"><span class="box"></span><span>${amb.titulo}</span><span class="ln"></span><span class="acount">${String(lista.length).padStart(2,"0")}</span></div>
+          <h2>${amb.titulo}</h2>
+          <p>${amb.sub}</p>
+        </div>`);
+      lista.forEach(a => {
+        idx++;
+        const n = String(idx).padStart(2,"0");
+        const tags = a.tags.map(t => `<span class="tag">${t}</span>`).join("") + (a.sc ? `<span class="tag sc">supercollider</span>` : "");
+        const alias = a.alias ? ` <span class="alias">${a.alias}</span>` : "";
+        reg.insertAdjacentHTML("beforeend", `
+          <article class="entry">
+            <div class="idx">${n}<span class="tick"></span></div>
+            <div class="ebody">
+              <h3 class="name">${a.nombre}${alias}</h3>
+              <p class="coords"><b>${a.origen}</b> · ${a.anios}</p>
+              <div class="sig">${firmaSVG(a.firma)}</div>
+              <p class="sig-cap">firma · ${FIRMA_CAP[a.firma] || a.firma}</p>
+              <p class="desc">${a.estilo}</p>
+              <div class="tags">${tags}</div>
+              <div class="rel"><span class="rl">Relevancia para KAIROS</span><p>${a.relevancia}</p></div>
+            </div>
+          </article>`);
+      });
+    });
+
+    const all = new Set();
+    ARTISTAS.forEach(a => { a.tags.forEach(t => all.add(t)); if (a.sc) all.add("supercollider"); });
+    const leg = document.getElementById("legend");
+    [...all].sort((x,y) => x.localeCompare(y,"es")).forEach(t => {
+      leg.insertAdjacentHTML("beforeend", `<span class="tag${t==="supercollider" ? " sc" : ""}">${t}</span>`);
+    });
+
+    document.getElementById("count").textContent = String(ARTISTAS.length).padStart(2,"0");
+    document.getElementById("ambcount").textContent = String(AMBITOS.length).padStart(2,"0");
+    document.getElementById("today").textContent = new Date().toLocaleDateString("es-ES",{year:"numeric",month:"short",day:"numeric"});
+    </script>
+    <script src="assets/main.js"></script>
+</body>
+</html>
