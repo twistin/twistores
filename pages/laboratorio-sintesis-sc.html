@@ -1020,7 +1020,7 @@
                 <p class="lab-family-intro">Las sesiones publican procesos de estudio, los scripts fijan materiales ejecutables y las lecturas integradas sostienen el marco teórico. Todo pertenece al mismo archivo, aunque cada página tenga su propia densidad y tono.</p>
                 <div class="lab-family-meta">
                     <span>6 sesiones publicadas</span>
-                    <span>2 recursos integrados</span>
+                    <span>3 recursos integrados</span>
                     <span>SuperCollider · ProxySpace · DSP</span>
                 </div>
             </div>
@@ -1032,6 +1032,7 @@
                 <a href="sesion-03-sintesis-granular.html">SC-03</a>
                 <a href="sesion-04-deriva-metodo-composicion-algoritmica.html">SC-04</a>
                 <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
+                <a href="../espectros-formas-onda-supercollider.html" class="is-support">Espectros SC</a>
                 <a href="../registro-artistas-kairos.html" class="is-support">Registro KAIROS</a>
             </nav>
         </section>
@@ -1041,9 +1042,61 @@
             
             <!-- COLUMNA IZQUIERDA: LAS SESIONES -->
             <div class="lab-main-col">
-                <h2 class="dashboard-section-title">// Sesiones de estudio publicadas</h2>
+                <h2 class="dashboard-section-title">// Sesiones y recursos publicados</h2>
                 
                 <div class="session-log-stack">
+
+                    <!-- RECURSO INTEGRADO: ESPECTROS -->
+                    <article class="session-log-card" data-category="sintesis">
+                        <div class="session-badge-row">
+                            <span class="tech-badge session-num">Recurso</span>
+                            <span class="tech-badge category">Fourier &amp; FreqScope</span>
+                            <span class="tech-badge difficulty easy">Apoyo</span>
+                            <span class="tech-badge lines">4 formas</span>
+                            <span class="session-log-date">JULIO 2026</span>
+                        </div>
+                        <h3 class="session-log-title">Espectros de formas de onda en SuperCollider</h3>
+                        <p class="session-log-desc">Una guía visual para comparar sinusoide, cuadrada, triangular y diente de sierra a 120 Hz en <code>FreqScope</code>, aclarando la diferencia entre forma temporal y representación espectral.</p>
+
+                        <div class="session-log-code-preview">
+                            <div class="code-terminal-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="terminal-title">supercollider // espectros_formas_onda.scd</span>
+                                <button class="copy-btn" aria-label="Copiar código">
+                                    <span class="copy-icon">📋</span> <span class="copy-text">Copiar</span>
+                                </button>
+                            </div>
+                            <pre><code><span class="sc-comment">// cuatro fuentes básicas para mirar el espectro</span>
+{ <span class="sc-ugen">SinOsc.ar</span>(<span class="sc-number">120</span>) ! <span class="sc-number">2</span> }.play;
+{ <span class="sc-ugen">Pulse.ar</span>(<span class="sc-number">120</span>, <span class="sc-number">0.5</span>) ! <span class="sc-number">2</span> }.play;
+{ <span class="sc-ugen">LFTri.ar</span>(<span class="sc-number">120</span>) ! <span class="sc-number">2</span> }.play;
+{ <span class="sc-ugen">Saw.ar</span>(<span class="sc-number">120</span>) ! <span class="sc-number">2</span> }.play;</code></pre>
+                        </div>
+
+                        <ul class="session-log-highlights">
+                            <li><strong>Corrección clave:</strong> las capturas no muestran la forma de onda en el tiempo, sino su distribución espectral.</li>
+                            <li><strong>Lectura rápida:</strong> qué armónicos aparecen en cada forma y cómo cae su amplitud.</li>
+                            <li><strong>Puente práctico:</strong> cierre con un ejercicio aditivo con <code>collect</code> para reconstruir una cuadrada desde parciales.</li>
+                        </ul>
+
+                        <div class="session-log-tags-row">
+                            <span class="micro-tag">FreqScope</span>
+                            <span class="micro-tag">Fourier</span>
+                            <span class="micro-tag">Armónicos</span>
+                            <span class="micro-tag">SinOsc</span>
+                            <span class="micro-tag">Saw</span>
+                            <span class="micro-tag">collect</span>
+                        </div>
+
+                        <div class="session-log-actions">
+                            <a href="../espectros-formas-onda-supercollider.html" class="btn">Abrir recurso →</a>
+                            <a href="sesion-01-pad-sustractivo.html" class="btn btn-ghost">Ver sesión 01 →</a>
+                        </div>
+                    </article>
 
                     <!-- SESIÓN 06 -->
                     <article class="session-log-card" data-category="ritmica">
@@ -1387,6 +1440,17 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                 </div>
 
                 <div class="sidebar-widget reference-widget">
+                    <span class="widget-label">Análisis espectral</span>
+                    <h3 class="widget-title">// FreqScope básico</h3>
+                    <div class="widget-reference-card">
+                        <span class="ref-author">SuperCollider</span>
+                        <h4>Espectros de formas de onda</h4>
+                        <p>Una lectura visual de seno, cuadrada, triangular y sierra para entender armónicos, caída espectral y timbre antes de pasar a filtros o síntesis aditiva.</p>
+                        <a href="../espectros-formas-onda-supercollider.html" class="btn btn-sm btn-full">Abrir recurso →</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget reference-widget">
                     <span class="widget-label">Cartografía de escucha</span>
                     <h3 class="widget-title">// Registro de artistas</h3>
                     <div class="widget-reference-card">
@@ -1464,6 +1528,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                     <li><a href="sesion-01-pad-sustractivo.html">Sesión 01 · Pad sustractivo</a></li>
                     <li><a href="sesion-02-live-coding-ritmico.html">Sesión 02 · Live Coding Rítmico</a></li>
                     <li><a href="sesion-03-sintesis-granular.html">Sesión 03 · Síntesis granular</a></li>
+                    <li><a href="../espectros-formas-onda-supercollider.html">Espectros de formas de onda</a></li>
                     <li><a href="../curtis_roads_capitulos.html">Curtis Roads · Audio Digital</a></li>
                 </ul>
             </div>
