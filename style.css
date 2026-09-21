@@ -2785,3 +2785,274 @@ body.home-acid .footer-col h4 {
         animation: none;
     }
 }
+
+/* ============================================================
+   ORCID SCHOLARLY INTEGRATION STYLES
+   ============================================================ */
+
+.orcid-badge-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.6px;
+    color: var(--text);
+    background: rgba(166, 206, 57, 0.08);
+    border: 1px solid rgba(166, 206, 57, 0.28);
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.orcid-badge-link:hover {
+    color: #ffffff;
+    background: rgba(166, 206, 57, 0.22);
+    border-color: #a6ce39;
+    box-shadow: 0 0 14px rgba(166, 206, 57, 0.25);
+    transform: translateY(-1px);
+}
+
+.orcid-icon-svg {
+    width: 14px;
+    height: 14px;
+    fill: #a6ce39;
+    flex-shrink: 0;
+}
+
+.scholar-badge-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.6px;
+    color: var(--text);
+    background: rgba(66, 133, 244, 0.09);
+    border: 1px solid rgba(66, 133, 244, 0.32);
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.scholar-badge-link:hover {
+    color: #ffffff;
+    background: rgba(66, 133, 244, 0.22);
+    border-color: #4285f4;
+    box-shadow: 0 0 14px rgba(66, 133, 244, 0.28);
+    transform: translateY(-1px);
+}
+
+.scholar-icon-svg {
+    width: 14px;
+    height: 14px;
+    fill: #4285f4;
+    flex-shrink: 0;
+}
+
+.orcid-publications-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.orcid-work-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition), transform var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.orcid-work-card:hover {
+    border-color: rgba(166, 206, 57, 0.35);
+    background: var(--surface-strong);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16), 0 0 16px rgba(166, 206, 57, 0.06);
+    transform: translateY(-2px);
+}
+
+.orcid-work-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.orcid-work-type {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    color: var(--accent2);
+}
+
+.orcid-work-type.preprint {
+    color: #a6ce39;
+    background: rgba(166, 206, 57, 0.08);
+    border-color: rgba(166, 206, 57, 0.25);
+}
+
+.orcid-work-type.book-chapter {
+    color: var(--signal);
+    background: var(--signal-soft);
+    border-color: var(--signal-border);
+}
+
+.orcid-work-type.thesis {
+    color: var(--accent);
+    background: rgba(121, 224, 209, 0.08);
+    border-color: var(--border-strong);
+}
+
+.orcid-work-year {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.orcid-work-title {
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: var(--heading);
+    margin: 0;
+    font-weight: 500;
+}
+
+.orcid-work-citation {
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+.orcid-work-citation em {
+    color: var(--text);
+    font-style: normal;
+}
+
+.orcid-work-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.orcid-work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+}
+
+.orcid-work-link:hover {
+    color: var(--heading);
+}
+
+.orcid-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 18px 22px;
+    border: 1px solid rgba(166, 206, 57, 0.24);
+    border-radius: var(--radius);
+    background:
+        radial-gradient(circle at 92% 16%, rgba(166, 206, 57, 0.08), transparent 30%),
+        linear-gradient(135deg, rgba(12, 25, 35, 0.75) 0%, rgba(7, 17, 24, 0.85) 100%);
+    margin-bottom: 28px;
+    box-shadow: var(--glow-sm);
+}
+
+.orcid-banner-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.orcid-banner-title {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #a6ce39;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.orcid-banner-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+/* Light Theme Overrides for ORCID */
+[data-theme="light"] .orcid-badge-link {
+    background: rgba(138, 175, 41, 0.1);
+    border-color: rgba(138, 175, 41, 0.35);
+    color: #3b570e;
+}
+
+[data-theme="light"] .orcid-badge-link:hover {
+    background: rgba(138, 175, 41, 0.2);
+    border-color: #799d1e;
+    color: #213504;
+}
+
+[data-theme="light"] .orcid-icon-svg {
+    fill: #799d1e;
+}
+
+[data-theme="light"] .orcid-banner {
+    background:
+        radial-gradient(circle at 92% 16%, rgba(138, 175, 41, 0.12), transparent 30%),
+        linear-gradient(135deg, #f7fbfa 0%, #e9f2ef 100%);
+    border-color: rgba(138, 175, 41, 0.28);
+}
+
+[data-theme="light"] .orcid-banner-title {
+    color: #5c7814;
+}
+
+[data-theme="light"] .orcid-work-type.preprint {
+    color: #5c7814;
+    background: rgba(138, 175, 41, 0.12);
+    border-color: rgba(138, 175, 41, 0.3);
+}
+
+/* Light Theme Overrides for Google Scholar */
+[data-theme="light"] .scholar-badge-link {
+    background: rgba(66, 133, 244, 0.08);
+    border-color: rgba(66, 133, 244, 0.32);
+    color: #1a56be;
+}
+
+[data-theme="light"] .scholar-badge-link:hover {
+    background: rgba(66, 133, 244, 0.18);
+    border-color: #2b73eb;
+    color: #0d3e94;
+}
+
+[data-theme="light"] .scholar-icon-svg {
+    fill: #1a56be;
+}
+
+

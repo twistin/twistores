@@ -278,6 +278,17 @@ const T = {
         ev_schmidt_venue:   "Sala Supersonic · Vigo",
         ev_schmidt_tickets: "Entradas dispoñibles",
         ev_schmidt_cta:     "Mercar entradas →",
+
+        // ORCID & SCHOLARLY
+        label_orcid:            "// produción científica · rexistro orcid",
+        title_orcid_section:    "Publicacións & Produción Académica",
+        orcid_desc:             "Rexistro público de artigos, preprints, capítulos de libro e teses indexados oficialmente en ORCID.",
+        orcid_view_profile:     "Ver perfil en ORCID →",
+        orcid_view_external:    "Consultar en ResearchGate →",
+        orcid_view_publisher:   "Ver na editorial →",
+        orcid_type_preprint:    "Preprint / Artigo",
+        orcid_type_chapter:     "Capítulo de libro",
+        orcid_type_thesis:      "Tese / Investigación",
     },
 
     es: {
@@ -522,6 +533,17 @@ const T = {
         ev_schmidt_venue:   "Sala Supersonic · Vigo",
         ev_schmidt_tickets: "Entradas disponibles",
         ev_schmidt_cta:     "Comprar entradas →",
+
+        // ORCID & SCHOLARLY
+        label_orcid:            "// producción científica · registro orcid",
+        title_orcid_section:    "Publicaciones & Producción Académica",
+        orcid_desc:             "Registro público de artículos, preprints, capítulos de libro y tesis indexados oficialmente en ORCID.",
+        orcid_view_profile:     "Ver perfil en ORCID →",
+        orcid_view_external:    "Consultar en ResearchGate →",
+        orcid_view_publisher:   "Ver en la editorial →",
+        orcid_type_preprint:    "Preprint / Artículo",
+        orcid_type_chapter:     "Capítulo de libro",
+        orcid_type_thesis:      "Tesis / Investigación",
     },
 
     en: {
@@ -764,6 +786,17 @@ const T = {
         ev_schmidt_venue:   "Sala Supersonic · Vigo",
         ev_schmidt_tickets: "Tickets available",
         ev_schmidt_cta:     "Get tickets →",
+
+        // ORCID & SCHOLARLY
+        label_orcid:            "// scholarly production · orcid record",
+        title_orcid_section:    "Publications & Academic Research",
+        orcid_desc:             "Public record of articles, preprints, book chapters and dissertations officially indexed in ORCID.",
+        orcid_view_profile:     "View ORCID profile →",
+        orcid_view_external:    "Consult on ResearchGate →",
+        orcid_view_publisher:   "View at publisher →",
+        orcid_type_preprint:    "Preprint / Article",
+        orcid_type_chapter:     "Book Chapter",
+        orcid_type_thesis:      "Thesis / Research",
     }
 };
 
