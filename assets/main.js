@@ -1516,14 +1516,17 @@ function initShareButtons() {
         if (btn.dataset.shareInited) return;
         btn.dataset.shareInited = '1';
 
-        const card  = btn.closest('[data-share-title]') || btn.closest('.card');
-        const title = card?.dataset?.shareTitle || document.title;
-        let pageUrl = getCanonicalUrl();
+        const wrap  = btn.closest('.share-wrap');
+        const card  = btn.closest('[data-share-title]') || btn.closest('.card') || btn.closest('.feature-panel') || btn.closest('.session-card');
+        const title = btn.dataset.shareTitle || wrap?.dataset?.shareTitle || card?.dataset?.shareTitle || document.title;
+        let pageUrl = btn.dataset.shareUrl || wrap?.dataset?.shareUrl || card?.dataset?.shareUrl || '';
         
-        // If sharing from a card that has a link, grab the article URL instead of current page
-        if (card) {
-            const link = card.querySelector('.card-link');
+        if (!pageUrl && card) {
+            const link = card.querySelector('.card-link') || card.querySelector('.feature-panel-actions a') || card.querySelector('a.btn');
             if (link) pageUrl = toAbsolutePageUrl(link.getAttribute('href'));
+        }
+        if (!pageUrl) {
+            pageUrl = getCanonicalUrl();
         }
 
         btn.addEventListener('click', e => {
@@ -1540,21 +1543,36 @@ function initShareButtons() {
                 // Build menu lazily
                 const enc = encodeURIComponent;
                 const twUrl = `https://x.com/intent/tweet?text=${enc(title)}&url=${enc(pageUrl)}`;
+                const bskyUrl = `https://bsky.app/intent/compose?text=${enc(title + ' ' + pageUrl)}`;
+                const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(pageUrl)}`;
                 const waUrl = `https://api.whatsapp.com/send?text=${enc(title + ' — ' + pageUrl)}`;
                 const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${enc(pageUrl)}`;
+                const tgUrl = `https://t.me/share/url?url=${enc(pageUrl)}&text=${enc(title)}`;
                 btn.insertAdjacentHTML('afterend', `
                 <div class="share-menu" role="menu">
                     <a class="share-option" href="${twUrl}" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         X / Twitter
                     </a>
+                    <a class="share-option" href="${bskyUrl}" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566 1.01 1.6 1.487 1.6 3.085c0 3.23.957 8.01 3.55 10.457-3.23-.33-6.75-2.072-3.15 6.172 4.417 8.29 8.2-1.393 10-5.714 1.8 4.32 5.583 14.004 10 5.714 3.6-8.244.08-6.502-3.15-6.172 2.593-2.447 3.55-7.227 3.55-10.457 0-1.598-.966-2.075-3.602-.28C16.046 4.747 13.087 8.686 12 10.8z"/></svg>
+                        Bluesky
+                    </a>
+                    <a class="share-option" href="${liUrl}" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                        LinkedIn
+                    </a>
+                    <a class="share-option" href="${waUrl}" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24M8.53 7.33c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.7 2.6 4.12 3.65.58.25 1.02.4 1.38.52.58.18 1.11.16 1.53.1.47-.07 1.45-.59 1.65-1.16.21-.57.21-1.06.15-1.16-.06-.1-.22-.16-.47-.29-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.16-.29.18-.54.06-.24-.12-1.04-.38-1.97-1.21-.73-.65-1.22-1.45-1.36-1.7-.14-.24-.01-.38.11-.5.11-.11.24-.29.37-.43.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.43s-.55-1.33-.76-1.82c-.2-.48-.41-.42-.56-.43h-.48z"/></svg>
+                        WhatsApp
+                    </a>
                     <a class="share-option" href="${fbUrl}" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         Facebook
                     </a>
-                    <a class="share-option" href="${waUrl}" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.95.449A11.507 11.507 0 00.449 11.95c0 2.023.531 4.004 1.541 5.75L.006 24l6.456-1.964a11.494 11.494 0 005.474 1.394h.005c6.356 0 11.553-5.197 11.553-11.553 0-3.088-1.2-5.99-3.382-8.175A11.462 11.462 0 0011.95.449zm0 21.1a9.56 9.56 0 01-4.877-1.337l-.35-.208-3.632 1.106 1.087-3.593-.226-.369A9.559 9.559 0 012.394 11.95c0-5.27 4.286-9.555 9.556-9.555 2.553 0 4.95.995 6.752 2.803a9.502 9.502 0 012.804 6.758c0 5.27-4.286 9.592-9.556 9.592z"/></svg>
-                        WhatsApp
+                    <a class="share-option" href="${tgUrl}" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                        Telegram
                     </a>
                     <button class="share-option js-copy-link" data-copy="${pageUrl}">
                         <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
