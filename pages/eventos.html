@@ -601,13 +601,98 @@
                 </div>
             </div>
 
-            <div class="session-card" id="session-explorations" style="margin-bottom:48px;border-color:var(--border);">
+            <!-- ── Sesión: Órbita sonora (TouchDesigner + SuperCollider) ── -->
+            <div class="session-card" id="session-orbita-sonora" style="margin-bottom:48px;border-color:var(--border);">
                 <div class="session-card-featured-strip" style="background:linear-gradient(90deg,rgba(183,255,74,0.9),rgba(102,230,255,0.48),transparent);"></div>
 
                 <div class="session-header">
                     <div>
                         <div class="session-meta-row">
                             <span class="session-badge">★ Nuevo</span>
+                            <span class="session-badge session-badge-past">Publicado</span>
+                        </div>
+                        <h2 class="session-title" id="session-orbita-sonora-title">Órbita sonora — primer experimento con TouchDesigner y SuperCollider</h2>
+                        <p class="session-subtitle">Octubre de 2026 · TouchDesigner · SuperCollider · OSC · Codex</p>
+                    </div>
+                </div>
+
+                <div class="session-body" style="grid-template-columns:minmax(0,1fr) 320px;">
+                    <div class="session-video-col">
+                        <p class="sidebar-block-title" style="margin-bottom:12px;">// vídeo · touchdesigner + supercollider · 1 min</p>
+                        <div class="video-wrap video-wrap--square" id="video-orbita-sonora" style="position:relative; width:100%; max-width:540px; margin:0 auto; aspect-ratio:1/1; padding-bottom:0; background:#000; border-radius:calc(var(--radius) - 1px); overflow:hidden; border:1px solid var(--border); box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+                            <video controls playsinline preload="metadata" poster="../assets/img/orbita-sonora/cover.jpg" style="width:100%; height:100%; object-fit:cover; display:block;">
+                                <source src="../assets/video/circulo-osc-01.mp4" type="video/mp4">
+                                Tu navegador no soporta la reproducción de vídeo HTML5.
+                            </video>
+                        </div>
+                        <p class="video-credit">Animación generativa en TouchDesigner y síntesis aditiva en SuperCollider conectadas vía OSC (1 min · 1024×1024).</p>
+
+                        <p class="sidebar-block-title" style="margin:24px 0 14px;">// descripción</p>
+                        <p style="font-size:0.92rem;color:var(--text);line-height:1.82;margin-bottom:14px;">
+                            Un círculo con un degradado de color recorre una órbita y transforma su movimiento en sonido. TouchDesigner envía sus coordenadas mediante OSC a SuperCollider: la posición horizontal modifica la altura y el panorama estéreo; la vertical cambia el reparto de energía entre nueve parciales impares, haciendo variar el timbre.
+                        </p>
+                        <p style="font-size:0.92rem;color:var(--text);line-height:1.82;margin-bottom:0;">
+                            Esta pieza de un minuto es el resultado de una primera sesión de aprendizaje acompañado por Codex. Una exploración inicial de cómo conectar animación, síntesis y programación para que imagen y sonido compartan un mismo gesto.
+                        </p>
+                    </div>
+
+                    <div class="session-sidebar">
+                        <div>
+                            <p class="sidebar-block-title">// captura</p>
+                            <button class="photo-item photo-trigger" type="button" data-lightbox-src="../assets/img/orbita-sonora/cover.jpg" data-lightbox-alt="Órbita sonora — frame TouchDesigner + SuperCollider" aria-label="Ampliar captura de Órbita sonora">
+                                <img src="../assets/img/orbita-sonora/cover.jpg" alt="Órbita sonora, experimento con TouchDesigner y SuperCollider" loading="lazy">
+                            </button>
+                        </div>
+
+                        <div>
+                            <p class="sidebar-block-title">// datos</p>
+                            <div class="session-info-row">
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Fecha</span>
+                                    <span class="session-info-value">Oct 2026</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Duración</span>
+                                    <span class="session-info-value">1 min</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Formato</span>
+                                    <span class="session-info-value">Estudio audiovisual generativo</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Control</span>
+                                    <span class="session-info-value">OSC en tiempo real (X/Y)</span>
+                                </div>
+                                <div class="session-info-item">
+                                    <span class="session-info-label">Herramientas</span>
+                                    <span class="session-info-value">TouchDesigner · SuperCollider · OSC · Codex</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="sidebar-block-title">// etiquetas</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                                <span class="session-badge session-badge-past">touchdesigner</span>
+                                <span class="session-badge session-badge-past">supercollider</span>
+                                <span class="session-badge session-badge-past">osc</span>
+                                <span class="session-badge session-badge-past">generative</span>
+                                <span class="session-badge session-badge-past">timbre</span>
+                                <span class="session-badge session-badge-past">audiovisual</span>
+                                <span class="session-badge session-badge-past">animación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-card" id="session-explorations" style="margin-bottom:48px;border-color:var(--border);">
+                <div class="session-card-featured-strip" style="background:linear-gradient(90deg,rgba(183,255,74,0.9),rgba(102,230,255,0.48),transparent);"></div>
+
+                <div class="session-header">
+                    <div>
+                        <div class="session-meta-row">
+                            <span class="session-badge">★ Destacado</span>
                             <span class="session-badge session-badge-past">Publicado</span>
                         </div>
                         <h2 class="session-title" id="session-explorations-title">Explorations in Paradise</h2>
@@ -1197,6 +1282,7 @@
             <div class="footer-col">
                 <h4 data-i18n="footer_tools">Herramientas</h4>
                 <ul>
+                    <li><span>TouchDesigner</span></li>
                     <li><span>SuperCollider</span></li>
                     <li><span>DaVinci Resolve</span></li>
                     <li><span>TidalCycles</span></li>
