@@ -1320,7 +1320,7 @@ function ensureSkipLink() {
 }
 
 // ── Theme Engine ──────────────────────────────────────────────────────────────
-let currentTheme = localStorage.getItem('twistores-theme') || 'dark';
+let currentTheme = localStorage.getItem('twistores-theme') || (document.body.classList.contains('editorial-home') ? 'light' : 'dark');
 
 function applyTheme(theme) {
     currentTheme = theme;

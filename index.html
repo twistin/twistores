@@ -7,7 +7,7 @@
     <meta name="description" content="Música, investigación, live coding y soundscapes desde Vigo. TWISTORES reúne artículos y ensayos sobre música, tecnología y cultura sonora, sesiones documentadas y grabaciones de campo publicadas.">
     <meta name="author" content="Silvino Díaz Carreras">
     <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#071118">
+    <meta name="theme-color" content="#F4EFE6">
     <link rel="icon" href="assets/img/favicon.png" type="image/png">
     <link rel="canonical" href="https://twistores.vercel.app/">
     <meta property="og:site_name" content="TWISTORES">
@@ -25,20 +25,19 @@
     <meta name="twitter:image" content="https://twistores.vercel.app/assets/img/twistores-social-card.png?v=20260613">
     <meta name="twitter:image:alt" content="TWISTORES — música, investigación, live coding y soundscapes desde Vigo">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/editorial-home.css">
 </head>
-<body class="home-acid">
-
-    <!-- ═══════ HEADER ═══════════════════════════════════════════ -->
+<body class="editorial-home">
     <header>
         <div class="header-inner">
             <a class="site-logo" href="/">TWISTORES</a>
             <nav id="main-nav">
                 <ul id="nav-list">
-                    <li><a href="/" class="active" data-i18n="nav_home">Inicio</a></li>
+
                     <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
                     <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
                     <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="pages/laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="pages/laboratorio-sintesis-sc.html" data-i18n="ed_nav_lab">Laboratorio</a></li>
                     <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
                 </ul>
             </nav>
@@ -54,429 +53,58 @@
         </div>
     </header>
 
-    <!-- ═══════ HERO ════════════════════════════════════════════ -->
-    <section class="hero hero-acid">
-        <div class="hero-acid-shell container">
-            <article class="hero-acid-main fade-in">
-                <div class="hero-acid-kicker">
-                    <span class="hero-acid-pulse"></span>
-                    <span data-i18n="hero_acid_kicker">Archivo activo · música, código y escucha</span>
-                </div>
-                <p class="hero-eyebrow" data-i18n="hero_eyebrow">// Música · Migración · Tecnología</p>
-                <p class="hero-brand cursor-blink">TWISTORES</p>
-                <h1 class="hero-title" data-i18n="hero_title">Música, investigación, live coding y soundscapes desde Vigo</h1>
-                <p class="hero-sub" data-i18n="hero_sub">
-                    Silvino Díaz Carreras. Investigador, docente y performer centrado en música, migración, tecnología y escucha de campo.
-                </p>
-                <div style="margin: 10px 0 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                    <a href="https://orcid.org/0009-0007-4511-1678" target="_blank" rel="noopener" class="orcid-badge-link" title="Ver perfil académico en ORCID">
-                        <svg class="orcid-icon-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M128 0C57.307 0 0 57.307 0 128s57.307 128 128 128 128-57.307 128-128S198.693 0 128 0zm-45.714 187.429H60.571V68.571h21.715v118.858zm-10.857-133.143c-7.429 0-13.714-6.286-13.714-13.714 0-7.429 6.285-13.714 13.714-13.714 7.428 0 13.714 6.285 13.714 13.714 0 7.428-6.286 13.714-13.714 13.714zm118.285 88.571c0 24.571-19.428 44.572-44 44.572h-36V68.571h36c24.572 0 44 20 44 44.572v34.286zm-21.714-34.286c0-12.571-10.286-22.857-22.286-22.857h-14.286v79.999h14.286c12 0 22.286-10.285 22.286-22.857v-34.285z"/>
-                        </svg>
-                        <span>ORCID iD: 0009-0007-4511-1678 ↗</span>
-                    </a>
-                    <a href="https://scholar.google.es/citations?user=n0lxaGMAAAAJ&hl=es" target="_blank" rel="noopener" class="scholar-badge-link" title="Ver perfil en Google Scholar">
-                        <svg class="scholar-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                        </svg>
-                        <span>Google Scholar ↗</span>
-                    </a>
-                </div>
-                <p class="hero-support" data-i18n="hero_support">
-                    Aquí conviven escritura larga, archivo de sesiones en vivo y paisajes sonoros publicados con contexto, imagen y audio.
-                </p>
-                <div class="hero-cta-row">
-                    <a href="pages/articulos.html" class="btn btn-acid-primary" data-i18n="hero_cta1">Explorar artículos</a>
-                    <a href="pages/laboratorio-sintesis-sc.html" class="btn btn-acid-secondary" data-i18n="hero_cta_lab">Abrir laboratorio</a>
-                    <a href="pages/eventos.html" class="btn btn-ghost" data-i18n="hero_cta2">Ver archivo en vivo</a>
-                </div>
-                <div class="hero-routes" aria-label="Rutas principales">
-                    <a class="hero-route" href="pages/articulos.html">
-                        <span class="hero-route-label" data-i18n="hero_route_articles_label">// investigación</span>
-                        <strong data-i18n="hero_route_articles_title">Leer artículos y ensayos</strong>
-                        <span data-i18n="hero_route_articles_desc">Textos publicados sobre sociología de la música, migración y tecnología.</span>
-                    </a>
-                    <a class="hero-route" href="pages/laboratorio-sintesis-sc.html">
-                        <span class="hero-route-label" data-i18n="hero_route_lab_label">// supercollider</span>
-                        <strong data-i18n="hero_route_lab_title">Entrar en el laboratorio</strong>
-                        <span data-i18n="hero_route_lab_desc">Patches, síntesis, composición algorítmica y cuadernos técnicos con SC.</span>
-                    </a>
-                    <a class="hero-route" href="pages/eventos.html">
-                        <span class="hero-route-label" data-i18n="hero_route_live_label">// archivo en vivo</span>
-                        <strong data-i18n="hero_route_live_title">Ver sesiones documentadas</strong>
-                        <span data-i18n="hero_route_live_desc">Directos con vídeo, fotografías, contexto y piezas interpretadas.</span>
-                    </a>
-                </div>
-            </article>
 
-            <aside class="hero-acid-side fade-in" aria-label="Accesos editoriales">
-                <article class="hero-side-card">
-                    <p class="hero-side-label" data-i18n="home_acid_side1_label">Ahora</p>
-                    <h2 data-i18n="home_acid_side1_title">Nueva sesión de live coding</h2>
-                    <p data-i18n="home_acid_side1_desc">Nueva sesión · 4 octubre 2026. Del banco de parciales a una textura en movimiento: fondo aditivo, eventos agudos y memoria espacial.</p>
-                    <a href="pages/sesion-07-live-coding-banco-parciales.html" class="hero-side-link" data-i18n="home_acid_side1_cta">Abrir sesión 07 →</a>
-                </article>
-                <article class="hero-side-card">
-                    <p class="hero-side-label" data-i18n="home_acid_side2_label">Investigación · ORCID</p>
-                    <h2 data-i18n="home_acid_side2_title">Música, migración y producción ORCID</h2>
-                    <p data-i18n="home_acid_side2_desc">7 publicaciones indexadas oficialmente en ORCID (0009-0007-4511-1678): artículos, preprints, capítulos de libro y tesis.</p>
-                    <a href="pages/about.html#orcid-publicaciones" class="hero-side-link" data-i18n="home_acid_side2_cta">Ver publicaciones ORCID →</a>
-                </article>
-                <article class="hero-side-card">
-                    <p class="hero-side-label" data-i18n="home_acid_side3_label">Lectura integrada</p>
-                    <h2 data-i18n="home_acid_side3_title">Espectros y formas de onda en SC</h2>
-                    <p data-i18n="home_acid_side3_desc">Una guía visual para leer seno, cuadrada, triangular y sierra en FreqScope y conectar oído, timbre y armónicos.</p>
-                    <a href="espectros-formas-onda-supercollider.html" class="hero-side-link" data-i18n="home_acid_side3_cta">Abrir recurso →</a>
-                </article>
-            </aside>
-        </div>
-    </section>
+    <main id="main-content" class="ed-wrap">
+        <section class="ed-intro" aria-labelledby="intro-title">
+            <p class="ed-kicker" data-i18n="ed_kicker">ARCHIVO PERSONAL · VIGO</p>
+            <h1 id="intro-title" data-i18n="ed_intro">Música, sociedad<br>y prácticas de <em>escucha.</em></h1>
+            <p class="ed-intro-note" data-i18n="ed_note">Silvino Díaz Carreras. Investigación, código creativo y grabaciones de campo.</p>
+        </section>
 
-    <main class="container home-acid-main-wrap">
-        <div class="home-acid-grid">
-            <div class="home-acid-main">
-
-        <!-- ── Artículos recientes ──────────────────────────────── -->
-        <section class="page-section fade-in home-acid-panel">
-            <div class="section-head">
-                <div>
-                    <p class="section-label" data-i18n="label_articles">// escritura académica &amp; reflexión</p>
-                    <h2 class="section-title" data-i18n="title_recent_articles">Artículos recientes</h2>
-                </div>
-                <p class="section-intro" data-i18n="home_articles_intro">Una selección breve de investigación publicada y textos sobre tecnología musical, sin mezclar borradores ni piezas en desarrollo.</p>
-            </div>
-
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-filter="all" data-i18n="filter_all">Todos</button>
-                <button class="filter-tab" data-filter="investigacion" data-i18n="filter_research">Investigación</button>
-                <button class="filter-tab" data-filter="musica-tech" data-i18n="filter_music_tech">Música &amp; Tech</button>
-            </div>
-
-            <div class="card-grid" id="articles-home">
-
-                <article class="card fade-in featured" data-category="investigacion"
-                         data-share-title="Venezolanos en Galicia: qué pasa cuando la Virgen de la Chinita llega a Ourense">
-                    <div class="card-featured-badge" data-i18n="badge_featured">★ Destacado</div>
-                    <p class="card-category" data-i18n="cat_research">Investigación</p>
-                    <h3>Venezolanos en Galicia: qué pasa cuando la Virgen de la Chinita llega a Ourense</h3>
-                    <p>Notas de campo desde una observación en Ourense sobre música, identidad y migración venezolana en Galicia.</p>
-                    <div class="card-meta">
-                        <span>Abr 2026</span>
-                        <span>· <span data-i18n="reading_min">Lectura</span> 7 min</span>
-                    </div>
-                    <div class="card-footer">
-                        <a class="card-link" href="pages/venezolanos-galicia-chinita-ourense.html" data-i18n="read_more">Leer más →</a>
-                    </div>
-                </article>
-
-                <article class="card fade-in" data-category="investigacion"
-                         data-share-title="Escenas musicales locales hoy en día: ¿una herramienta válida?">
-                    <p class="card-category" data-i18n="cat_research">Investigación</p>
-                    <h3 data-i18n="art_locales_title">Escenas musicales locales hoy en día: ¿una herramienta válida?</h3>
-                    <p data-i18n="art_locales_desc">Una revisión crítica de la utilidad del concepto de "escena musical local", desde su emergencia con el punk hasta su expansión en la era de las plataformas digitales, analizando el caso de Vigo.</p>
-                    <div class="card-meta">
-                        <span>Mar 2026</span>
-                        <span>· <span data-i18n="reading_min">Lectura</span> 10 min</span>
-                    </div>
-                    <div class="card-footer">
-                        <a class="card-link" href="pages/escenas-locales.html" data-i18n="read_more">Leer más →</a>
-                    </div>
-                </article>
-
-                <article class="card fade-in" data-category="musica-tech"
-                         data-share-title="El Estado del Arte Digital">
-                    <p class="card-category" data-i18n="cat_music_tech">Música &amp; Tecnología</p>
-                    <h3 data-i18n="art13_title">El Estado del Arte Digital: historia, escenas, pedagogía y futuros de la inteligencia artificial</h3>
-                    <p data-i18n="art13_desc">Un recorrido por los pioneros del arte computacional, la demoscene, el net.art y la IA generativa, con foco en escenas, artistas y modelos pedagógicos.</p>
-                    <div class="card-meta">
-                        <span>Mar 2026</span>
-                        <span>· <span data-i18n="reading_min">Lectura</span> 24 min</span>
-                    </div>
-                    <div class="card-footer">
-                        <a class="card-link" href="pages/estado-del-arte-digital.html" data-i18n="read_more">Leer más →</a>
-                    </div>
-                </article>
-
-
-            </div>
-            <p class="section-note" data-i18n="home_articles_note">Archivo ampliado: textos revisados y publicaciones de 2017-2022 en la página de artículos.</p>
-            <div class="section-actions">
-                <a href="pages/articulos.html" class="btn btn-ghost" data-i18n="all_art_btn">Ver todos los artículos →</a>
-            </div>
-
-            <!-- ── Banner ORCID & Google Scholar / Producción Científica ──────────────── -->
-            <div class="orcid-banner fade-in" style="margin-top: 32px; margin-bottom: 0;">
-                <div class="orcid-banner-info">
-                    <span class="orcid-banner-title">
-                        <svg class="orcid-icon-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M128 0C57.307 0 0 57.307 0 128s57.307 128 128 128 128-57.307 128-128S198.693 0 128 0zm-45.714 187.429H60.571V68.571h21.715v118.858zm-10.857-133.143c-7.429 0-13.714-6.286-13.714-13.714 0-7.429 6.285-13.714 13.714-13.714 7.428 0 13.714 6.285 13.714 13.714 0 7.428-6.286 13.714-13.714 13.714zm118.285 88.571c0 24.571-19.428 44.572-44 44.572h-36V68.571h36c24.572 0 44 20 44 44.572v34.286zm-21.714-34.286c0-12.571-10.286-22.857-22.286-22.857h-14.286v79.999h14.286c12 0 22.286-10.285 22.286-22.857v-34.285z"/>
-                        </svg>
-                        Producción Académica · ORCID &amp; Google Scholar
-                    </span>
-                    <p class="orcid-banner-desc">Publicaciones científicas y artículos indexados oficialmente en ORCID y Google Scholar.</p>
-                </div>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                    <a href="pages/about.html#orcid-publicaciones" class="btn btn-acid-primary" style="font-size: 0.72rem; padding: 8px 14px;">Explorar las 7 obras →</a>
-                    <a href="https://orcid.org/0009-0007-4511-1678" target="_blank" rel="noopener" class="orcid-badge-link" title="Perfil ORCID">
-                        <svg class="orcid-icon-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M128 0C57.307 0 0 57.307 0 128s57.307 128 128 128 128-57.307 128-128S198.693 0 128 0zm-45.714 187.429H60.571V68.571h21.715v118.858zm-10.857-133.143c-7.429 0-13.714-6.286-13.714-13.714 0-7.429 6.285-13.714 13.714-13.714 7.428 0 13.714 6.285 13.714 13.714 0 7.428-6.286 13.714-13.714 13.714zm118.285 88.571c0 24.571-19.428 44.572-44 44.572h-36V68.571h36c24.572 0 44 20 44 44.572v34.286zm-21.714-34.286c0-12.571-10.286-22.857-22.286-22.857h-14.286v79.999h14.286c12 0 22.286-10.285 22.286-22.857v-34.285z"/>
-                        </svg>
-                        <span>ORCID ↗</span>
-                    </a>
-                    <a href="https://scholar.google.es/citations?user=n0lxaGMAAAAJ&hl=es" target="_blank" rel="noopener" class="scholar-badge-link" title="Perfil en Google Scholar">
-                        <svg class="scholar-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                        </svg>
-                        <span>Google Scholar ↗</span>
-                    </a>
-                </div>
+        <section class="ed-feature" aria-labelledby="guide-title">
+            <a class="ed-feature-photo" href="pages/paisaje-sonoro-ecologia-acustica.html" tabindex="-1" aria-hidden="true">
+                <img src="assets/img/chandebrito/2-1.jpg" alt="" width="3024" height="4032" fetchpriority="high">
+                <span class="ed-photo-caption" data-i18n="ed_photo">01 / TERRITORIOS DE ESCUCHA</span>
+            </a>
+            <div class="ed-feature-copy">
+                <p class="ed-kicker"><span class="ed-dot" aria-hidden="true"></span> <span data-i18n="ed_feature_label">EN FOCO · GUÍA INTERACTIVA</span></p>
+                <h2 id="guide-title" data-i18n="ed_feature_title">El mundo suena.<br>Aprende a escucharlo.</h2>
+                <p data-i18n="ed_feature_desc">Paisaje sonoro y ecología acústica: descubre las capas del entorno, experimenta con el ruido y prepara tu propio paseo de escucha.</p>
+                <a class="ed-button" href="pages/paisaje-sonoro-ecologia-acustica.html"><span data-i18n="ed_feature_cta">Explorar la guía</span><span aria-hidden="true">↗</span></a>
             </div>
         </section>
 
-        <hr class="divider home-acid-divider">
-
-        <section class="page-section fade-in home-acid-panel" aria-labelledby="home-lab-title">
-            <div class="section-head">
-                <div>
-                    <p class="section-label">// estudio con supercollider</p>
-                    <h2 class="section-title" id="home-lab-title">Laboratorio de Síntesis con SC</h2>
-                </div>
-                <p class="section-intro">Cuaderno técnico separado del archivo de artículos: patches, técnicas de síntesis y métodos de composición con SuperCollider.</p>
-            </div>
-            <article class="feature-panel feature-panel--lab fade-in">
-                <div class="feature-panel-media code-editor-container">
-                    <div class="code-terminal-header">
-                        <div class="terminal-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="terminal-title">supercollider // live_synthesis.scd</span>
-                    </div>
-                    <pre><code><span class="sc-comment">// Pad sustractivo base filtrado</span>
-<span class="sc-symbol">~pad</span> = {
-    <span class="sc-keyword">var</span> sig = <span class="sc-ugen">LFTri.ar</span>(<span class="sc-arg">\freq.kr</span>(<span class="sc-number">220</span>));
-    <span class="sc-keyword">var</span> env = <span class="sc-ugen">EnvGen.kr</span>(<span class="sc-ugen">Env.adsr</span>, <span class="sc-arg">\gate.kr</span>(<span class="sc-number">1</span>));
-    <span class="sc-ugen">BPF.ar</span>(sig * env, <span class="sc-arg">\ffreq.kr</span>(<span class="sc-number">800</span>));
-};</code></pre>
-                </div>
-                <div class="feature-panel-body">
-                    <div class="feature-panel-kicker">
-                        <span class="tag">Laboratorio</span>
-                        <span class="feature-panel-meta">Oct 2026 · 7 sesiones + 3 recursos</span>
-                    </div>
-                    <h3 class="feature-panel-title">Sesiones y recursos de SuperCollider</h3>
-                    <p class="feature-panel-text">Cuaderno de estudio abierto que documenta patches de síntesis, teoría acústica, análisis espectral y sistemas de live coding en el servidor, con código funcional y materiales de apoyo integrados.</p>
-                    <ul class="feature-panel-list">
-                        <li><strong>Nueva sesión 07 · 4 octubre 2026.</strong> Del banco de parciales a una textura en movimiento: síntesis aditiva, eventos con <code>~blip</code> y retorno espacial con <code>CombL</code> y <code>GVerb</code>.</li>
-                        <li><strong>Nuevo recurso: Espectros de formas de onda.</strong> Lectura visual de seno, cuadrada, triangular y sierra en <code>FreqScope</code>, con armónicos, caídas y un ejercicio aditivo con <code>collect</code>.</li>
-                        <li><strong>Sesión 01: Pad sustractivo y sus expansiones.</strong> Base de ruido filtrado en ProxySpace, NamedControl, Klank, Ringz y armonía móvil con <code>Tdef</code>.</li>
-                        <li><strong>Sesión 02: Sistema de live coding rítmico.</strong> Reloj maestro con impulsos de kr, secuenciación binaria con <code>Select</code>, síntesis analógica e interpolación tiempo-sincronizada de efectos.</li>
-                        <li><strong>Sesión 03: Síntesis granular.</strong> Teoría Roads, ley tiempo-banda, fill factor y cuatro bloques de práctica con <code>GrainSin</code>, <code>GrainBuf</code> y morphing lento.</li>
-                        <li><strong>Sesión 04: Deriva.</strong> Método de composición algorítmica por capas con ProxySpace, Tdef, Fibonacci y bus máster único.</li>
-                        <li><strong>Sesión 05: DERIVA.</strong> Cuaderno de sesión sobre pad, bajo, ritmo, reverb compartida y el continuo tono-ruido como eje compositivo.</li>
-                        <li><strong>Sesión 06: Transformar la batería.</strong> Cuatro modos de intervenir bd, sn y hh desde el golpe individual hasta la forma.</li>
-                        <li><strong>Curtis Roads.</strong> Traducción comentada de <em>Audio Digital</em> conectada con señal, aliasing, fase y mezcla digital.</li>
-                        <li><strong>Registro KAIROS.</strong> Cartografía de referencias sonoras para el proyecto, del microsonido al ruido y del live coding a la acusmática.</li>
-                    </ul>
-                    <div class="feature-panel-actions">
-                        <a href="pages/laboratorio-sintesis-sc.html" class="btn">Abrir laboratorio →</a>
-                        <a href="pages/sesion-07-live-coding-banco-parciales.html" class="btn btn-ghost">Nueva sesión 07 →</a>
-                        <a href="espectros-formas-onda-supercollider.html" class="btn btn-ghost">Espectros SC →</a>
-                        <a href="curtis_roads_capitulos.html" class="btn btn-ghost">Curtis Roads →</a>
-                    </div>
-                </div>
-            </article>
-        </section>
-
-        <hr class="divider home-acid-divider">
-
-        <!-- ── Live Coding & Audiovisual — Pieza destacada ──────────── -->
-        <section class="page-section fade-in home-acid-panel" aria-labelledby="home-livecoding-title">
-            <div class="section-head">
-                <div>
-                    <p class="section-label">// experimentos &amp; audiovisual</p>
-                    <h2 class="section-title" id="home-livecoding-title">Audiovisual &amp; Live Coding</h2>
-                </div>
-                <p class="section-intro">Archivo de experimentos generativos, directos y piezas audiovisuales con vídeo y contexto técnico.</p>
-            </div>
-            <article class="feature-panel feature-panel--live fade-in" data-share-title="Órbita sonora — TouchDesigner y SuperCollider" data-share-url="https://twistores.vercel.app/pages/eventos.html#session-orbita-sonora">
-                <div class="feature-panel-media-container" style="background:#000; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); overflow:hidden; padding:16px;">
-                    <img class="feature-panel-media" src="assets/img/orbita-sonora/cover.jpg" alt="Órbita sonora — TouchDesigner y SuperCollider" loading="lazy" style="width:100%; height:auto; max-height:360px; max-width:360px; object-fit:contain; border-right:none; border-radius:var(--radius); box-shadow:0 8px 30px rgba(0,0,0,0.6); display:block;">
-                </div>
-                <div class="feature-panel-body">
-                    <div class="feature-panel-kicker">
-                        <span class="tag">★ Nuevo</span>
-                        <span class="feature-panel-meta">Oct 2026 · TouchDesigner + SC · Vimeo</span>
-                    </div>
-                    <h3 class="feature-panel-title">Órbita sonora — TouchDesigner y SuperCollider</h3>
-                    <p class="feature-panel-text">Un círculo con un degradado de color recorre una órbita y transforma su movimiento en sonido. TouchDesigner envía sus coordenadas mediante OSC a SuperCollider: posición horizontal para altura y panorama estéreo, y vertical para variar el timbre entre nueve parciales impares.</p>
-                    <ul class="feature-panel-list">
-                        <li><strong>Animación y OSC.</strong> TouchDesigner envía en tiempo real las coordenadas espaciales a SuperCollider.</li>
-                        <li><strong>Síntesis espectral.</strong> El movimiento vertical modula el reparto de energía entre nueve parciales impares.</li>
-                    </ul>
-                    <div class="feature-panel-actions" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <a href="pages/eventos.html#session-orbita-sonora" class="btn">Ver vídeo y sesión completa →</a>
-                        <a href="https://vimeo.com/1232822361?share=copy&amp;fl=sv&amp;fe=ci" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Vimeo ↗</a>
-                        <div class="share-wrap" data-share-title="Órbita sonora — primer experimento con TouchDesigner y SuperCollider" data-share-url="https://twistores.vercel.app/pages/eventos.html#session-orbita-sonora">
-                            <button class="share-btn btn btn-ghost" type="button" aria-haspopup="menu" aria-expanded="false" style="display:inline-flex; align-items:center; gap:6px;">
-                                <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
-                                <span>Compartir</span>
-                            </button>
-                        </div>
-                        <a href="pages/eventos.html" class="btn btn-ghost">Ver todo el archivo →</a>
-                    </div>
-                </div>
-            </article>
-        </section>
-
-        <hr class="divider home-acid-divider">
-
-        <section class="page-section" aria-label="Guía destacada de escucha">
-            <article class="listening-guide" aria-labelledby="home-listening-guide-title">
-                <a class="listening-guide-visual" href="pages/paisaje-sonoro-ecologia-acustica.html" tabindex="-1" aria-hidden="true">
-                    <img src="assets/img/chandebrito/2-1.jpg" alt="" width="3024" height="4032" loading="lazy">
-                    <span class="listening-guide-stamp">ESCUCHAR<br>EL MUNDO</span>
-                    <span class="listening-guide-wave">▂ ▅ ▃ ▇ ▄ ▂ ▆ █ ▃ ▅ ▂ ▇ ▄ ▆ ▃</span>
-                </a>
-                <div class="listening-guide-body">
-                    <p class="listening-guide-label">NUEVO · GUÍA INTERACTIVA</p>
-                    <h2 id="home-listening-guide-title">Paisaje sonoro y ecología acústica</h2>
-                    <p>El mundo suena. Aprende a escucharlo: descubre las capas del paisaje sonoro, experimenta con el ruido y prepara tu propio paseo de escucha.</p>
-                    <ul class="listening-guide-tags" aria-label="Contenido"><li>Audio interactivo</li><li>Experimento de ruido</li><li>Paseo sonoro</li></ul>
-                    <a class="listening-guide-cta" href="pages/paisaje-sonoro-ecologia-acustica.html">Explorar la guía <span aria-hidden="true">↗</span></a>
-                </div>
-            </article>
-        </section>
-
-        <!-- ── Soundscapes recientes ────────────────────────────── -->
-        <section class="page-section fade-in home-acid-panel">
-            <div class="section-head">
-                <div>
-                    <p class="section-label" data-i18n="label_soundscapes">// grabaciones de campo</p>
-                    <h2 class="section-title" data-i18n="title_soundscapes">Soundscapes recientes</h2>
-                </div>
-                <p class="section-intro" data-i18n="home_soundscapes_intro">Registro de escucha en entorno natural y urbano, publicado con fotografía y audio de campo reales.</p>
-            </div>
-
-            <div id="home-soundscapes-list" class="soundscapes-grid">
-                <article class="soundscape-card fade-in visible" style="position:relative;">
-                    <div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">archivo curado</div>
-                    <img class="soundscape-img" src="assets/img/chandebrito/2-1.jpg" alt="Chan de Brito, marzo de 2026" loading="lazy">
-                    <div class="soundscape-body">
-                        <p class="soundscape-date">Mar 2026 · Chan de Brito</p>
-                        <h3 class="soundscape-title">Chan de Brito</h3>
-                        <p class="soundscape-desc">Tres localizaciones en el monte con grabaciones y fotografías de campo publicadas como archivo base.</p>
-                        <audio class="soundscape-audio" controls preload="none" src="assets/audio/chandebrito/2a.mp3"></audio>
-                        <div class="card-footer">
-                            <a class="card-link" href="pages/soundscapes.html#session-chandebrito">Ver salida completa →</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="soundscape-card fade-in visible" style="position:relative;">
-                    <div class="card-featured-badge" style="position:absolute;top:12px;left:12px;z-index:2;">archivo curado</div>
-                    <img class="soundscape-img" src="assets/img/castro/1.jpg" alt="O Castro de Vigo, noviembre de 2024" loading="lazy">
-                    <div class="soundscape-body">
-                        <p class="soundscape-date">Nov 2024 · O Castro de Vigo</p>
-                        <h3 class="soundscape-title">O Castro de Vigo</h3>
-                        <p class="soundscape-desc">Nueve puntos de escucha y grabaciones de campo registrados en la ciudad como sesión publicada.</p>
-                        <audio class="soundscape-audio" controls preload="none" src="assets/audio/castro/1.mp3"></audio>
-                        <div class="card-footer">
-                            <a class="card-link" href="pages/soundscapes.html#session-castro">Ver salida completa →</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <p id="home-soundscapes-note" class="section-note" role="status" aria-live="polite">Archivo en crecimiento · Salidas publicadas: Chan de Brito (mar. 2026) · O Castro de Vigo (nov. 2024).</p>
-            <div class="section-actions">
-                <a href="pages/soundscapes.html" class="btn" data-i18n="all_ss_btn">Ver todas las sesiones →</a>
+        <section class="ed-section" aria-labelledby="publications-title">
+            <div class="ed-section-heading"><div><p class="ed-kicker" data-i18n="ed_writing_label">02 / ESCRITURA</p><h2 id="publications-title" data-i18n="ed_writing">Últimas publicaciones</h2></div><a class="ed-text-link" href="pages/articulos.html" data-i18n="ed_archive">Todos los artículos ↗</a></div>
+            <div class="ed-publications">
+                <article class="ed-publication"><p class="ed-meta" data-i18n="ed_date1">ABR 2026 · INVESTIGACIÓN</p><h3><a href="pages/venezolanos-galicia-chinita-ourense.html" data-i18n="ed_article1">Venezolanos en Galicia: cuando la Virgen de la Chinita llega a Ourense <span aria-hidden="true">↗</span></a></h3></article>
+                <article class="ed-publication"><p class="ed-meta" data-i18n="ed_date2">MAR 2026 · SOCIOLOGÍA</p><h3><a href="pages/escenas-locales.html" data-i18n="ed_article2">Escenas musicales locales hoy en día: ¿una herramienta válida? <span aria-hidden="true">↗</span></a></h3></article>
+                <article class="ed-publication"><p class="ed-meta" data-i18n="ed_date3">MAR 2026 · ARTE Y TECNOLOGÍA</p><h3><a href="pages/estado-del-arte-digital.html" data-i18n="ed_article3">El Estado del Arte Digital: historia, escenas y futuros de la IA <span aria-hidden="true">↗</span></a></h3></article>
             </div>
         </section>
 
-            </div>
+        <section class="ed-lab" aria-labelledby="lab-title">
+            <div class="ed-lab-copy"><p class="ed-kicker" data-i18n="ed_lab_label">03 / LABORATORIO · SUPERCOLLIDER</p><h2 id="lab-title" data-i18n="ed_lab_title">El código también<br>se escucha.</h2><p data-i18n="ed_lab_desc">Sesión 07. Del banco de parciales a una textura en movimiento: síntesis aditiva, eventos agudos y memoria espacial.</p><a class="ed-button ed-button-acid" href="pages/sesion-07-live-coding-banco-parciales.html"><span data-i18n="ed_lab_cta">Abrir sesión 07</span><span aria-hidden="true">↗</span></a><a class="ed-text-link" href="pages/laboratorio-sintesis-sc.html" data-i18n="ed_lab_archive">Todas las sesiones y recursos →</a></div>
+            <figure class="ed-code"><figcaption><span>SUPERCOLLIDER</span><span data-i18n="ed_code_caption">ESTUDIO DE PARCIALES / 01</span></figcaption><pre tabindex="0" aria-label="Código SuperCollider"><code><span class="ed-code-comment">// Sine partials, shared space</span>
+(
+<span class="ed-code-symbol">~partials</span> = {
+    <span class="ed-code-keyword">var</span> f = <span class="ed-code-num">110</span>;
+    <span class="ed-code-ugen">Splay</span>.ar(
+        <span class="ed-code-ugen">SinOsc</span>.ar(f * [<span class="ed-code-num">1, 2, 3, 5</span>])
+        * [<span class="ed-code-num">0.1, 0.05, 0.03, 0.02</span>]
+    );
+}.play;
+)</code></pre></figure>
+        </section>
+        <div class="ed-live-link"><span class="ed-kicker" data-i18n="ed_live_label">IMAGEN EN MOVIMIENTO</span><a href="pages/eventos.html#session-explorations" data-i18n="ed_live">Explorations in Paradise · Ver el archivo audiovisual ↗</a></div>
 
-            <aside class="home-acid-side-rail fade-in" aria-label="Panel lateral de portada">
-                <article class="home-acid-aside-card">
-                    <p class="home-acid-aside-label" data-i18n="home_acid_aside1_label">Diagnóstico</p>
-                    <h3 data-i18n="home_acid_aside1_title">Una portada con más presencia escénica</h3>
-                    <p data-i18n="home_acid_aside1_desc">La home deja de ser sólo sobria y técnica. Ahora separa mejor escritura, laboratorio y directo sin depender de un solo acento cromático.</p>
-                </article>
-
-                <article class="home-acid-aside-card home-acid-aside-card--media">
-                    <img src="assets/img/explorations-paradise/cover.jpg" alt="Explorations in Paradise, pieza audiovisual publicada el 30 de julio de 2026" loading="lazy">
-                    <div class="home-acid-aside-body">
-                        <p class="home-acid-aside-label" data-i18n="home_acid_aside2_label">Audiovisual destacado</p>
-                        <h3 data-i18n="home_acid_aside2_title">Explorations in Paradise</h3>
-                        <p data-i18n="home_acid_aside2_desc">Primer estudio audiovisual de una serie generativa: ambient, drone y paisaje imaginado entre SuperCollider, imagen sintética y edición cinematográfica.</p>
-                        <a href="pages/eventos.html#session-explorations" class="hero-side-link" data-i18n="home_acid_aside2_cta">Ver pieza →</a>
-                    </div>
-                </article>
-
-                <article class="home-acid-aside-card home-acid-aside-card--media">
-                    <img src="assets/img/chandebrito/2-1.jpg" alt="Chan de Brito, marzo de 2026" loading="lazy">
-                    <div class="home-acid-aside-body">
-                        <p class="home-acid-aside-label" data-i18n="home_acid_aside3_label">Escucha de campo</p>
-                        <h3 data-i18n="home_acid_aside3_title">Chan de Brito</h3>
-                        <p data-i18n="home_acid_aside3_desc">Los soundscapes siguen funcionando, pero ahora con un borde más performativo y menos neutral.</p>
-                        <a href="pages/soundscapes.html#session-chandebrito" class="hero-side-link" data-i18n="home_acid_aside3_cta">Abrir salida →</a>
-                    </div>
-                </article>
-            </aside>
-        </div>
-
+        <section class="ed-section ed-listen" aria-labelledby="listen-title">
+            <div class="ed-section-heading"><div><p class="ed-kicker" data-i18n="ed_listen_label">04 / ESCUCHA DE CAMPO</p><h2 id="listen-title" data-i18n="ed_listen_title">Una pausa en O Castro.</h2></div><a class="ed-text-link" href="pages/soundscapes.html" data-i18n="ed_listen_archive">Todos los soundscapes ↗</a></div>
+            <figure class="ed-recording"><img src="assets/img/castro/1.jpg" alt="Mirador en O Castro de Vigo" data-alt-es="Mirador en O Castro de Vigo" data-alt-gl="Miradoiro no Castro de Vigo" data-alt-en="Lookout in O Castro, Vigo" width="1200" height="800" loading="lazy"><figcaption><div><p class="ed-meta" data-i18n="ed_recording_meta">VIGO · 03 NOV 2024 · ZOOM H6</p><p data-i18n="ed_recording_note">Una sirena, pájaros, pasos. La ciudad se escucha desde la fortaleza.</p></div><audio controls preload="none" src="assets/audio/castro/1.mp3" aria-label="Grabación de campo en O Castro de Vigo"></audio></figcaption></figure>
+        </section>
     </main>
-
-    <!-- ═══════ FOOTER ═══════════════════════════════════════════ -->
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <a class="site-logo" href="/">TWISTORES</a>
-                <p data-i18n="footer_desc">Artículos sobre música, investigación, live coding y escucha de campo.</p>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_sections">Secciones</h4>
-                <ul>
-                    <li><a href="pages/articulos.html" data-i18n="nav_articles">Artículos</a></li>
-                    <li><a href="pages/eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
-                    <li><a href="pages/soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="pages/laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
-                    <li><a href="pages/about.html" data-i18n="nav_about">Acerca de</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_project">Proyecto</h4>
-                <ul>
-                    <li><a href="pages/music21-musicoloxia-computacional.html">Music21</a></li>
-                    <li><a href="pages/musica-son-intelixencia-artificial.html">Música, son e IA</a></li>
-                    <li><a href="pages/musicbert-musica-simbolica.html">MusicBERT</a></li>
-                    <li><a href="pages/cacofonia-buraco-negro.html">Cacofonía dun buraco negro</a></li>
-                    <li><a href="pages/son-do-sars-cov-2.html">O son do SARS-CoV-2</a></li>
-                    <li><a href="https://orcid.org/0009-0007-4511-1678" target="_blank" rel="noopener" style="color: #a6ce39;">ORCID: 0009-0007-4511-1678 ↗</a></li>
-                    <li><a href="https://scholar.google.es/citations?user=n0lxaGMAAAAJ&hl=es" target="_blank" rel="noopener" style="color: #4285f4;">Google Scholar ↗</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 TWISTORES</p>
-            <p data-i18n="footer_copy">// hecho con código y café ☕</p>
-        </div>
-    </footer>
-
+    <footer class="ed-footer"><div class="ed-wrap ed-footer-inner"><div><a class="ed-footer-brand" href="/">TWISTORES</a><p data-i18n="ed_footer">Un archivo abierto de música, código y escucha.</p><p class="ed-copyright">© 2026 · Silvino Díaz Carreras</p></div><nav aria-label="Enlaces del autor"><a href="pages/about.html" data-i18n="nav_about">Acerca de</a><a href="https://orcid.org/0009-0007-4511-1678" target="_blank" rel="noopener">ORCID ↗</a><a href="https://scholar.google.es/citations?user=n0lxaGMAAAAJ&amp;hl=es" target="_blank" rel="noopener">Google Scholar ↗</a></nav></div></footer>
     <script src="assets/main.js"></script>
-    <script src="assets/data/soundscapes.js"></script>
-    <script src="assets/soundscapes.js"></script>
-    <script>
-        // Filter tabs (homepage only)
-        document.querySelectorAll('.filter-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.dataset.filter;
-                document.querySelectorAll('#articles-home .card').forEach(card => {
-                    card.hidden = !(filter === 'all' || card.dataset.category === filter);
-                });
-            });
-        });
-    </script>
+    <script src="assets/editorial-home.js"></script>
 </body>
 </html>
