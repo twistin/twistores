@@ -7,7 +7,7 @@
     <meta name="description" content="Archivo en crecimiento de sesiones de aprendizaje, estudio de patches y exploración sonora con SuperCollider.">
     <meta name="author" content="Silvino Díaz Carreras">
     <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#071118">
+    <meta name="theme-color" content="#F4EFE6">
     <link rel="icon" href="../assets/img/favicon.png" type="image/png">
     <link rel="canonical" href="https://twistores.vercel.app/pages/laboratorio-sintesis-sc.html">
     <meta property="og:site_name" content="TWISTORES">
@@ -955,8 +955,9 @@
             }
         }
     </style>
+<link rel="stylesheet" href="../assets/editorial-system.css">
 </head>
-<body class="acid-page acid-lab">
+<body class="editorial-site">
 
     <header>
         <div class="header-inner">
@@ -967,7 +968,7 @@
                     <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
                     <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
                     <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="laboratorio-sintesis-sc.html" class="active">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" class="active" data-i18n="nav_lab">Laboratorio</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
                 </ul>
             </nav>
@@ -1013,30 +1014,7 @@
             </div>
         </div>
 
-        <section class="lab-family-band fade-in" aria-label="Mapa editorial del laboratorio">
-            <div class="lab-family-copy">
-                <p class="lab-family-kicker">Cuaderno técnico en crecimiento</p>
-                <h2 class="lab-family-title">Una misma serie, tres ritmos de lectura</h2>
-                <p class="lab-family-intro">Las sesiones publican procesos de estudio, los scripts fijan materiales ejecutables y las lecturas integradas sostienen el marco teórico. Todo pertenece al mismo archivo, aunque cada página tenga su propia densidad y tono.</p>
-                <div class="lab-family-meta">
-                    <span>7 sesiones publicadas</span>
-                    <span>3 recursos integrados</span>
-                    <span>SuperCollider · ProxySpace · DSP</span>
-                </div>
-            </div>
-            <nav class="lab-family-nav" aria-label="Accesos rápidos del laboratorio">
-                <a href="sesion-07-live-coding-banco-parciales.html">SC-07</a>
-                <a href="sesion-06-transformar-bateria.html">SC-06</a>
-                <a href="sesion-05-deriva-cuaderno-sesion.html">SC-05</a>
-                <a href="sesion-01-pad-sustractivo.html">SC-01</a>
-                <a href="sesion-02-live-coding-ritmico.html">SC-02</a>
-                <a href="sesion-03-sintesis-granular.html">SC-03</a>
-                <a href="sesion-04-deriva-metodo-composicion-algoritmica.html">SC-04</a>
-                <a href="../curtis_roads_capitulos.html" class="is-support">Curtis Roads</a>
-                <a href="../espectros-formas-onda-supercollider.html" class="is-support">Espectros SC</a>
-                <a href="../registro-artistas-kairos.html" class="is-support">Registro KAIROS</a>
-            </nav>
-        </section>
+        <p class="ed-lab-introduction">Cuaderno abierto de síntesis, composición algorítmica y live coding. Explora las sesiones o consulta las lecturas de apoyo al final del archivo.</p>
 
         <!-- DASHBOARD GRID -->
         <div class="lab-dashboard fade-in">
@@ -1057,7 +1035,8 @@
                         </div>
                         <h3 class="session-log-title">Del banco de parciales a una textura en movimiento</h3>
                         <p class="session-log-desc">Cuaderno de live coding con tres capas: fondo aditivo de nueve parciales impares, dos voces de eventos agudos y un retorno espacial paralelo. Incluye código consolidado, controles y un guion temporal para volver a interpretar la sesión.</p>
-                        <ul class="session-log-highlights">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<ul class="session-log-highlights">
                             <li><strong>~pat:</strong> pendiente espectral, deformación de frecuencias, saturación y pulso.</li>
                             <li><strong>~blip:</strong> notas aleatorias, envolventes percusivas y panoramas independientes.</li>
                             <li><strong>~fx:</strong> envíos separados, CombL, GVerb y filtrado del retorno.</li>
@@ -1069,7 +1048,8 @@
                             <span class="micro-tag">CombL</span>
                             <span class="micro-tag">GVerb</span>
                         </div>
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-07-live-coding-banco-parciales.html" class="btn">Abrir sesión 07 →</a>
                             <a href="eventos.html#session-orbita-sonora" class="btn btn-ghost">Ver estudio TouchDesigner + OSC →</a>
                         </div>
@@ -1088,7 +1068,8 @@
                         <h3 class="session-log-title">Espectros de formas de onda en SuperCollider</h3>
                         <p class="session-log-desc">Una guía visual para comparar sinusoide, cuadrada, triangular y diente de sierra a 120 Hz en <code>FreqScope</code>, aclarando la diferencia entre forma temporal y representación espectral.</p>
 
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1122,7 +1103,8 @@
                             <span class="micro-tag">collect</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="../espectros-formas-onda-supercollider.html" class="btn">Abrir recurso →</a>
                             <a href="sesion-01-pad-sustractivo.html" class="btn btn-ghost">Ver sesión 01 →</a>
                         </div>
@@ -1140,7 +1122,8 @@
                         <h3 class="session-log-title">Cuatro vías para transformar la batería</h3>
                         <p class="session-log-desc">Un cuaderno práctico para mover bd, sn y hh en cuatro escalas distintas: microvariación por evento, transformación tímbrica, espacio compartido y reorganización temporal.</p>
 
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1173,7 +1156,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                             <span class="micro-tag">Forma</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-06-transformar-bateria.html" class="btn">Abrir sesión 06 →</a>
                             <a href="sesion-05-deriva-cuaderno-sesion.html" class="btn btn-ghost">Ver sesión 05 →</a>
                         </div>
@@ -1191,7 +1175,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                         <h3 class="session-log-title">DERIVA: cuaderno de sesión</h3>
                         <p class="session-log-desc">Una expansión práctica de <em>Deriva</em> que aterriza sintaxis, pad, bajo, ritmo, espacio y macroforma en un cuaderno técnico unificado, guiado por el continuo entre tono y ruido.</p>
 
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1226,7 +1211,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                             <span class="micro-tag">Roads</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-05-deriva-cuaderno-sesion.html" class="btn">Abrir sesión 05 →</a>
                             <a href="sesion-04-deriva-metodo-composicion-algoritmica.html" class="btn btn-ghost">Ver sesión 04 →</a>
                         </div>
@@ -1244,7 +1230,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                         <h3 class="session-log-title">Deriva: método de composición algorítmica</h3>
                         <p class="session-log-desc">Un cuaderno técnico sobre composición en capas en SuperCollider: reloj maestro único, contadores derivados, NodeProxy con NamedControls, Tdef macroformal y mezcla centralizada en un solo bus.</p>
 
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1278,7 +1265,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                             <span class="micro-tag">Master Bus</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-04-deriva-metodo-composicion-algoritmica.html" class="btn">Abrir sesión 04 →</a>
                             <a href="../assets/code/sc/sesion-04-deriva-v2.scd" class="btn btn-ghost" download>Descargar script .scd</a>
                         </div>
@@ -1296,7 +1284,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                         <h3 class="session-log-title">Pad sustractivo y sus expansiones</h3>
                         <p class="session-log-desc">La primera sesión parte de un <code>~pad</code> sustractivo en ProxySpace y avanza hacia la decorrelación estéreo por fase, modulación analógica de filtros y transiciones hacia resonadores de modelado físico con Klank y Ringz.</p>
                         
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1331,7 +1320,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                             <span class="micro-tag">Tdef</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-01-pad-sustractivo.html" class="btn">Abrir sesión 01 →</a>
                             <a href="../assets/code/sc/sesion-01-pad-sustractivo.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
                         </div>
@@ -1349,7 +1339,8 @@ Synth(<span class="sc-symbol">\hh</span>, [<span class="sc-symbol">\amp</span>, 
                         <h3 class="session-log-title">Sistema de live coding rítmico</h3>
                         <p class="session-log-desc">Construcción de un motor rítmico modular y robusto de alta estabilidad directamente en el servidor de audio (scsynth). Secuenciación por rejilla binaria por pasos con Select, limitación final e interpolación de efectos paralelos sincronizados.</p>
                         
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1382,7 +1373,8 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                             <span class="micro-tag">Limiter</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-02-live-coding-ritmico.html" class="btn">Abrir sesión 02 →</a>
                             <a href="../assets/code/sc/sesion-02-live-coding-ritmico.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
                         </div>
@@ -1400,7 +1392,8 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                         <h3 class="session-log-title">Síntesis granular: teoría, parámetros y SuperCollider</h3>
                         <p class="session-log-desc">Traslado completo del dossier de estudio al laboratorio web: definición del grano, ley tiempo-banda, fill factor, tabla de parámetros y cuatro bloques prácticos con <code>GrainSin</code>, <code>GrainBuf</code>, <code>pos</code> dinámico y <code>ProxySpace</code> con slow morphing.</p>
                         
-                        <div class="session-log-code-preview">
+                        <details class="ed-session-details"><summary>Detalles técnicos y código de muestra</summary>
+<div class="session-log-code-preview">
                             <div class="code-terminal-header">
                                 <div class="terminal-dots">
                                     <span class="dot red"></span>
@@ -1435,7 +1428,8 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                             <span class="micro-tag">ProxySpace</span>
                         </div>
 
-                        <div class="session-log-actions">
+                        </details>
+<div class="session-log-actions">
                             <a href="sesion-03-sintesis-granular.html" class="btn">Abrir sesión 03 →</a>
                             <a href="../assets/code/sc/sesion-03-sintesis-granular.scd" class="btn btn-ghost" download>Descargar patch .scd</a>
                         </div>
@@ -1543,7 +1537,7 @@ sig = <span class="sc-ugen">SinOsc.ar</span>(envFreq * <span class="sc-number">1
                     <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
                     <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
                     <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" data-i18n="nav_lab">Laboratorio</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
                 </ul>
             </div>

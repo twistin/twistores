@@ -1,6 +1,5 @@
 /* Editorial home — paper / aubergine / electric orange.
    Spacing: 8, 16, 24, 32, 48, 64, 96. One containment level. */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 body.editorial-home {
     --paper:#F4EFE6; --ink:#241C2D; --muted:#68616D; --line:#D8D0C5;
     --orange:#FF5C28; --blue:#3546D3; --acid:#E5F254;

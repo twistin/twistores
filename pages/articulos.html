@@ -7,7 +7,7 @@
     <meta name="description" content="Archivo de artículos y ensayos sobre música, sociología, escenas locales y tecnología sonora.">
     <meta name="author" content="Silvino Díaz Carreras">
     <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#071118">
+    <meta name="theme-color" content="#F4EFE6">
     <link rel="icon" href="../assets/img/favicon.png" type="image/png">
     <link rel="canonical" href="https://twistores.vercel.app/pages/articulos.html">
     <meta property="og:site_name" content="TWISTORES">
@@ -155,8 +155,9 @@
             }
         }
     </style>
+<link rel="stylesheet" href="../assets/editorial-system.css">
 </head>
-<body class="acid-page acid-articles">
+<body class="editorial-site">
 
     <header>
         <div class="header-inner">
@@ -167,7 +168,7 @@
                     <li><a href="articulos.html" class="active" data-i18n="nav_articles">Artículos</a></li>
                     <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
                     <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" data-i18n="nav_lab">Laboratorio</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
                 </ul>
             </nav>
@@ -194,31 +195,7 @@
             <p><strong>Archivo editorial:</strong> textos recientes, ensayos de fondo y piezas anteriores reunidas por temas. La portada prioriza lo nuevo; este índice conserva la continuidad completa del archivo.</p>
         </div>
 
-        <div class="orcid-banner fade-in">
-            <div class="orcid-banner-info">
-                <span class="orcid-banner-title">
-                    <svg class="orcid-icon-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M128 0C57.307 0 0 57.307 0 128s57.307 128 128 128 128-57.307 128-128S198.693 0 128 0zm-45.714 187.429H60.571V68.571h21.715v118.858zm-10.857-133.143c-7.429 0-13.714-6.286-13.714-13.714 0-7.429 6.285-13.714 13.714-13.714 7.428 0 13.714 6.285 13.714 13.714 0 7.428-6.286 13.714-13.714 13.714zm118.285 88.571c0 24.571-19.428 44.572-44 44.572h-36V68.571h36c24.572 0 44 20 44 44.572v34.286zm-21.714-34.286c0-12.571-10.286-22.857-22.286-22.857h-14.286v79.999h14.286c12 0 22.286-10.285 22.286-22.857v-34.285z"/>
-                    </svg>
-                    Producción académica · ORCID &amp; Google Scholar
-                </span>
-                <p class="orcid-banner-desc">Artículos, preprints autoarchivados, capítulos de libro y tesis doctorales/de investigación verificados.</p>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-                <a href="https://orcid.org/0009-0007-4511-1678" target="_blank" rel="noopener" class="orcid-badge-link" title="Perfil ORCID">
-                    <svg class="orcid-icon-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M128 0C57.307 0 0 57.307 0 128s57.307 128 128 128 128-57.307 128-128S198.693 0 128 0zm-45.714 187.429H60.571V68.571h21.715v118.858zm-10.857-133.143c-7.429 0-13.714-6.286-13.714-13.714 0-7.429 6.285-13.714 13.714-13.714 7.428 0 13.714 6.285 13.714 13.714 0 7.428-6.286 13.714-13.714 13.714zm118.285 88.571c0 24.571-19.428 44.572-44 44.572h-36V68.571h36c24.572 0 44 20 44 44.572v34.286zm-21.714-34.286c0-12.571-10.286-22.857-22.286-22.857h-14.286v79.999h14.286c12 0 22.286-10.285 22.286-22.857v-34.285z"/>
-                    </svg>
-                    <span>Registro ORCID ↗</span>
-                </a>
-                <a href="https://scholar.google.es/citations?user=n0lxaGMAAAAJ&hl=es" target="_blank" rel="noopener" class="scholar-badge-link" title="Perfil en Google Scholar">
-                    <svg class="scholar-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                    </svg>
-                    <span>Google Scholar ↗</span>
-                </a>
-            </div>
-        </div>
+        <p class="ed-academic-link"><a href="about.html#orcid-publicaciones">Ver producción académica y publicaciones indexadas ↗</a></p>
 
         <div class="filter-tabs fade-in">
             <button class="filter-tab active" data-filter="all" data-i18n="filter_all">Todos</button>
@@ -379,7 +356,7 @@
                     <li><a href="articulos.html" data-i18n="nav_articles">Artículos</a></li>
                     <li><a href="eventos.html" data-i18n="nav_livecoding">Live Coding</a></li>
                     <li><a href="soundscapes.html" data-i18n="nav_soundscapes">Soundscapes</a></li>
-                    <li><a href="laboratorio-sintesis-sc.html">Laboratorio de Síntesis con SC</a></li>
+                    <li><a href="laboratorio-sintesis-sc.html" data-i18n="nav_lab">Laboratorio</a></li>
                     <li><a href="about.html" data-i18n="nav_about">Acerca de</a></li>
                 </ul>
             </div>

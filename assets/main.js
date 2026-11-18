@@ -6,6 +6,7 @@
 // ── Translations ──────────────────────────────────────────────────────────────
 const T = {
     gl: {
+        nav_lab: "Laboratorio",
         // NAV
         nav_home:        "Inicio",
         nav_articles:    "Artigos",
@@ -292,6 +293,7 @@ const T = {
     },
 
     es: {
+        nav_lab: "Laboratorio",
         nav_home:        "Inicio",
         nav_articles:    "Artículos",
         nav_livecoding:  "Live Coding",
@@ -547,6 +549,7 @@ const T = {
     },
 
     en: {
+        nav_lab: "Laboratory",
         nav_home:        "Home",
         nav_articles:    "Articles",
         nav_livecoding:  "Live Coding",
@@ -1320,7 +1323,7 @@ function ensureSkipLink() {
 }
 
 // ── Theme Engine ──────────────────────────────────────────────────────────────
-let currentTheme = localStorage.getItem('twistores-theme') || (document.body.classList.contains('editorial-home') ? 'light' : 'dark');
+let currentTheme = localStorage.getItem('twistores-theme') || (document.body.classList.contains('editorial-site') ? 'light' : 'dark');
 
 function applyTheme(theme) {
     currentTheme = theme;
