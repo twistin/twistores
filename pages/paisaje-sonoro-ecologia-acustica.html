@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paisaje sonoro y ecología acústica | TWISTORES</title>
+<meta name="description" content="Explora el paisaje sonoro y la ecología acústica con ejemplos de audio, un experimento de enmascaramiento, un paseo sonoro y un cuestionario interactivo.">
+<link rel="canonical" href="https://twistores.vercel.app/pages/paisaje-sonoro-ecologia-acustica.html">
+<link rel="icon" href="../assets/img/favicon.png" type="image/png">
+<meta property="og:site_name" content="TWISTORES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paisaje sonoro y ecología acústica">
+<meta property="og:description" content="Una guía interactiva para aprender a escuchar el entorno: sonidos, ruido, ecología acústica y paseo sonoro.">
+<meta property="og:url" content="https://twistores.vercel.app/pages/paisaje-sonoro-ecologia-acustica.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: rejilla modular de bloques con borde duro, numerados 01-08; una columna en móvil */
+:root{
+  --bg:#efeee9; --panel:#ffffff; --ink:#0c0c0c; --muted:#56564f;
+  --accent:#ffd400; --on-accent:#0c0c0c;
+  --geo:#1f4fff; --bio:#0a8a4c; --antro:#e23a17;
+  --ok:#0a8a4c; --warn:#b97a00; --bad:#d21f1f;
+  --display:"Archivo Black","Arial Black",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --b:3px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d0d0d; --panel:#181817; --ink:#f1f0ea; --muted:#a9a8a0;
+    --geo:#7b9bff; --bio:#3ad18c; --antro:#ff7a5c;
+    --ok:#3ad18c; --warn:#f0b53a; --bad:#ff6464;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d0d0d; --panel:#181817; --ink:#f1f0ea; --muted:#a9a8a0;
+  --geo:#7b9bff; --bio:#3ad18c; --antro:#ff7a5c;
+  --ok:#3ad18c; --warn:#f0b53a; --bad:#ff6464;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 20px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1;margin:0;text-wrap:balance;text-transform:uppercase}
+h1{font-size:clamp(3rem,11vw,8rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,4.5vw,3rem)}
+h3{font-size:1.25rem;line-height:1.1}
+p{margin:0;max-width:65ch}
+.mono{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.muted{color:var(--muted)}
+mark{background:var(--accent);color:var(--on-accent);padding:0 .25em}
+button{font:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--accent);outline-offset:2px}
+
+/* cabecera */
+header{border:var(--b) solid var(--ink);background:var(--panel);display:grid;grid-template-columns:1fr}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 16px;border-bottom:var(--b) solid var(--ink)}
+.hero{padding:28px 16px 20px;display:flex;flex-direction:column;gap:16px}
+.hero p{font-size:1.25rem}
+.wave{display:flex;align-items:flex-end;gap:3px;height:90px;padding:0 16px;border-top:var(--b) solid var(--ink);overflow:hidden}
+.wave span{flex:1;background:var(--ink);min-width:2px}
+.reto{background:var(--accent);color:var(--on-accent);padding:14px 16px;border-top:var(--b) solid var(--ink);font-weight:700}
+
+/* secciones */
+section{border:var(--b) solid var(--ink);background:var(--panel)}
+.shead{display:grid;grid-template-columns:auto 1fr;border-bottom:var(--b) solid var(--ink)}
+.num{font-family:var(--display);font-size:clamp(1.7rem,4.5vw,3rem);line-height:1;padding:14px 16px;background:var(--ink);color:var(--bg)}
+.shead h2{padding:14px 16px;align-self:center}
+.sbody{padding:20px 16px;display:flex;flex-direction:column;gap:20px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{border:var(--b) solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.big{font-family:var(--display);font-size:clamp(1.4rem,3.4vw,2.2rem);line-height:1.08;text-transform:uppercase;max-width:22ch}
+.tag{display:inline-block;font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;border:2px solid currentColor;padding:2px 8px;align-self:flex-start}
+ul.ej{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:2px}
+
+/* fuentes */
+.src{border-top-width:14px}
+.src.geo{border-top-color:var(--geo)} .src.bio{border-top-color:var(--bio)} .src.antro{border-top-color:var(--antro)}
+.src.geo h3{color:var(--geo)} .src.bio h3{color:var(--bio)} .src.antro h3{color:var(--antro)}
+.play{border:var(--b) solid var(--ink);background:var(--panel);padding:10px 14px;font-family:var(--mono);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:10px;justify-content:space-between;margin-top:auto}
+.play:hover{background:var(--accent);color:var(--on-accent)}
+.play[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.led{display:flex;gap:3px;align-items:flex-end;height:18px}
+.led i{width:4px;height:4px;background:currentColor}
+.play[aria-pressed="true"] .led i{animation:vu .6s infinite alternate ease-in-out}
+.play[aria-pressed="true"] .led i:nth-child(2){animation-delay:.15s}
+.play[aria-pressed="true"] .led i:nth-child(3){animation-delay:.3s}
+.play[aria-pressed="true"] .led i:nth-child(4){animation-delay:.45s}
+@keyframes vu{to{height:18px}}
+@media (prefers-reduced-motion: reduce){.play[aria-pressed="true"] .led i{animation:none;height:12px} html{scroll-behavior:auto}}
+.note{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
+/* capas */
+.capas{display:grid;grid-template-columns:1fr;border:var(--b) solid var(--ink)}
+.capa{display:grid;grid-template-columns:minmax(120px,220px) 1fr;border-bottom:var(--b) solid var(--ink)}
+.capa:last-child{border-bottom:0}
+.capa .lab{padding:16px;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.capa .txt{padding:16px;border-left:var(--b) solid var(--ink);display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.capa.c1 .lab{background:var(--ink);color:var(--bg)}
+.capa.c2 .lab{background:var(--accent);color:var(--on-accent)}
+.capa.c3 .lab{background:repeating-linear-gradient(45deg,var(--panel) 0 10px,var(--bg) 10px 20px)}
+@media (max-width:560px){.capa{grid-template-columns:1fr}.capa .txt{border-left:0;border-top:var(--b) solid var(--ink)}}
+
+/* hifi */
+canvas{display:block;width:100%;height:240px;border:var(--b) solid var(--ink);background:var(--bg)}
+.ctrl{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ctrl label{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+input[type=range]{flex:1;min-width:200px;accent-color:var(--ink);height:28px}
+.estado{font-family:var(--display);font-size:1.5rem;text-transform:uppercase}
+
+/* decibelios */
+.db{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center}
+.row .v{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.bar{position:relative;height:38px;border:2px solid var(--ink);background:var(--bg)}
+.bar b{position:absolute;inset:0 auto 0 0;display:block}
+.bar span{position:relative;display:flex;align-items:center;height:100%;padding:0 10px;font-size:.92rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-ok b{background:color-mix(in srgb,var(--ok) 45%,transparent)}
+.s-warn b{background:color-mix(in srgb,var(--warn) 55%,transparent)}
+.s-bad b{background:color-mix(in srgb,var(--bad) 60%,transparent)}
+.leyenda{display:flex;gap:16px;flex-wrap:wrap}
+.leyenda span{display:flex;align-items:center;gap:6px}
+.leyenda i{width:16px;height:16px;border:2px solid var(--ink);display:inline-block}
+
+/* paseo */
+ol.pasos{margin:0;padding:0;list-style:none;counter-reset:p;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+ol.pasos li{counter-increment:p;border:var(--b) solid var(--ink);padding:14px;background:var(--bg);display:flex;flex-direction:column;gap:6px}
+ol.pasos li::before{content:"PASO " counter(p);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted)}
+.timer{display:flex;gap:16px;align-items:center;flex-wrap:wrap;border:var(--b) solid var(--ink);padding:14px;background:var(--accent);color:var(--on-accent)}
+.timer .t{font-family:var(--display);font-size:3rem;line-height:1;font-variant-numeric:tabular-nums;min-width:3ch}
+.timer button{border:var(--b) solid var(--on-accent);background:var(--on-accent);color:var(--accent);padding:10px 14px;font-family:var(--mono);font-weight:600;text-transform:uppercase;cursor:pointer}
+
+/* quiz */
+.q{border:var(--b) solid var(--ink);padding:14px;background:var(--bg);display:flex;flex-direction:column;gap:10px}
+.q .ops{display:flex;gap:8px;flex-wrap:wrap}
+.q button{border:2px solid var(--ink);background:var(--panel);padding:6px 12px;font-family:var(--mono);font-size:.8rem;text-transform:uppercase;cursor:pointer}
+.q button:hover:not(:disabled){background:var(--accent);color:var(--on-accent)}
+.q button.si{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+.q button.no{background:var(--bad);color:var(--bg);border-color:var(--bad);text-decoration:line-through}
+.q .fb{font-size:.92rem;min-height:1.4em}
+.marcador{font-family:var(--display);font-size:1.5rem;text-transform:uppercase}
+.glos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border:var(--b) solid var(--ink)}
+.glos div{padding:12px 14px;border:1px solid var(--ink);display:flex;flex-direction:column;gap:4px;font-size:.95rem}
+.glos dt{font-family:var(--mono);font-weight:600;text-transform:uppercase;font-size:.8rem;letter-spacing:.06em}
+.glos dd{margin:0}
+footer{font-size:.9rem;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+</style>
+</head>
+<body>
+<nav aria-label="Navegación de Twistores" style="max-width:1120px;margin:20px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;gap:12px 24px">
+  <a href="../index.html" style="color:inherit;font-weight:700">TWISTORES</a>
+  <a href="soundscapes.html" style="color:inherit">← Volver a Soundscapes</a>
+</nav>
+<div class="wrap">
+
+<header>
+  <div class="top mono"><span>Música · ESO</span><span>Unidad: escuchar el mundo</span></div>
+  <div class="hero">
+    <h1>Paisaje sonoro</h1>
+    <p>Todo lugar suena. Tu calle, tu clase y la playa tienen un sonido propio, igual que tienen un aspecto propio. La <strong>ecología acústica</strong> estudia esos sonidos y cómo nos afectan a las personas y a los animales.</p>
+  </div>
+  <div class="wave" id="wave" aria-hidden="true"></div>
+  <div class="reto">Antes de seguir: 10 segundos en silencio. ¿Cuántos sonidos distintos cuentas ahora mismo?</div>
+</header>
+
+<section id="que-es">
+  <div class="shead"><div class="num">01</div><h2>¿Qué es un paisaje sonoro?</h2></div>
+  <div class="sbody">
+    <p class="big">Todos los sonidos de un lugar, tal como los percibe quien está allí escuchando.</p>
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag">Origen</span>
+        <p>La palabra viene del inglés <em>soundscape</em> (de <em>landscape</em>, paisaje). La popularizó el compositor canadiense <strong>R. Murray Schafer</strong> en los años 70, cuando empezó a grabar y estudiar cómo sonaban las ciudades y los pueblos.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Oír ≠ escuchar</span>
+        <p><strong>Oír</strong> es automático: tus oídos no tienen párpados. <strong>Escuchar</strong> es prestar atención. Un paisaje sonoro solo se descubre escuchando.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Depende de ti</span>
+        <p>El mismo lugar no suena igual para todos. Un mecánico distingue ruidos de motor que tú no notas. El paisaje sonoro incluye a la persona que escucha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fuentes">
+  <div class="shead"><div class="num">02</div><h2>Tres familias de sonidos</h2></div>
+  <div class="sbody">
+    <p>El músico y naturalista <strong>Bernie Krause</strong> clasifica los sonidos según quién los produce. Activa cada familia y mézclalas para construir tu propio paisaje. Los sonidos son sintéticos, hechos por el ordenador.</p>
+    <div class="grid g3">
+      <div class="card src geo">
+        <h3>Geofonía</h3>
+        <p class="mono muted">La Tierra</p>
+        <p>Sonidos naturales que no vienen de seres vivos.</p>
+        <ul class="ej"><li>Viento</li><li>Lluvia y truenos</li><li>Olas del mar</li><li>Un río</li></ul>
+        <button class="play" data-layer="geo" aria-pressed="false"><span>Viento</span><span class="led"><i></i><i></i><i></i><i></i></span></button>
+      </div>
+      <div class="card src bio">
+        <h3>Biofonía</h3>
+        <p class="mono muted">Los seres vivos</p>
+        <p>Sonidos de animales, sin contar a los humanos.</p>
+        <ul class="ej"><li>Canto de pájaros</li><li>Grillos y ranas</li><li>Ladridos</li><li>Gaviotas</li></ul>
+        <button class="play" data-layer="bio" aria-pressed="false"><span>Pájaros</span><span class="led"><i></i><i></i><i></i><i></i></span></button>
+      </div>
+      <div class="card src antro">
+        <h3>Antropofonía</h3>
+        <p class="mono muted">Los humanos</p>
+        <p>Sonidos que hacemos las personas y nuestras máquinas.</p>
+        <ul class="ej"><li>Tráfico</li><li>Voces y música</li><li>Obras</li><li>Móviles</li></ul>
+        <button class="play" data-layer="antro" aria-pressed="false"><span>Tráfico</span><span class="led"><i></i><i></i><i></i><i></i></span></button>
+      </div>
+    </div>
+    <p class="note" id="audioMsg">Sube el volumen del ordenador. Cada botón enciende o apaga una capa.</p>
+  </div>
+</section>
+
+<section id="capas">
+  <div class="shead"><div class="num">03</div><h2>Fondo, señal y marca</h2></div>
+  <div class="sbody">
+    <p>Schafer propuso otra forma de ordenar lo que oímos, según el papel que cada sonido tiene para quien vive en ese lugar.</p>
+    <div class="capas">
+      <div class="capa c1">
+        <div class="lab"><h3>Tónica</h3><span class="mono">Sonido de fondo</span></div>
+        <div class="txt"><p>Suena siempre y casi no la notas, como el fondo de un cuadro. La echas de menos cuando desaparece.</p><p class="note">En Vigo: el rumor del tráfico, el mar. En clase: el ventilador del proyector.</p></div>
+      </div>
+      <div class="capa c2">
+        <div class="lab"><h3>Señal</h3><span class="mono">Sonido que avisa</span></div>
+        <div class="txt"><p>Destaca sobre el fondo y te obliga a atender. Lleva un mensaje.</p><p class="note">El timbre del recreo, una sirena de ambulancia, la notificación del móvil, tu nombre.</p></div>
+      </div>
+      <div class="capa c3">
+        <div class="lab"><h3>Marca sonora</h3><span class="mono">Sonido con identidad</span></div>
+        <div class="txt"><p>Es único de un lugar y su gente lo reconoce como propio. Es un monumento que se escucha, y merece protegerse.</p><p class="note">Las campanas de la iglesia de tu pueblo, la bocina de los barcos en la ría, una gaita en la fiesta.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hifi">
+  <div class="shead"><div class="num">04</div><h2>Hi-fi contra lo-fi</h2></div>
+  <div class="sbody">
+    <div class="grid g2">
+      <div class="card"><h3>Paisaje hi-fi</h3><p>Poco ruido de fondo. Cada sonido se distingue y se oye de lejos: un perro a un kilómetro, unos pasos, una campana. Típico del campo o de la noche.</p></div>
+      <div class="card"><h3>Paisaje lo-fi</h3><p>Tanto ruido que los sonidos se tapan unos a otros. A eso se le llama <mark>enmascaramiento</mark>. Para que te oigan tienes que gritar. Típico de una calle con mucho tráfico.</p></div>
+    </div>
+    <canvas id="spec" width="1000" height="240" role="img" aria-label="Gráfico: tres sonidos destacan sobre el ruido de fondo; al subir el ruido quedan tapados"></canvas>
+    <div class="ctrl">
+      <label for="ruido">Ruido de fondo</label>
+      <input type="range" id="ruido" min="0" max="100" value="12">
+      <span class="estado" id="estado">Hi-fi</span>
+    </div>
+    <div class="ctrl">
+      <button class="play" id="hifiPlay" aria-pressed="false" style="margin:0"><span>Escuchar el ejemplo</span><span class="led"><i></i><i></i><i></i><i></i></span></button>
+      <span class="note" id="oyes">Se distinguen 3 de 3 sonidos.</span>
+    </div>
+    <p>Mueve el control. Fíjate en qué momento dejas de oír a los pájaros: no se han callado, los ha tapado el ruido.</p>
+  </div>
+</section>
+
+<section id="decibelios">
+  <div class="shead"><div class="num">05</div><h2>¿Cuánto es demasiado?</h2></div>
+  <div class="sbody">
+    <p>La intensidad del sonido en el aire se mide en <strong>decibelios de presión sonora (dB SPL)</strong>. El 0 es el sonido más débil que puede oír una persona. La escala engaña: cada 10 dB más, el sonido nos parece más o menos el doble de fuerte. Valores aproximados.</p>
+    <div class="db" id="db"></div>
+    <div class="leyenda note">
+      <span><i style="background:color-mix(in srgb,var(--ok) 45%,transparent)"></i>Seguro</span>
+      <span><i style="background:color-mix(in srgb,var(--warn) 55%,transparent)"></i>Cuidado si dura horas</span>
+      <span><i style="background:color-mix(in srgb,var(--bad) 60%,transparent)"></i>Daña el oído</span>
+    </div>
+    <div class="card">
+      <span class="tag">¿Y los dB negativos del ordenador?</span>
+      <p>El decibelio siempre compara con una referencia. En esta escala la referencia es el silencio (0 dB SPL), y por eso los valores son positivos.</p>
+      <p>En un programa de audio la referencia es el máximo que admite el sistema (<strong>0 dBFS</strong>). Todo queda por debajo, en negativo, y si te pasas de 0 el sonido distorsiona. En las dos escalas, el número más alto suena más fuerte: −20 dBFS es más fuerte que −50 dBFS.</p>
+    </div>
+    <p class="big">El daño en el oído no duele y no se cura. Baja los auriculares.</p>
+  </div>
+</section>
+
+<section id="ecologia">
+  <div class="shead"><div class="num">06</div><h2>Ecología acústica</h2></div>
+  <div class="sbody">
+    <p>La ecología estudia cómo se relacionan los seres vivos con su entorno. La ecología acústica hace lo mismo con el sonido. El ruido que sobra se llama <mark>contaminación acústica</mark>, y no solo molesta a las personas.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Pájaros</span><p>En la ciudad, algunos pájaros cantan más agudo para que su canto no quede tapado por el tráfico, que es grave. Otros cantan de noche, cuando hay menos ruido.</p></div>
+      <div class="card"><span class="tag">Ballenas</span><p>Las ballenas se comunican a enormes distancias bajo el agua. El ruido de los motores de los barcos ocupa las mismas frecuencias y les impide oírse.</p></div>
+      <div class="card"><span class="tag">Personas</span><p>Vivir con mucho ruido empeora el sueño, la concentración y el humor, aunque creas que ya te has acostumbrado.</p></div>
+    </div>
+    <div class="card">
+      <span class="tag">Palabra rara: esquizofonía</span>
+      <p>Schafer llamó así a separar un sonido de su fuente. Antes de las grabaciones, para oír una voz tenías que estar junto a la persona. Hoy llevas en los auriculares sonidos grabados en otro lugar y en otro momento, y con ellos tapas el paisaje sonoro que te rodea.</p>
+    </div>
+    <p class="big">Un paisaje sonoro sano es aquel donde todos caben y se oyen.</p>
+  </div>
+</section>
+
+<section id="paseo">
+  <div class="shead"><div class="num">07</div><h2>Práctica: paseo sonoro</h2></div>
+  <div class="sbody">
+    <p>Un paseo sonoro es caminar con un único objetivo: escuchar. Lo desarrolló la compositora <strong>Hildegard Westerkamp</strong>. No hace falta ningún aparato.</p>
+    <div class="timer">
+      <div class="t" id="t">60</div>
+      <button id="tbtn">Empezar 1 minuto de escucha</button>
+      <span id="tmsg">Ojos cerrados, boca cerrada. Cuenta sonidos distintos.</span>
+    </div>
+    <ol class="pasos">
+      <li><strong>Silencio total.</strong> Nadie habla ni usa el móvil durante el recorrido.</li>
+      <li><strong>De cerca a lejos.</strong> Empieza por tu cuerpo: respiración, pasos, ropa. Después el aula, el edificio, la calle.</li>
+      <li><strong>Anota.</strong> Apunta cada sonido que identifiques y de dónde viene.</li>
+      <li><strong>Clasifica.</strong> ¿Geofonía, biofonía o antropofonía? ¿Tónica, señal o marca sonora?</li>
+      <li><strong>Dibuja el mapa.</strong> Haz un plano del recorrido y coloca cada sonido donde lo escuchaste.</li>
+      <li><strong>Opina.</strong> ¿Qué sonido quitarías? ¿Cuál protegerías? ¿Es un lugar hi-fi o lo-fi?</li>
+    </ol>
+  </div>
+</section>
+
+<section id="repaso">
+  <div class="shead"><div class="num">08</div><h2>Comprueba lo que sabes</h2></div>
+  <div class="sbody">
+    <p>¿Qué papel tiene cada sonido? Elige una opción.</p>
+    <div class="grid g2" id="quiz"></div>
+    <div class="marcador" id="marcador">Aciertos: 0 de 6</div>
+    <dl class="glos">
+      <div><dt>Paisaje sonoro</dt><dd>Conjunto de sonidos de un lugar según quien lo escucha.</dd></div>
+      <div><dt>Geofonía</dt><dd>Sonidos de la Tierra: viento, agua, truenos.</dd></div>
+      <div><dt>Biofonía</dt><dd>Sonidos de los animales.</dd></div>
+      <div><dt>Antropofonía</dt><dd>Sonidos de los humanos y sus máquinas.</dd></div>
+      <div><dt>Tónica</dt><dd>Sonido de fondo constante.</dd></div>
+      <div><dt>Señal</dt><dd>Sonido que destaca y avisa.</dd></div>
+      <div><dt>Marca sonora</dt><dd>Sonido propio de un lugar.</dd></div>
+      <div><dt>Hi-fi / lo-fi</dt><dd>Paisaje claro / paisaje saturado de ruido.</dd></div>
+      <div><dt>Enmascaramiento</dt><dd>Un sonido tapa a otro.</dd></div>
+      <div><dt>Decibelio</dt><dd>Unidad de intensidad del sonido.</dd></div>
+      <div><dt>Esquizofonía</dt><dd>Sonido separado de su fuente original.</dd></div>
+      <div><dt>Paseo sonoro</dt><dd>Recorrido dedicado a escuchar.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <span class="mono">Para saber más</span>
+  <span>R. Murray Schafer, <em>El paisaje sonoro y la afinación del mundo</em> (1977) · Barry Truax, <em>Acoustic Communication</em> (1984) · Bernie Krause, <em>La gran orquesta animal</em> (2012) · Hildegard Westerkamp, «Soundwalking» (1974).</span>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* cabecera: forma de onda fija */
+var wave=$("#wave");
+for(var i=0;i<96;i++){
+  var h=18+38*Math.abs(Math.sin(i*0.21))+30*Math.abs(Math.sin(i*0.057+1))+14*Math.abs(Math.sin(i*1.3));
+  var s=document.createElement("span"); s.style.height=Math.min(100,h)+"%"; wave.appendChild(s);
+}
+
+/* ---------- audio ---------- */
+var ctx=null, master=null, noiseBuf=null;
+function audio(){
+  if(!ctx){
+    var AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC) throw new Error("sin audio");
+    ctx=new AC();
+    master=ctx.createGain(); master.gain.value=0.7; master.connect(ctx.destination);
+    var len=ctx.sampleRate*2;
+    noiseBuf=ctx.createBuffer(1,len,ctx.sampleRate);
+    var d=noiseBuf.getChannelData(0);
+    for(var k=0;k<len;k++) d[k]=Math.random()*2-1;
+  }
+  if(ctx.state==="suspended") ctx.resume();
+  return ctx;
+}
+function noise(){var s=ctx.createBufferSource(); s.buffer=noiseBuf; s.loop=true; return s;}
+function fadeOut(g,nodes){
+  var t=ctx.currentTime;
+  g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(0,t,0.1);
+  setTimeout(function(){nodes.forEach(function(n){try{n.stop()}catch(e){}}); try{g.disconnect()}catch(e){}},600);
+}
+function chirp(dest,t,f){
+  var o=ctx.createOscillator(), g=ctx.createGain();
+  o.type="sine";
+  o.frequency.setValueAtTime(f,t);
+  o.frequency.exponentialRampToValueAtTime(f*1.5,t+0.05);
+  o.frequency.exponentialRampToValueAtTime(f*0.9,t+0.11);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.22,t+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.12);
+  o.connect(g); g.connect(dest); o.start(t); o.stop(t+0.14);
+}
+function birds(dest){
+  function phrase(){
+    var t=ctx.currentTime+0.05, n=2+Math.floor(Math.random()*4), f=2300+Math.random()*1900;
+    for(var j=0;j<n;j++) chirp(dest,t+j*0.15,f*(1+(Math.random()-0.5)*0.12));
+  }
+  phrase();
+  var id=setInterval(function(){ if(Math.random()<0.75) phrase(); },1000);
+  return function(){clearInterval(id)};
+}
+var layers={
+  geo:function(){
+    var n=noise(), bp=ctx.createBiquadFilter(), g=ctx.createGain(), lfo=ctx.createOscillator(), lg=ctx.createGain();
+    bp.type="bandpass"; bp.frequency.value=520; bp.Q.value=0.9;
+    lfo.frequency.value=0.13; lg.gain.value=320; lfo.connect(lg); lg.connect(bp.frequency);
+    g.gain.value=0; g.gain.setTargetAtTime(0.55,ctx.currentTime,0.3);
+    n.connect(bp); bp.connect(g); g.connect(master); n.start(); lfo.start();
+    return function(){fadeOut(g,[n,lfo])};
+  },
+  bio:function(){
+    var g=ctx.createGain(); g.gain.value=0.8; g.connect(master);
+    var stop=birds(g);
+    return function(){stop(); fadeOut(g,[])};
+  },
+  antro:function(){
+    var o1=ctx.createOscillator(), o2=ctx.createOscillator(), lp=ctx.createBiquadFilter(), n=noise(), lp2=ctx.createBiquadFilter(), ng=ctx.createGain(), g=ctx.createGain();
+    o1.type="sawtooth"; o2.type="sawtooth"; o1.frequency.value=72; o2.frequency.value=108.7;
+    lp.type="lowpass"; lp.frequency.value=420;
+    lp2.type="lowpass"; lp2.frequency.value=600; ng.gain.value=0.5;
+    g.gain.value=0; g.gain.setTargetAtTime(0.3,ctx.currentTime,0.3);
+    o1.connect(lp); o2.connect(lp); lp.connect(g);
+    n.connect(lp2); lp2.connect(ng); ng.connect(g); g.connect(master);
+    o1.start(); o2.start(); n.start();
+    return function(){fadeOut(g,[o1,o2,n])};
+  }
+};
+var running={};
+function fail(){ $("#audioMsg").textContent="Este navegador no deja reproducir sonido aquí. El resto de la página funciona igual."; }
+document.querySelectorAll(".play[data-layer]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var k=b.dataset.layer;
+    try{
+      audio();
+      if(running[k]){ running[k](); running[k]=null; b.setAttribute("aria-pressed","false"); }
+      else{ running[k]=layers[k](); b.setAttribute("aria-pressed","true"); }
+    }catch(e){ fail(); }
+  });
+});
+
+/* ---------- hi-fi / lo-fi ---------- */
+var cv=$("#spec"), g2=cv.getContext("2d"), slider=$("#ruido");
+var señales=[{i:9,h:0.72,n:"CAMPANA"},{i:24,h:0.5,n:"VOZ"},{i:38,h:0.86,n:"PÁJARO"}];
+function rnd(i){var x=Math.sin(i*127.1)*43758.5453; return x-Math.floor(x);}
+function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function draw(){
+  var W=cv.width,H=cv.height,N=48,lvl=slider.value/100;
+  var ink=tok("--ink"),muted=tok("--muted"),acc=tok("--accent"),on=tok("--on-accent");
+  g2.clearRect(0,0,W,H);
+  var bw=W/N, base=H-10, top=34, vis=0;
+  for(var i=0;i<N;i++){
+    var nh=lvl*(0.55+0.45*rnd(i))*0.98+0.02;
+    g2.fillStyle=muted; g2.globalAlpha=0.55;
+    g2.fillRect(i*bw+2,base-nh*(base-top),bw-4,nh*(base-top));
+    g2.globalAlpha=1;
+  }
+  señales.forEach(function(s){
+    var nh=lvl*(0.55+0.45*rnd(s.i))*0.98+0.02;
+    if(s.h>nh+0.06){
+      vis++;
+      var y=base-s.h*(base-top);
+      g2.fillStyle=ink; g2.fillRect(s.i*bw+2,y,bw-4,s.h*(base-top));
+      g2.font="600 15px 'IBM Plex Mono',monospace";
+      var tw=g2.measureText(s.n).width, tx=Math.max(4,Math.min(W-tw-12,s.i*bw+bw/2-tw/2-4));
+      g2.fillStyle=acc; g2.fillRect(tx,y-26,tw+8,20);
+      g2.fillStyle=on; g2.fillText(s.n,tx+4,y-11);
+    }
+  });
+  g2.fillStyle=ink; g2.fillRect(0,base,W,3);
+  $("#estado").textContent= lvl<0.35?"Hi-fi": lvl<0.65?"Se va llenando":"Lo-fi";
+  $("#oyes").textContent="Se distinguen "+vis+" de 3 sonidos.";
+}
+var hifi=null;
+function setNoise(){ if(hifi) hifi.ng.gain.setTargetAtTime(Math.pow(slider.value/100,1.6)*0.9,ctx.currentTime,0.05); }
+slider.addEventListener("input",function(){draw(); setNoise();});
+$("#hifiPlay").addEventListener("click",function(){
+  var b=this;
+  try{
+    audio();
+    if(hifi){ hifi.stop(); hifi=null; b.setAttribute("aria-pressed","false"); return; }
+    var bg=ctx.createGain(); bg.gain.value=0.35; bg.connect(master);
+    var stopB=birds(bg);
+    var n=noise(), lp=ctx.createBiquadFilter(), ng=ctx.createGain();
+    lp.type="lowpass"; lp.frequency.value=5000; ng.gain.value=0;
+    n.connect(lp); lp.connect(ng); ng.connect(master); n.start();
+    hifi={ng:ng,stop:function(){stopB(); fadeOut(bg,[]); fadeOut(ng,[n]);}};
+    setNoise(); b.setAttribute("aria-pressed","true");
+  }catch(e){ fail(); }
+});
+draw();
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
+if(window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change",draw);
+new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+/* ---------- decibelios ---------- */
+var dbs=[
+ [10,"Respiración tranquila","ok"],
+ [30,"Susurro, biblioteca","ok"],
+ [50,"Lluvia suave","ok"],
+ [60,"Conversación normal","ok"],
+ [70,"Clase con jaleo, aspiradora","ok"],
+ [85,"Tráfico intenso","warn"],
+ [100,"Auriculares al máximo, discoteca","bad"],
+ [110,"Concierto junto a los altavoces","bad"],
+ [120,"Sirena muy cerca: empieza a doler","bad"],
+ [140,"Petardo, avión despegando al lado","bad"]
+];
+var dbBox=$("#db");
+dbs.forEach(function(r){
+  var row=document.createElement("div"); row.className="row";
+  row.innerHTML='<div class="v">'+r[0]+' dB</div><div class="bar s-'+r[2]+'"><b style="width:'+(r[0]/140*100)+'%"></b><span>'+r[1]+'</span></div>';
+  dbBox.appendChild(row);
+});
+
+/* ---------- minuto de escucha ---------- */
+var tid=null;
+$("#tbtn").addEventListener("click",function(){
+  var b=this, left=60;
+  if(tid){ clearInterval(tid); tid=null; $("#t").textContent="60"; b.textContent="Empezar 1 minuto de escucha"; return; }
+  b.textContent="Parar"; $("#tmsg").textContent="Ojos cerrados, boca cerrada. Cuenta sonidos distintos.";
+  tid=setInterval(function(){
+    left--; $("#t").textContent=left;
+    if(left<=0){ clearInterval(tid); tid=null; $("#t").textContent="60"; b.textContent="Repetir"; $("#tmsg").textContent="Tiempo. ¿Cuántos sonidos has contado? Compáralo con tu compañero."; }
+  },1000);
+});
+
+/* ---------- test ---------- */
+var ops=["Tónica","Señal","Marca sonora"];
+var qs=[
+ ["El rumor continuo del tráfico en tu calle",0,"Suena siempre de fondo y ya ni lo notas."],
+ ["El timbre que anuncia el recreo",1,"Destaca y te avisa de algo."],
+ ["Las campanas de la iglesia de tu pueblo, que todos reconocen",2,"Identifican a ese lugar y a su gente."],
+ ["El mar de fondo en un pueblo de la costa",0,"Es el fondo permanente del lugar."],
+ ["La sirena de una ambulancia",1,"Lleva un mensaje urgente: apártate."],
+ ["Una gaita sonando en una fiesta gallega",2,"Es un sonido con identidad propia."]
+];
+var ok=0, quiz=$("#quiz");
+qs.forEach(function(q){
+  var d=document.createElement("div"); d.className="q";
+  var p=document.createElement("strong"); p.textContent=q[0]; d.appendChild(p);
+  var o=document.createElement("div"); o.className="ops"; d.appendChild(o);
+  var fb=document.createElement("div"); fb.className="fb"; fb.setAttribute("aria-live","polite"); d.appendChild(fb);
+  ops.forEach(function(t,ix){
+    var b=document.createElement("button"); b.type="button"; b.textContent=t;
+    b.addEventListener("click",function(){
+      var all=o.querySelectorAll("button");
+      all.forEach(function(x){x.disabled=true});
+      all[q[1]].classList.add("si");
+      if(ix===q[1]){ ok++; fb.textContent="Correcto. "+q[2]; }
+      else{ b.classList.add("no"); fb.textContent="Era "+ops[q[1]].toLowerCase()+". "+q[2]; }
+      $("#marcador").textContent="Aciertos: "+ok+" de "+qs.length;
+    });
+    o.appendChild(b);
+  });
+  quiz.appendChild(d);
+});
+})();
+</script>
+</body>
+</html>
